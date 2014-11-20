@@ -4,7 +4,7 @@
   <title><![CDATA[Category: GNURadio | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/gnuradio/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-19T17:23:17-08:00</updated>
+  <updated>2014-11-19T18:23:45-08:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -22,10 +22,9 @@
 
 <p>El desarrollo de nuevos sistemas de comunicación, en el ambiente académico, normalmente queda en proyectos de software, limitados a resultados de simulación sin poder dar el paso a la implementación del mismo. Es muy bien sabido que los problemas de software no son lo mismos que los problemas que pueden presentarse en las plataformas de hardware, por lo que el uso de herramientas de SDR (Software Defined Radio) como <a href="http://www.gnuradio.org">GNU Radio</a> en combinación con las tarjetas <a href="http://www.ettus.com">USRP</a> (Universal Software Radio Peripheral) facilitan el dar ese paso de la simulación en plataformas de software a la emulación en plataformas de hardware de una forma transparente.</p>
 
-<p>A continuación se muestra el desarrollo de una plataforma de comunicación inalámbrica basada en DFTS-OFDM (Direct Fourier Transform Spread &ndash; Orthogonal Frequency Division Modulation) en combinación con protocolos de relay en una implementación de una antena y dos saltos.</p>
+<p>A continuación se muestra el desarrollo de una plataforma de comunicación inalámbrica basada en DFTS-OFDM (Direct Fourier Transform Spread - Orthogonal Frequency Division Modulation) en combinación con protocolos de relay en una implementación de una antena y dos saltos.</p>
 
 <!-- more -->
-
 
 <p><em>Introducción.</em></p>
 
@@ -42,17 +41,17 @@
 <p>El esquema de transmisión de un protocolo de cooperación se divide en dos fases para evitar interferencias.</p>
 
 <p>Fase 1: Una fuente envía su información al destino y la información también es recibida por el relay al mismo tiempo.
-Fase 2: El relay envía su información al destino.</p>
+Fase 2: El relay envía su información al destino. </p>
 
 <p>Adicionalmente puede considerarse que en la Fase 1 el destino no recibe información, solo el relay.</p>
 
 <p><em>Amplifica y envía.</em></p>
 
-<p>En este protocolo, el relay amplifica la señal de la fuente y envía esta a su destino de una forma ideal para ecualizar el efecto del canal entre la fuente y el relay. El relay hace esto simplemente escalando la señal recibida por un factor que es inversamente proporcional a la potencia recibida.</p>
+<p>En este protocolo, el relay amplifica la señal de la fuente y envía esta a su destino de una forma ideal para ecualizar el efecto del canal entre la fuente y el relay. El relay hace esto simplemente escalando la señal recibida por un factor que es inversamente proporcional a la potencia recibida.   </p>
 
 <p><em>Decodifica y envía.</em></p>
 
-<p>Este protocolo consiste en que el nodo relay decodifique la señal recibida, la vuelva a codificar y entonces retransmita esta nueva señal al destino. Si la señal en el relay es incorrecta, esta puede ser reenviada al destino y su decodificación no tendría sentido.</p>
+<p>Este protocolo consiste en que el nodo relay decodifique la señal recibida, la vuelva a codificar y entonces retransmita esta nueva señal al destino. Si la señal en el relay es incorrecta, esta puede ser reenviada al destino y su decodificación no tendría sentido. </p>
 
 <p><em>Ecualiza y envía.</em></p>
 
@@ -60,7 +59,7 @@ Fase 2: El relay envía su información al destino.</p>
 
 <p><em>DFTS-OFDM</em></p>
 
-<p>Para disminuir el PAPR, 3GPP LTE-Advanced propone usar en el enlace de subida una tecnología conocida como SC-FDMA (Single Carrier &ndash; Frequency Division Medium Access) o DFTS-OFDM, esta técnica consiste en precodificar el símbolo de datos con una transformada discreta de Fourier y las muestras obtenidas de la etapa de precodificación son transmitidas en paralelo en un grupo de subportadoras. La forma de onda resultante en el dominio del tiempo tiene las características de una forma de onda de una señal de portadora única, esto es, tiene un PAPR bajo aunque la forma de onda no es de una señal de portadora única.</p>
+<p>Para disminuir el PAPR, 3GPP LTE-Advanced propone usar en el enlace de subida una tecnología conocida como SC-FDMA (Single Carrier - Frequency Division Medium Access) o DFTS-OFDM, esta técnica consiste en precodificar el símbolo de datos con una transformada discreta de Fourier y las muestras obtenidas de la etapa de precodificación son transmitidas en paralelo en un grupo de subportadoras. La forma de onda resultante en el dominio del tiempo tiene las características de una forma de onda de una señal de portadora única, esto es, tiene un PAPR bajo aunque la forma de onda no es de una señal de portadora única. </p>
 
 <p>El transmisor DFTS-OFDM maneja bloques de tamaño N, los cuales contienen las muestras (valores complejos) de los símbolos modulados digitalmente, la etapa de DFT de N-puntos genera una representación de los símbolos de entrada en el dominio del tiempo. Las muestras son proyectadas en algunas de las M subportadoras disponibles de la etapa de IFFT de M-puntos, transformando la amplitud de las subportadoras en una señal compleja en el dominio del tiempo.</p>
 
@@ -73,31 +72,28 @@ Fase 2: El relay envía su información al destino.</p>
 <p>Para el desarrollo de una plataforma DFTS-OFDM en GNU Radio se consideraron las siguientes etapas en la transmisión y recepción del sistema.</p>
 
 <ol>
-<li>CRC de 32 bits.</li>
-<li>Modulador digital 16-QAM.</li>
-<li>Esparcimiento DFT de 192 puntos.</li>
-<li>Modulador OFDM de 2048 puntos.</li>
+  <li>CRC de 32 bits.</li>
+  <li>Modulador digital 16-QAM.</li>
+  <li>Esparcimiento DFT de 192 puntos.</li>
+  <li>Modulador OFDM de 2048 puntos.</li>
 </ol>
-
 
 <p>Así mismo la secuencia para la transmisión de datos es la siguiente:</p>
 
 <ol>
-<li>Envío de encabezado (3 Símbolos).</li>
-<li>Envío de palabras de sincronía (2 palabras).</li>
-<li>Envío de carga (>1 símbolo).</li>
+  <li>Envío de encabezado (3 Símbolos).</li>
+  <li>Envío de palabras de sincronía (2 palabras).</li>
+  <li>Envío de carga (&gt;1 símbolo).</li>
 </ol>
-
 
 <p>La etapa de recepción  de datos se implementa de la siguiente manera:</p>
 
 <ol>
-<li>Detección de símbolo OFDM en el canal.</li>
-<li>Detección de cabecera y carga.</li>
-<li>Detección de palabras de sincronía para estimación de canal.</li>
-<li>Detección de carga.</li>
+  <li>Detección de símbolo OFDM en el canal.</li>
+  <li>Detección de cabecera y carga.</li>
+  <li>Detección de palabras de sincronía para estimación de canal.</li>
+  <li>Detección de carga.</li>
 </ol>
-
 
 <p>Tanto las etapas de detección de cabecera y carga en el receptor incluyen etapas de DFTS, OFDM y demodulación digital 16-QAM, adicionalmente a la carga se le realiza una verificación de CRC.</p>
 
@@ -111,7 +107,7 @@ Fase 2: El relay envía su información al destino.</p>
 
 <p><em>DFTS-OFDM en modo relay con protocolo DF</em></p>
 
-<p>El protocolo DF es de los mas complejos de implementar, el nodo relay debe obtener los datos hasta la etapa de CRC y volver a generar el símbolo para retransmitirlo al destino.</p>
+<p>El protocolo DF es de los mas complejos de implementar, el nodo relay debe obtener los datos hasta la etapa de CRC y volver a generar el símbolo para retransmitirlo al destino. </p>
 
 <p>La implementación del protocolo DF en GNU Radio queda de la siguiente manera:</p>
 
@@ -129,7 +125,7 @@ Fase 2: El relay envía su información al destino.</p>
 
 <p>Las herramientas de SDR propician el desarrollo e implementación de nuevas tecnologías de radio, ya que no se requiere de una infraestructura cara y compleja para su utilización, se puede resumir en el uso de una computadora con linux. Para la emulación el paso es muy sencillo, solo se requiere conectar las tarjetas <a href="http://www.ettus.com/">USRP</a> en el puerto USB o de red y se tendrá un sistema de radio funcionando.</p>
 
-<p><a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#x76;&#x69;&#107;&#x74;&#x6f;&#x72;&#x69;&#x76;&#x61;&#110;&#64;&#x6f;&#112;&#x65;&#x6e;&#x6d;&#x61;&#x69;&#108;&#98;&#111;&#120;&#46;&#x6f;&#x72;&#x67;">&#118;&#x69;&#107;&#116;&#111;&#x72;&#x69;&#118;&#97;&#x6e;&#x40;&#x6f;&#112;&#101;&#x6e;&#109;&#97;&#105;&#x6c;&#x62;&#x6f;&#120;&#x2e;&#x6f;&#114;&#x67;</a></p>
+<p>viktorivan@openmailbox.org</p>
 
 <p>@viktor_ivan</p>
 ]]></content>

@@ -92,15 +92,9 @@
 
 <div class="entry-content"><p>Resumen.</p>
 
-<p>Actualmente, las redes inalámbricas de banda ancha están en constante evolución debido al crecimiento en la demanda de aplicaciones móviles de datos, por lo que estas redes tienen que aumentar su capacidad de sistema, cobertura, datos y calidad de servicio. La implementación de estaciones de relay inalámbricos, especialmente cuando operan a half-duplex, permiten alcanzar estos objetivos sin realizar altos gastos <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Esto, aunado a la implementación de tecnologías como MIMO (Multiple Input Multiple Output) y sistemas basados en OFDM (Orthogonal Frequency Division Multiplexing) como OFDMA y SC-FDMA (Single Carrier &ndash; FDMA), permiten que el diseño de este tipo de redes puedan enfrentar los retos de compatibilidad con dispositivos de generaciones previas, minimizando así la complexidad y maximizando la eficiencia. En este artículo se analizará los diferentes tipos de protocolos de relay y escenarios, donde dispositivos de una antena pueden tener servicios exclusivos de dispositivos MIMO-OFDM.</p>
-
+<p>Actualmente, las redes inalámbricas de banda ancha están en constante evolución debido al crecimiento en la demanda de aplicaciones móviles de datos, por lo que estas redes tienen que aumentar su capacidad de sistema, cobertura, datos y calidad de servicio. La implementación de estaciones de relay inalámbricos, especialmente cuando operan a half-duplex, permiten alcanzar estos objetivos sin realizar altos gastos <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Esto, aunado a la implementación de tecnologías como MIMO (Multiple Input Multiple Output) y sistemas basados en OFDM (Orthogonal Frequency Division Multiplexing) como OFDMA y SC-FDMA (Single Carrier - FDMA), permiten que el diseño de este tipo de redes puedan enfrentar los retos de compatibilidad con dispositivos de generaciones previas, minimizando así la complexidad y maximizando la eficiencia. En este artículo se analizará los diferentes tipos de protocolos de relay y escenarios, donde dispositivos de una antena pueden tener servicios exclusivos de dispositivos MIMO-OFDM.
 <!-- more -->
-
-
-<ol type="a">
-<li>Introducción.</li>
-</ol>
-
+I. Introducción.</p>
 
 <p>MIMO es una tecnlogía que puede explotar de una manera eficiente el dominio espacial en los canales con desvanecimiento de los móviles, esto es, por medio de esta técnica se pueden tantos flujos de datos como antenas transmisoras y receptoras se dispongan en el canal, permitiendo aumentar de esta manera la capacidad de capacidad del canal inalámbrico convencional <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</p>
 
@@ -108,7 +102,7 @@
 
 <p>Las comunicaciones cooperativas son un nuevo paradigma de las comunicaciones, ya que a partir de la naturaleza broadcast del canal inalámbrico se puede lograr que los nodos de comunicación se ayuden entre ellos. La implementación de redes de relays permite a los dispositivos sin capacidad MIMO (entiéndase dispositivos de una sola antena) aprovechar las ventajas de una transmisión en un canal MIMO a través de tecnologías como MIMO virtual, distribuido o cooperativo. En este tipo de tecnologías permite que nodos de relay fijos o móviles formen parte de un arreglo de antenas mayor, donde en conjunto presentarán una ganancia de diversidad, aunque ésta no será mayor a la ganancia de diversidad de un enlace MIMO punto a punto.</p>
 
-<p>La forma como es procesada la señal recibida en el nodo relay, ya sea sólo amplificando y reenviando la señal recibida o incluso decodificando y reenviando la señal recibida, define el protocol de relay que es utilizado en la comunicación cooperativa. Existen tres protocolos principales, Amplifica-y-envía, Decodifica-y-envía y Comprime-y-envía, siendo el primero el de implementación mas sencillo y el último el mas complejo. Los primeros dos protocolos son los de mayor popularidad al momento de implementar estas técnicas, debido a que comprime-y-envía no ofrece grandes diferencias en ganancia y desempeño <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>.</p>
+<p>La forma como es procesada la señal recibida en el nodo relay, ya sea sólo amplificando y reenviando la señal recibida o incluso decodificando y reenviando la señal recibida, define el protocol de relay que es utilizado en la comunicación cooperativa. Existen tres protocolos principales, Amplifica-y-envía, Decodifica-y-envía y Comprime-y-envía, siendo el primero el de implementación mas sencillo y el último el mas complejo. Los primeros dos protocolos son los de mayor popularidad al momento de implementar estas técnicas, debido a que comprime-y-envía no ofrece grandes diferencias en ganancia y desempeño <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>.   </p>
 
 <p>II. Protocolos de Relay.</p>
 
@@ -123,19 +117,19 @@
 <p>El esquema de transmisión de un protocolo de cooperación se divide en dos fases para evitar interferencias.</p>
 
 <p>Fase 1: Una fuente envía su información al destino y la información también es recibida por el relay al mismo tiempo.
-Fase 2: El relay envía su información al destino.</p>
+Fase 2: El relay envía su información al destino. </p>
 
 <p>II.1 Amplifica y envía.</p>
 
 <p>En este protocolo, el relay amplifica la señal de la fuente y envía esta a su destino de una forma ideal para ecualizar el efecto del canal entre la fuente y el relay. El relay hace esto simplemente escalando la señal recibida por un factor que es inversamente proporcional a la potencia recibida.</p>
 
-<p>El destino recibe dos copias de la señal x a través del enlace de la fuente y del enlace del relay. Existen diversas técnicas para combinar las dos versiones de la señal recibida. La técnica óptima que maximiza todos los SNR (SNR de la fuente al relay mas el SNR de la fuente al destino) es el MRC (Maximal Ratio Combining). El combinador MRC requiere de un detector coherente que tenga conocimiento de todos los coeficientes del canal, además, el SNR a la salida del MRC es igual a la suma de todos los SNR recibidos por ambos lados.</p>
+<p>El destino recibe dos copias de la señal x a través del enlace de la fuente y del enlace del relay. Existen diversas técnicas para combinar las dos versiones de la señal recibida. La técnica óptima que maximiza todos los SNR (SNR de la fuente al relay mas el SNR de la fuente al destino) es el MRC (Maximal Ratio Combining). El combinador MRC requiere de un detector coherente que tenga conocimiento de todos los coeficientes del canal, además, el SNR a la salida del MRC es igual a la suma de todos los SNR recibidos por ambos lados.   </p>
 
 <p>II.2 Decodifica y envía.</p>
 
 <p>Este protocolo consiste en que el nodo relay decodifique la señal recibida, la vuelva a codificar y entonces retransmita esta nueva señal al destino. Si la señal en el relay es incorrecta, esta puede ser reenviada al destino y su decodificación no tendría sentido.</p>
 
-<p>La ventaja de Decodifica-y-envía sobre Amplifica-y-envía es la reducción de los efectos del ruido aditivo en el relay, esto disminuye la posibilidad de enviar señales erróneamente detectadas a su destino, ya que en caso de enviarse provocaría un error en la propagación que puede disminuir el desempeño del sistema. La información mutua entre la fuente y el destino está limitada por la información mutua del enlace mas debil entre la fuente y el destino y el canal combinado de la fuente al relay y el relay al destino.</p>
+<p>La ventaja de Decodifica-y-envía sobre Amplifica-y-envía es la reducción de los efectos del ruido aditivo en el relay, esto disminuye la posibilidad de enviar señales erróneamente detectadas a su destino, ya que en caso de enviarse provocaría un error en la propagación que puede disminuir el desempeño del sistema. La información mutua entre la fuente y el destino está limitada por la información mutua del enlace mas debil entre la fuente y el destino y el canal combinado de la fuente al relay y el relay al destino.  </p>
 
 <p>III. Conclusiones</p>
 
@@ -143,21 +137,22 @@ Fase 2: El relay envía su información al destino.</p>
 
 <p>Referencias.</p>
 
-<p><a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#x3a;&#x76;&#105;&#x6b;&#x74;&#x6f;&#x72;&#x69;&#x76;&#97;&#110;&#x40;&#x6f;&#112;&#101;&#x6e;&#109;&#97;&#105;&#x6c;&#98;&#x6f;&#120;&#46;&#x6f;&#114;&#x67;">&#118;&#x69;&#x6b;&#116;&#111;&#114;&#105;&#x76;&#97;&#x6e;&#x40;&#x6f;&#112;&#x65;&#x6e;&#x6d;&#x61;&#x69;&#108;&#98;&#x6f;&#120;&#46;&#111;&#114;&#x67;</a></p>
+<p>viktorivan@openmailbox.org</p>
 
 <p>@viktor_ivan</p>
 <div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Hoymann, C.; Wanshi Chen; Montojo, J.; Golitschek, A.; Koutsimanis, C.; Xiaodong Shen, &ldquo;Relaying operation in 3GPP LTE: challenges and solutions,&rdquo; Communications Magazine, IEEE , vol.50, no.2, pp.156,162, February 2012.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>Cheng-Xiang Wang; Xuemin Hong; Xiaohu Ge; Xiang Cheng; Gong Zhang; Thompson, J., &ldquo;Cooperative MIMO channel models: A survey,&rdquo; Communications Magazine, IEEE , vol.48, no.2, pp.80,87, February 2010.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>Gerhard Kramer, Ivana Marić, and Roy D. Yates. 2006. Cooperative communications. Found. Trends Netw. 1, 3 (August 2006), 271-425.<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-</ol>
+  <ol>
+    <li id="fn:1">
+      <p>Hoymann, C.; Wanshi Chen; Montojo, J.; Golitschek, A.; Koutsimanis, C.; Xiaodong Shen, “Relaying operation in 3GPP LTE: challenges and solutions,” Communications Magazine, IEEE , vol.50, no.2, pp.156,162, February 2012.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Cheng-Xiang Wang; Xuemin Hong; Xiaohu Ge; Xiang Cheng; Gong Zhang; Thompson, J., “Cooperative MIMO channel models: A survey,” Communications Magazine, IEEE , vol.48, no.2, pp.80,87, February 2010.<a href="#fnref:2" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>Gerhard Kramer, Ivana Marić, and Roy D. Yates. 2006. Cooperative communications. Found. Trends Netw. 1, 3 (August 2006), 271-425.<a href="#fnref:3" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
 </div>
-
 </div>
 
 
@@ -225,6 +220,10 @@ Fase 2: El relay envía su información al destino.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/12/calculo-snr-ciego-para-ofdm/">Cálculo de SNR ciego para OFDM</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/13/scipy-como-alternativa-a-matlab/">SciPy como alternativa a Matlab</a>
       </li>
     
@@ -238,10 +237,6 @@ Fase 2: El relay envía su información al destino.</p>
     
       <li class="post">
         <a href="/blog/2014/03/19/bloques-de-procesamiento-de-senales-en-gnu-radio/">Bloques de procesamiento de señales en GNU Radio</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/20/comunicaciones-cooperativas/">Comunicaciones Cooperativas</a>
       </li>
     
   </ul>
@@ -337,5 +332,20 @@ Fase 2: El relay envía su información al destino.</p>
 
 
 
+  <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 </body>
 </html>

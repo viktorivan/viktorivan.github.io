@@ -4,7 +4,7 @@
   <title><![CDATA[Category: out-of-tree | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/out-of-tree/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-19T17:23:17-08:00</updated>
+  <updated>2014-11-19T18:23:45-08:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -24,15 +24,14 @@
 
 <!-- more -->
 
-
 <p>Procedimiento.</p>
 
 <p>Para crear un módulo out-of-tree se ejecuta desde una terminal de linux el siguiente comando
 <code>
 $ gr_modtool create
 Name of the new module:Tu_modulo
-Creating out-of-tree module in ./gr-Tu_modulo... Done.
-Use 'gr_modtool add' to add a new block to this currently empty module.
+Creating out-of-tree module in ./gr-Tu_modulo... Done. 
+Use 'gr_modtool add' to add a new block to this currently empty module. 
 </code>
 El nombre que se indique para el módulo es con el que va a aparecer en el catálogo de GNU Radio.</p>
 
@@ -41,41 +40,41 @@ El nombre que se indique para el módulo es con el que va a aparecer en el catá
 <p><code>
 $ cd gr-Tu_modulo
 $ gr_modtool add
-GNU Radio module name identified: Tu_modulo
-Enter code type: decimator
-Language: C++
-Enter name of block/code (without module name prefix): bin2dec_ff
-Block/code identifier: bin2dec_ff
-Enter valid argument list, including default arguments: int vec_size
-Add Python QA code? [Y/n]
-Add C++ QA code? [y/N]
-Adding file 'lib/bin2dec_ff_impl.h'...
-Adding file 'lib/bin2dec_ff_impl.cc'...
-Adding file 'include/Tu_modulo/bin2dec_ff.h'...
-Editing swig/Tu_modulo_swig.i...
-Adding file 'python/qa_bin2dec_ff.py'...
-Editing python/CMakeLists.txt...
-Adding file 'grc/Tu_modulo_bin2dec_ff.xml'...
+GNU Radio module name identified: Tu_modulo 
+Enter code type: decimator 
+Language: C++ 
+Enter name of block/code (without module name prefix): bin2dec_ff 
+Block/code identifier: bin2dec_ff 
+Enter valid argument list, including default arguments: int vec_size 
+Add Python QA code? [Y/n] 
+Add C++ QA code? [y/N] 
+Adding file 'lib/bin2dec_ff_impl.h'... 
+Adding file 'lib/bin2dec_ff_impl.cc'... 
+Adding file 'include/Tu_modulo/bin2dec_ff.h'... 
+Editing swig/Tu_modulo_swig.i... 
+Adding file 'python/qa_bin2dec_ff.py'... 
+Editing python/CMakeLists.txt... 
+Adding file 'grc/Tu_modulo_bin2dec_ff.xml'... 
 Editing grc/CMakeLists.txt...
 </code>
 y a su vez, se desarrollará un bloque que realice la operación inversa, esto es, un convertidor decimal a binario.
 <code>
-$ gr_modtool add
-GNU Radio module name identified: Tu_modulo
-Enter code type: interpolator
-Language: C++
-Enter name of block/code (without module name prefix): dec2bin_ff
-Block/code identifier: dec2bin_ff
-Enter valid argument list, including default arguments: int vec_size
-Add Python QA code? [Y/n]
-Add C++ QA code? [y/N]
-Adding file 'lib/dec2bin_ff_impl.h'...
-Adding file 'lib/dec2bin_ff_impl.cc'...
-Adding file 'include/Tu_modulo/dec2bin_ff.h'...
-Editing swig/Tu_modulo_swig.i...
-Adding file 'python/qa_dec2bin_ff.py'...
-Editing python/CMakeLists.txt...
-Adding file 'grc/Tu_modulo_dec2bin_ff.xml'...
+$ gr_modtool add 
+GNU Radio module name identified: Tu_modulo 
+Enter code type: interpolator 
+Language: C++ 
+Enter name of block/code (without module name prefix): dec2bin_ff 
+Block/code identifier: dec2bin_ff 
+Enter valid argument list, including default arguments: int vec_size 
+Add Python QA code? [Y/n] 
+Add C++ QA code? [y/N] 
+Adding file 'lib/dec2bin_ff_impl.h'... 
+Adding file 'lib/dec2bin_ff_impl.cc'... 
+Adding file 'include/Tu_modulo/dec2bin_ff.h'... 
+Editing swig/Tu_modulo_swig.i... 
+Adding file 'python/qa_dec2bin_ff.py'... 
+Editing python/CMakeLists.txt... 
+Adding file 'grc/Tu_modulo_dec2bin_ff.xml'... 
 Editing grc/CmakeLists.txt...
 </code>
 de esta manera se han creado dos bloques, un decimador para el convertidor binario a decimal y un interpolador para el decimal a binario.</p>
@@ -89,14 +88,14 @@ de esta manera se han creado dos bloques, un decimador para el convertidor binar
 <pre><code>#include &lt;math.h&gt;
 </code></pre>
 
-<p>En la sección de <code>bin2dec_ff_impl::bin2dec_ff_impl(int vec_size)</code> se definen la cantidad de flujos de datos que manejará el bloque de procesamiento, en este caso, sólo es un flujo de entrada y uno de salida, el factor de decimación definido por la variable vec_size y además se asigna a la variable chunk el valor de vec_size, ya que vec_size representa la cantidad de bits que se requieren para convertir el número a decimal.</p>
+<p>En la sección de <code>bin2dec_ff_impl::bin2dec_ff_impl(int vec_size)</code> se definen la cantidad de flujos de datos que manejará el bloque de procesamiento, en este caso, sólo es un flujo de entrada y uno de salida, el factor de decimación definido por la variable vec_size y además se asigna a la variable chunk el valor de vec_size, ya que vec_size representa la cantidad de bits que se requieren para convertir el número a decimal. </p>
 
 <pre><code>bin2dec_ff_impl::bin2dec_ff_impl(int vec_size)
   : gr::sync_decimator("bin2dec_ff",
           gr::io_signature::make(1, 1, sizeof(float)),
           gr::io_signature::make(1, 1, sizeof(float)), vec_size)
 {
-    chunk = vec_size;
+	chunk = vec_size;
 }
 </code></pre>
 
@@ -104,21 +103,21 @@ de esta manera se han creado dos bloques, un decimador para el convertidor binar
 
 <pre><code>int
 bin2dec_ff_impl::work(int noutput_items,
-          gr_vector_const_void_star &amp;input_items,
-          gr_vector_void_star &amp;output_items)
+		  gr_vector_const_void_star &amp;input_items,
+		  gr_vector_void_star &amp;output_items)
 {
     const float *in = (const float *) input_items[0];
     float *out = (float *) output_items[0];
 
     int j = 0, a = 0;
     for (int i = 0; i &lt; noutput_items * chunk; i = i + chunk){
-        out[j] = 0;
-        a = chunk - 1;
-        for (int k = 0; k &lt; chunk; k++){
-            out[j] = out[j] + (in[i + k] * pow (2,a));
-            a = a - 1;
-        }
-        j++;
+    	out[j] = 0;
+    	a = chunk - 1;
+    	for (int k = 0; k &lt; chunk; k++){
+    		out[j] = out[j] + (in[i + k] * pow (2,a));
+    		a = a - 1;
+    	}
+    	j++;
     }
 
     // Tell runtime system how many output items we produced.
@@ -302,14 +301,15 @@ bin2dec_ff_impl::work(int noutput_items,
 <pre><code>#include &lt;math.h&gt;
 </code></pre>
 
-<p>Nuevamente, en la sección de <code>dec2bin_ff_impl::dec2bin_ff_impl(int vec_size)</code> se indica la cantidad de flujos de entrada y salida que manejará el bloque de procesamiento, así también el factor de interpolación definido por la variable vec_size y por último la variabe chunk, quedando como sigue:</p>
+<p>Nuevamente, en la sección de <code>dec2bin_ff_impl::dec2bin_ff_impl(int vec_size)
+</code> se indica la cantidad de flujos de entrada y salida que manejará el bloque de procesamiento, así también el factor de interpolación definido por la variable vec_size y por último la variabe chunk, quedando como sigue:</p>
 
 <pre><code>dec2bin_ff_impl::dec2bin_ff_impl(int vec_size)
   : gr::sync_interpolator("dec2bin_ff",
           gr::io_signature::make(1, 1, sizeof(float)),
           gr::io_signature::make(1, 1, sizeof(float)), vec_size)
 {
-    chunk = vec_size;
+	chunk = vec_size;
 }
 </code></pre>
 
@@ -317,25 +317,25 @@ bin2dec_ff_impl::work(int noutput_items,
 
 <pre><code>int
 dec2bin_ff_impl::work(int noutput_items,
-          gr_vector_const_void_star &amp;input_items,
-          gr_vector_void_star &amp;output_items)
+		  gr_vector_const_void_star &amp;input_items,
+		  gr_vector_void_star &amp;output_items)
 {
     const float *in = (const float *) input_items[0];
     float *out = (float *) output_items[0];
 
     int l = 0, m = 0, a = 0, b[chunk];
     for (int i = 0; i &lt; noutput_items / chunk; i++){
-        a = in[i];
-        l = chunk - 1;
-        for (int j = 0; j &lt; chunk; j++){
-            b[j] = a % 2;
-            a = a / 2;  
-        }
-        for (int k = 0; k &lt; chunk; k++){
-            out[m] = b [l];
-            l = l - 1;
-            m++;
-        }
+    	a = in[i];
+    	l = chunk - 1;
+    	for (int j = 0; j &lt; chunk; j++){
+    		b[j] = a % 2;
+    		a = a / 2;	
+    	}
+    	for (int k = 0; k &lt; chunk; k++){
+    		out[m] = b [l];
+    		l = l - 1;
+    		m++;
+    	}
     }
 </code></pre>
 
@@ -934,7 +934,7 @@ $ sudo ldconfig
 </code>
 De esa manera queda integrado el módulo out-of-tree dentro de GNU Radio.</p>
 
-<p><a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x76;&#105;&#x6b;&#x74;&#x6f;&#114;&#x69;&#118;&#x61;&#110;&#x40;&#111;&#112;&#101;&#110;&#x6d;&#x61;&#x69;&#108;&#98;&#111;&#x78;&#46;&#x6f;&#114;&#x67;">&#118;&#x69;&#x6b;&#116;&#111;&#x72;&#105;&#x76;&#97;&#x6e;&#x40;&#x6f;&#x70;&#x65;&#x6e;&#109;&#x61;&#x69;&#x6c;&#98;&#111;&#120;&#x2e;&#x6f;&#x72;&#x67;</a></p>
+<p>viktorivan@openmailbox.org</p>
 
 <p>@viktor_ivan</p>
 ]]></content>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Relay | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/relay/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-19T17:23:17-08:00</updated>
+  <updated>2014-11-19T18:23:45-08:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -22,10 +22,9 @@
 
 <p>El desarrollo de nuevos sistemas de comunicación, en el ambiente académico, normalmente queda en proyectos de software, limitados a resultados de simulación sin poder dar el paso a la implementación del mismo. Es muy bien sabido que los problemas de software no son lo mismos que los problemas que pueden presentarse en las plataformas de hardware, por lo que el uso de herramientas de SDR (Software Defined Radio) como <a href="http://www.gnuradio.org">GNU Radio</a> en combinación con las tarjetas <a href="http://www.ettus.com">USRP</a> (Universal Software Radio Peripheral) facilitan el dar ese paso de la simulación en plataformas de software a la emulación en plataformas de hardware de una forma transparente.</p>
 
-<p>A continuación se muestra el desarrollo de una plataforma de comunicación inalámbrica basada en DFTS-OFDM (Direct Fourier Transform Spread &ndash; Orthogonal Frequency Division Modulation) en combinación con protocolos de relay en una implementación de una antena y dos saltos.</p>
+<p>A continuación se muestra el desarrollo de una plataforma de comunicación inalámbrica basada en DFTS-OFDM (Direct Fourier Transform Spread - Orthogonal Frequency Division Modulation) en combinación con protocolos de relay en una implementación de una antena y dos saltos.</p>
 
 <!-- more -->
-
 
 <p><em>Introducción.</em></p>
 
@@ -42,17 +41,17 @@
 <p>El esquema de transmisión de un protocolo de cooperación se divide en dos fases para evitar interferencias.</p>
 
 <p>Fase 1: Una fuente envía su información al destino y la información también es recibida por el relay al mismo tiempo.
-Fase 2: El relay envía su información al destino.</p>
+Fase 2: El relay envía su información al destino. </p>
 
 <p>Adicionalmente puede considerarse que en la Fase 1 el destino no recibe información, solo el relay.</p>
 
 <p><em>Amplifica y envía.</em></p>
 
-<p>En este protocolo, el relay amplifica la señal de la fuente y envía esta a su destino de una forma ideal para ecualizar el efecto del canal entre la fuente y el relay. El relay hace esto simplemente escalando la señal recibida por un factor que es inversamente proporcional a la potencia recibida.</p>
+<p>En este protocolo, el relay amplifica la señal de la fuente y envía esta a su destino de una forma ideal para ecualizar el efecto del canal entre la fuente y el relay. El relay hace esto simplemente escalando la señal recibida por un factor que es inversamente proporcional a la potencia recibida.   </p>
 
 <p><em>Decodifica y envía.</em></p>
 
-<p>Este protocolo consiste en que el nodo relay decodifique la señal recibida, la vuelva a codificar y entonces retransmita esta nueva señal al destino. Si la señal en el relay es incorrecta, esta puede ser reenviada al destino y su decodificación no tendría sentido.</p>
+<p>Este protocolo consiste en que el nodo relay decodifique la señal recibida, la vuelva a codificar y entonces retransmita esta nueva señal al destino. Si la señal en el relay es incorrecta, esta puede ser reenviada al destino y su decodificación no tendría sentido. </p>
 
 <p><em>Ecualiza y envía.</em></p>
 
@@ -60,7 +59,7 @@ Fase 2: El relay envía su información al destino.</p>
 
 <p><em>DFTS-OFDM</em></p>
 
-<p>Para disminuir el PAPR, 3GPP LTE-Advanced propone usar en el enlace de subida una tecnología conocida como SC-FDMA (Single Carrier &ndash; Frequency Division Medium Access) o DFTS-OFDM, esta técnica consiste en precodificar el símbolo de datos con una transformada discreta de Fourier y las muestras obtenidas de la etapa de precodificación son transmitidas en paralelo en un grupo de subportadoras. La forma de onda resultante en el dominio del tiempo tiene las características de una forma de onda de una señal de portadora única, esto es, tiene un PAPR bajo aunque la forma de onda no es de una señal de portadora única.</p>
+<p>Para disminuir el PAPR, 3GPP LTE-Advanced propone usar en el enlace de subida una tecnología conocida como SC-FDMA (Single Carrier - Frequency Division Medium Access) o DFTS-OFDM, esta técnica consiste en precodificar el símbolo de datos con una transformada discreta de Fourier y las muestras obtenidas de la etapa de precodificación son transmitidas en paralelo en un grupo de subportadoras. La forma de onda resultante en el dominio del tiempo tiene las características de una forma de onda de una señal de portadora única, esto es, tiene un PAPR bajo aunque la forma de onda no es de una señal de portadora única. </p>
 
 <p>El transmisor DFTS-OFDM maneja bloques de tamaño N, los cuales contienen las muestras (valores complejos) de los símbolos modulados digitalmente, la etapa de DFT de N-puntos genera una representación de los símbolos de entrada en el dominio del tiempo. Las muestras son proyectadas en algunas de las M subportadoras disponibles de la etapa de IFFT de M-puntos, transformando la amplitud de las subportadoras en una señal compleja en el dominio del tiempo.</p>
 
@@ -73,31 +72,28 @@ Fase 2: El relay envía su información al destino.</p>
 <p>Para el desarrollo de una plataforma DFTS-OFDM en GNU Radio se consideraron las siguientes etapas en la transmisión y recepción del sistema.</p>
 
 <ol>
-<li>CRC de 32 bits.</li>
-<li>Modulador digital 16-QAM.</li>
-<li>Esparcimiento DFT de 192 puntos.</li>
-<li>Modulador OFDM de 2048 puntos.</li>
+  <li>CRC de 32 bits.</li>
+  <li>Modulador digital 16-QAM.</li>
+  <li>Esparcimiento DFT de 192 puntos.</li>
+  <li>Modulador OFDM de 2048 puntos.</li>
 </ol>
-
 
 <p>Así mismo la secuencia para la transmisión de datos es la siguiente:</p>
 
 <ol>
-<li>Envío de encabezado (3 Símbolos).</li>
-<li>Envío de palabras de sincronía (2 palabras).</li>
-<li>Envío de carga (>1 símbolo).</li>
+  <li>Envío de encabezado (3 Símbolos).</li>
+  <li>Envío de palabras de sincronía (2 palabras).</li>
+  <li>Envío de carga (&gt;1 símbolo).</li>
 </ol>
-
 
 <p>La etapa de recepción  de datos se implementa de la siguiente manera:</p>
 
 <ol>
-<li>Detección de símbolo OFDM en el canal.</li>
-<li>Detección de cabecera y carga.</li>
-<li>Detección de palabras de sincronía para estimación de canal.</li>
-<li>Detección de carga.</li>
+  <li>Detección de símbolo OFDM en el canal.</li>
+  <li>Detección de cabecera y carga.</li>
+  <li>Detección de palabras de sincronía para estimación de canal.</li>
+  <li>Detección de carga.</li>
 </ol>
-
 
 <p>Tanto las etapas de detección de cabecera y carga en el receptor incluyen etapas de DFTS, OFDM y demodulación digital 16-QAM, adicionalmente a la carga se le realiza una verificación de CRC.</p>
 
@@ -111,7 +107,7 @@ Fase 2: El relay envía su información al destino.</p>
 
 <p><em>DFTS-OFDM en modo relay con protocolo DF</em></p>
 
-<p>El protocolo DF es de los mas complejos de implementar, el nodo relay debe obtener los datos hasta la etapa de CRC y volver a generar el símbolo para retransmitirlo al destino.</p>
+<p>El protocolo DF es de los mas complejos de implementar, el nodo relay debe obtener los datos hasta la etapa de CRC y volver a generar el símbolo para retransmitirlo al destino. </p>
 
 <p>La implementación del protocolo DF en GNU Radio queda de la siguiente manera:</p>
 
@@ -129,7 +125,7 @@ Fase 2: El relay envía su información al destino.</p>
 
 <p>Las herramientas de SDR propician el desarrollo e implementación de nuevas tecnologías de radio, ya que no se requiere de una infraestructura cara y compleja para su utilización, se puede resumir en el uso de una computadora con linux. Para la emulación el paso es muy sencillo, solo se requiere conectar las tarjetas <a href="http://www.ettus.com/">USRP</a> en el puerto USB o de red y se tendrá un sistema de radio funcionando.</p>
 
-<p><a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#x3a;&#118;&#x69;&#x6b;&#116;&#x6f;&#x72;&#x69;&#118;&#97;&#110;&#x40;&#111;&#x70;&#101;&#x6e;&#109;&#x61;&#105;&#108;&#98;&#111;&#x78;&#x2e;&#x6f;&#x72;&#103;">&#118;&#105;&#107;&#116;&#x6f;&#114;&#x69;&#118;&#97;&#110;&#64;&#x6f;&#112;&#101;&#x6e;&#109;&#97;&#x69;&#108;&#98;&#x6f;&#x78;&#46;&#111;&#114;&#103;</a></p>
+<p>viktorivan@openmailbox.org</p>
 
 <p>@viktor_ivan</p>
 ]]></content>
@@ -142,15 +138,9 @@ Fase 2: El relay envía su información al destino.</p>
     <id>http://viktorivan.github.io/blog/2013/10/20/comunicaciones-cooperativas</id>
     <content type="html"><![CDATA[<p>Resumen.</p>
 
-<p>Actualmente, las redes inalámbricas de banda ancha están en constante evolución debido al crecimiento en la demanda de aplicaciones móviles de datos, por lo que estas redes tienen que aumentar su capacidad de sistema, cobertura, datos y calidad de servicio. La implementación de estaciones de relay inalámbricos, especialmente cuando operan a half-duplex, permiten alcanzar estos objetivos sin realizar altos gastos <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Esto, aunado a la implementación de tecnologías como MIMO (Multiple Input Multiple Output) y sistemas basados en OFDM (Orthogonal Frequency Division Multiplexing) como OFDMA y SC-FDMA (Single Carrier &ndash; FDMA), permiten que el diseño de este tipo de redes puedan enfrentar los retos de compatibilidad con dispositivos de generaciones previas, minimizando así la complexidad y maximizando la eficiencia. En este artículo se analizará los diferentes tipos de protocolos de relay y escenarios, donde dispositivos de una antena pueden tener servicios exclusivos de dispositivos MIMO-OFDM.</p>
-
+<p>Actualmente, las redes inalámbricas de banda ancha están en constante evolución debido al crecimiento en la demanda de aplicaciones móviles de datos, por lo que estas redes tienen que aumentar su capacidad de sistema, cobertura, datos y calidad de servicio. La implementación de estaciones de relay inalámbricos, especialmente cuando operan a half-duplex, permiten alcanzar estos objetivos sin realizar altos gastos <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Esto, aunado a la implementación de tecnologías como MIMO (Multiple Input Multiple Output) y sistemas basados en OFDM (Orthogonal Frequency Division Multiplexing) como OFDMA y SC-FDMA (Single Carrier - FDMA), permiten que el diseño de este tipo de redes puedan enfrentar los retos de compatibilidad con dispositivos de generaciones previas, minimizando así la complexidad y maximizando la eficiencia. En este artículo se analizará los diferentes tipos de protocolos de relay y escenarios, donde dispositivos de una antena pueden tener servicios exclusivos de dispositivos MIMO-OFDM.
 <!-- more -->
-
-
-<ol type="a">
-<li>Introducción.</li>
-</ol>
-
+I. Introducción.</p>
 
 <p>MIMO es una tecnlogía que puede explotar de una manera eficiente el dominio espacial en los canales con desvanecimiento de los móviles, esto es, por medio de esta técnica se pueden tantos flujos de datos como antenas transmisoras y receptoras se dispongan en el canal, permitiendo aumentar de esta manera la capacidad de capacidad del canal inalámbrico convencional <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</p>
 
@@ -158,7 +148,7 @@ Fase 2: El relay envía su información al destino.</p>
 
 <p>Las comunicaciones cooperativas son un nuevo paradigma de las comunicaciones, ya que a partir de la naturaleza broadcast del canal inalámbrico se puede lograr que los nodos de comunicación se ayuden entre ellos. La implementación de redes de relays permite a los dispositivos sin capacidad MIMO (entiéndase dispositivos de una sola antena) aprovechar las ventajas de una transmisión en un canal MIMO a través de tecnologías como MIMO virtual, distribuido o cooperativo. En este tipo de tecnologías permite que nodos de relay fijos o móviles formen parte de un arreglo de antenas mayor, donde en conjunto presentarán una ganancia de diversidad, aunque ésta no será mayor a la ganancia de diversidad de un enlace MIMO punto a punto.</p>
 
-<p>La forma como es procesada la señal recibida en el nodo relay, ya sea sólo amplificando y reenviando la señal recibida o incluso decodificando y reenviando la señal recibida, define el protocol de relay que es utilizado en la comunicación cooperativa. Existen tres protocolos principales, Amplifica-y-envía, Decodifica-y-envía y Comprime-y-envía, siendo el primero el de implementación mas sencillo y el último el mas complejo. Los primeros dos protocolos son los de mayor popularidad al momento de implementar estas técnicas, debido a que comprime-y-envía no ofrece grandes diferencias en ganancia y desempeño <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>.</p>
+<p>La forma como es procesada la señal recibida en el nodo relay, ya sea sólo amplificando y reenviando la señal recibida o incluso decodificando y reenviando la señal recibida, define el protocol de relay que es utilizado en la comunicación cooperativa. Existen tres protocolos principales, Amplifica-y-envía, Decodifica-y-envía y Comprime-y-envía, siendo el primero el de implementación mas sencillo y el último el mas complejo. Los primeros dos protocolos son los de mayor popularidad al momento de implementar estas técnicas, debido a que comprime-y-envía no ofrece grandes diferencias en ganancia y desempeño <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>.   </p>
 
 <p>II. Protocolos de Relay.</p>
 
@@ -173,19 +163,19 @@ Fase 2: El relay envía su información al destino.</p>
 <p>El esquema de transmisión de un protocolo de cooperación se divide en dos fases para evitar interferencias.</p>
 
 <p>Fase 1: Una fuente envía su información al destino y la información también es recibida por el relay al mismo tiempo.
-Fase 2: El relay envía su información al destino.</p>
+Fase 2: El relay envía su información al destino. </p>
 
 <p>II.1 Amplifica y envía.</p>
 
 <p>En este protocolo, el relay amplifica la señal de la fuente y envía esta a su destino de una forma ideal para ecualizar el efecto del canal entre la fuente y el relay. El relay hace esto simplemente escalando la señal recibida por un factor que es inversamente proporcional a la potencia recibida.</p>
 
-<p>El destino recibe dos copias de la señal x a través del enlace de la fuente y del enlace del relay. Existen diversas técnicas para combinar las dos versiones de la señal recibida. La técnica óptima que maximiza todos los SNR (SNR de la fuente al relay mas el SNR de la fuente al destino) es el MRC (Maximal Ratio Combining). El combinador MRC requiere de un detector coherente que tenga conocimiento de todos los coeficientes del canal, además, el SNR a la salida del MRC es igual a la suma de todos los SNR recibidos por ambos lados.</p>
+<p>El destino recibe dos copias de la señal x a través del enlace de la fuente y del enlace del relay. Existen diversas técnicas para combinar las dos versiones de la señal recibida. La técnica óptima que maximiza todos los SNR (SNR de la fuente al relay mas el SNR de la fuente al destino) es el MRC (Maximal Ratio Combining). El combinador MRC requiere de un detector coherente que tenga conocimiento de todos los coeficientes del canal, además, el SNR a la salida del MRC es igual a la suma de todos los SNR recibidos por ambos lados.   </p>
 
 <p>II.2 Decodifica y envía.</p>
 
 <p>Este protocolo consiste en que el nodo relay decodifique la señal recibida, la vuelva a codificar y entonces retransmita esta nueva señal al destino. Si la señal en el relay es incorrecta, esta puede ser reenviada al destino y su decodificación no tendría sentido.</p>
 
-<p>La ventaja de Decodifica-y-envía sobre Amplifica-y-envía es la reducción de los efectos del ruido aditivo en el relay, esto disminuye la posibilidad de enviar señales erróneamente detectadas a su destino, ya que en caso de enviarse provocaría un error en la propagación que puede disminuir el desempeño del sistema. La información mutua entre la fuente y el destino está limitada por la información mutua del enlace mas debil entre la fuente y el destino y el canal combinado de la fuente al relay y el relay al destino.</p>
+<p>La ventaja de Decodifica-y-envía sobre Amplifica-y-envía es la reducción de los efectos del ruido aditivo en el relay, esto disminuye la posibilidad de enviar señales erróneamente detectadas a su destino, ya que en caso de enviarse provocaría un error en la propagación que puede disminuir el desempeño del sistema. La información mutua entre la fuente y el destino está limitada por la información mutua del enlace mas debil entre la fuente y el destino y el canal combinado de la fuente al relay y el relay al destino.  </p>
 
 <p>III. Conclusiones</p>
 
@@ -193,21 +183,22 @@ Fase 2: El relay envía su información al destino.</p>
 
 <p>Referencias.</p>
 
-<p><a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x76;&#x69;&#107;&#x74;&#111;&#x72;&#105;&#x76;&#x61;&#x6e;&#x40;&#x6f;&#x70;&#x65;&#x6e;&#109;&#97;&#x69;&#x6c;&#x62;&#111;&#x78;&#x2e;&#111;&#x72;&#x67;">&#118;&#105;&#107;&#x74;&#x6f;&#114;&#x69;&#x76;&#x61;&#x6e;&#64;&#x6f;&#112;&#x65;&#x6e;&#109;&#97;&#105;&#x6c;&#98;&#111;&#x78;&#x2e;&#x6f;&#x72;&#x67;</a></p>
+<p>viktorivan@openmailbox.org</p>
 
 <p>@viktor_ivan</p>
 <div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Hoymann, C.; Wanshi Chen; Montojo, J.; Golitschek, A.; Koutsimanis, C.; Xiaodong Shen, &ldquo;Relaying operation in 3GPP LTE: challenges and solutions,&rdquo; Communications Magazine, IEEE , vol.50, no.2, pp.156,162, February 2012.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>Cheng-Xiang Wang; Xuemin Hong; Xiaohu Ge; Xiang Cheng; Gong Zhang; Thompson, J., &ldquo;Cooperative MIMO channel models: A survey,&rdquo; Communications Magazine, IEEE , vol.48, no.2, pp.80,87, February 2010.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>Gerhard Kramer, Ivana Marić, and Roy D. Yates. 2006. Cooperative communications. Found. Trends Netw. 1, 3 (August 2006), 271-425.<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-</ol>
+  <ol>
+    <li id="fn:1">
+      <p>Hoymann, C.; Wanshi Chen; Montojo, J.; Golitschek, A.; Koutsimanis, C.; Xiaodong Shen, “Relaying operation in 3GPP LTE: challenges and solutions,” Communications Magazine, IEEE , vol.50, no.2, pp.156,162, February 2012.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Cheng-Xiang Wang; Xuemin Hong; Xiaohu Ge; Xiang Cheng; Gong Zhang; Thompson, J., “Cooperative MIMO channel models: A survey,” Communications Magazine, IEEE , vol.48, no.2, pp.80,87, February 2010.<a href="#fnref:2" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>Gerhard Kramer, Ivana Marić, and Roy D. Yates. 2006. Cooperative communications. Found. Trends Netw. 1, 3 (August 2006), 271-425.<a href="#fnref:3" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
 </div>
-
 ]]></content>
   </entry>
   

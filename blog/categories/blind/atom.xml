@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: blind | Iván Rodríguez]]></title>
+  <link href="http://viktorivan.github.io/blog/categories/blind/atom.xml" rel="self"/>
+  <link href="http://viktorivan.github.io/"/>
+  <updated>2014-11-19T18:23:45-08:00</updated>
+  <id>http://viktorivan.github.io/</id>
+  <author>
+    <name><![CDATA[Iván Rodríguez]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Cálculo de SNR ciego para OFDM]]></title>
+    <link href="http://viktorivan.github.io/blog/2014/11/12/calculo-snr-ciego-para-ofdm/"/>
+    <updated>2014-11-12T17:10:05-08:00</updated>
+    <id>http://viktorivan.github.io/blog/2014/11/12/calculo-snr-ciego-para-ofdm</id>
+    <content type="html"><![CDATA[<p><em>Resumen</em></p>
+
+<p>La relación señal a ruido (SNR) es la proporción existente entre la potencia de la señal recibida y la potencia de ruido en el receptor. De este modo, se realiza la medición de la tasa de bit erróneo (BER) de un sistema de comunicación digital ante la presencia de ruido y sin tener en cuenta el ancho de banda. Para el cálculo de SNR normalmente involucra el conocimiento previo en el receptor de la palabra transmitida y el canal. Por lo general se expresa en dB y es adimensional. </p>
+
+<p>En un sistema convencional de Multiplexión por División de Frecuencias Ortogonales (OFDM), el cálculo de SNR se realiza utilizando símbolos de entrenamiento o subportadoras pilotos. Uno de los métodos para el cálculo de SNR involucra que la secuencia transmitida es conocida previamente por el receptor. Cuando el receptor no conoce esta secuencia de entrenamiento, el método de estimación es conocido como estimación ciega.</p>
+
+<!-- more -->
+<p>I. Introducción.</p>
+
+<p>La estimación del SNR para un sistema de comunicación es importante, ya que con ello se valida el desempeño de un sistema para ciertas condiciones de canal. De este modo se puede interpretar que un sistema es eficiente a altas SNR o un deficiente a bajos SNR. Así mismo se puede utlizar para comparar el sistema con otros esquemas, dando a entender que tiene un mejor BER, tasa de símbolo erróneo (SER) o tasa de paquete erróneo (PER) que otros sistemas.</p>
+
+<p>De acuerdo con la literatura, la estimación de SNR en el contexto de portadora única es un tema muy investigado, y muchos de estas técnicas se han adaptado a la modulación OFDM en forma directa. De acuerdo a algunos autores, es posible realizar la estimación ciega de SNR en un símbolo OFDM directamente en la carga util, sin necesidad de conocer los pilotos, cabecera o secuencias de entrenamiento<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. </p>
+
+<p>A continuación se mostrará una técnica de estimación de SNR ciego, así mismo se propondrá un algoritmo donde se muestra los valores de estimación y reales de SNR de un sistema OFDM.</p>
+
+<p>II. Modelo de sistema.</p>
+
+<p>En el dominio de la frecuencia, el símbolo OFDM recibido $Y(j,k)$ en el tiempo $j$ y subportadora $k$ puede ser representado por:</p>
+
+<p>$
+\begin{align}
+Y(j,k)=X(j,k)H(j,k)+N(j,k),
+\end{align}
+$ </p>
+
+<p>Referencias</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>LI, Yunxin. Blind SNR estimation of OFDM signals. En 2010 International Conference on Microwave and Millimeter Wave Technology. 2010. p. 1792-1796.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+]]></content>
+  </entry>
+  
+</feed>

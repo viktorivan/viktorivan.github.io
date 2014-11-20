@@ -9,7 +9,7 @@
   <meta name="author" content="Iván Rodríguez">
 
   
-  <meta name="description" content="Resumen El uso de herramientas de programación como Matlab permiten que el desarrollo de simulaciones se realice de una manera muy práctica, dejando &hellip;">
+  <meta name="description" content="Resumen La relación señal a ruido (SNR) es la proporción existente entre la potencia de la señal recibida y la potencia de ruido en el receptor. De &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +70,51 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/11/12/calculo-snr-ciego-para-ofdm/">Cálculo De SNR Ciego Para OFDM</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-12T17:10:05-08:00" pubdate data-updated="true">Nov 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>Resumen</em></p>
+
+<p>La relación señal a ruido (SNR) es la proporción existente entre la potencia de la señal recibida y la potencia de ruido en el receptor. De este modo, se realiza la medición de la tasa de bit erróneo (BER) de un sistema de comunicación digital ante la presencia de ruido y sin tener en cuenta el ancho de banda. Para el cálculo de SNR normalmente involucra el conocimiento previo en el receptor de la palabra transmitida y el canal. Por lo general se expresa en dB y es adimensional. </p>
+
+<p>En un sistema convencional de Multiplexión por División de Frecuencias Ortogonales (OFDM), el cálculo de SNR se realiza utilizando símbolos de entrenamiento o subportadoras pilotos. Uno de los métodos para el cálculo de SNR involucra que la secuencia transmitida es conocida previamente por el receptor. Cuando el receptor no conoce esta secuencia de entrenamiento, el método de estimación es conocido como estimación ciega.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/12/calculo-snr-ciego-para-ofdm/">Leer más &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/06/13/scipy-como-alternativa-a-matlab/">SciPy Como Alternativa a Matlab</a></h1>
     
     
@@ -95,7 +140,7 @@
 
   <div class="entry-content"><p><em>Resumen</em></p>
 
-<p>El uso de herramientas de programación como <a href="http://www.mathworks.com/">Matlab</a> permiten que el desarrollo de simulaciones se realice de una manera muy práctica, dejando que el programador sólo se enfoque a solucionar el problema y no batalle en la implementación del algoritmo. Matlab es un lenguaje de alto nivel que permite que usuarios con conocimientos básicos de programación, puedan implementar cualquier algoritmo de una manera simple y rápida, así mismo, cuenta con múltiples herramientas gráficas que ayudan en la interpretación de los resultados. Una alternativa para el uso de herramientas enfocadas a la investigación es <a href="http://www.scipy.org">SciPy</a> o <code>Python Científico</code>. SciPy es una biblioteca de <a href="http://www.python.org">Python</a> que permite realizar operaciones especializadas en un lenguaje de programación convencional, facilitando así el desarrollo de algoritmos y optimizando los tiempos de ejecución, de manera similar a Matlab.</p>
+<p>El uso de herramientas de programación como <a href="http://www.mathworks.com/">Matlab</a> permiten que el desarrollo de simulaciones se realice de una manera muy práctica, dejando que el programador sólo se enfoque a solucionar el problema y no batalle en la implementación del algoritmo. Matlab es un lenguaje de alto nivel que permite que usuarios con conocimientos básicos de programación, puedan implementar cualquier algoritmo de una manera simple y rápida, así mismo, cuenta con múltiples herramientas gráficas que ayudan en la interpretación de los resultados. Una alternativa para el uso de herramientas enfocadas a la investigación es <a href="http://www.scipy.org">SciPy</a> o <code>Python Científico</code>. SciPy es una biblioteca de <a href="http://www.python.org">Python</a> que permite realizar operaciones especializadas en un lenguaje de programación convencional, facilitando así el desarrollo de algoritmos y optimizando los tiempos de ejecución, de manera similar a Matlab. </p>
 
 </div>
   
@@ -140,7 +185,7 @@
 
 <p>El desarrollo de nuevos sistemas de comunicación, en el ambiente académico, normalmente queda en proyectos de software, limitados a resultados de simulación sin poder dar el paso a la implementación del mismo. Es muy bien sabido que los problemas de software no son lo mismos que los problemas que pueden presentarse en las plataformas de hardware, por lo que el uso de herramientas de SDR (Software Defined Radio) como <a href="http://www.gnuradio.org">GNU Radio</a> en combinación con las tarjetas <a href="http://www.ettus.com">USRP</a> (Universal Software Radio Peripheral) facilitan el dar ese paso de la simulación en plataformas de software a la emulación en plataformas de hardware de una forma transparente.</p>
 
-<p>A continuación se muestra el desarrollo de una plataforma de comunicación inalámbrica basada en DFTS-OFDM (Direct Fourier Transform Spread &ndash; Orthogonal Frequency Division Modulation) en combinación con protocolos de relay en una implementación de una antena y dos saltos.</p>
+<p>A continuación se muestra el desarrollo de una plataforma de comunicación inalámbrica basada en DFTS-OFDM (Direct Fourier Transform Spread - Orthogonal Frequency Division Modulation) en combinación con protocolos de relay en una implementación de una antena y dos saltos.</p>
 
 </div>
   
@@ -183,7 +228,7 @@
 
   <div class="entry-content"><p>Introducción.</p>
 
-<p>Aunque <a href="http://www.gnuradio.org">GNU Radio</a> es un proyecto versátil conformado con una gran cantidad de herramientas que permiten realizar múltiples procesos en Software Radio, muchas veces se requiere de operaciones específicas que difícilmente serán integradas en el proyecto original. La integración de estas funciones especiales pueden ser desarrolladas por el usuario por medio de herramientas como <code>gr_modtool</code>, donde a través de código en C++ o Python se puede desarrollar cualquier función para el procesamiento digital de la señal que no este considerado dentro del proyecto de GNU Radio.</p>
+<p>Aunque <a href="http://www.gnuradio.org">GNU Radio</a> es un proyecto versátil conformado con una gran cantidad de herramientas que permiten realizar múltiples procesos en Software Radio, muchas veces se requiere de operaciones específicas que difícilmente serán integradas en el proyecto original. La integración de estas funciones especiales pueden ser desarrolladas por el usuario por medio de herramientas como <code>gr_modtool</code>, donde a través de código en C++ o Python se puede desarrollar cualquier función para el procesamiento digital de la señal que no este considerado dentro del proyecto de GNU Radio. </p>
 
 </div>
   
@@ -269,8 +314,7 @@
 
   <div class="entry-content"><p>Resumen.</p>
 
-<p>Actualmente, las redes inalámbricas de banda ancha están en constante evolución debido al crecimiento en la demanda de aplicaciones móviles de datos, por lo que estas redes tienen que aumentar su capacidad de sistema, cobertura, datos y calidad de servicio. La implementación de estaciones de relay inalámbricos, especialmente cuando operan a half-duplex, permiten alcanzar estos objetivos sin realizar altos gastos <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Esto, aunado a la implementación de tecnologías como MIMO (Multiple Input Multiple Output) y sistemas basados en OFDM (Orthogonal Frequency Division Multiplexing) como OFDMA y SC-FDMA (Single Carrier &ndash; FDMA), permiten que el diseño de este tipo de redes puedan enfrentar los retos de compatibilidad con dispositivos de generaciones previas, minimizando así la complexidad y maximizando la eficiencia. En este artículo se analizará los diferentes tipos de protocolos de relay y escenarios, donde dispositivos de una antena pueden tener servicios exclusivos de dispositivos MIMO-OFDM.</p>
-
+<p>Actualmente, las redes inalámbricas de banda ancha están en constante evolución debido al crecimiento en la demanda de aplicaciones móviles de datos, por lo que estas redes tienen que aumentar su capacidad de sistema, cobertura, datos y calidad de servicio. La implementación de estaciones de relay inalámbricos, especialmente cuando operan a half-duplex, permiten alcanzar estos objetivos sin realizar altos gastos <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Esto, aunado a la implementación de tecnologías como MIMO (Multiple Input Multiple Output) y sistemas basados en OFDM (Orthogonal Frequency Division Multiplexing) como OFDMA y SC-FDMA (Single Carrier - FDMA), permiten que el diseño de este tipo de redes puedan enfrentar los retos de compatibilidad con dispositivos de generaciones previas, minimizando así la complexidad y maximizando la eficiencia. En este artículo se analizará los diferentes tipos de protocolos de relay y escenarios, donde dispositivos de una antena pueden tener servicios exclusivos de dispositivos MIMO-OFDM.
 </div>
   
   
@@ -312,8 +356,7 @@
 
   <div class="entry-content"><p>Resumen.</p>
 
-<p>Hoy en día, la demanda de capacidad y servicios a altas tasas de transmisión en los sistemas celulares exige un mejor desempeño, así también, las limitaciones en el espectro radio-eléctrico obligan a los sistemas de comunicaciones modernos a lograr una eficiencia espectral alta. En este artículo se analizará la capa física (PHY) del estandar LTE-A (Long Term Evolution &ndash; Advanced) que el grupo de trabajo 3GPP (3rd Generation Partnership Project) propone para alcanzar los requisitos de cuarta generación (4G) propuesto por la ITU-R (International Telecommunication Union), el cuál define tasas de transmisión de hasta 1 Gbps en su enlace de bajada y 500 Mbps en su enlace de subida <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-
+<p>Hoy en día, la demanda de capacidad y servicios a altas tasas de transmisión en los sistemas celulares exige un mejor desempeño, así también, las limitaciones en el espectro radio-eléctrico obligan a los sistemas de comunicaciones modernos a lograr una eficiencia espectral alta. En este artículo se analizará la capa física (PHY) del estandar LTE-A (Long Term Evolution - Advanced) que el grupo de trabajo 3GPP (3rd Generation Partnership Project) propone para alcanzar los requisitos de cuarta generación (4G) propuesto por la ITU-R (International Telecommunication Union), el cuál define tasas de transmisión de hasta 1 Gbps en su enlace de bajada y 500 Mbps en su enlace de subida <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. 
 </div>
   
   
@@ -338,6 +381,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/12/calculo-snr-ciego-para-ofdm/">Cálculo de SNR ciego para OFDM</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/13/scipy-como-alternativa-a-matlab/">SciPy como alternativa a Matlab</a>
       </li>
     
@@ -351,10 +398,6 @@
     
       <li class="post">
         <a href="/blog/2014/03/19/bloques-de-procesamiento-de-senales-en-gnu-radio/">Bloques de procesamiento de señales en GNU Radio</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/20/comunicaciones-cooperativas/">Comunicaciones Cooperativas</a>
       </li>
     
   </ul>
@@ -449,5 +492,20 @@
 
 
 
+  <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 </body>
 </html>

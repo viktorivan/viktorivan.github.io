@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sdr | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/sdr/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-19T17:23:17-08:00</updated>
+  <updated>2014-11-19T18:23:45-08:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -20,10 +20,9 @@
     <id>http://viktorivan.github.io/blog/2014/03/19/librerias-externas-en-gnu-radio</id>
     <content type="html"><![CDATA[<p>Introducción.</p>
 
-<p>Aunque <a href="http://www.gnuradio.org">GNU Radio</a> es un proyecto versátil conformado con una gran cantidad de herramientas que permiten realizar múltiples procesos en Software Radio, muchas veces se requiere de operaciones específicas que difícilmente serán integradas en el proyecto original. La integración de estas funciones especiales pueden ser desarrolladas por el usuario por medio de herramientas como <code>gr_modtool</code>, donde a través de código en C++ o Python se puede desarrollar cualquier función para el procesamiento digital de la señal que no este considerado dentro del proyecto de GNU Radio.</p>
+<p>Aunque <a href="http://www.gnuradio.org">GNU Radio</a> es un proyecto versátil conformado con una gran cantidad de herramientas que permiten realizar múltiples procesos en Software Radio, muchas veces se requiere de operaciones específicas que difícilmente serán integradas en el proyecto original. La integración de estas funciones especiales pueden ser desarrolladas por el usuario por medio de herramientas como <code>gr_modtool</code>, donde a través de código en C++ o Python se puede desarrollar cualquier función para el procesamiento digital de la señal que no este considerado dentro del proyecto de GNU Radio. </p>
 
 <!-- more -->
-
 
 <p>Lenguajes de programación como C++ y Python gozan de una popularidad entre los programadores de tal manera que se desarrollan proyectos independientes especializados que facilitan el desarrollo de programas orientados a analizar o solucionar áreas muy específicas, un caso es <a href="http://itpp.sourceforge.net">IT++</a> que es una biblioteca de clases y funciones para álgebra lineal, optimización numérica, procesamiento de señales, comunicaciones y estadística. Utilizada ampliamente tanto en la industria como en la investigación.</p>
 
@@ -106,7 +105,7 @@
 endif()
 </code></pre>
 
-<p>En la sección de <code># Setup the include and linker paths</code> se agrega la línea <code>${ITPP_INCLUDE_DIRS}</code> para <code>include_directories</code> y la línea <code>${ITPP_LIBRARY_DIRS}</code> para <code>link_directories</code>, quedando como sigue:</p>
+<p>En la sección de <code># Setup the include and linker paths</code> se agrega la línea ` ${ITPP_INCLUDE_DIRS}<code> para </code>include_directories<code> y la línea </code>${ITPP_LIBRARY_DIRS}<code> para </code>link_directories`, quedando como sigue:</p>
 
 <pre><code>include_directories(
     ${CMAKE_SOURCE_DIR}/lib
@@ -454,8 +453,8 @@ Language: C++
 Enter name of block/code (without module name prefix): encodconv_vff
 Block/code identifier: encodconv_vff
 Enter valid argument list, including default arguments: int val1, int val2, int val3
-Add Python QA code? [Y/n]
-Add C++ QA code? [y/N]
+Add Python QA code? [Y/n] 
+Add C++ QA code? [y/N] 
 Adding file 'lib/encodconv_vff_impl.h'...
 Adding file 'lib/encodconv_vff_impl.cc'...
 Adding file 'include/Tu_modulo/encodconv_vff.h'...
@@ -475,8 +474,8 @@ Language: C++
 Enter name of block/code (without module name prefix): decodconv_vff
 Block/code identifier: decodconv_vff
 Enter valid argument list, including default arguments: int val1, int val2, int val3
-Add Python QA code? [Y/n]
-Add C++ QA code? [y/N]
+Add Python QA code? [Y/n] 
+Add C++ QA code? [y/N] 
 Adding file 'lib/decodconv_vff_impl.h'...
 Adding file 'lib/decodconv_vff_impl.cc'...
 Adding file 'include/Tu_modulo/decodconv_vff.h'...
@@ -488,37 +487,37 @@ Editing grc/CmakeLists.txt...
 </code>
 <em>Codificador convolucional</em></p>
 
-<p>Dentro del archivo <code>encodconv_vff_impl.cc</code> que se ubica en <code>~/gr-Tu_modulo/lib</code> se indica que se utilizará la biblioteca de IT++</p>
+<p>Dentro del archivo <code>encodconv_vff_impl.cc</code> que se ubica en <code>~/gr-Tu_modulo/lib</code> se indica que se utilizará la biblioteca de IT++ </p>
 
 <pre><code>#include &lt;itpp/itcomm.h&gt;
 </code></pre>
 
-<p>En la sección de <code>encodconv_vff_impl::encodconv_vff_impl(int val1, int val2, int val3)</code> se indican los parámetros del bloque tales como la cantidad de flujos de datos, tamaño de los paquetes de entrada y salida, así como asignar a las variables internas las variables públicas que se capturaron en el bloque de GRC.</p>
+<p>En la sección de <code>encodconv_vff_impl::encodconv_vff_impl(int val1, int val2, int val3)</code> se indican los parámetros del bloque tales como la cantidad de flujos de datos, tamaño de los paquetes de entrada y salida, así como asignar a las variables internas las variables públicas que se capturaron en el bloque de GRC. </p>
 
 <pre><code>encodconv_vff_impl::encodconv_vff_impl(int val1, int val2, int val3)
   : gr::sync_block("encodconv_vff",
           gr::io_signature::make(1, 1, sizeof(float) * val3),
           gr::io_signature::make(1, 1, sizeof(float) * val3 * sizeof(val1)))
 {
-    polsize = sizeof(val1);
-    cl = val2;
-    pz = val3;
+	polsize = sizeof(val1);
+	cl = val2;
+	pz = val3;
+  
+	for (int i = 0; i &lt; 0x100; i++){
+		polynom[i] = i;
+	}
+	
+	memcpy(polynom, (char*)&amp;val1, sizeof(val1));
+	
+	// -- Channel code parameters --
 
-    for (int i = 0; i &lt; 0x100; i++){
-        polynom[i] = i;
-    }
+	itpp::ivec generator(polsize);
 
-    memcpy(polynom, (char*)&amp;val1, sizeof(val1));
+	for (int i = 0; i &lt; polsize; i++){
+		generator[i] = polynom[i];
+	}
 
-    // -- Channel code parameters --
-
-    itpp::ivec generator(polsize);
-
-    for (int i = 0; i &lt; polsize; i++){
-        generator[i] = polynom[i];
-    }
-
-    code.set_generator_polynomials(generator, cl);  
+	code.set_generator_polynomials(generator, cl);	
 }
 </code></pre>
 
@@ -528,31 +527,32 @@ Editing grc/CmakeLists.txt...
 
 <pre><code>int
 encodconv_vff_impl::work(int noutput_items,
-          gr_vector_const_void_star &amp;input_items,
-          gr_vector_void_star &amp;output_items)
+		  gr_vector_const_void_star &amp;input_items,
+		  gr_vector_void_star &amp;output_items)
 {
     const float *in = (const float *) input_items[0];
     float *out = (float *) output_items[0];
 
     itpp::bvec tempin(pz * sizeof(float));
-    itpp::bvec tempout(pz * polsize * sizeof(float));
+	itpp::bvec tempout(pz * polsize * sizeof(float));
+  
+	for (int j = 0; j &lt; (pz * sizeof(float)); j++){
+		tempin[j] = in[j];
+	}	
 
-    for (int j = 0; j &lt; (pz * sizeof(float)); j++){
-        tempin[j] = in[j];
-    }   
+	code.encode_tailbite(tempin, tempout);
 
-    code.encode_tailbite(tempin, tempout);
-
-    for (int k = 0; k &lt; (pz * polsize * sizeof(float)); k++){
-        out[k] = tempout[k];
-    }
+	for (int k = 0; k &lt; (pz * polsize * sizeof(float)); k++){
+		out[k] = tempout[k];
+	}
 
     // Tell runtime system how many output items we produced.
     return noutput_items;
 }
 </code></pre>
 
-<p>La operación de codificación es realizada por el comando <code>code.encode_tailbite(tempin, tempout);</code>, disminuyendo así la cantidad de líneas para desarrollar un codificador convolucional.</p>
+<p>La operación de codificación es realizada por el comando <code>code.encode_tailbite(tempin, tempout);
+</code>, disminuyendo así la cantidad de líneas para desarrollar un codificador convolucional.</p>
 
 <p>La versión final del código es</p>
 
@@ -775,34 +775,34 @@ encodconv_vff_impl::work(int noutput_items,
           gr::io_signature::make(1, 1, sizeof(float) * val3 * sizeof(val1)),
           gr::io_signature::make(1, 1, sizeof(float) * val3))
 {
-    polsize = sizeof(val1);
-    cl = val2;
-    pz = val3;
+	polsize = sizeof(val1);
+	cl = val2;
+	pz = val3;
+  
+	for (int i = 0; i &lt; 0x100; i++){
+		polynom[i] = i;
+	}
 
-    for (int i = 0; i &lt; 0x100; i++){
-        polynom[i] = i;
-    }
+	memcpy(polynom, (char*)&amp;val1, sizeof(val1));
+	
+	// -- Channel code parameters --
 
-    memcpy(polynom, (char*)&amp;val1, sizeof(val1));
+	itpp::ivec generator(polsize);
 
-    // -- Channel code parameters --
+	for (int i = 0; i &lt; polsize; i++){
+		generator[i] = polynom[i];
+	}
 
-    itpp::ivec generator(polsize);
-
-    for (int i = 0; i &lt; polsize; i++){
-        generator[i] = polynom[i];
-    }
-
-    code.set_generator_polynomials(generator, cl);
+	code.set_generator_polynomials(generator, cl);
 }
 </code></pre>
 
-<p>De igual manera, en la sección de procesamiento de la señal del bloque de procesamiento <code>// Do &lt;+signal processing+&gt;</code> se realizará la decodificación de los paquetes de entrada de acuerdo a los parámetros previamente definidos utilizando la biblioteca de IT++,</p>
+<p>De igual manera, en la sección de procesamiento de la señal del bloque de procesamiento <code>// Do &lt;+signal processing+&gt;</code> se realizará la decodificación de los paquetes de entrada de acuerdo a los parámetros previamente definidos utilizando la biblioteca de IT++, </p>
 
 <pre><code>int
 decodconv_vff_impl::work(int noutput_items,
-          gr_vector_const_void_star &amp;input_items,
-          gr_vector_void_star &amp;output_items)
+		  gr_vector_const_void_star &amp;input_items,
+		  gr_vector_void_star &amp;output_items)
 {
     const float *in = (const float *) input_items[0];
     float *out = (float *) output_items[0];
@@ -811,25 +811,25 @@ itpp::bvec tempbin(pz * polsize * sizeof(float));
 itpp::bvec tempout(pz * sizeof(float));
 itpp::vec tempin(pz * polsize * sizeof(float));
 
-    for (int j = 0; j &lt; (pz  * polsize * sizeof(float)); j++){
-        tempbin[j] = in[j];
-    }
+	for (int j = 0; j &lt; (pz  * polsize * sizeof(float)); j++){
+		tempbin[j] = in[j];
+	}
 
-    tempin = to_vec(tempbin);
-    tempin = -(tempin * 2 - 1);
+	tempin = to_vec(tempbin);
+	tempin = -(tempin * 2 - 1);
 
-    code.decode_tailbite(tempin, tempout);
+	code.decode_tailbite(tempin, tempout);
 
-    for (int k = 0; k &lt; (pz * sizeof(float)); k++){
-        out[k] = tempout[k];
-    }
+	for (int k = 0; k &lt; (pz * sizeof(float)); k++){
+		out[k] = tempout[k];
+	}
 
     // Tell runtime system how many output items we produced.
     return noutput_items;
 }
 </code></pre>
 
-<p>En este bloque la operación de decodificación es realizada por el comando <code>code.decode_tailbite(tempin, tempout);</code></p>
+<p>En este bloque la operación de decodificación es realizada por el comando <code>code.decode_tailbite(tempin, tempout);</code> </p>
 
 <p>El código final del bloque de procesamiento es</p>
 
@@ -1048,7 +1048,7 @@ itpp::vec tempin(pz * polsize * sizeof(float));
 
 <p><em>Definiendo las variables públicas en los archivos de cabecera</em></p>
 
-<p>Para poder utilizar libremente las clases y variables de IT++ dentro de los archivos cc de GNU Radio se requiere modificar los archivos de cabecera h de los bloques de procesamiento. Para el codificador convolucional el archivo es <code>encodconv_vff_impl.h</code> y para el decodificador es <code>decodconv_vff_impl.h</code>.</p>
+<p>Para poder utilizar libremente las clases y variables de IT++ dentro de los archivos cc de GNU Radio se requiere modificar los archivos de cabecera h de los bloques de procesamiento. Para el codificador convolucional el archivo es <code>encodconv_vff_impl.h</code> y para el decodificador es <code>decodconv_vff_impl.h</code>. </p>
 
 <p>Dentro del archivo <code>encodconv_vff_impl.h</code> se indica la biblioteca de IT++</p>
 
@@ -1064,7 +1064,7 @@ itpp::vec tempin(pz * polsize * sizeof(float));
   int cl;
   int pz;
   itpp::Convolutional_Code code;
-
+  
   ~encodconv_vff_impl();
 </code></pre>
 
@@ -1186,17 +1186,16 @@ itpp::vec tempin(pz * polsize * sizeof(float));
 <pre><code>#include &lt;itpp/itcomm.h&gt;
 </code></pre>
 
-<p>y en la sección de <code>public</code> las variables requeridas para el procesamiento de la señal,</p>
+<p>y en la sección de <code>public</code> las variables requeridas para el procesamiento de la señal,
+     public:
+      decodconv_vff_impl(int val1, int val2, int val3);
+      unsigned char polynom [0x100];
+      int polsize;
+      int cl;
+      int pz;
+      itpp::Convolutional_Code code;</p>
 
-<pre><code> public:
-  decodconv_vff_impl(int val1, int val2, int val3);
-  unsigned char polynom [0x100];
-  int polsize;
-  int cl;
-  int pz;
-  itpp::Convolutional_Code code;
-
-  ~decodconv_vff_impl();
+<pre><code>  ~decodconv_vff_impl();
 </code></pre>
 
 <p>El archivo de cabecera, en su versión final queda,</p>
@@ -1572,7 +1571,7 @@ $ sudo ldconfig
 </code>
 De esa manera queda integrado el módulo out-of-tree dentro de GNU Radio.</p>
 
-<p><a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#x3a;&#118;&#105;&#107;&#x74;&#x6f;&#x72;&#x69;&#118;&#97;&#x6e;&#64;&#x6f;&#112;&#x65;&#x6e;&#x6d;&#x61;&#105;&#x6c;&#98;&#111;&#120;&#46;&#x6f;&#x72;&#x67;">&#x76;&#x69;&#107;&#116;&#111;&#x72;&#105;&#118;&#97;&#110;&#x40;&#x6f;&#112;&#x65;&#110;&#x6d;&#97;&#105;&#108;&#98;&#111;&#x78;&#46;&#x6f;&#114;&#x67;</a></p>
+<p>viktorivan@openmailbox.org</p>
 
 <p>@viktor_ivan</p>
 ]]></content>
@@ -1589,15 +1588,14 @@ De esa manera queda integrado el módulo out-of-tree dentro de GNU Radio.</p>
 
 <!-- more -->
 
-
 <p>Procedimiento.</p>
 
 <p>Para crear un módulo out-of-tree se ejecuta desde una terminal de linux el siguiente comando
 <code>
 $ gr_modtool create
 Name of the new module:Tu_modulo
-Creating out-of-tree module in ./gr-Tu_modulo... Done.
-Use 'gr_modtool add' to add a new block to this currently empty module.
+Creating out-of-tree module in ./gr-Tu_modulo... Done. 
+Use 'gr_modtool add' to add a new block to this currently empty module. 
 </code>
 El nombre que se indique para el módulo es con el que va a aparecer en el catálogo de GNU Radio.</p>
 
@@ -1606,41 +1604,41 @@ El nombre que se indique para el módulo es con el que va a aparecer en el catá
 <p><code>
 $ cd gr-Tu_modulo
 $ gr_modtool add
-GNU Radio module name identified: Tu_modulo
-Enter code type: decimator
-Language: C++
-Enter name of block/code (without module name prefix): bin2dec_ff
-Block/code identifier: bin2dec_ff
-Enter valid argument list, including default arguments: int vec_size
-Add Python QA code? [Y/n]
-Add C++ QA code? [y/N]
-Adding file 'lib/bin2dec_ff_impl.h'...
-Adding file 'lib/bin2dec_ff_impl.cc'...
-Adding file 'include/Tu_modulo/bin2dec_ff.h'...
-Editing swig/Tu_modulo_swig.i...
-Adding file 'python/qa_bin2dec_ff.py'...
-Editing python/CMakeLists.txt...
-Adding file 'grc/Tu_modulo_bin2dec_ff.xml'...
+GNU Radio module name identified: Tu_modulo 
+Enter code type: decimator 
+Language: C++ 
+Enter name of block/code (without module name prefix): bin2dec_ff 
+Block/code identifier: bin2dec_ff 
+Enter valid argument list, including default arguments: int vec_size 
+Add Python QA code? [Y/n] 
+Add C++ QA code? [y/N] 
+Adding file 'lib/bin2dec_ff_impl.h'... 
+Adding file 'lib/bin2dec_ff_impl.cc'... 
+Adding file 'include/Tu_modulo/bin2dec_ff.h'... 
+Editing swig/Tu_modulo_swig.i... 
+Adding file 'python/qa_bin2dec_ff.py'... 
+Editing python/CMakeLists.txt... 
+Adding file 'grc/Tu_modulo_bin2dec_ff.xml'... 
 Editing grc/CMakeLists.txt...
 </code>
 y a su vez, se desarrollará un bloque que realice la operación inversa, esto es, un convertidor decimal a binario.
 <code>
-$ gr_modtool add
-GNU Radio module name identified: Tu_modulo
-Enter code type: interpolator
-Language: C++
-Enter name of block/code (without module name prefix): dec2bin_ff
-Block/code identifier: dec2bin_ff
-Enter valid argument list, including default arguments: int vec_size
-Add Python QA code? [Y/n]
-Add C++ QA code? [y/N]
-Adding file 'lib/dec2bin_ff_impl.h'...
-Adding file 'lib/dec2bin_ff_impl.cc'...
-Adding file 'include/Tu_modulo/dec2bin_ff.h'...
-Editing swig/Tu_modulo_swig.i...
-Adding file 'python/qa_dec2bin_ff.py'...
-Editing python/CMakeLists.txt...
-Adding file 'grc/Tu_modulo_dec2bin_ff.xml'...
+$ gr_modtool add 
+GNU Radio module name identified: Tu_modulo 
+Enter code type: interpolator 
+Language: C++ 
+Enter name of block/code (without module name prefix): dec2bin_ff 
+Block/code identifier: dec2bin_ff 
+Enter valid argument list, including default arguments: int vec_size 
+Add Python QA code? [Y/n] 
+Add C++ QA code? [y/N] 
+Adding file 'lib/dec2bin_ff_impl.h'... 
+Adding file 'lib/dec2bin_ff_impl.cc'... 
+Adding file 'include/Tu_modulo/dec2bin_ff.h'... 
+Editing swig/Tu_modulo_swig.i... 
+Adding file 'python/qa_dec2bin_ff.py'... 
+Editing python/CMakeLists.txt... 
+Adding file 'grc/Tu_modulo_dec2bin_ff.xml'... 
 Editing grc/CmakeLists.txt...
 </code>
 de esta manera se han creado dos bloques, un decimador para el convertidor binario a decimal y un interpolador para el decimal a binario.</p>
@@ -1654,14 +1652,14 @@ de esta manera se han creado dos bloques, un decimador para el convertidor binar
 <pre><code>#include &lt;math.h&gt;
 </code></pre>
 
-<p>En la sección de <code>bin2dec_ff_impl::bin2dec_ff_impl(int vec_size)</code> se definen la cantidad de flujos de datos que manejará el bloque de procesamiento, en este caso, sólo es un flujo de entrada y uno de salida, el factor de decimación definido por la variable vec_size y además se asigna a la variable chunk el valor de vec_size, ya que vec_size representa la cantidad de bits que se requieren para convertir el número a decimal.</p>
+<p>En la sección de <code>bin2dec_ff_impl::bin2dec_ff_impl(int vec_size)</code> se definen la cantidad de flujos de datos que manejará el bloque de procesamiento, en este caso, sólo es un flujo de entrada y uno de salida, el factor de decimación definido por la variable vec_size y además se asigna a la variable chunk el valor de vec_size, ya que vec_size representa la cantidad de bits que se requieren para convertir el número a decimal. </p>
 
 <pre><code>bin2dec_ff_impl::bin2dec_ff_impl(int vec_size)
   : gr::sync_decimator("bin2dec_ff",
           gr::io_signature::make(1, 1, sizeof(float)),
           gr::io_signature::make(1, 1, sizeof(float)), vec_size)
 {
-    chunk = vec_size;
+	chunk = vec_size;
 }
 </code></pre>
 
@@ -1669,21 +1667,21 @@ de esta manera se han creado dos bloques, un decimador para el convertidor binar
 
 <pre><code>int
 bin2dec_ff_impl::work(int noutput_items,
-          gr_vector_const_void_star &amp;input_items,
-          gr_vector_void_star &amp;output_items)
+		  gr_vector_const_void_star &amp;input_items,
+		  gr_vector_void_star &amp;output_items)
 {
     const float *in = (const float *) input_items[0];
     float *out = (float *) output_items[0];
 
     int j = 0, a = 0;
     for (int i = 0; i &lt; noutput_items * chunk; i = i + chunk){
-        out[j] = 0;
-        a = chunk - 1;
-        for (int k = 0; k &lt; chunk; k++){
-            out[j] = out[j] + (in[i + k] * pow (2,a));
-            a = a - 1;
-        }
-        j++;
+    	out[j] = 0;
+    	a = chunk - 1;
+    	for (int k = 0; k &lt; chunk; k++){
+    		out[j] = out[j] + (in[i + k] * pow (2,a));
+    		a = a - 1;
+    	}
+    	j++;
     }
 
     // Tell runtime system how many output items we produced.
@@ -1867,14 +1865,15 @@ bin2dec_ff_impl::work(int noutput_items,
 <pre><code>#include &lt;math.h&gt;
 </code></pre>
 
-<p>Nuevamente, en la sección de <code>dec2bin_ff_impl::dec2bin_ff_impl(int vec_size)</code> se indica la cantidad de flujos de entrada y salida que manejará el bloque de procesamiento, así también el factor de interpolación definido por la variable vec_size y por último la variabe chunk, quedando como sigue:</p>
+<p>Nuevamente, en la sección de <code>dec2bin_ff_impl::dec2bin_ff_impl(int vec_size)
+</code> se indica la cantidad de flujos de entrada y salida que manejará el bloque de procesamiento, así también el factor de interpolación definido por la variable vec_size y por último la variabe chunk, quedando como sigue:</p>
 
 <pre><code>dec2bin_ff_impl::dec2bin_ff_impl(int vec_size)
   : gr::sync_interpolator("dec2bin_ff",
           gr::io_signature::make(1, 1, sizeof(float)),
           gr::io_signature::make(1, 1, sizeof(float)), vec_size)
 {
-    chunk = vec_size;
+	chunk = vec_size;
 }
 </code></pre>
 
@@ -1882,25 +1881,25 @@ bin2dec_ff_impl::work(int noutput_items,
 
 <pre><code>int
 dec2bin_ff_impl::work(int noutput_items,
-          gr_vector_const_void_star &amp;input_items,
-          gr_vector_void_star &amp;output_items)
+		  gr_vector_const_void_star &amp;input_items,
+		  gr_vector_void_star &amp;output_items)
 {
     const float *in = (const float *) input_items[0];
     float *out = (float *) output_items[0];
 
     int l = 0, m = 0, a = 0, b[chunk];
     for (int i = 0; i &lt; noutput_items / chunk; i++){
-        a = in[i];
-        l = chunk - 1;
-        for (int j = 0; j &lt; chunk; j++){
-            b[j] = a % 2;
-            a = a / 2;  
-        }
-        for (int k = 0; k &lt; chunk; k++){
-            out[m] = b [l];
-            l = l - 1;
-            m++;
-        }
+    	a = in[i];
+    	l = chunk - 1;
+    	for (int j = 0; j &lt; chunk; j++){
+    		b[j] = a % 2;
+    		a = a / 2;	
+    	}
+    	for (int k = 0; k &lt; chunk; k++){
+    		out[m] = b [l];
+    		l = l - 1;
+    		m++;
+    	}
     }
 </code></pre>
 
@@ -2499,7 +2498,7 @@ $ sudo ldconfig
 </code>
 De esa manera queda integrado el módulo out-of-tree dentro de GNU Radio.</p>
 
-<p><a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#118;&#105;&#x6b;&#x74;&#x6f;&#114;&#x69;&#x76;&#x61;&#x6e;&#x40;&#x6f;&#x70;&#101;&#x6e;&#109;&#97;&#x69;&#108;&#98;&#111;&#x78;&#46;&#x6f;&#114;&#103;">&#x76;&#x69;&#107;&#x74;&#111;&#114;&#105;&#118;&#x61;&#x6e;&#64;&#111;&#112;&#x65;&#x6e;&#x6d;&#97;&#x69;&#108;&#98;&#x6f;&#120;&#x2e;&#x6f;&#114;&#x67;</a></p>
+<p>viktorivan@openmailbox.org</p>
 
 <p>@viktor_ivan</p>
 ]]></content>

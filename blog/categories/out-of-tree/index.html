@@ -103,6 +103,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/12/calculo-snr-ciego-para-ofdm/">Cálculo de SNR ciego para OFDM</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/13/scipy-como-alternativa-a-matlab/">SciPy como alternativa a Matlab</a>
       </li>
     
@@ -116,10 +120,6 @@
     
       <li class="post">
         <a href="/blog/2014/03/19/bloques-de-procesamiento-de-senales-en-gnu-radio/">Bloques de procesamiento de señales en GNU Radio</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/20/comunicaciones-cooperativas/">Comunicaciones Cooperativas</a>
       </li>
     
   </ul>
@@ -215,5 +215,20 @@
 
 
 
+  <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 4G | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/4g/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-19T17:23:17-08:00</updated>
+  <updated>2014-11-19T18:23:45-08:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -20,15 +20,9 @@
     <id>http://viktorivan.github.io/blog/2013/10/20/comunicaciones-cooperativas</id>
     <content type="html"><![CDATA[<p>Resumen.</p>
 
-<p>Actualmente, las redes inalámbricas de banda ancha están en constante evolución debido al crecimiento en la demanda de aplicaciones móviles de datos, por lo que estas redes tienen que aumentar su capacidad de sistema, cobertura, datos y calidad de servicio. La implementación de estaciones de relay inalámbricos, especialmente cuando operan a half-duplex, permiten alcanzar estos objetivos sin realizar altos gastos <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Esto, aunado a la implementación de tecnologías como MIMO (Multiple Input Multiple Output) y sistemas basados en OFDM (Orthogonal Frequency Division Multiplexing) como OFDMA y SC-FDMA (Single Carrier &ndash; FDMA), permiten que el diseño de este tipo de redes puedan enfrentar los retos de compatibilidad con dispositivos de generaciones previas, minimizando así la complexidad y maximizando la eficiencia. En este artículo se analizará los diferentes tipos de protocolos de relay y escenarios, donde dispositivos de una antena pueden tener servicios exclusivos de dispositivos MIMO-OFDM.</p>
-
+<p>Actualmente, las redes inalámbricas de banda ancha están en constante evolución debido al crecimiento en la demanda de aplicaciones móviles de datos, por lo que estas redes tienen que aumentar su capacidad de sistema, cobertura, datos y calidad de servicio. La implementación de estaciones de relay inalámbricos, especialmente cuando operan a half-duplex, permiten alcanzar estos objetivos sin realizar altos gastos <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Esto, aunado a la implementación de tecnologías como MIMO (Multiple Input Multiple Output) y sistemas basados en OFDM (Orthogonal Frequency Division Multiplexing) como OFDMA y SC-FDMA (Single Carrier - FDMA), permiten que el diseño de este tipo de redes puedan enfrentar los retos de compatibilidad con dispositivos de generaciones previas, minimizando así la complexidad y maximizando la eficiencia. En este artículo se analizará los diferentes tipos de protocolos de relay y escenarios, donde dispositivos de una antena pueden tener servicios exclusivos de dispositivos MIMO-OFDM.
 <!-- more -->
-
-
-<ol type="a">
-<li>Introducción.</li>
-</ol>
-
+I. Introducción.</p>
 
 <p>MIMO es una tecnlogía que puede explotar de una manera eficiente el dominio espacial en los canales con desvanecimiento de los móviles, esto es, por medio de esta técnica se pueden tantos flujos de datos como antenas transmisoras y receptoras se dispongan en el canal, permitiendo aumentar de esta manera la capacidad de capacidad del canal inalámbrico convencional <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</p>
 
@@ -36,7 +30,7 @@
 
 <p>Las comunicaciones cooperativas son un nuevo paradigma de las comunicaciones, ya que a partir de la naturaleza broadcast del canal inalámbrico se puede lograr que los nodos de comunicación se ayuden entre ellos. La implementación de redes de relays permite a los dispositivos sin capacidad MIMO (entiéndase dispositivos de una sola antena) aprovechar las ventajas de una transmisión en un canal MIMO a través de tecnologías como MIMO virtual, distribuido o cooperativo. En este tipo de tecnologías permite que nodos de relay fijos o móviles formen parte de un arreglo de antenas mayor, donde en conjunto presentarán una ganancia de diversidad, aunque ésta no será mayor a la ganancia de diversidad de un enlace MIMO punto a punto.</p>
 
-<p>La forma como es procesada la señal recibida en el nodo relay, ya sea sólo amplificando y reenviando la señal recibida o incluso decodificando y reenviando la señal recibida, define el protocol de relay que es utilizado en la comunicación cooperativa. Existen tres protocolos principales, Amplifica-y-envía, Decodifica-y-envía y Comprime-y-envía, siendo el primero el de implementación mas sencillo y el último el mas complejo. Los primeros dos protocolos son los de mayor popularidad al momento de implementar estas técnicas, debido a que comprime-y-envía no ofrece grandes diferencias en ganancia y desempeño <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>.</p>
+<p>La forma como es procesada la señal recibida en el nodo relay, ya sea sólo amplificando y reenviando la señal recibida o incluso decodificando y reenviando la señal recibida, define el protocol de relay que es utilizado en la comunicación cooperativa. Existen tres protocolos principales, Amplifica-y-envía, Decodifica-y-envía y Comprime-y-envía, siendo el primero el de implementación mas sencillo y el último el mas complejo. Los primeros dos protocolos son los de mayor popularidad al momento de implementar estas técnicas, debido a que comprime-y-envía no ofrece grandes diferencias en ganancia y desempeño <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>.   </p>
 
 <p>II. Protocolos de Relay.</p>
 
@@ -51,19 +45,19 @@
 <p>El esquema de transmisión de un protocolo de cooperación se divide en dos fases para evitar interferencias.</p>
 
 <p>Fase 1: Una fuente envía su información al destino y la información también es recibida por el relay al mismo tiempo.
-Fase 2: El relay envía su información al destino.</p>
+Fase 2: El relay envía su información al destino. </p>
 
 <p>II.1 Amplifica y envía.</p>
 
 <p>En este protocolo, el relay amplifica la señal de la fuente y envía esta a su destino de una forma ideal para ecualizar el efecto del canal entre la fuente y el relay. El relay hace esto simplemente escalando la señal recibida por un factor que es inversamente proporcional a la potencia recibida.</p>
 
-<p>El destino recibe dos copias de la señal x a través del enlace de la fuente y del enlace del relay. Existen diversas técnicas para combinar las dos versiones de la señal recibida. La técnica óptima que maximiza todos los SNR (SNR de la fuente al relay mas el SNR de la fuente al destino) es el MRC (Maximal Ratio Combining). El combinador MRC requiere de un detector coherente que tenga conocimiento de todos los coeficientes del canal, además, el SNR a la salida del MRC es igual a la suma de todos los SNR recibidos por ambos lados.</p>
+<p>El destino recibe dos copias de la señal x a través del enlace de la fuente y del enlace del relay. Existen diversas técnicas para combinar las dos versiones de la señal recibida. La técnica óptima que maximiza todos los SNR (SNR de la fuente al relay mas el SNR de la fuente al destino) es el MRC (Maximal Ratio Combining). El combinador MRC requiere de un detector coherente que tenga conocimiento de todos los coeficientes del canal, además, el SNR a la salida del MRC es igual a la suma de todos los SNR recibidos por ambos lados.   </p>
 
 <p>II.2 Decodifica y envía.</p>
 
 <p>Este protocolo consiste en que el nodo relay decodifique la señal recibida, la vuelva a codificar y entonces retransmita esta nueva señal al destino. Si la señal en el relay es incorrecta, esta puede ser reenviada al destino y su decodificación no tendría sentido.</p>
 
-<p>La ventaja de Decodifica-y-envía sobre Amplifica-y-envía es la reducción de los efectos del ruido aditivo en el relay, esto disminuye la posibilidad de enviar señales erróneamente detectadas a su destino, ya que en caso de enviarse provocaría un error en la propagación que puede disminuir el desempeño del sistema. La información mutua entre la fuente y el destino está limitada por la información mutua del enlace mas debil entre la fuente y el destino y el canal combinado de la fuente al relay y el relay al destino.</p>
+<p>La ventaja de Decodifica-y-envía sobre Amplifica-y-envía es la reducción de los efectos del ruido aditivo en el relay, esto disminuye la posibilidad de enviar señales erróneamente detectadas a su destino, ya que en caso de enviarse provocaría un error en la propagación que puede disminuir el desempeño del sistema. La información mutua entre la fuente y el destino está limitada por la información mutua del enlace mas debil entre la fuente y el destino y el canal combinado de la fuente al relay y el relay al destino.  </p>
 
 <p>III. Conclusiones</p>
 
@@ -71,21 +65,22 @@ Fase 2: El relay envía su información al destino.</p>
 
 <p>Referencias.</p>
 
-<p><a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;&#x76;&#x69;&#107;&#116;&#x6f;&#114;&#x69;&#118;&#97;&#x6e;&#64;&#111;&#112;&#101;&#110;&#109;&#x61;&#x69;&#108;&#98;&#x6f;&#120;&#46;&#111;&#x72;&#103;">&#x76;&#x69;&#107;&#x74;&#x6f;&#x72;&#105;&#118;&#97;&#110;&#64;&#x6f;&#112;&#x65;&#110;&#109;&#x61;&#x69;&#108;&#x62;&#x6f;&#x78;&#46;&#x6f;&#x72;&#103;</a></p>
+<p>viktorivan@openmailbox.org</p>
 
 <p>@viktor_ivan</p>
 <div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Hoymann, C.; Wanshi Chen; Montojo, J.; Golitschek, A.; Koutsimanis, C.; Xiaodong Shen, &ldquo;Relaying operation in 3GPP LTE: challenges and solutions,&rdquo; Communications Magazine, IEEE , vol.50, no.2, pp.156,162, February 2012.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>Cheng-Xiang Wang; Xuemin Hong; Xiaohu Ge; Xiang Cheng; Gong Zhang; Thompson, J., &ldquo;Cooperative MIMO channel models: A survey,&rdquo; Communications Magazine, IEEE , vol.48, no.2, pp.80,87, February 2010.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>Gerhard Kramer, Ivana Marić, and Roy D. Yates. 2006. Cooperative communications. Found. Trends Netw. 1, 3 (August 2006), 271-425.<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-</ol>
+  <ol>
+    <li id="fn:1">
+      <p>Hoymann, C.; Wanshi Chen; Montojo, J.; Golitschek, A.; Koutsimanis, C.; Xiaodong Shen, “Relaying operation in 3GPP LTE: challenges and solutions,” Communications Magazine, IEEE , vol.50, no.2, pp.156,162, February 2012.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Cheng-Xiang Wang; Xuemin Hong; Xiaohu Ge; Xiang Cheng; Gong Zhang; Thompson, J., “Cooperative MIMO channel models: A survey,” Communications Magazine, IEEE , vol.48, no.2, pp.80,87, February 2010.<a href="#fnref:2" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>Gerhard Kramer, Ivana Marić, and Roy D. Yates. 2006. Cooperative communications. Found. Trends Netw. 1, 3 (August 2006), 271-425.<a href="#fnref:3" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
 </div>
-
 ]]></content>
   </entry>
   
@@ -96,19 +91,13 @@ Fase 2: El relay envía su información al destino.</p>
     <id>http://viktorivan.github.io/blog/2013/09/29/capa-fisica-de-lte-a</id>
     <content type="html"><![CDATA[<p>Resumen.</p>
 
-<p>Hoy en día, la demanda de capacidad y servicios a altas tasas de transmisión en los sistemas celulares exige un mejor desempeño, así también, las limitaciones en el espectro radio-eléctrico obligan a los sistemas de comunicaciones modernos a lograr una eficiencia espectral alta. En este artículo se analizará la capa física (PHY) del estandar LTE-A (Long Term Evolution &ndash; Advanced) que el grupo de trabajo 3GPP (3rd Generation Partnership Project) propone para alcanzar los requisitos de cuarta generación (4G) propuesto por la ITU-R (International Telecommunication Union), el cuál define tasas de transmisión de hasta 1 Gbps en su enlace de bajada y 500 Mbps en su enlace de subida <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-
+<p>Hoy en día, la demanda de capacidad y servicios a altas tasas de transmisión en los sistemas celulares exige un mejor desempeño, así también, las limitaciones en el espectro radio-eléctrico obligan a los sistemas de comunicaciones modernos a lograr una eficiencia espectral alta. En este artículo se analizará la capa física (PHY) del estandar LTE-A (Long Term Evolution - Advanced) que el grupo de trabajo 3GPP (3rd Generation Partnership Project) propone para alcanzar los requisitos de cuarta generación (4G) propuesto por la ITU-R (International Telecommunication Union), el cuál define tasas de transmisión de hasta 1 Gbps en su enlace de bajada y 500 Mbps en su enlace de subida <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. 
 <!-- more -->
+I. Introducción.</p>
 
+<p>Una de las claves para alcanzar altas tasas de transmisión es la implementación de arreglos de antenas, los cuales permiten la multicanalización espacial, conocido normalmente como MIMO (Multiple Input Multiple Output), además, pueden ser apoyadas por técnicas de relay que consiste en la transmisión y recepción de señales hacia y desde los usuarios ubicados dentro de una célula para reducir la distancia entre el transmisor y receptor y por lo tanto permitir altas tasas de transmisión <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>. </p>
 
-<ol type="a">
-<li>Introducción.</li>
-</ol>
-
-
-<p>Una de las claves para alcanzar altas tasas de transmisión es la implementación de arreglos de antenas, los cuales permiten la multicanalización espacial, conocido normalmente como MIMO (Multiple Input Multiple Output), además, pueden ser apoyadas por técnicas de relay que consiste en la transmisión y recepción de señales hacia y desde los usuarios ubicados dentro de una célula para reducir la distancia entre el transmisor y receptor y por lo tanto permitir altas tasas de transmisión <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</p>
-
-<p>Otra técnica que se ha implementado en redes de nueva generación es OFDM (Orthogonal Frequency Division Multiplexing), el cuál se basa en la transmisión de datos a través de subportadoras ortogonales, donde cada símbolo se transmite en una subportadora disminuyendo los efectos de multitrayectoria en el canal.</p>
+<p>Otra técnica que se ha implementado en redes de nueva generación es OFDM (Orthogonal Frequency Division Multiplexing), el cuál se basa en la transmisión de datos a través de subportadoras ortogonales, donde cada símbolo se transmite en una subportadora disminuyendo los efectos de multitrayectoria en el canal.  </p>
 
 <p>LTE-A en su enlace de bajada propone una modificación al método de acceso al medio (MAC), este se conoce como OFDMA (Orthogonal Frequency Division Multiple Access) y permite asignar un número de subportadoras distintos a los usuarios móviles, esto de acuerdo a su tasa de transmisión. Además, en el enlace de subida se propone SC-FDMA (Single Carrier – Frequency Division Multiple Access), que permite a varios usuarios usar una parte de las subportadoras disponibles con un PAPR  bajo (Peak to Average Power Ratio) <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>.</p>
 
@@ -118,19 +107,19 @@ Fase 2: El relay envía su información al destino.</p>
 
 <p>II.1. Métodos de acceso al medio (OFDMA y SC-FDMA).</p>
 
-<p>Aunque OFDMA es una técnica utilizada en un principio en redes inalámbricas fijas alrededor de 2004 en el estandar IEEE802.16d, no fue hasta 2005 que 3GPP la adoptó como una técnica para la capa física como una evolución de WCDMA (Wideband CDMA) basado en UMTS (3G). Esta modificación se incluye en el estandar como 3GPP LTE Release 8, la cual fue terminada en 2008.</p>
+<p>Aunque OFDMA es una técnica utilizada en un principio en redes inalámbricas fijas alrededor de 2004 en el estandar IEEE802.16d, no fue hasta 2005 que 3GPP la adoptó como una técnica para la capa física como una evolución de WCDMA (Wideband CDMA) basado en UMTS (3G). Esta modificación se incluye en el estandar como 3GPP LTE Release 8, la cual fue terminada en 2008. </p>
 
 <p>OFDMA permite la asignación de recursos como tiempo y frecuencia a ciertos usuarios en específico, esto se logra dividiendo de manera lógica estas unidades de recursos básicos, los cuales consisten en sub-bandas de frecuencia de uno o más símbolos OFDM en el dominio del tiempo, además una sub-banda se conforma de varias subportadoras. Las unidades de recursos básicos son proyectadas a los paquetes físicos de OFDMA a través de uno de los dos esquemas de permutacion, el primero consiste en distribuir los datos a transmitir en subportadoras no contiguas usando la diversidad en frecuencia, lo que permite la reducción de la probabilidad de error por el desvanecimiento selectivo en frecuencia o por interferencia del canal. El segundo esquema, envía los datos en subportadoras contiguas, logrando diversidad de multiusuario y calendarización selectiva en frecuencia.</p>
 
-<p>La implementación de OFDMA en la capa física de LTE-A implica algunas complicaciones, tales como el PAPR, el cuál es particularmente alto en sistemas OFDM/OFDMA, esto se debe a que la forma de onda del símbolo OFDMA en el dominio del tiempo es la superposición de ondas senoidales donde la frecuencia es n veces la subportadora mas baja, donde n son los puntos de la IFFT. Un PAPR alto necesita de amplificadores de frecuencia con una salida lineal sobre un rango de frecuencias grande. Este es un factor del bajo rendimiento de la batería y el incremento del costo de los dispositivos móviles basados en OFDMA.</p>
+<p>La implementación de OFDMA en la capa física de LTE-A implica algunas complicaciones, tales como el PAPR, el cuál es particularmente alto en sistemas OFDM/OFDMA, esto se debe a que la forma de onda del símbolo OFDMA en el dominio del tiempo es la superposición de ondas senoidales donde la frecuencia es n veces la subportadora mas baja, donde n son los puntos de la IFFT. Un PAPR alto necesita de amplificadores de frecuencia con una salida lineal sobre un rango de frecuencias grande. Este es un factor del bajo rendimiento de la batería y el incremento del costo de los dispositivos móviles basados en OFDMA. </p>
 
-<p>Para disminuir el PAPR, 3GPP LTE-Advanced propone usar en el enlace de subida una tecnología conocida como SC-FDMA o DFTS-OFDM (Direct Fourier Transform Spread – OFDM), esta técnica consiste en precodificar el símbolo de datos con una transformada discreta de Fourier, como se muestra en la Figura 1, y las muestras obtenidas de la etapa de precodificación son transmitidas en paralelo en un grupo de subportadoras. La forma de onda resultante en el dominio del tiempo tiene las características de una forma de onda de una señal de portadora única, esto es, tiene un PAPR bajo aunque la forma de onda no es de una señal de portadora única <sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup>.</p>
+<p>Para disminuir el PAPR, 3GPP LTE-Advanced propone usar en el enlace de subida una tecnología conocida como SC-FDMA o DFTS-OFDM (Direct Fourier Transform Spread – OFDM), esta técnica consiste en precodificar el símbolo de datos con una transformada discreta de Fourier, como se muestra en la Figura 1, y las muestras obtenidas de la etapa de precodificación son transmitidas en paralelo en un grupo de subportadoras. La forma de onda resultante en el dominio del tiempo tiene las características de una forma de onda de una señal de portadora única, esto es, tiene un PAPR bajo aunque la forma de onda no es de una señal de portadora única <sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup>. </p>
 
-<p>El transmisor SC-FDMA maneja bloques de tamaño N, los cuales contienen las muestras (valores complejos) de los símbolos modulados digitalmente, la etapa de DFT de N-puntos genera una representación de los símbolos de entrada en el dominio del tiempo. Las muestras son proyectadas en algunas de las M subportadoras disponibles de la etapa de IFFT de M-puntos, donde M>N, transformando la amplitud de las subportadoras en una señal compleja en el dominio del tiempo. El valor de N depende de la cantidad de usuarios o del factor de expansión Q y la cantidad de subportadoras disponibles (N=M/Q).</p>
+<p>El transmisor SC-FDMA maneja bloques de tamaño N, los cuales contienen las muestras (valores complejos) de los símbolos modulados digitalmente, la etapa de DFT de N-puntos genera una representación de los símbolos de entrada en el dominio del tiempo. Las muestras son proyectadas en algunas de las M subportadoras disponibles de la etapa de IFFT de M-puntos, donde M&gt;N, transformando la amplitud de las subportadoras en una señal compleja en el dominio del tiempo. El valor de N depende de la cantidad de usuarios o del factor de expansión Q y la cantidad de subportadoras disponibles (N=M/Q).</p>
 
 <p>Las muestras obtenidas de la etapa de DFT son proyectadas a la subportadora correspondiente a través de dos métodos: proyección distribuida de subportadoras y proyección localizada. En el modo distribuido (también conocido como DFDMA, Distributed Frequency Division Multiple Access), la salida del DFT es distribuida sobre las subportadoras de todo el ancho de banda disponible, esto es, en todas las subportadoras ortogonales necesarias, y las restantes se acompletan con ceros. En el modo localizado (LDFMA) la salida del DFT es asignada a subportadoras contiguas, rellenando con ceros las subportadoras mayores y/o menores en frecuencia.</p>
 
-<p>En DFDMA, si la condición de M=Q*N se cumple, quiere decir que las subportadores ocupadas son equidistantes entre si. Esta condición es conocida como modo de entrelazado (IFDMA), su implementación es un caso especial de SC-FDMA, ya que el transmisor SC-FDMA modula la señal exclusivamente en el dominio del tiempo sin las etapas de DFT e IFFT.</p>
+<p>En DFDMA, si la condición de M=Q*N se cumple, quiere decir que las subportadores ocupadas son equidistantes entre si. Esta condición es conocida como modo de entrelazado (IFDMA), su implementación es un caso especial de SC-FDMA, ya que el transmisor SC-FDMA modula la señal exclusivamente en el dominio del tiempo sin las etapas de DFT e IFFT. </p>
 
 <p>Dependiendo del método de proyección, los símbolos modulados de SC-FDMA pueden ser diferentes en el dominio del tiempo. Para IFDMA, los símbolos modulados en el tiempo son una repetición de los símbolos de entrada originales, sólo con un factor de escalamiento de 1/Q y alguna rotación de fase. DFDMA y LFDMA tienen la misma estructura de símbolo en el tiempo y tiene copias exactas de los símbolos en el dominio del tiempo con un factor de escalamiento de 1/Q en las N posiciones de las muestras, y los valores intermedios son la suma de todos los símbolos en el tiempo con una peso complejo diferente. Por esta razón hay mas fluctuaciones y picos en la amplitud de DFDMA y LFDMA <sup id="fnref:6"><a href="#fn:6" rel="footnote">6</a></sup>.</p>
 
@@ -146,9 +135,9 @@ Fase 2: El relay envía su información al destino.</p>
 
 <p>El transmisor de LTE-A incluye la capacidad de incrementar la ganancia por diversidad a través de un esquema de transmisión de 8 antenas con sólo 4 antenas físicas en el dispositivo, en este caso, se agregan 4 antenas virtuales. En el caso de un arreglo de 6x6 y sólo se tienen 4 antenas físicas, es posible agregar 2 antenas virtuales. La virtualización es posible con precoding y un pequeño retardo al proyectar cada flujo de diversidad en el grupo de antenas físicas para asi lograr una antena virtual.</p>
 
-<p>El transmisor de LTE-A para el enlace de subida es capaz de transmitir 2 TB al mismo tiempo, esto sólo es posible con un esquema MIMO de 4x4 antenas a través de virtualización, ya que el dispositivo del usuario cuenta con 2 antenas físicas para la transmisión de datos.</p>
+<p>El transmisor de LTE-A para el enlace de subida es capaz de transmitir 2 TB al mismo tiempo, esto sólo es posible con un esquema MIMO de 4x4 antenas a través de virtualización, ya que el dispositivo del usuario cuenta con 2 antenas físicas para la transmisión de datos. </p>
 
-<p>III. Estructura del transmisor.</p>
+<p>III. Estructura del transmisor. </p>
 
 <p>La estructura del transmisor para el enlace de bajada entre la estación base y los usuarios está definida por <sup id="fnref:8"><a href="#fn:8" rel="footnote">8</a></sup>, donde la técnica de OFDMA es el método de acceso al medio (MAC). Debido a las limitantes de los dispositivos móviles (tanto en potencia como en tamaño), el transmisor para el enlace de subida tiene a SC-FDMA como técnica de acceso al medio. Existen tres tipos de canales lógicos de transporte para el transporte de datos, el canal de broadcast o difusión (PBCH) utilizado para la transmisión la información básica de la configuración del sistema; el canal multicast o multidifusión (PMCH) utilizado para la transmisión de servicios, tales como TV; y el canal compartido de enlace de bajada (PDSCH), que es el canal principal de datos, utilizado para transmitir los bloques de datos conocidos como bloques de transporte (TB), estos bloques son proveídos por la capa MAC (Medium Access Control). En este estandar, es posible transmitir hasta dos TB al mismo tiempo por un usuario de LTE-A tanto en el enlace de subida como de bajada.</p>
 
@@ -157,17 +146,16 @@ Fase 2: El relay envía su información al destino.</p>
 <p>De acuerdo a <sup id="fnref:9"><a href="#fn:9" rel="footnote">9</a></sup>, los procesos de la capa PHY son:</p>
 
 <ol>
-<li>Inserción de CRC de 24 bits.</li>
-<li>Codificación de canal: Turbo códigos basados en entrelazado interno QPP (Permutación Polinomial Cuadrática) con terminación de trellis.</li>
-<li>Proceso ARQ híbrido de capa PHY.</li>
-<li>Entrelazado de canal.</li>
-<li>Aleatorización.</li>
-<li>Modulación digital.</li>
-<li>Precodificación DFT.</li>
-<li>Proyección a capas y precodificación.</li>
-<li>Proyeccion a antenas.</li>
+  <li>Inserción de CRC de 24 bits.</li>
+  <li>Codificación de canal: Turbo códigos basados en entrelazado interno QPP (Permutación Polinomial Cuadrática) con terminación de trellis.</li>
+  <li>Proceso ARQ híbrido de capa PHY.</li>
+  <li>Entrelazado de canal.</li>
+  <li>Aleatorización.</li>
+  <li>Modulación digital.</li>
+  <li>Precodificación DFT.</li>
+  <li>Proyección a capas y precodificación.</li>
+  <li>Proyeccion a antenas.</li>
 </ol>
-
 
 <p>III.1 Segmentación en bloques de código e inserción de CRC.</p>
 
@@ -178,13 +166,13 @@ Fase 2: El relay envía su información al destino.</p>
 <p>gCRC24A (D) = D24 + D23 + D18 + D17 + D14 + D11 + D10 + D7 + D6 + D5 + D4 + D3 + D + 1.   (1)
 gCRC24B (D) = D24 + D23 + D6 + D5 + D + 1.        (2)</p>
 
-<p>El polinomio gCRC24A es utilizado para el cálculo de CRC para el bloque de transporte de UL-SCH, DL- SCH, PCH y MCH.</p>
+<p>El polinomio gCRC24A es utilizado para el cálculo de CRC para el bloque de transporte de UL-SCH, DL- SCH, PCH y MCH. </p>
 
 <p>En LTE-A se especifican un tamaño mínimo y máximo para el bloque de código, esto es para asegurar la compatibilidad con el turbo entrelazado, el tamaño mínimo es de 40 bits y el máximo de 6144 bits, si la longitud del bloque de entrada es mayor que el tamaño máximo de entrada, este bloque es segmentado.</p>
 
 <p>III.2 Turbo codificación.</p>
 
-<p>El turbo código utilizado es un codificador convolucional concatenado en paralelo (PCCC) con dos codificadores de 8 estados y tasa &frac12;, además de un entrelazado polinomial de permutación cuadrática &ldquo;libre de contención&rdquo;. La función de transferencia para cada codificador está dado por:</p>
+<p>El turbo código utilizado es un codificador convolucional concatenado en paralelo (PCCC) con dos codificadores de 8 estados y tasa 1/2, además de un entrelazado polinomial de permutación cuadrática “libre de contención”. La función de transferencia para cada codificador está dado por:</p>
 
 <p>G(D) = [1, g1 (D)/g0 (D)],                                   (3)</p>
 
@@ -194,7 +182,7 @@ gCRC24B (D) = D24 + D23 + D6 + D5 + D + 1.        (2)</p>
 
 <p>El turbo código de tasa 1/3 genera un flujo de bits sistemáticos, un flujo de bits de paridad del primer codificador convolucional y un flujo de bits de paridad del segundo codificador convolucional.</p>
 
-<p>La función del entrelazado en el segundo codificador convolucional es repartir los bits de información de tal manera que al presentarse un error, los dos códigos se vean afectados de una manera distinta permitiendo que los datos puedan ser recuperados todavía. La relación entre el índice de salida i y el índice de entrada Π(i) satisface la siguiente forma cuadrática:</p>
+<p>La función del entrelazado en el segundo codificador convolucional es repartir los bits de información de tal manera que al presentarse un error, los dos códigos se vean afectados de una manera distinta permitiendo que los datos puedan ser recuperados todavía. La relación entre el índice de salida i y el índice de entrada Π(i) satisface la siguiente forma cuadrática: </p>
 
 <p>Π(i) = f1 · i + f2 · i2 mod K.                                 (5)</p>
 
@@ -212,7 +200,7 @@ gCRC24B (D) = D24 + D23 + D6 + D5 + D + 1.        (2)</p>
 
 <p>III.5 Aleatorización.</p>
 
-<p>Los bits de código entregados por la etapa anterior es multiplicado (operación or-exclusiva) por una secuencia aleatoria a nivel de bit el cuál consiste en el indentificador único de la célula. El uso de diferentes secuencias de aleatorización de las células vecinas permite que la señal interferente después del des-aleatorizarla sea variada, asegurando la completa utilización de la ganancia por procesamiento obtenida del código de canal.</p>
+<p>Los bits de código entregados por la etapa anterior es multiplicado (operación or-exclusiva) por una secuencia aleatoria a nivel de bit el cuál consiste en el indentificador único de la célula. El uso de diferentes secuencias de aleatorización de las células vecinas permite que la señal interferente después del des-aleatorizarla sea variada, asegurando la completa utilización de la ganancia por procesamiento obtenida del código de canal. </p>
 
 <p>III.6 Modulación digital.</p>
 
@@ -220,15 +208,15 @@ gCRC24B (D) = D24 + D23 + D6 + D5 + D + 1.        (2)</p>
 
 <p>III.7 Precodificación DFT.</p>
 
-<p>Los símbolos modulados son agrupados en bloques de M símbolos para el bloque de DFT de tamaño M, donde M corresponde a el número de subportadoras asignadas para la transmisión.</p>
+<p>Los símbolos modulados son agrupados en bloques de M símbolos para el bloque de DFT de tamaño M, donde M corresponde a el número de subportadoras asignadas para la transmisión. </p>
 
 <p>El tamaño de la DFT debe ser una constante múltiplo de 12, desde 12 hasta 204, donde la DFT puede ser implementada como una combinación de procesos de FFT de complejidad baja radix-2, radix-3 y radix-5. Los tamaños de la DFT que no son permitidos son 60, 84, 120, 132, 156, 168, 180 y 204.</p>
 
 <p>III.8 Proyección de capas y precodificación.</p>
 
-<p>Los símbolos complejos son proyectadas en uno, dos o cuatro capas de manera secuencuial, esto es, en el caso de dos capas los símbolos impares son proyectadas a la primera capa y los símbolos pares son proyectadas en la segunda capa. En el modo sencillo, los símbolos son proyectados a una capa; en el modo de diversidad, los símbolos son proyectados en dos y cuatro capas, dependiendo de la cantidad de antenas a utilizar; en modo de multicanalización espacial, los símbolos son proyectados en dos, tres o cuatro capas, en este caso el número de capas siempre es igual o menos al número de antenas utilzadas.</p>
+<p>Los símbolos complejos son proyectadas en uno, dos o cuatro capas de manera secuencuial, esto es, en el caso de dos capas los símbolos impares son proyectadas a la primera capa y los símbolos pares son proyectadas en la segunda capa. En el modo sencillo, los símbolos son proyectados a una capa; en el modo de diversidad, los símbolos son proyectados en dos y cuatro capas, dependiendo de la cantidad de antenas a utilizar; en modo de multicanalización espacial, los símbolos son proyectados en dos, tres o cuatro capas, en este caso el número de capas siempre es igual o menos al número de antenas utilzadas. </p>
 
-<p>Existen tres tipos de precodificación: multicanalización espacial, diversidad en la transmisión y transmisión de una antena. Dentro de multicanalización espacial hay dos esquemas: precodificación con retardo largo de diversidad de retardo cíclico (CDD), también conocido como multicanalización espacial de lazo abierto y precodificación sin CDD también conocido como multicanalización espacial de lazo cerrado.</p>
+<p>Existen tres tipos de precodificación: multicanalización espacial, diversidad en la transmisión y transmisión de una antena. Dentro de multicanalización espacial hay dos esquemas: precodificación con retardo largo de diversidad de retardo cíclico (CDD), también conocido como multicanalización espacial de lazo abierto y precodificación sin CDD también conocido como multicanalización espacial de lazo cerrado. </p>
 
 <p>Para la transmisión sobre un puerto de antena no se realiza procesamiento alguno sobre los símbolos, para la diversidad en la transmisión se utiliza un esquema espacio-frecuencia de Alamouti para dos y cuatro antenas, para la multicanalización espacial se utiliza un libro de códigos configurado por el eNodeB y el dispositivo del usuario cuando es requerido.</p>
 
@@ -238,22 +226,21 @@ gCRC24B (D) = D24 + D23 + D6 + D5 + D + 1.        (2)</p>
 
 <p>IV. Modos de transmisión.</p>
 
-<p>LTE y LTE-A han incluido el concepto de capas, esto consiste en asignar los bloques de transporte a la antena correspondiente para su transmisión; esta demás mencionar que la cantidad de símbolos modulados es el mismo e igual a la suma de los símbolos a transmitir por cada antena. Existen varios modos de transmisión en LTE-A que indican la manera en cómo uno o dos bloques transportes, después de la modulación digital, son proyectados y procesados hacia las diferentes antenas del dispositivo.</p>
+<p>LTE y LTE-A han incluido el concepto de capas, esto consiste en asignar los bloques de transporte a la antena correspondiente para su transmisión; esta demás mencionar que la cantidad de símbolos modulados es el mismo e igual a la suma de los símbolos a transmitir por cada antena. Existen varios modos de transmisión en LTE-A que indican la manera en cómo uno o dos bloques transportes, después de la modulación digital, son proyectados y procesados hacia las diferentes antenas del dispositivo.  </p>
 
 <p>Los modos de transmisión son:</p>
 
 <ol>
-<li>Modo de transmisión 1: Transmisión de una antena.</li>
-<li>Modo de transmisión 2: Diversidad en la transmisión.</li>
-<li>Modo de transmisión 3: Precodificación de lazo abierto basado en libro de códigos para el caso de más de una capa, diversidad en la transmisión en caso de transmisión de grado uno.</li>
-<li>Modo de transmisión 4: Precodificación de lazo cerrado basado en libro de códigos.</li>
-<li>Modo de transmisión 5: Versión MIMO multiusuario del modo de transmisión 4.</li>
-<li>Modo de transmisión 6: Caso especial de precodificación de lazo cerrado basado en libro de códigos limitado a transmisión de una capa.</li>
-<li>Modo de transmisión 7: Precodificación Release-8 no basado en libro de códigos para una capa de transmisión.</li>
-<li>Modo de transmisión 8: Precodificación Release-9 no basado en libro de códigos hasta dos capas de transmisión.</li>
-<li>Modo de transmisión 9: Precodificación Release-10 no basado en libro de códigos hasta 8 capas.</li>
+  <li>Modo de transmisión 1: Transmisión de una antena. </li>
+  <li>Modo de transmisión 2: Diversidad en la transmisión.</li>
+  <li>Modo de transmisión 3: Precodificación de lazo abierto basado en libro de códigos para el caso de más de una capa, diversidad en la transmisión en caso de transmisión de grado uno.</li>
+  <li>Modo de transmisión 4: Precodificación de lazo cerrado basado en libro de códigos.</li>
+  <li>Modo de transmisión 5: Versión MIMO multiusuario del modo de transmisión 4.</li>
+  <li>Modo de transmisión 6: Caso especial de precodificación de lazo cerrado basado en libro de códigos limitado a transmisión de una capa.</li>
+  <li>Modo de transmisión 7: Precodificación Release-8 no basado en libro de códigos para una capa de transmisión. </li>
+  <li>Modo de transmisión 8: Precodificación Release-9 no basado en libro de códigos hasta dos capas de transmisión. </li>
+  <li>Modo de transmisión 9: Precodificación Release-10 no basado en libro de códigos hasta 8 capas.</li>
 </ol>
-
 
 <p>Estos modos de transmisión sólo son para el envío de DL-SCH.</p>
 
@@ -263,7 +250,7 @@ gCRC24B (D) = D24 + D23 + D6 + D5 + D + 1.        (2)</p>
 
 <p>En el modo de multicanalización espacial, tanto en lazo abierto como cerrado, LTE-A permite que cada antena tenga un flujo de datos independiente. Cabe mencionar que este modo no esta estandarizado por 3GPP LTE Advanced Rel 10, permitiendo la libre implementación de cualquier algoritmo para multicanalización espacial.</p>
 
-<p>El procedimiento básico para la precodificación basada en libro de códigos consiste en proyectar los símbolos modulados correspondientes a uno o dos bloques de transporte a múltiples capas. La cantidad de capas varia desde una hasta al cantidad de antenas presentes en el dispositivo. La multicanalización espacial de lazo abierto abierta está orientado a usuarios de movilidad alta, donde el transmisor no tiene conocimiento del canal. El esquema de precodificación utilizado en este modo se basa en CDD (Cyclic Delay Diversity), donde una serie definida de matrices precodificadas son aplicadas sobre cada RE (Resource Element); como resultado, se obtiene diversidad en el dominio de la frecuencia debido al retardo aplicado en cada RE, incluso si el canal del RE no lo necesita, como es en el caso de desvanecimiento plano <sup id="fnref:10"><a href="#fn:10" rel="footnote">10</a></sup>.</p>
+<p>El procedimiento básico para la precodificación basada en libro de códigos consiste en proyectar los símbolos modulados correspondientes a uno o dos bloques de transporte a múltiples capas. La cantidad de capas varia desde una hasta al cantidad de antenas presentes en el dispositivo. La multicanalización espacial de lazo abierto abierta está orientado a usuarios de movilidad alta, donde el transmisor no tiene conocimiento del canal. El esquema de precodificación utilizado en este modo se basa en CDD (Cyclic Delay Diversity), donde una serie definida de matrices precodificadas son aplicadas sobre cada RE (Resource Element); como resultado, se obtiene diversidad en el dominio de la frecuencia debido al retardo aplicado en cada RE, incluso si el canal del RE no lo necesita, como es en el caso de desvanecimiento plano <sup id="fnref:10"><a href="#fn:10" rel="footnote">10</a></sup>. </p>
 
 <p>El caudal eficaz máximo posible por LTE-A se obtiene en el modo de multicanalización espacial de lazo cerrado, pero esta técnica requiere de la información del estado del canal en el transmisor (CSIT) y el usuario debe tener una movilidad de baja a media así como el canal un SNR de medio a alto.</p>
 
@@ -275,37 +262,46 @@ gCRC24B (D) = D24 + D23 + D6 + D5 + D + 1.        (2)</p>
 
 <p>VII. Referencias.</p>
 
-<p><a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#58;&#118;&#105;&#x6b;&#116;&#111;&#x72;&#105;&#118;&#97;&#x6e;&#64;&#x6f;&#x70;&#x65;&#110;&#109;&#x61;&#105;&#x6c;&#x62;&#111;&#x78;&#46;&#111;&#114;&#103;">&#118;&#x69;&#107;&#x74;&#x6f;&#x72;&#x69;&#118;&#x61;&#110;&#64;&#x6f;&#112;&#101;&#110;&#x6d;&#x61;&#x69;&#108;&#x62;&#111;&#x78;&#x2e;&#x6f;&#114;&#103;</a></p>
+<p>viktorivan@openmailbox.org</p>
 
 <p>@viktor_ivan</p>
 <div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Stefan Parkvall, Erik Dahlman, “LTE-Advanced – Evolving LTE towards IMT-Advanced” in Vehicular Technology Conference, 2008. VTC 2008-Fall. IEEE 68th.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>Jolly Parikh, Anuradha Basu, “LTE Advanced: The 4G Mobile Broadband Technology” in International Journal of Computer Applications, Volume 13-No. 5, January 2011.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>Shirish Nagaraj, Sanjeev Garg, Frank Liang, “Lab Performance Analysis of a 4G LTE Prototype” in Wireless Communications and Networking Conference, 2009. WCNC 2009. IEEE.<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-<li id="fn:4">
-<p>Guangxiang Yuan, Xiang Zhang, “Carrier Aggregation for LTE-Advanced Mobile Communication Systems”, Communications Magazine, February 2010.<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
-<li id="fn:5">
-<p>Andreas Maeder, Nader Zein, “OFDMA in the Field: Current and Future Challenges” ACM SIGCOMM Computer Communication Review , Volume 40, Number 5, October 2010.<a href="#fnref:5" rev="footnote">&#8617;</a></p></li>
-<li id="fn:6">
-<p>Hyung G. Myung, “Introduction to Single Carrier FDMA”, 15th European Signal Processing Conference (EUSIPCO 2007), Poznan, Poland, September 3-7, 2007. <a href="#fnref:6" rev="footnote">&#8617;</a></p></li>
-<li id="fn:7">
-<p>Ian F. Akyildiz, David M. Gutierrez-Estevez, “The evolution to 4G cellular systems: LTE-Advanced”, Physical Communication 3, pages 217-244, 2010.<a href="#fnref:7" rev="footnote">&#8617;</a></p></li>
-<li id="fn:8">
-<p>3GPP TS 36.211 V8.0.0 (2007-09).<a href="#fnref:8" rev="footnote">&#8617;</a></p></li>
-<li id="fn:9">
-<p>3GPP TS 36.300 version 9.4.0 Release 9 , ETSI, 2010.<a href="#fnref:9" rev="footnote">&#8617;</a></p></li>
-<li id="fn:10">
-<p>CDD precoding for 4Tx antennas. Technical Report R1-072019, 3GPP, 2007. <a href="#fnref:10" rev="footnote">&#8617;</a></p></li>
-<li id="fn:11">
-<p>A. Goldsmith. Wireless Communications. Cambridge University Press, 2005. <a href="#fnref:11" rev="footnote">&#8617;</a></p></li>
-</ol>
+  <ol>
+    <li id="fn:1">
+      <p>Stefan Parkvall, Erik Dahlman, “LTE-Advanced – Evolving LTE towards IMT-Advanced” in Vehicular Technology Conference, 2008. VTC 2008-Fall. IEEE 68th.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Jolly Parikh, Anuradha Basu, “LTE Advanced: The 4G Mobile Broadband Technology” in International Journal of Computer Applications, Volume 13-No. 5, January 2011.<a href="#fnref:2" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>Shirish Nagaraj, Sanjeev Garg, Frank Liang, “Lab Performance Analysis of a 4G LTE Prototype” in Wireless Communications and Networking Conference, 2009. WCNC 2009. IEEE.<a href="#fnref:3" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p>Guangxiang Yuan, Xiang Zhang, “Carrier Aggregation for LTE-Advanced Mobile Communication Systems”, Communications Magazine, February 2010.<a href="#fnref:4" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:5">
+      <p>Andreas Maeder, Nader Zein, “OFDMA in the Field: Current and Future Challenges” ACM SIGCOMM Computer Communication Review , Volume 40, Number 5, October 2010.<a href="#fnref:5" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:6">
+      <p>Hyung G. Myung, “Introduction to Single Carrier FDMA”, 15th European Signal Processing Conference (EUSIPCO 2007), Poznan, Poland, September 3-7, 2007. <a href="#fnref:6" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:7">
+      <p>Ian F. Akyildiz, David M. Gutierrez-Estevez, “The evolution to 4G cellular systems: LTE-Advanced”, Physical Communication 3, pages 217-244, 2010.<a href="#fnref:7" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:8">
+      <p>3GPP TS 36.211 V8.0.0 (2007-09).<a href="#fnref:8" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:9">
+      <p>3GPP TS 36.300 version 9.4.0 Release 9 , ETSI, 2010.<a href="#fnref:9" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:10">
+      <p>CDD precoding for 4Tx antennas. Technical Report R1-072019, 3GPP, 2007. <a href="#fnref:10" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:11">
+      <p>A. Goldsmith. Wireless Communications. Cambridge University Press, 2005. <a href="#fnref:11" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
 </div>
-
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SciPy | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/scipy/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-19T17:23:17-08:00</updated>
+  <updated>2014-11-19T18:23:45-08:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -20,16 +20,15 @@
     <id>http://viktorivan.github.io/blog/2014/06/13/scipy-como-alternativa-a-matlab</id>
     <content type="html"><![CDATA[<p><em>Resumen</em></p>
 
-<p>El uso de herramientas de programación como <a href="http://www.mathworks.com/">Matlab</a> permiten que el desarrollo de simulaciones se realice de una manera muy práctica, dejando que el programador sólo se enfoque a solucionar el problema y no batalle en la implementación del algoritmo. Matlab es un lenguaje de alto nivel que permite que usuarios con conocimientos básicos de programación, puedan implementar cualquier algoritmo de una manera simple y rápida, así mismo, cuenta con múltiples herramientas gráficas que ayudan en la interpretación de los resultados. Una alternativa para el uso de herramientas enfocadas a la investigación es <a href="http://www.scipy.org">SciPy</a> o <code>Python Científico</code>. SciPy es una biblioteca de <a href="http://www.python.org">Python</a> que permite realizar operaciones especializadas en un lenguaje de programación convencional, facilitando así el desarrollo de algoritmos y optimizando los tiempos de ejecución, de manera similar a Matlab.</p>
+<p>El uso de herramientas de programación como <a href="http://www.mathworks.com/">Matlab</a> permiten que el desarrollo de simulaciones se realice de una manera muy práctica, dejando que el programador sólo se enfoque a solucionar el problema y no batalle en la implementación del algoritmo. Matlab es un lenguaje de alto nivel que permite que usuarios con conocimientos básicos de programación, puedan implementar cualquier algoritmo de una manera simple y rápida, así mismo, cuenta con múltiples herramientas gráficas que ayudan en la interpretación de los resultados. Una alternativa para el uso de herramientas enfocadas a la investigación es <a href="http://www.scipy.org">SciPy</a> o <code>Python Científico</code>. SciPy es una biblioteca de <a href="http://www.python.org">Python</a> que permite realizar operaciones especializadas en un lenguaje de programación convencional, facilitando así el desarrollo de algoritmos y optimizando los tiempos de ejecución, de manera similar a Matlab. </p>
 
 <!-- more -->
-
 
 <p><em>Justificación</em></p>
 
 <p>Una de las características principales de Matlab es el manejo de Matrices, de hecho, su nombre se deriva de la palabra <code>Laboratorio de Matrices</code>. El uso de matrices y vectores permite manejar estructuras de datos mas complejas y realizar operaciones matemáticas que en un lenguaje de programación convencional requeriría varias líneas de código, por ejemplo, una simple multiplicación de matrices, donde en Matlab se realiza por un comando A*B, en otro lenguaje tendríamos que realizar (a groso modo) un ciclo For que recorra cada renglón de la matriz A y la multiplique por la columna de la matriz B y la suma de cada multiplicación colocarla en un nuevo arreglo en la posición que le corresponde.</p>
 
-<p>Aunque Matlab es una herramienta poderosa y popular, esta no es de libre distribución debido a que su código es propietario; por lo que es limitado a la disponibilidad y tipo de licencias con que se disponga en el centro de trabajo. Una alternativa viable puede ser el uso de herramientas de código abierto, existen diversos proyectos que son compatibles incluso a nivel de código y manejo de archivos y datos, tal es el caso de <a href="http://www.octave.org">Octave</a>, que es un proyecto donde los archivos desarrollados en Matlab funcionan sin tener que cambiar el lenguaje en que fue programado, aunque existen algunas funciones especializadas no estan implementadas en Octave.</p>
+<p>Aunque Matlab es una herramienta poderosa y popular, esta no es de libre distribución debido a que su código es propietario; por lo que es limitado a la disponibilidad y tipo de licencias con que se disponga en el centro de trabajo. Una alternativa viable puede ser el uso de herramientas de código abierto, existen diversos proyectos que son compatibles incluso a nivel de código y manejo de archivos y datos, tal es el caso de <a href="http://www.octave.org">Octave</a>, que es un proyecto donde los archivos desarrollados en Matlab funcionan sin tener que cambiar el lenguaje en que fue programado, aunque existen algunas funciones especializadas no estan implementadas en Octave. </p>
 
 <p>Aún así, la tendencia en algunos lenguajes de programación de libre distribución es ser multipropósitos, esto se logra con la ayuda de bibliotecas especializadas; Por ejemplo, Python, a través de SciPy, puede manipular datos en forma vectorial o matricial permitiendo una implementación sencilla del algoritmo y el cálculo de las operaciones matemáticas, ya que esta incluye funciones que van desde matemáticas básica hasta avanzada.</p>
 
@@ -37,7 +36,7 @@
 
 <p>MatPlotLib es una herramienta visual que permite mostrar los datos calculados en las simulaciones en diferentes tipos de gráficas, una muy utilizada en telecomunicaciones para el cálculo de BER es <code>semilogy</code>.</p>
 
-<p>La instalación de SciPy en una distribución Linux basada en Debian/Ubuntu se realiza a través de la terminal de comandos.</p>
+<p>La instalación de SciPy en una distribución Linux basada en Debian/Ubuntu se realiza a través de la terminal de comandos. </p>
 
 <pre><code>sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose python-tk 
 </code></pre>
@@ -361,7 +360,7 @@
 </span><span class='line'><span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p><a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#118;&#x69;&#107;&#x74;&#111;&#x72;&#x69;&#x76;&#97;&#110;&#64;&#111;&#x70;&#101;&#110;&#x6d;&#97;&#105;&#x6c;&#98;&#x6f;&#x78;&#46;&#111;&#114;&#x67;">&#x76;&#105;&#107;&#116;&#x6f;&#114;&#105;&#x76;&#97;&#110;&#x40;&#x6f;&#112;&#x65;&#110;&#109;&#x61;&#x69;&#108;&#98;&#x6f;&#x78;&#46;&#111;&#x72;&#x67;</a></p>
+<p>viktorivan@openmailbox.org</p>
 
 <p>@viktor_ivan</p>
 ]]></content>
