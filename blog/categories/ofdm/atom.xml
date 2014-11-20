@@ -4,7 +4,7 @@
   <title><![CDATA[Category: OFDM | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/ofdm/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-19T18:23:45-08:00</updated>
+  <updated>2014-11-19T19:56:10-08:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -38,10 +38,72 @@
 <p>En el dominio de la frecuencia, el símbolo OFDM recibido $Y(j,k)$ en el tiempo $j$ y subportadora $k$ puede ser representado por:</p>
 
 <p>$
-\begin{align}
+\begin{equation}
 Y(j,k)=X(j,k)H(j,k)+N(j,k),
-\end{align}
+\end{equation}
 $ </p>
+
+<p>donde $X(j,k)$ es el símbolo transmitido, $H(j,k)$ es el canal y $N(j,k)$ es el ruido. El SRN instantáneo $\Psi$ en el intervalo de tiempo $J$ en el grupo de subportadoras $K$ está definido por la variable aleatoria</p>
+
+<p>$
+\begin{equation}
+\Psi = \dfrac{\sum_J\sum_K{\left| X(j,k)H(j,k) \right|^2}}{\sum_J\sum_K{\left| N(j,k) \right|^2}}
+\end{equation}
+$ </p>
+
+<p>donde $N(j,k)$ se puede calcular por medio de la siguiente ecuación:</p>
+
+<p>$
+\begin{equation}
+{\sum_J\sum_K{\left| N(j,k) \right|^2}}= {\sum_J\sum_K{\left| Y(j,k)-X(j,k)H(j,k) \right|^2}}
+\end{equation}
+$</p>
+
+<p>Considerando que prácticamente todos los sistemas OFDM definen un conjunto de subportadoras $Q$ donde no se transmite señal alguna, por lo general al principio y final del símbolo, es posible suponer que los valores presentes en $Q$ después de la equalización de la carga util sea ruido.</p>
+
+<p>$
+\begin{equation}
+Y(j,q)= N(j,q)
+\end{equation}
+$  </p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Asumiendo que $\sum_J\sum_Q{\left</td>
+      <td>N(j,q) \right</td>
+      <td>^2} &gt; 0$, se puede definir la relación ruido a ruido (NNR) $\eta$ como sigue:</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>$
+\begin{equation}
+{\sum_J\sum_Q{\left| N(j,q) \right|^2}}= {\sum_J\sum_K{\left| N(j,k)\right|^2}}
+\end{equation}
+$</p>
+
+<p>Si el ruido es blanco aditivo gausiano (AWGN), el cálculo de $\eta$ puede realizarse como:</p>
+
+<p>$
+\begin{equation}
+\eta = Q / K
+\end{equation}
+$</p>
+
+<p>De este modo, la estimación del SNR $\Psi$ se define por:</p>
+
+<p>$
+\begin{equation}
+\Psi = \dfrac{\sum_J\sum_K{\left| Y(j,k) \right|^2}}{\sum_J\sum_Q{\left| Y(j,q) \right|^2}} \eta -1
+\end{equation}
+$ </p>
+
+<p>II. Algoritmo de estimación de SNR ciego.</p>
+
+<p>File /home/ivan/Dropbox/Blogs/viktorivan/octopress/source/downloads/code/DFTSOFDMSNR.py could not be found</p>
+
+<p><img src="/downloads/images/dftsofdmsnr.png"></p>
 
 <p>Referencias</p>
 
