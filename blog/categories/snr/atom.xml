@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SNR | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/snr/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-19T20:12:00-08:00</updated>
+  <updated>2014-11-19T20:15:41-08:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -286,7 +286,7 @@ $ </p>
 </span><span class='line'><span class="c">#Desde una terminal ejecute: </span>
 </span><span class='line'><span class="c"># sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose python-tk</span>
 </span><span class='line'><span class="c">#La simulacion la puede correr desde una terminal</span>
-</span><span class='line'><span class="c"># python DFTSOFDM.py</span>
+</span><span class='line'><span class="c"># python DFTSOFDMSNR.py</span>
 </span><span class='line'>
 </span><span class='line'><span class="c">#Carga de bibliotecas</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
@@ -457,7 +457,7 @@ $ </p>
 </span><span class='line'><span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ebno</span><span class="p">,</span><span class="n">snrest</span><span class="p">,</span><span class="s">&#39;v&#39;</span><span class="p">,</span><span class="n">ebno</span><span class="p">,</span><span class="n">ebno</span><span class="p">,</span><span class="s">&#39;--&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">leg2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;dftsofdmsim.eps&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;dftsofdmsnr.eps&#39;</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><img src="/downloads/images/dftsofdmsnr.png"></p>

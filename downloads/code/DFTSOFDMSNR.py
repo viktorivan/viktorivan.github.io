@@ -4,7 +4,7 @@
 #Desde una terminal ejecute: 
 # sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose python-tk
 #La simulacion la puede correr desde una terminal
-# python DFTSOFDM.py
+# python DFTSOFDMSNR.py
 
 #Carga de bibliotecas
 import scipy as sp
@@ -175,4 +175,4 @@ ax2 = ax1.twinx()
 ax2.plot(ebno,snrest,'v',ebno,ebno,'--')
 ax2.legend(leg2, loc=2)
 plt.show()
-plt.savefig('dftsofdmsim.eps')
+plt.savefig('dftsofdmsnr.eps')
