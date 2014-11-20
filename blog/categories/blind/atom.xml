@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blind | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/blind/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-19T20:15:41-08:00</updated>
+  <updated>2014-11-20T14:29:51-08:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -100,6 +100,8 @@ $</p>
 $ </p>
 
 <p><em>II. Algoritmo de estimación de SNR ciego.</em></p>
+
+<p>A continuación se muestra una simulación de un sistema DFTS-OFDM desarrollado en Python. El tamaño del símbolo es de 2048 subportadoras, de las cuales sólo 192 tienen datos y el resto son nulos. La estimación de SNR se realiza en el dominio de la frecuencia, por lo que al algoritmo se agrega después de la etapa de OFDM pero antes de DFTS. Así mismo en la gráfica se puede observar el valor de SNR estimado junto con el valor de SNR real. </p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (DFTSOFDMSNR.py)</span> <a href='/downloads/code/DFTSOFDMSNR.py'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -286,13 +288,12 @@ $ </p>
 </span><span class='line'><span class="c">#Desde una terminal ejecute: </span>
 </span><span class='line'><span class="c"># sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose python-tk</span>
 </span><span class='line'><span class="c">#La simulacion la puede correr desde una terminal</span>
-</span><span class='line'><span class="c"># python DFTSOFDMSNR.py</span>
+</span><span class='line'><span class="c"># python DFTSOFDM.py</span>
 </span><span class='line'>
 </span><span class='line'><span class="c">#Carga de bibliotecas</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">matplotlib</span>
-</span><span class='line'><span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">&#39;Agg&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="s">&#39;nan&#39;</span><span class="p">)</span>
@@ -399,15 +400,17 @@ $ </p>
 </span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">dataiofdm</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
 </span><span class='line'>	<span class="n">dataiofdm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">sp</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">dataiofdm</span><span class="p">)[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">dataiofdm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">sp</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">dataiofdm</span><span class="p">)[</span><span class="mi">1</span><span class="p">]])</span>
 </span><span class='line'>
+</span><span class='line'><span class="c">#Ecualizador</span>
+</span><span class='line'><span class="c">#print &quot;Ecualizando los datos recibidos&quot;</span>
+</span><span class='line'><span class="n">dataiofdm</span> <span class="o">=</span> <span class="n">dataiofdm</span><span class="o">/</span><span class="n">H</span><span class="p">[:,</span><span class="n">cp</span><span class="p">:</span><span class="n">ofdm</span><span class="o">+</span><span class="n">cp</span><span class="p">]</span>
+</span><span class='line'>
 </span><span class='line'><span class="c">#Calculo de SNR estimado</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">snrest</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">dataiofdm</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">paqsnr</span><span class="p">,</span><span class="n">ofdm</span><span class="p">)))),</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
 </span><span class='line'><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">dataiofdm</span><span class="p">[:][:,</span><span class="n">zero_carriers</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">paqsnr</span><span class="p">,</span><span class="n">ofdm</span><span class="o">-</span><span class="n">dfts</span><span class="o">-</span><span class="n">pilot</span><span class="p">)))),</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span>
 </span><span class='line'><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">ofdm</span><span class="o">-</span><span class="n">dfts</span><span class="o">-</span><span class="n">pilot</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">ofdm</span><span class="p">)))</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'><span class="c">#Ecualizador</span>
-</span><span class='line'><span class="c">#print &quot;Ecualizando los datos recibidos&quot;</span>
-</span><span class='line'><span class="n">dataiofdm</span> <span class="o">=</span> <span class="n">dataiofdm</span><span class="p">[:,</span><span class="n">dfts_carriers</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">/</span><span class="n">H</span><span class="p">[:,</span><span class="n">dfts_carriers</span><span class="p">]</span>
+</span><span class='line'><span class="n">dataiofdm</span> <span class="o">=</span> <span class="n">dataiofdm</span><span class="p">[:,</span><span class="n">dfts_carriers</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 </span><span class='line'>
 </span><span class='line'><span class="c">#IDFTS</span>
 </span><span class='line'><span class="c">#print &quot;Calculando IDFTS&quot;</span>
@@ -457,7 +460,6 @@ $ </p>
 </span><span class='line'><span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ebno</span><span class="p">,</span><span class="n">snrest</span><span class="p">,</span><span class="s">&#39;v&#39;</span><span class="p">,</span><span class="n">ebno</span><span class="p">,</span><span class="n">ebno</span><span class="p">,</span><span class="s">&#39;--&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">leg2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;dftsofdmsnr.eps&#39;</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><img src="/downloads/images/dftsofdmsnr.png"></p>

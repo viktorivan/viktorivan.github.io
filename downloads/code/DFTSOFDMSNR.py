@@ -4,13 +4,12 @@
 #Desde una terminal ejecute: 
 # sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose python-tk
 #La simulacion la puede correr desde una terminal
-# python DFTSOFDMSNR.py
+# python DFTSOFDM.py
 
 #Carga de bibliotecas
 import scipy as sp
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 np.set_printoptions(precision=4,suppress=True,threshold='nan')
@@ -117,15 +116,17 @@ dataiofdm = datacanal[:,cp:ofdm+cp].copy()
 for i in range(sp.shape(dataiofdm)[0]):
 	dataiofdm[i,0:sp.shape(dataiofdm)[1]] = np.fft.fft(dataiofdm[i,0:sp.shape(dataiofdm)[1]])
 
+#Ecualizador
+#print "Ecualizando los datos recibidos"
+dataiofdm = dataiofdm/H[:,cp:ofdm+cp]
+
 #Calculo de SNR estimado
 
 snrest = 10*np.log10(np.sum(np.sum(np.square(np.absolute(dataiofdm.reshape((-1, paqsnr,ofdm)))),axis=2),axis=1) / np.sum(
 np.sum(np.square(np.absolute(dataiofdm[:][:,zero_carriers].reshape((-1, paqsnr,ofdm-dfts-pilot)))),axis=2),axis=1) * ((
 np.linalg.norm(ofdm-dfts-pilot)/np.linalg.norm(ofdm)))-1)
 
-#Ecualizador
-#print "Ecualizando los datos recibidos"
-dataiofdm = dataiofdm[:,dfts_carriers].copy()/H[:,dfts_carriers]
+dataiofdm = dataiofdm[:,dfts_carriers].copy()
 
 #IDFTS
 #print "Calculando IDFTS"
@@ -175,4 +176,3 @@ ax2 = ax1.twinx()
 ax2.plot(ebno,snrest,'v',ebno,ebno,'--')
 ax2.legend(leg2, loc=2)
 plt.show()
-plt.savefig('dftsofdmsnr.eps')
