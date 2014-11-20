@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ciego | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/ciego/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-19T19:56:10-08:00</updated>
+  <updated>2014-11-19T20:07:02-08:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -18,14 +18,14 @@
     <link href="http://viktorivan.github.io/blog/2014/11/12/calculo-snr-ciego-para-ofdm/"/>
     <updated>2014-11-12T17:10:05-08:00</updated>
     <id>http://viktorivan.github.io/blog/2014/11/12/calculo-snr-ciego-para-ofdm</id>
-    <content type="html"><![CDATA[<p><em>Resumen</em></p>
+    <content type="html"><![CDATA[<p><em>Resumen.</em></p>
 
 <p>La relación señal a ruido (SNR) es la proporción existente entre la potencia de la señal recibida y la potencia de ruido en el receptor. De este modo, se realiza la medición de la tasa de bit erróneo (BER) de un sistema de comunicación digital ante la presencia de ruido y sin tener en cuenta el ancho de banda. Para el cálculo de SNR normalmente involucra el conocimiento previo en el receptor de la palabra transmitida y el canal. Por lo general se expresa en dB y es adimensional. </p>
 
 <p>En un sistema convencional de Multiplexión por División de Frecuencias Ortogonales (OFDM), el cálculo de SNR se realiza utilizando símbolos de entrenamiento o subportadoras pilotos. Uno de los métodos para el cálculo de SNR involucra que la secuencia transmitida es conocida previamente por el receptor. Cuando el receptor no conoce esta secuencia de entrenamiento, el método de estimación es conocido como estimación ciega.</p>
 
 <!-- more -->
-<p>I. Introducción.</p>
+<p><em>I. Introducción.</em></p>
 
 <p>La estimación del SNR para un sistema de comunicación es importante, ya que con ello se valida el desempeño de un sistema para ciertas condiciones de canal. De este modo se puede interpretar que un sistema es eficiente a altas SNR o un deficiente a bajos SNR. Así mismo se puede utlizar para comparar el sistema con otros esquemas, dando a entender que tiene un mejor BER, tasa de símbolo erróneo (SER) o tasa de paquete erróneo (PER) que otros sistemas.</p>
 
@@ -33,7 +33,7 @@
 
 <p>A continuación se mostrará una técnica de estimación de SNR ciego, así mismo se propondrá un algoritmo donde se muestra los valores de estimación y reales de SNR de un sistema OFDM.</p>
 
-<p>II. Modelo de sistema.</p>
+<p><em>II. Modelo de sistema.</em></p>
 
 <p>En el dominio de la frecuencia, el símbolo OFDM recibido $Y(j,k)$ en el tiempo $j$ y subportadora $k$ puede ser representado por:</p>
 
@@ -67,15 +67,15 @@ Y(j,q)= N(j,q)
 \end{equation}
 $  </p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>Asumiendo que $\sum_J\sum_Q{\left</td>
-      <td>N(j,q) \right</td>
-      <td>^2} &gt; 0$, se puede definir la relación ruido a ruido (NNR) $\eta$ como sigue:</td>
-    </tr>
-  </tbody>
-</table>
+<p>Asumiendo que </p>
+
+<p>$
+\begin{equation}
+\sum_J\sum_Q{\left| N(j,q) \right|^2} &gt; 0
+\end{equation}
+$ </p>
+
+<p>se puede definir la relación ruido a ruido (NNR) $\eta$ como sigue:</p>
 
 <p>$
 \begin{equation}
@@ -99,7 +99,7 @@ $</p>
 \end{equation}
 $ </p>
 
-<p>II. Algoritmo de estimación de SNR ciego.</p>
+<p><em>II. Algoritmo de estimación de SNR ciego.</em></p>
 
 <p>File /home/ivan/Dropbox/Blogs/viktorivan/octopress/source/downloads/code/DFTSOFDMSNR.py could not be found</p>
 
