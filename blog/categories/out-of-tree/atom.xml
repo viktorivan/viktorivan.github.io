@@ -4,7 +4,7 @@
   <title><![CDATA[Category: out-of-tree | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/out-of-tree/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-20T14:29:51-08:00</updated>
+  <updated>2014-11-22T11:35:40-08:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -26,14 +26,16 @@
 
 <p>Procedimiento.</p>
 
-<p>Para crear un módulo out-of-tree se ejecuta desde una terminal de linux el siguiente comando
-<code>
+<p>Para crear un módulo out-of-tree se ejecuta desde una terminal de linux el siguiente comando</p>
+
+<p><code>
 $ gr_modtool create
 Name of the new module:Tu_modulo
 Creating out-of-tree module in ./gr-Tu_modulo... Done. 
 Use 'gr_modtool add' to add a new block to this currently empty module. 
-</code>
-El nombre que se indique para el módulo es con el que va a aparecer en el catálogo de GNU Radio.</p>
+</code></p>
+
+<p>El nombre que se indique para el módulo es con el que va a aparecer en el catálogo de GNU Radio.</p>
 
 <p>Para crear los bloques que integrarán el módulo se utiliza la herramienta <code>gr_modtool</code> en la carpeta raíz del proyecto. En este caso se creará un bloque que realizará la función de un convertidor binario a decimal para los tipos de datos float.</p>
 
@@ -57,8 +59,9 @@ Editing python/CMakeLists.txt...
 Adding file 'grc/Tu_modulo_bin2dec_ff.xml'... 
 Editing grc/CMakeLists.txt...
 </code>
-y a su vez, se desarrollará un bloque que realice la operación inversa, esto es, un convertidor decimal a binario.
-<code>
+y a su vez, se desarrollará un bloque que realice la operación inversa, esto es, un convertidor decimal a binario.</p>
+
+<p><code>
 $ gr_modtool add 
 GNU Radio module name identified: Tu_modulo 
 Enter code type: interpolator 
@@ -76,8 +79,9 @@ Adding file 'python/qa_dec2bin_ff.py'...
 Editing python/CMakeLists.txt... 
 Adding file 'grc/Tu_modulo_dec2bin_ff.xml'... 
 Editing grc/CmakeLists.txt...
-</code>
-de esta manera se han creado dos bloques, un decimador para el convertidor binario a decimal y un interpolador para el decimal a binario.</p>
+</code></p>
+
+<p>de esta manera se han creado dos bloques, un decimador para el convertidor binario a decimal y un interpolador para el decimal a binario.</p>
 
 <p>Los archivos donde se realizará la programación en código c++ se ubican en <code>~/gr-Tu_modulo/lib</code> y se llama <code>dec2bin_ff_impl.cc</code> para el convertidor decimal a binario y <code>bin2dec_ff_impl.cc</code> para el convertidor binario a decimal.</p>
 
