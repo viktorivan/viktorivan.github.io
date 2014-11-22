@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sdr | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/sdr/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-22T11:35:40-08:00</updated>
+  <updated>2014-11-22T11:41:02-08:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -105,7 +105,7 @@
 endif()
 </code></pre>
 
-<p>En la sección de <code># Setup the include and linker paths</code> se agrega la línea ` ${ITPP_INCLUDE_DIRS}<code> para </code>include_directories<code> y la línea </code>${ITPP_LIBRARY_DIRS}<code> para </code>link_directories`, quedando como sigue:</p>
+<p>En la sección de <code># Setup the include and linker paths</code> se agrega la línea <code>${ITPP_INCLUDE_DIRS}</code> para <code>include_directories</code> y la línea <code>${ITPP_LIBRARY_DIRS}</code> para <code>link_directories</code>, quedando como sigue:</p>
 
 <pre><code>include_directories(
     ${CMAKE_SOURCE_DIR}/lib
