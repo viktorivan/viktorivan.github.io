@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ax25 | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/ax25/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2015-10-22T10:36:22-05:00</updated>
+  <updated>2015-10-22T11:15:03-05:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -42,7 +42,7 @@
 
 <p>Desde una terminal de linux se clona el repositorio de <a href="www.github.com">github</a> con git y se instala de acuerdo al procedimiento definido por GNU Radio en modulos out-of-tree.</p>
 
-<p>´´´
+<p><code>
 $ git clone https://github.com/dl1ksv/gr-display.git
 $ cd gr-display
 $ mkdir build
@@ -51,7 +51,7 @@ $ cmake ../
 $ make
 $ sudo make install
 $ sudo ldconfig
-´´´</p>
+</code></p>
 
 <p><em>Instalación de gr-fcdproplus</em></p>
 
@@ -59,9 +59,9 @@ $ sudo ldconfig
 
 <p>Para instalar se  requiere de instalar algunos prerequisitos antes de descargar el repositorio desde github y proceder con a la instalación.</p>
 
-<p>Instalando (HIDAPI)[https://github.com/signal11/hidapi]</p>
+<p>Instalando <a href="https://github.com/signal11/hidapi">HIDAPI</a></p>
 
-<p>´´´
+<p><code>
 $ sudo apt-get install libudev-dev libusb-1.0-0-dev libfox-1.6-dev autotools-dev autoconf automake libtool
 $ git clone https://github.com/signal11/hidapi.git
 $ cd hidapi
@@ -69,11 +69,11 @@ $ ./bootstrap
 $ ./configure
 $ make
 $ sudo make install
-´´´</p>
+</code></p>
 
 <p>Instalando gr-fcdproplus</p>
 
-<p>´´´
+<p><code>
 $ git clone https://github.com/dl1ksv/gr-fcdproplus.git
 $ cd gr-fcdproplus
 $ mkdir build
@@ -81,13 +81,13 @@ $ cmake ../
 $ make
 $ sudo make install
 $ sudo ldconfig
-´´´</p>
+</code></p>
 
 <p><em>Instalación de gr-ax25</em></p>
 
 <p>Una vez instalados los prerequisitos, se procede a instalar gr-ax25 desde una terminal.</p>
 
-<p>´´´
+<p><code>
 $ git clone https://github.com/dl1ksv/gr-ax25.git
 $ cd gr-ax25
 $ mkdir build
@@ -96,7 +96,7 @@ $ cmake ../
 $ make
 $ sudo make install
 $ sudo ldconfig
-´´´</p>
+</code></p>
 
 <p>Para la demostración, gr-ax25 incluye en <code>gr-ax25/apps</code> un archivo llamado <code>APRS.grc</code>, este diagrama de flujo de GRC contiene un bloque jerárquico llamado <code>detectmarkspace.grc</code>, para que <code>APRS.grc</code> detecte el bloque jerárqico, es necesario que dentro de <code>detectmarkspace.grc</code> se presione el botón que genera los archivos .py, una vez hecho esto se procede a correr el archivo <code>APRS.grc</code> con el dispositivo de FUNcube Dongle instalado.</p>
 
@@ -106,8 +106,8 @@ $ sudo ldconfig
 
 <p>De esta forma queda instalado el protocolo AX.25 en una plataforma de GNU Radio. Una vez funcionando el archivo <code>APRS.grc</code>, se mostrará una interfaz gráfica que desplegará en una pestaña el espectro recivido y en otra el mensaje recibido por AX.25 de la ISS o por APRS, tal como se muestra a continuación.</p>
 
-<p><img src="/downloads/images/APRSax25.png">
-<img src="/downloads/images/APRSspectral.png"></p>
+<p><img src="/downloads/images/APRSspectral.png">
+<img src="/downloads/images/APRSax25.png"></p>
 
 <p>viktorivan@openmailbox.org</p>
 
