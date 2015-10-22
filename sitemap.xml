@@ -2,46 +2,50 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://viktorivan.github.io/blog/2013/09/29/capa-fisica-de-lte-a/</loc>
-        <lastmod>2014-11-19T18:02:21-08:00</lastmod>
+        <lastmod>2014-11-19T20:02:21-06:00</lastmod>
     </url>
     <url>
         <loc>http://viktorivan.github.io/blog/2013/10/20/comunicaciones-cooperativas/</loc>
-        <lastmod>2014-11-19T18:02:21-08:00</lastmod>
+        <lastmod>2014-11-19T20:02:21-06:00</lastmod>
     </url>
     <url>
         <loc>
             http://viktorivan.github.io/blog/2014/03/19/bloques-de-procesamiento-de-senales-en-gnu-radio/
         </loc>
-        <lastmod>2014-11-22T11:35:00-08:00</lastmod>
+        <lastmod>2014-11-22T13:35:00-06:00</lastmod>
     </url>
     <url>
         <loc>http://viktorivan.github.io/blog/2014/03/19/librerias-externas-en-gnu-radio/</loc>
-        <lastmod>2014-11-22T11:39:41-08:00</lastmod>
+        <lastmod>2014-11-22T13:39:41-06:00</lastmod>
     </url>
     <url>
         <loc>
             http://viktorivan.github.io/blog/2014/05/19/redes-cooperativas-dfts-ofdm-con-gnu-radio/
         </loc>
-        <lastmod>2014-11-19T18:02:21-08:00</lastmod>
+        <lastmod>2014-11-19T20:02:21-06:00</lastmod>
     </url>
     <url>
         <loc>http://viktorivan.github.io/blog/2014/06/13/scipy-como-alternativa-a-matlab/</loc>
-        <lastmod>2014-11-19T18:02:21-08:00</lastmod>
+        <lastmod>2014-11-19T20:02:21-06:00</lastmod>
     </url>
     <url>
         <loc>http://viktorivan.github.io/blog/2014/11/12/calculo-snr-ciego-para-ofdm/</loc>
-        <lastmod>2014-11-20T10:33:54-08:00</lastmod>
+        <lastmod>2014-11-20T12:33:54-06:00</lastmod>
     </url>
     <url>
-        <loc>http://viktorivan.github.io/</loc>
-        <lastmod>2014-11-22T11:39:41-08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://viktorivan.github.io/robots.txt</loc>
-        <lastmod>2014-03-17T18:21:51-07:00</lastmod>
+        <loc>http://viktorivan.github.io/blog/2015/10/21/ax-dot-25-en-gnu-radio/</loc>
+        <lastmod>2015-10-22T10:35:44-05:00</lastmod>
     </url>
     <url>
         <loc>http://viktorivan.github.io/blog/archives/</loc>
-        <lastmod>2014-11-22T11:39:41-08:00</lastmod>
+        <lastmod>2015-10-22T10:35:44-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://viktorivan.github.io/robots.txt</loc>
+        <lastmod>2014-03-17T19:21:51-06:00</lastmod>
+    </url>
+    <url>
+        <loc>http://viktorivan.github.io/</loc>
+        <lastmod>2015-10-22T10:35:44-05:00</lastmod>
     </url>
 </urlset>

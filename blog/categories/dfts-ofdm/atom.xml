@@ -4,7 +4,7 @@
   <title><![CDATA[Category: DFTS-OFDM | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/dfts-ofdm/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2014-11-22T11:41:02-08:00</updated>
+  <updated>2015-10-22T10:36:22-05:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Redes cooperativas DFTS-OFDM con GNU Radio]]></title>
     <link href="http://viktorivan.github.io/blog/2014/05/19/redes-cooperativas-dfts-ofdm-con-gnu-radio/"/>
-    <updated>2014-05-19T14:44:59-07:00</updated>
+    <updated>2014-05-19T16:44:59-05:00</updated>
     <id>http://viktorivan.github.io/blog/2014/05/19/redes-cooperativas-dfts-ofdm-con-gnu-radio</id>
     <content type="html"><![CDATA[<p><em>Resumen.</em></p>
 
@@ -134,7 +134,7 @@ Fase 2: El relay envía su información al destino. </p>
   <entry>
     <title type="html"><![CDATA[Capa física de LTE-A]]></title>
     <link href="http://viktorivan.github.io/blog/2013/09/29/capa-fisica-de-lte-a/"/>
-    <updated>2013-09-29T12:43:00-07:00</updated>
+    <updated>2013-09-29T12:43:00-05:00</updated>
     <id>http://viktorivan.github.io/blog/2013/09/29/capa-fisica-de-lte-a</id>
     <content type="html"><![CDATA[<p>Resumen.</p>
 

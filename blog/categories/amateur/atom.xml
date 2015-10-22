@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: amateur | Iván Rodríguez]]></title>
+  <link href="http://viktorivan.github.io/blog/categories/amateur/atom.xml" rel="self"/>
+  <link href="http://viktorivan.github.io/"/>
+  <updated>2015-10-22T10:36:22-05:00</updated>
+  <id>http://viktorivan.github.io/</id>
+  <author>
+    <name><![CDATA[Iván Rodríguez]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AX.25 en GNU Radio]]></title>
+    <link href="http://viktorivan.github.io/blog/2015/10/21/ax-dot-25-en-gnu-radio/"/>
+    <updated>2015-10-21T12:35:32-05:00</updated>
+    <id>http://viktorivan.github.io/blog/2015/10/21/ax-dot-25-en-gnu-radio</id>
+    <content type="html"><![CDATA[<p><em>Resumen.</em></p>
+
+<p>Debido a la versatilidad que ofrece <a href="www.gnuradio.org">GNU Radio</a> para adaptarse a la mayoría de los protocolos de radio, es factible desarrollar proyectos independientes que puedan trabajar sobre estos protocolos usandolo como base. Un ejemplo de ello es el proyecto <a href="https://github.com/dl1ksv/gr-ax25">gr-ax25</a> para GNU Radio, donde a través de <a href="www.python.org">Python</a> desarrollan una interfaz gráfica que captura los paquetes transmitidos por este protocolo, entre ellos la ISS y APRS.</p>
+
+<!-- more -->
+
+<p><em>Introducción.</em></p>
+
+<p>De acuerdo con <a href="www.ax25.net">AX25 Layer 2</a>, la comunidad de radio amateur expresó su necesidad y deseo de definir un protocolo que pueda aceptar y entregar datos de manera fiable sobre diversos enlaces de comunicación entre dos terminales de señalización. El protocolo de capa 2 AX.25 versión 2.2 ofrece este servicio, independientemente de la existencia de capas superiores.</p>
+
+<p>Este protocolo trabaja suficientemente bien tanto en ambientes de radio amateur half-duplex o full-duplex. Así mismo también trabaja sobre conexiones directas entre estaciones de radio amateur portátiles o punto-multipunto.  </p>
+
+<p><em>Instalación</em></p>
+
+<p><em>Prerequisitos</em></p>
+
+<p>gr-ax25 utiliza los proyectos <a href="https://github.com/dl1ksv/gr-display">gr-display</a> y <a href="https://github.com/dl1ksv/gr-fcdproplus">gr-fcdproplus</a> para el ejemplo que incluye en su distribución.</p>
+
+<p><em>Instalanción de gr-display</em></p>
+
+<p>gr-display es una herramienta que permite desplegar texto en la interfaz gráfica de GRC.</p>
+
+<p>Desde una terminal de linux se clona el repositorio de <a href="www.github.com">github</a> con git y se instala de acuerdo al procedimiento definido por GNU Radio en modulos out-of-tree.</p>
+
+<p>´´´
+$ git clone https://github.com/dl1ksv/gr-display.git
+$ cd gr-display
+$ mkdir build
+$ cd build
+$ cmake ../
+$ make
+$ sudo make install
+$ sudo ldconfig
+´´´</p>
+
+<p><em>Instalación de gr-fcdproplus</em></p>
+
+<p>Esta herramienta permite utilizar los dispositivos de <a href="http://www.funcubedongle.com/">FUNcube Dongle</a> dentro del ambiente de GNU Radio.</p>
+
+<p>Para instalar se  requiere de instalar algunos prerequisitos antes de descargar el repositorio desde github y proceder con a la instalación.</p>
+
+<p>Instalando (HIDAPI)[https://github.com/signal11/hidapi]</p>
+
+<p>´´´
+$ sudo apt-get install libudev-dev libusb-1.0-0-dev libfox-1.6-dev autotools-dev autoconf automake libtool
+$ git clone https://github.com/signal11/hidapi.git
+$ cd hidapi
+$ ./bootstrap
+$ ./configure
+$ make
+$ sudo make install
+´´´</p>
+
+<p>Instalando gr-fcdproplus</p>
+
+<p>´´´
+$ git clone https://github.com/dl1ksv/gr-fcdproplus.git
+$ cd gr-fcdproplus
+$ mkdir build
+$ cmake ../
+$ make
+$ sudo make install
+$ sudo ldconfig
+´´´</p>
+
+<p><em>Instalación de gr-ax25</em></p>
+
+<p>Una vez instalados los prerequisitos, se procede a instalar gr-ax25 desde una terminal.</p>
+
+<p>´´´
+$ git clone https://github.com/dl1ksv/gr-ax25.git
+$ cd gr-ax25
+$ mkdir build
+$ cd build
+$ cmake ../
+$ make
+$ sudo make install
+$ sudo ldconfig
+´´´</p>
+
+<p>Para la demostración, gr-ax25 incluye en <code>gr-ax25/apps</code> un archivo llamado <code>APRS.grc</code>, este diagrama de flujo de GRC contiene un bloque jerárquico llamado <code>detectmarkspace.grc</code>, para que <code>APRS.grc</code> detecte el bloque jerárqico, es necesario que dentro de <code>detectmarkspace.grc</code> se presione el botón que genera los archivos .py, una vez hecho esto se procede a correr el archivo <code>APRS.grc</code> con el dispositivo de FUNcube Dongle instalado.</p>
+
+<p>Así mismo, se puede remplazar el bloque de FUNcube por uno de UHD para las tarjetas USRP, tal como se muestra a continuación.</p>
+
+<p><img src="/downloads/images/APRS.png"></p>
+
+<p>De esta forma queda instalado el protocolo AX.25 en una plataforma de GNU Radio. Una vez funcionando el archivo <code>APRS.grc</code>, se mostrará una interfaz gráfica que desplegará en una pestaña el espectro recivido y en otra el mensaje recibido por AX.25 de la ISS o por APRS, tal como se muestra a continuación.</p>
+
+<p><img src="/downloads/images/APRSax25.png">
+<img src="/downloads/images/APRSspectral.png"></p>
+
+<p>viktorivan@openmailbox.org</p>
+
+<p>@viktor_ivan</p>
+]]></content>
+  </entry>
+  
+</feed>
