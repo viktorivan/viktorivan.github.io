@@ -34,11 +34,17 @@
     </url>
     <url>
         <loc>http://viktorivan.github.io/blog/2015/10/21/ax-dot-25-en-gnu-radio/</loc>
-        <lastmod>2015-10-22T11:13:11-05:00</lastmod>
+        <lastmod>2015-10-23T10:33:36-05:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://viktorivan.github.io/blog/2015/10/22/jupyter-una-aplicacion-web-para-computo-cientifico/
+        </loc>
+        <lastmod>2015-10-23T10:39:12-05:00</lastmod>
     </url>
     <url>
         <loc>http://viktorivan.github.io/blog/archives/</loc>
-        <lastmod>2015-10-22T11:13:11-05:00</lastmod>
+        <lastmod>2015-10-23T10:39:12-05:00</lastmod>
     </url>
     <url>
         <loc>http://viktorivan.github.io/robots.txt</loc>
@@ -46,6 +52,6 @@
     </url>
     <url>
         <loc>http://viktorivan.github.io/</loc>
-        <lastmod>2015-10-22T11:13:11-05:00</lastmod>
+        <lastmod>2015-10-23T10:39:12-05:00</lastmod>
     </url>
 </urlset>
