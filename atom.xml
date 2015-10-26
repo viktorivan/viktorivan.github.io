@@ -4,7 +4,7 @@
   <title><![CDATA[Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2015-10-26T09:42:02-06:00</updated>
+  <updated>2015-10-26T10:02:29-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -94,7 +94,7 @@
 
 <p>gr-display es una herramienta que permite desplegar texto en la interfaz gráfica de GRC.</p>
 
-<p>Desde una terminal de linux se clona el repositorio de <a href="http://www.github.com">github</a> con git y se instala de acuerdo al procedimiento definido por GNU Radio en modulos out-of-tree.</p>
+<p>Desde una terminal de linux se clona el repositorio de <a href="http://www.github.com">github</a> con git y se instala de acuerdo al procedimiento definido por GNU Radio para módulos out-of-tree.</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
