@@ -4,7 +4,7 @@
   <title><![CDATA[Category: amateur | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/amateur/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2015-10-23T10:55:08-05:00</updated>
+  <updated>2015-10-26T09:25:44-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -20,7 +20,7 @@
     <id>http://viktorivan.github.io/blog/2015/10/21/ax-dot-25-en-gnu-radio</id>
     <content type="html"><![CDATA[<p><em>Resumen.</em></p>
 
-<p>Debido a la versatilidad que ofrece <a href="http://www.gnuradio.org">GNU Radio</a> para adaptarse a la mayoría de los protocolos de radio, es factible desarrollar proyectos independientes que puedan trabajar sobre estos protocolos usandolo como base. Un ejemplo de ello es el proyecto <a href="https://github.com/dl1ksv/gr-ax25">gr-ax25</a> para GNU Radio, donde a través de <a href="http://www.python.org">Python</a> desarrollan una interfaz gráfica que captura los paquetes transmitidos por este protocolo, entre ellos la ISS y APRS.</p>
+<p>Debido a la versatilidad que ofrece <a href="http://www.gnuradio.org">GNU Radio</a> para adaptarse a la mayoría de los protocolos de radio, es factible desarrollar proyectos independientes que puedan trabajar sobre estos protocolos usándolo como base. Un ejemplo de ello es el proyecto <a href="https://github.com/dl1ksv/gr-ax25">gr-ax25</a> para GNU Radio, donde a través de <a href="http://www.python.org">Python</a> desarrollan una interfaz gráfica que captura los paquetes transmitidos por este protocolo, entre ellos la ISS y APRS.</p>
 
 <!-- more -->
 
@@ -104,7 +104,7 @@ $ sudo ldconfig
 
 <p><img src="/downloads/images/APRS.png"></p>
 
-<p>De esta forma queda instalado el protocolo AX.25 en una plataforma de GNU Radio. Una vez funcionando el archivo <code>APRS.grc</code>, se mostrará una interfaz gráfica que desplegará en una pestaña el espectro recivido y en otra el mensaje recibido por AX.25 de la ISS o por APRS, tal como se muestra a continuación.</p>
+<p>De esta forma queda instalado el protocolo AX.25 en una plataforma de GNU Radio. Una vez funcionando el archivo <code>APRS.grc</code>, se mostrará una interfaz gráfica que desplegará en una pestaña el espectro recibido y en otra el mensaje recibido por AX.25 de la ISS o por APRS, tal como se muestra a continuación.</p>
 
 <p><img src="/downloads/images/APRSspectral.png">
 <img src="/downloads/images/APRSax25.png"></p>
