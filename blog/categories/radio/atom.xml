@@ -4,7 +4,7 @@
   <title><![CDATA[Category: radio | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/radio/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2015-10-26T09:25:44-06:00</updated>
+  <updated>2015-10-26T09:42:02-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -36,7 +36,7 @@
 
 <p>gr-ax25 utiliza los proyectos <a href="https://github.com/dl1ksv/gr-display">gr-display</a> y <a href="https://github.com/dl1ksv/gr-fcdproplus">gr-fcdproplus</a> para el ejemplo que incluye en su distribución.</p>
 
-<p><em>Instalanción de gr-display</em></p>
+<p><em>Instalación de gr-display</em></p>
 
 <p>gr-display es una herramienta que permite desplegar texto en la interfaz gráfica de GRC.</p>
 
