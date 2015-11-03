@@ -12,7 +12,7 @@
         <loc>
             http://viktorivan.github.io/blog/2014/03/19/bloques-de-procesamiento-de-senales-en-gnu-radio/
         </loc>
-        <lastmod>2014-11-22T13:35:00-06:00</lastmod>
+        <lastmod>2015-11-03T12:03:22-06:00</lastmod>
     </url>
     <url>
         <loc>http://viktorivan.github.io/blog/2014/03/19/librerias-externas-en-gnu-radio/</loc>
@@ -43,8 +43,14 @@
         <lastmod>2015-10-23T10:53:13-05:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://viktorivan.github.io/blog/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python/
+        </loc>
+        <lastmod>2015-11-03T12:00:55-06:00</lastmod>
+    </url>
+    <url>
         <loc>http://viktorivan.github.io/blog/archives/</loc>
-        <lastmod>2015-10-26T10:02:13-06:00</lastmod>
+        <lastmod>2015-11-03T12:03:22-06:00</lastmod>
     </url>
     <url>
         <loc>http://viktorivan.github.io/robots.txt</loc>
@@ -52,6 +58,6 @@
     </url>
     <url>
         <loc>http://viktorivan.github.io/</loc>
-        <lastmod>2015-10-26T10:02:13-06:00</lastmod>
+        <lastmod>2015-11-03T12:03:22-06:00</lastmod>
     </url>
 </urlset>

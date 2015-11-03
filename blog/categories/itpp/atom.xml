@@ -4,7 +4,7 @@
   <title><![CDATA[Category: itpp | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/itpp/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2015-10-26T10:02:29-06:00</updated>
+  <updated>2015-11-03T12:04:24-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -381,7 +381,7 @@ link_directories(
 </span><span class='line'>    <span class="nb">message</span><span class="p">(</span><span class="s">FATAL_ERROR</span> <span class="s2">&quot;CppUnit required to compile Tu_modulo&quot;</span><span class="p">)</span>
 </span><span class='line'><span class="nb">endif</span><span class="p">()</span>
 </span><span class='line'><span class="nb">if</span><span class="p">(</span><span class="s">NOT</span> <span class="s">ITPP_FOUND</span><span class="p">)</span>
-</span><span class='line'>    <span class="nb">message</span><span class="p">(</span><span class="s">FATAL_ERROR</span> <span class="s2">&quot;IT++ Core required to compile Umbrella&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">message</span><span class="p">(</span><span class="s">FATAL_ERROR</span> <span class="s2">&quot;IT++ Core required to compile Tu_modulo&quot;</span><span class="p">)</span>
 </span><span class='line'><span class="nb">endif</span><span class="p">()</span>
 </span><span class='line'><span class="c">########################################################################</span>
 </span><span class='line'><span class="c"># Setup the include and linker paths</span>

@@ -96,7 +96,7 @@ if(NOT CPPUNIT_FOUND)
     message(FATAL_ERROR "CppUnit required to compile Tu_modulo")
 endif()
 if(NOT ITPP_FOUND)
-    message(FATAL_ERROR "IT++ Core required to compile Umbrella")
+    message(FATAL_ERROR "IT++ Core required to compile Tu_modulo")
 endif()
 ########################################################################
 # Setup the include and linker paths

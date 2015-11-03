@@ -4,7 +4,7 @@
   <title><![CDATA[Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2015-10-26T10:02:29-06:00</updated>
+  <updated>2015-11-03T12:04:24-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -12,6 +12,654 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bloques de procesamiento de señal de GNU Radio en Python]]></title>
+    <link href="http://viktorivan.github.io/blog/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python/"/>
+    <updated>2015-11-02T09:10:09-06:00</updated>
+    <id>http://viktorivan.github.io/blog/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python</id>
+    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
+
+<p>Debido a la popularidad de <a href="https://www.python.org">Python</a> para el procesamiento digital de señales en el ámbito científico a través de <a href="http://www.scipy.org/">SciPy</a>, el proyecto de <a href="http://www.gnuradio.org">GNU Radio</a> permite el desarrollo de bloques de procesamiento de señales que pueden ser escritos en lenguaje de programación Python y usar estas librerías sin ningún problema. Este tipo de módulos son conocidos como <code>out-of-tree</code>, ya que, aunque los módulos serán integrados dentro del catálogo de bloques de GNU Radio no se van a integrar al proyecto para su distribución conjunta, sino individual.</p>
+
+<!-- more -->
+
+<p><em>Procedimiento.</em></p>
+
+<p>Para crear un módulo <code>out-of-tree</code> se ejecuta desde una terminal de linux el siguiente comando</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ gr_modtool create
+</span><span class="line">Name of the new module:Tu_modulo
+</span><span class="line">Creating out-of-tree module in ./gr-Tu_modulo... Done. 
+</span><span class="line">Use 'gr_modtool add' to add a new block to this currently empty module. </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>El nombre que se indique para el módulo es con el que va a aparecer en el catálogo de GNU Radio, en este caso Tu_modulo.</p>
+
+<p>Para crear los bloques que integrarán el módulo se utiliza la herramienta <code>gr_modtool</code> en la carpeta raíz del proyecto. En este caso se creará un bloque que realizará la función de un convertidor binario a decimal para los tipos de datos float basado en Python.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ cd gr-Tu_modulo
+</span><span class="line">$ gr_modtool add
+</span><span class="line">GNU Radio module name identified: Tu_modulo 
+</span><span class="line">('sink', 'source', 'sync', 'decimator', 'interpolator', 'general', 'tagged_stream', 'hier', 'noblock')
+</span><span class="line">Enter block type: decimator 
+</span><span class="line">Language (python/cpp): python
+</span><span class="line">Language: Python
+</span><span class="line">Enter name of block/code (without module name prefix): bin2dec_py_ff
+</span><span class="line">Block/code identifier: bin2dec_py_ff
+</span><span class="line">Enter valid argument list, including default arguments: vec_size
+</span><span class="line">Add Python QA code? [Y/n] 
+</span><span class="line">Adding file 'python/bin2dec_py_ff.py'...
+</span><span class="line">Adding file 'python/qa_bin2dec_py_ff.py'...
+</span><span class="line">Editing python/CMakeLists.txt...
+</span><span class="line">Adding file 'grc/prueba_bin2dec_py_ff.xml'...
+</span><span class="line">Editing grc/CMakeLists.txt...</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>y a su vez, se desarrollará un bloque que realice la operación inversa, esto es, un convertidor decimal a binario.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ gr_modtool add 
+</span><span class="line">GNU Radio module name identified: Tu_modulo 
+</span><span class="line">('sink', 'source', 'sync', 'decimator', 'interpolator', 'general', 'tagged_stream', 'hier', 'noblock')
+</span><span class="line">Enter block type: interpolator
+</span><span class="line">Language (python/cpp): python
+</span><span class="line">Language: Python
+</span><span class="line">Enter name of block/code (without module name prefix): dec2bin_py_ff
+</span><span class="line">Block/code identifier: dec2bin_py_ff
+</span><span class="line">Enter valid argument list, including default arguments: vec_size
+</span><span class="line">Add Python QA code? [Y/n] 
+</span><span class="line">Adding file 'python/dec2bin_py_ff.py'...
+</span><span class="line">Adding file 'python/qa_dec2bin_py_ff.py'...
+</span><span class="line">Editing python/CMakeLists.txt...
+</span><span class="line">Adding file 'grc/prueba_dec2bin_py_ff.xml'...
+</span><span class="line">Editing grc/CMakeLists.txt...</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>de esta manera se han creado dos bloques que serán escritos en Python, un decimador para el convertidor binario a decimal y un interpolador para el decimal a binario.</p>
+
+<p>Los archivos donde se realizará la programación en código Python se ubican en <code>~/gr-Tu_modulo/python</code> y se llama <code>dec2bin_py_ff.py</code> para el convertidor decimal a binario y <code>bin2dec_py_ff.py</code> para el convertidor binario a decimal.</p>
+
+<p><em>Convertidor binario a decimal</em></p>
+
+<p>Dentro del archivo <code>bin2dec_py_ff.py</code> se puede observar que la librería de Scipy con Numpy ha sido declarada, en caso de que se requiera alguna librería en particular sólo se agrega con la instrucción <code>include</code>.</p>
+
+<p>En la parte de <code>class bin2dec_py_ff(gr.decim_block)</code> está la seccción donde se definen los parámetros iniciales del bloque, <code>def __init__(self, vec_size):</code>, en ella se define el tipo de datos de entrada y salida del bloque, así como el factor de decimación del bloque <code>decim=vec_size</code>. Para poder utilizar la variable <code>vec_size</code> fuera de la clase se puede utilizar <code>self.vec_size</code>, es importante notar que esta variable pertenece a la clase pero no a la función <code>__init__</code>, la variable <code>vec_size</code> representa la cantidad de bits que se requieren para convertir el número a decimal.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">class bin2dec_py_ff(gr.decim_block):
+</span><span class="line">    """
+</span><span class="line">    docstring for block bin2dec_py_ff
+</span><span class="line">    """
+</span><span class="line">    def __init__(self, vec_size):
+</span><span class="line">        gr.decim_block.__init__(self,
+</span><span class="line">            name="bin2dec_py_ff",
+</span><span class="line">            in_sig=[numpy.float32],
+</span><span class="line">            out_sig=[numpy.float32], decim=vec_size)
+</span><span class="line">    self.vec_size=vec_size </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>En la parte correspondiente a <code>// Do &lt;+signal processing+&gt;</code> es donde se realiza el procesamiento de datos que manipulará el bloque, para la conversión de binario a decimal se desarrolla el código de programación en Python, quedando de la siguiente manera:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def work(self, input_items, output_items):
+</span><span class="line">	in0 = numpy.int_(input_items[0])
+</span><span class="line">	out = output_items[0]
+</span><span class="line">	j=0
+</span><span class="line">	for i in range(self.vec_size,len(in0)+1,self.vec_size):
+</span><span class="line">		out[j]= int(str("".join(str(x) for x in in0[i-self.vec_size:i])),2)
+</span><span class="line">		j += 1
+</span><span class="line">	return len(output_items[0])</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>El archivo quedaría de la siguiente forma, ya con todas las modificaciones incluidas:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span> (bin2dec_py_ff.py)</span> <a href="http://viktorivan.github.io/downloads/code/bin2dec_py_ff.py">download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+</pre></td><td class="code"><pre><code class="py"><span class="line"><span class="c">#!/usr/bin/env python</span>
+</span><span class="line"><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class="line"><span class="c"># </span>
+</span><span class="line"><span class="c"># Copyright 2015 IVAN RODRIGUEZ.</span>
+</span><span class="line"><span class="c"># </span>
+</span><span class="line"><span class="c"># This is free software; you can redistribute it and/or modify</span>
+</span><span class="line"><span class="c"># it under the terms of the GNU General Public License as published by</span>
+</span><span class="line"><span class="c"># the Free Software Foundation; either version 3, or (at your option)</span>
+</span><span class="line"><span class="c"># any later version.</span>
+</span><span class="line"><span class="c"># </span>
+</span><span class="line"><span class="c"># This software is distributed in the hope that it will be useful,</span>
+</span><span class="line"><span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+</span><span class="line"><span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+</span><span class="line"><span class="c"># GNU General Public License for more details.</span>
+</span><span class="line"><span class="c"># </span>
+</span><span class="line"><span class="c"># You should have received a copy of the GNU General Public License</span>
+</span><span class="line"><span class="c"># along with this software; see the file COPYING.  If not, write to</span>
+</span><span class="line"><span class="c"># the Free Software Foundation, Inc., 51 Franklin Street,</span>
+</span><span class="line"><span class="c"># Boston, MA 02110-1301, USA.</span>
+</span><span class="line"><span class="c"># </span>
+</span><span class="line">
+</span><span class="line"><span class="kn">import</span> <span class="nn">numpy</span>
+</span><span class="line"><span class="kn">from</span> <span class="nn">gnuradio</span> <span class="kn">import</span> <span class="n">gr</span>
+</span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">bin2dec_py_ff</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">decim_block</span><span class="p">):</span>
+</span><span class="line">    <span class="sd">&quot;&quot;&quot;</span>
+</span><span class="line"><span class="sd">    docstring for block bin2dec_py_ff</span>
+</span><span class="line"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec_size</span><span class="p">):</span>
+</span><span class="line">        <span class="n">gr</span><span class="o">.</span><span class="n">decim_block</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+</span><span class="line">            <span class="n">name</span><span class="o">=</span><span class="s">&quot;bin2dec_py_ff&quot;</span><span class="p">,</span>
+</span><span class="line">            <span class="n">in_sig</span><span class="o">=</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span>
+</span><span class="line">            <span class="n">out_sig</span><span class="o">=</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span> <span class="n">decim</span><span class="o">=</span><span class="n">vec_size</span><span class="p">)</span>
+</span><span class="line">	<span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="o">=</span><span class="n">vec_size</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_items</span><span class="p">,</span> <span class="n">output_items</span><span class="p">):</span>
+</span><span class="line">        <span class="n">in0</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int_</span><span class="p">(</span><span class="n">input_items</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span class="line">        <span class="n">out</span> <span class="o">=</span> <span class="n">output_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class="line">        <span class="n">j</span><span class="o">=</span><span class="mi">0</span>
+</span><span class="line">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">in0</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="p">):</span>
+</span><span class="line">			<span class="n">out</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">in0</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="p">:</span><span class="n">i</span><span class="p">])),</span><span class="mi">2</span><span class="p">)</span>
+</span><span class="line">			<span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class="line">        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_items</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><em>Convertidor decimal a binario</em></p>
+
+<p>Para corroborar el correcto funcionamiento del bloque de convertidor binario a decimal se propone realizar un convertidor decimal a binario que realizará la operación inversa del bloque anterior.</p>
+
+<p>El archivo donde se realiza la programación es <code>dec2bin_py_ff.py</code>. Nuevamente, en la sección de <code>class dec2bin_py_ff(gr.interp_block):</code> se indica los tipos de datos de entrada y salida que manejará el bloque de procesamiento, así también el factor de interpolación definido por la variable <code>vec_size</code> y por último la variable <code>self.vec_size</code>, quedando como sigue:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">class dec2bin_py_ff(gr.interp_block):
+</span><span class="line">    """
+</span><span class="line">    docstring for block dec2bin_py_ff
+</span><span class="line">    """
+</span><span class="line">    def __init__(self, vec_size):
+</span><span class="line">        gr.interp_block.__init__(self,
+</span><span class="line">            name="dec2bin_py_ff",
+</span><span class="line">            in_sig=[numpy.float32],
+</span><span class="line">            out_sig=[numpy.float32], interp=vec_size)
+</span><span class="line">    self.vec_size=vec_size</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>En la sección de <code>// Do &lt;+signal processing+&gt;</code> se escribe el código que realizará la conversión decimal a binario.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def work(self, input_items, output_items):
+</span><span class="line">    in0 = input_items[0]
+</span><span class="line">    out = output_items[0]
+</span><span class="line">    f=numpy.zeros([len(in0),self.vec_size])
+</span><span class="line">    for i in range(0,len(in0)):
+</span><span class="line">        f[i,:] = numpy.int_([str(x) for x in numpy.binary_repr(in0[i], width = self.vec_size)])*1.0
+</span><span class="line">    out[:] = numpy.hstack(f)
+</span><span class="line">    return len(output_items[0])</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>El archivo completo queda de la siguiente manera:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span> (dec2bin_py_ff.py)</span> <a href="http://viktorivan.github.io/downloads/code/dec2bin_py_ff.py">download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+</pre></td><td class="code"><pre><code class="py"><span class="line"><span class="c">#!/usr/bin/env python</span>
+</span><span class="line"><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class="line"><span class="c"># </span>
+</span><span class="line"><span class="c"># Copyright 2015 IVAN RODRIGUEZ.</span>
+</span><span class="line"><span class="c"># </span>
+</span><span class="line"><span class="c"># This is free software; you can redistribute it and/or modify</span>
+</span><span class="line"><span class="c"># it under the terms of the GNU General Public License as published by</span>
+</span><span class="line"><span class="c"># the Free Software Foundation; either version 3, or (at your option)</span>
+</span><span class="line"><span class="c"># any later version.</span>
+</span><span class="line"><span class="c"># </span>
+</span><span class="line"><span class="c"># This software is distributed in the hope that it will be useful,</span>
+</span><span class="line"><span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+</span><span class="line"><span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+</span><span class="line"><span class="c"># GNU General Public License for more details.</span>
+</span><span class="line"><span class="c"># </span>
+</span><span class="line"><span class="c"># You should have received a copy of the GNU General Public License</span>
+</span><span class="line"><span class="c"># along with this software; see the file COPYING.  If not, write to</span>
+</span><span class="line"><span class="c"># the Free Software Foundation, Inc., 51 Franklin Street,</span>
+</span><span class="line"><span class="c"># Boston, MA 02110-1301, USA.</span>
+</span><span class="line"><span class="c"># </span>
+</span><span class="line">
+</span><span class="line"><span class="kn">import</span> <span class="nn">numpy</span>
+</span><span class="line"><span class="kn">from</span> <span class="nn">gnuradio</span> <span class="kn">import</span> <span class="n">gr</span>
+</span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">dec2bin_py_ff</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">interp_block</span><span class="p">):</span>
+</span><span class="line">    <span class="sd">&quot;&quot;&quot;</span>
+</span><span class="line"><span class="sd">    docstring for block dec2bin_py_ff</span>
+</span><span class="line"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec_size</span><span class="p">):</span>
+</span><span class="line">        <span class="n">gr</span><span class="o">.</span><span class="n">interp_block</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+</span><span class="line">            <span class="n">name</span><span class="o">=</span><span class="s">&quot;dec2bin_py_ff&quot;</span><span class="p">,</span>
+</span><span class="line">            <span class="n">in_sig</span><span class="o">=</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span>
+</span><span class="line">            <span class="n">out_sig</span><span class="o">=</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span> <span class="n">interp</span><span class="o">=</span><span class="n">vec_size</span><span class="p">)</span>
+</span><span class="line">	<span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="o">=</span><span class="n">vec_size</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_items</span><span class="p">,</span> <span class="n">output_items</span><span class="p">):</span>
+</span><span class="line">		<span class="n">in0</span> <span class="o">=</span> <span class="n">input_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class="line">		<span class="n">out</span> <span class="o">=</span> <span class="n">output_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class="line">		<span class="n">f</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">in0</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="p">])</span>
+</span><span class="line">		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">in0</span><span class="p">)):</span>
+</span><span class="line">			<span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int_</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="n">in0</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="p">)])</span><span class="o">*</span><span class="mf">1.0</span>
+</span><span class="line">		<span class="n">out</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span class="line">		<span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_items</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><em>Interfaz GNU Radio Companion</em></p>
+
+<p>Los bloques dentro de GNU Radio Companion (GRC) son archivos xml que se ubican en <code>~/gr-Tu_modulo/grc</code>, para el convertidor binario a decimal se llama <code>Tu_modulo_bin2dec_py_ff.xml</code> y para el convertidor decimal a binario <code>Tu_modulo_dec2bin_py_ff.xml</code>.</p>
+
+<p>Dentro del archivo xml hay varios parámetros que pueden ser personalizados, tal como el nombre del bloque, este parámetro se define en la línea correspondiente a <code>&lt;name&gt;</code>.</p>
+
+<pre><code>&lt;name&gt;Binary To Decimal Python&lt;/name&gt;
+</code></pre>
+
+<p>En la parte de <code>&lt;param&gt;</code> se indica la variable de entrada del bloque</p>
+
+<pre><code>  &lt;param&gt;
+    &lt;name&gt;Vector size&lt;/name&gt;
+    &lt;key&gt;vec_size&lt;/key&gt;
+    &lt;type&gt;int&lt;/type&gt;
+  &lt;/param&gt;
+</code></pre>
+
+<p>El conector de entrada del bloque de procesamiento se define en <code>&lt;sink&gt;</code></p>
+
+<pre><code>  &lt;sink&gt;
+    &lt;name&gt;in&lt;/name&gt;
+    &lt;type&gt;float&lt;/type&gt;
+  &lt;/sink&gt;
+</code></pre>
+
+<p>El conector de salida en <code>&lt;source&gt;</code></p>
+
+<pre><code>  &lt;source&gt;
+    &lt;name&gt;out&lt;/name&gt;
+    &lt;type&gt;float&lt;/type&gt;
+  &lt;/source&gt;
+</code></pre>
+
+<p>De igual manera se modifican las secciones de <code>&lt;name&gt;</code>, <code>&lt;param&gt;</code>, <code>&lt;sink&gt;</code> y <code>&lt;source&gt;</code> en el archivo <code>Tu_modulo_dec2bin_py_ff.xml</code> para el bloque de procesamiento del convertidor decimal a binario.</p>
+
+<p>Los archivos quedarán finalmente de la siguiente forma:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span> (Tu_modulo_bin2dec_py_ff.xml)</span> <a href="http://viktorivan.github.io/downloads/code/Tu_modulo_bin2dec_py_ff.xml">download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+</pre></td><td class="code"><pre><code class="xml"><span class="line"><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</span><span class="line"><span class="nt">&lt;block&gt;</span>
+</span><span class="line">  <span class="nt">&lt;name&gt;</span>Binary to decimal Python<span class="nt">&lt;/name&gt;</span>
+</span><span class="line">  <span class="nt">&lt;key&gt;</span>Tu_modulo_bin2dec_py_ff<span class="nt">&lt;/key&gt;</span>
+</span><span class="line">  <span class="nt">&lt;category&gt;</span>Tu_modulo<span class="nt">&lt;/category&gt;</span>
+</span><span class="line">  <span class="nt">&lt;import&gt;</span>import cidte<span class="nt">&lt;/import&gt;</span>
+</span><span class="line">  <span class="nt">&lt;make&gt;</span>Tu_modulo.bin2dec_py_ff($vec_size)<span class="nt">&lt;/make&gt;</span>
+</span><span class="line">  <span class="c">&lt;!-- Make one &#39;param&#39; node for every Parameter you want settable from the GUI.</span>
+</span><span class="line"><span class="c">       Sub-nodes:</span>
+</span><span class="line"><span class="c">       * name</span>
+</span><span class="line"><span class="c">       * key (makes the value accessible as $keyname, e.g. in the make node)</span>
+</span><span class="line"><span class="c">       * type --&gt;</span>
+</span><span class="line">  <span class="nt">&lt;param&gt;</span>
+</span><span class="line">    <span class="nt">&lt;name&gt;</span>Vector size<span class="nt">&lt;/name&gt;</span>
+</span><span class="line">    <span class="nt">&lt;key&gt;</span>vec_size<span class="nt">&lt;/key&gt;</span>
+</span><span class="line">    <span class="nt">&lt;type&gt;</span>int<span class="nt">&lt;/type&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/param&gt;</span>
+</span><span class="line">
+</span><span class="line">  <span class="c">&lt;!-- Make one &#39;sink&#39; node per input. Sub-nodes:</span>
+</span><span class="line"><span class="c">       * name (an identifier for the GUI)</span>
+</span><span class="line"><span class="c">       * type</span>
+</span><span class="line"><span class="c">       * vlen</span>
+</span><span class="line"><span class="c">       * optional (set to 1 for optional inputs) --&gt;</span>
+</span><span class="line">  <span class="nt">&lt;sink&gt;</span>
+</span><span class="line">    <span class="nt">&lt;name&gt;</span>in<span class="nt">&lt;/name&gt;</span>
+</span><span class="line">    <span class="nt">&lt;type&gt;</span>float<span class="nt">&lt;/type&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/sink&gt;</span>
+</span><span class="line">
+</span><span class="line">  <span class="c">&lt;!-- Make one &#39;source&#39; node per output. Sub-nodes:</span>
+</span><span class="line"><span class="c">       * name (an identifier for the GUI)</span>
+</span><span class="line"><span class="c">       * type</span>
+</span><span class="line"><span class="c">       * vlen</span>
+</span><span class="line"><span class="c">       * optional (set to 1 for optional inputs) --&gt;</span>
+</span><span class="line">  <span class="nt">&lt;source&gt;</span>
+</span><span class="line">    <span class="nt">&lt;name&gt;</span>out<span class="nt">&lt;/name&gt;</span>
+</span><span class="line">    <span class="nt">&lt;type&gt;</span>float<span class="nt">&lt;/type&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/source&gt;</span>
+</span><span class="line"><span class="nt">&lt;/block&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span> (Tu_modulo_dec2bin_py_ff.xml)</span> <a href="http://viktorivan.github.io/downloads/code/Tu_modulo_dec2bin_py_ff.xml">download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+</pre></td><td class="code"><pre><code class="xml"><span class="line"><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</span><span class="line"><span class="nt">&lt;block&gt;</span>
+</span><span class="line">  <span class="nt">&lt;name&gt;</span>Decimal to binary Python<span class="nt">&lt;/name&gt;</span>
+</span><span class="line">  <span class="nt">&lt;key&gt;</span>Tu_modulo_dec2bin_py_ff<span class="nt">&lt;/key&gt;</span>
+</span><span class="line">  <span class="nt">&lt;category&gt;</span>Tu_modulo<span class="nt">&lt;/category&gt;</span>
+</span><span class="line">  <span class="nt">&lt;import&gt;</span>import cidte<span class="nt">&lt;/import&gt;</span>
+</span><span class="line">  <span class="nt">&lt;make&gt;</span>Tu_modulo.dec2bin_py_ff($vec_size)<span class="nt">&lt;/make&gt;</span>
+</span><span class="line">  <span class="c">&lt;!-- Make one &#39;param&#39; node for every Parameter you want settable from the GUI.</span>
+</span><span class="line"><span class="c">       Sub-nodes:</span>
+</span><span class="line"><span class="c">       * name</span>
+</span><span class="line"><span class="c">       * key (makes the value accessible as $keyname, e.g. in the make node)</span>
+</span><span class="line"><span class="c">       * type --&gt;</span>
+</span><span class="line">  <span class="nt">&lt;param&gt;</span>
+</span><span class="line">    <span class="nt">&lt;name&gt;</span>Vector size<span class="nt">&lt;/name&gt;</span>
+</span><span class="line">    <span class="nt">&lt;key&gt;</span>vec_size<span class="nt">&lt;/key&gt;</span>
+</span><span class="line">    <span class="nt">&lt;type&gt;</span>int<span class="nt">&lt;/type&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/param&gt;</span>
+</span><span class="line">
+</span><span class="line">  <span class="c">&lt;!-- Make one &#39;sink&#39; node per input. Sub-nodes:</span>
+</span><span class="line"><span class="c">       * name (an identifier for the GUI)</span>
+</span><span class="line"><span class="c">       * type</span>
+</span><span class="line"><span class="c">       * vlen</span>
+</span><span class="line"><span class="c">       * optional (set to 1 for optional inputs) --&gt;</span>
+</span><span class="line">  <span class="nt">&lt;sink&gt;</span>
+</span><span class="line">    <span class="nt">&lt;name&gt;</span>in<span class="nt">&lt;/name&gt;</span>
+</span><span class="line">    <span class="nt">&lt;type&gt;</span>float<span class="nt">&lt;/type&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/sink&gt;</span>
+</span><span class="line">
+</span><span class="line">  <span class="c">&lt;!-- Make one &#39;source&#39; node per output. Sub-nodes:</span>
+</span><span class="line"><span class="c">       * name (an identifier for the GUI)</span>
+</span><span class="line"><span class="c">       * type</span>
+</span><span class="line"><span class="c">       * vlen</span>
+</span><span class="line"><span class="c">       * optional (set to 1 for optional inputs) --&gt;</span>
+</span><span class="line">  <span class="nt">&lt;source&gt;</span>
+</span><span class="line">    <span class="nt">&lt;name&gt;</span>out<span class="nt">&lt;/name&gt;</span>
+</span><span class="line">    <span class="nt">&lt;type&gt;</span>float<span class="nt">&lt;/type&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/source&gt;</span>
+</span><span class="line"><span class="nt">&lt;/block&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><em>Compilación de los bloques</em></p>
+
+<p>Una vez ya realizado todos los procesos referentes al código de programación de los bloques de procesamiento se procede a integrarlos en el proyecto de GNU Radio. Esto se realiza por medio de una serie de comandos desde una terminal de linux en la raíz del proyecto. En caso de no tener una carpeta de build, se crea por medio de comandos de linux</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ mkdir build
+</span><span class="line">$ cd build</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>Una vez dentro de la carpeta de build, se procede a compilar el proyecto</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ cmake ../
+</span><span class="line">$ make
+</span><span class="line">$ sudo make install
+</span><span class="line">$ sudo ldconfig</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>De esa manera queda integrado el módulo out-of-tree dentro de GNU Radio.</p>
+
+<p><em>Archivos de prueba QA</em></p>
+
+<p>Un modo para corroborar el correcto funcionamiento del bloque de procesamiento es a través de los archivos QA que se ubican en <code>~/gr-Tu_modulo/python</code>. Estos archivos permiten hacer una comparación de los datos de salida y los datos esperados de salida de acuerdo a una secuencia de datos de entrada previamente definida. Un ejemplo para probar el convertidor binario a decimal sería:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def test_001_t (self):
+</span><span class="line">    # set up fg
+</span><span class="line">    src_data = [1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0]
+</span><span class="line">    expected_result = [5.0, 7.0, 0.0, 1.0, 2.0]
+</span><span class="line">    src = blocks.vector_source_f (src_data)
+</span><span class="line">    conv = bin2dec_py_ff (3)
+</span><span class="line">    snk = blocks.vector_sink_f ()
+</span><span class="line">    self.tb.connect (src, conv)
+</span><span class="line">    self.tb.connect (conv, snk)
+</span><span class="line">    self.tb.run ()
+</span><span class="line">    # check data
+</span><span class="line">    result_data = snk.data ()
+</span><span class="line">    self.assertFloatTuplesAlmostEqual (expected_result, result_data,2)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Una vez modificado el archivo QA, se procede a ejecutarlo desde una terminal de Linux con el comando de <code>python</code>, cabe recordar que la terminal debe abrirse en <code>~/gr-Tu_modulo/python</code>.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ python qa_dec2bin_py_ff.py 
+</span><span class="line">.
+</span><span class="line">----------------------------------------------------------------------
+</span><span class="line">Ran 1 test in 0.002s
+</span><span class="line">
+</span><span class="line">OK
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Si el código funciona correctamente, se nos mostrará que no hubo error al momento de ejecutar.</p>
+
+<p>viktorivan@openmailbox.org</p>
+
+<p>@viktor_ivan</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Jupyter, una aplicacion web para cómputo científico]]></title>
@@ -1493,7 +2141,7 @@ link_directories(
 </span><span class="line">    <span class="nb">message</span><span class="p">(</span><span class="s">FATAL_ERROR</span> <span class="s2">&quot;CppUnit required to compile Tu_modulo&quot;</span><span class="p">)</span>
 </span><span class="line"><span class="nb">endif</span><span class="p">()</span>
 </span><span class="line"><span class="nb">if</span><span class="p">(</span><span class="s">NOT</span> <span class="s">ITPP_FOUND</span><span class="p">)</span>
-</span><span class="line">    <span class="nb">message</span><span class="p">(</span><span class="s">FATAL_ERROR</span> <span class="s2">&quot;IT++ Core required to compile Umbrella&quot;</span><span class="p">)</span>
+</span><span class="line">    <span class="nb">message</span><span class="p">(</span><span class="s">FATAL_ERROR</span> <span class="s2">&quot;IT++ Core required to compile Tu_modulo&quot;</span><span class="p">)</span>
 </span><span class="line"><span class="nb">endif</span><span class="p">()</span>
 </span><span class="line"><span class="c">########################################################################</span>
 </span><span class="line"><span class="c"># Setup the include and linker paths</span>
@@ -2849,7 +3497,7 @@ itpp::vec tempin(pz * polsize * sizeof(float));
 }
 </code></pre>
 
-<p>En la parte correspondiente a <code>// Do &lt;+signal processing+&gt;</code> es donde se realiza el procesamiento de datos que manipulará el bloque, para la conversión de binario a decimal se desarrolla el código de programación en c++, quedando de la siguiente manera:</p>
+<p>En la parte correspondiente a <code>// Do &lt;+signal processing+&gt;</code> es donde se realiza el procesamiento de datos que manipulará el bloque, para la conversión de binario a decimal se desarrolla el código de programación en C++, quedando de la siguiente manera:</p>
 
 <pre><code>int
 bin2dec_ff_impl::work(int noutput_items,
@@ -3052,7 +3700,7 @@ bin2dec_ff_impl::work(int noutput_items,
 </code></pre>
 
 <p>Nuevamente, en la sección de <code>dec2bin_ff_impl::dec2bin_ff_impl(int vec_size)
-</code> se indica la cantidad de flujos de entrada y salida que manejará el bloque de procesamiento, así también el factor de interpolación definido por la variable vec_size y por último la variabe chunk, quedando como sigue:</p>
+</code> se indica la cantidad de flujos de entrada y salida que manejará el bloque de procesamiento, así también el factor de interpolación definido por la variable vec_size y por último la variable chunk, quedando como sigue:</p>
 
 <pre><code>dec2bin_ff_impl::dec2bin_ff_impl(int vec_size)
   : gr::sync_interpolator("dec2bin_ff",

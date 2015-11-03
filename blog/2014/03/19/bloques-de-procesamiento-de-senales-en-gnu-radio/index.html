@@ -211,7 +211,7 @@
 }
 </code></pre>
 
-<p>En la parte correspondiente a <code>// Do &lt;+signal processing+&gt;</code> es donde se realiza el procesamiento de datos que manipulará el bloque, para la conversión de binario a decimal se desarrolla el código de programación en c++, quedando de la siguiente manera:</p>
+<p>En la parte correspondiente a <code>// Do &lt;+signal processing+&gt;</code> es donde se realiza el procesamiento de datos que manipulará el bloque, para la conversión de binario a decimal se desarrolla el código de programación en C++, quedando de la siguiente manera:</p>
 
 <pre><code>int
 bin2dec_ff_impl::work(int noutput_items,
@@ -414,7 +414,7 @@ bin2dec_ff_impl::work(int noutput_items,
 </code></pre>
 
 <p>Nuevamente, en la sección de <code>dec2bin_ff_impl::dec2bin_ff_impl(int vec_size)
-</code> se indica la cantidad de flujos de entrada y salida que manejará el bloque de procesamiento, así también el factor de interpolación definido por la variable vec_size y por último la variabe chunk, quedando como sigue:</p>
+</code> se indica la cantidad de flujos de entrada y salida que manejará el bloque de procesamiento, así también el factor de interpolación definido por la variable vec_size y por último la variable chunk, quedando como sigue:</p>
 
 <pre><code>dec2bin_ff_impl::dec2bin_ff_impl(int vec_size)
   : gr::sync_interpolator("dec2bin_ff",
@@ -1078,7 +1078,7 @@ dec2bin_ff_impl::work(int noutput_items,
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/dsp/'>dsp</a>, <a class='category' href='/blog/categories/gnuradio/'>gnuradio</a>, <a class='category' href='/blog/categories/out-of-tree/'>out-of-tree</a>, <a class='category' href='/blog/categories/sdr/'>sdr</a>
+    <a class='category' href='/blog/categories/c-plus-plus/'>c++</a>, <a class='category' href='/blog/categories/dsp/'>dsp</a>, <a class='category' href='/blog/categories/gnuradio/'>gnuradio</a>, <a class='category' href='/blog/categories/out-of-tree/'>out-of-tree</a>, <a class='category' href='/blog/categories/sdr/'>sdr</a>
   
 </span>
 
@@ -1118,6 +1118,10 @@ dec2bin_ff_impl::work(int noutput_items,
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python/">Bloques de procesamiento de señal de GNU Radio en Python</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/10/22/jupyter-una-aplicacion-web-para-computo-cientifico/">Jupyter, una aplicacion web para cómputo científico</a>
       </li>
     
@@ -1131,10 +1135,6 @@ dec2bin_ff_impl::work(int noutput_items,
     
       <li class="post">
         <a href="/blog/2014/06/13/scipy-como-alternativa-a-matlab/">SciPy como alternativa a Matlab</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/19/redes-cooperativas-dfts-ofdm-con-gnu-radio/">Redes cooperativas DFTS-OFDM con GNU Radio</a>
       </li>
     
   </ul>
