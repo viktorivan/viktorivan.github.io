@@ -3,7 +3,7 @@
   <name>Decimal to binary Python</name>
   <key>Tu_modulo_dec2bin_py_ff</key>
   <category>Tu_modulo</category>
-  <import>import cidte</import>
+  <import>import Tu_modulo</import>
   <make>Tu_modulo.dec2bin_py_ff($vec_size)</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:

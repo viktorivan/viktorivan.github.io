@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <block>
-  <name>Binary to decimal Python</name>
+  <name>binary to decimal Python</name>
   <key>Tu_modulo_bin2dec_py_ff</key>
   <category>Tu_modulo</category>
-  <import>import cidte</import>
+  <import>import Tu_modulo</import>
   <make>Tu_modulo.bin2dec_py_ff($vec_size)</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
