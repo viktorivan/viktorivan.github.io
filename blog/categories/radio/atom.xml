@@ -4,7 +4,7 @@
   <title><![CDATA[Category: radio | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/radio/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2015-11-24T18:29:58-06:00</updated>
+  <updated>2015-11-24T18:42:35-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -102,12 +102,12 @@ $ sudo ldconfig
 
 <p>Así mismo, se puede remplazar el bloque de FUNcube por uno de UHD para las tarjetas USRP, tal como se muestra a continuación.</p>
 
-<p><img src="/downloads/images/APRS.png"></p>
+<p>{% img /downloads/images/APRS.png %}</p>
 
 <p>De esta forma queda instalado el protocolo AX.25 en una plataforma de GNU Radio. Una vez funcionando el archivo <code>APRS.grc</code>, se mostrará una interfaz gráfica que desplegará en una pestaña el espectro recibido y en otra el mensaje recibido por AX.25 de la ISS o por APRS, tal como se muestra a continuación.</p>
 
-<p><img src="/downloads/images/APRSspectral.png">
-<img src="/downloads/images/APRSax25.png"></p>
+<p>{% img /downloads/images/APRSspectral.png %}
+{% img /downloads/images/APRSax25.png %}</p>
 
 <p>viktorivan@openmailbox.org</p>
 

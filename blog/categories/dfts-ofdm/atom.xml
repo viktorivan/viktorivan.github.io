@@ -4,7 +4,7 @@
   <title><![CDATA[Category: DFTS-OFDM | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/dfts-ofdm/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2015-11-24T18:29:58-06:00</updated>
+  <updated>2015-11-24T18:42:35-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -97,13 +97,13 @@ Fase 2: El relay envía su información al destino. </p>
 
 <p>Tanto las etapas de detección de cabecera y carga en el receptor incluyen etapas de DFTS, OFDM y demodulación digital 16-QAM, adicionalmente a la carga se le realiza una verificación de CRC.</p>
 
-<p><img src="/downloads/images/ofdm2048dfts192.png"></p>
+<p>{% img /downloads/images/ofdm2048dfts192.png %}</p>
 
 <p><em>DFTS-OFDM en modo relay con protocolo AF</em></p>
 
 <p>El protocolo de AF indica que los símbolos recibidos en el nodo relay serán enviados a su destino sólo amplificando la señal recibida, esta amplificación depende del SNR recibido, quedando de la siguiente manera:</p>
 
-<p><img src="/downloads/images/ofdm2048dfts192AF.png"></p>
+<p>{% img /downloads/images/ofdm2048dfts192AF.png %}</p>
 
 <p><em>DFTS-OFDM en modo relay con protocolo DF</em></p>
 
@@ -111,7 +111,7 @@ Fase 2: El relay envía su información al destino. </p>
 
 <p>La implementación del protocolo DF en GNU Radio queda de la siguiente manera:</p>
 
-<p><img src="/downloads/images/ofdm2048dfts192DF.png"></p>
+<p>{% img /downloads/images/ofdm2048dfts192DF.png %}</p>
 
 <p><em>DFTS-OFDM en modo relay con protocolo EF</em></p>
 
@@ -119,7 +119,7 @@ Fase 2: El relay envía su información al destino. </p>
 
 <p>El diagrama a bloques del protocolo EF queda de la siguiente manera:</p>
 
-<p><img src="/downloads/images/ofdm2048dfts192EF.png"></p>
+<p>{% img /downloads/images/ofdm2048dfts192EF.png %}</p>
 
 <p><em>Conclusión</em></p>
 

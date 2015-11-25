@@ -4,7 +4,7 @@
   <title><![CDATA[Category: out-of-tree | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/out-of-tree/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2015-11-24T18:29:58-06:00</updated>
+  <updated>2015-11-24T18:42:09-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -337,12 +337,15 @@ def work(self, input_items, output_items):
 
 <p>Los bloques dentro de GNU Radio Companion (GRC) son archivos xml que se ubican en <code>~/gr-Tu_modulo/grc</code>, para el convertidor binario a decimal se llama <code>Tu_modulo_bin2dec_py_ff.xml</code> y para el convertidor decimal a binario <code>Tu_modulo_dec2bin_py_ff.xml</code>.</p>
 
-<p>Dentro del archivo xml hay varios parámetros que pueden ser personalizados, tal como el nombre del bloque, este parámetro se define en la línea correspondiente a <code>&lt;name&gt;</code>.
-```</p>
+<p>Dentro del archivo xml hay varios parámetros que pueden ser personalizados, tal como el nombre del bloque, este parámetro se define en la línea correspondiente a <code>&lt;name&gt;</code>.</p>
+
+<p>```</p>
 <name>Binary To Decimal Python</name>
-<p><code>
-En la parte de `&lt;param&gt;` se indica la variable de entrada del bloque
-</code></p>
+<p>```</p>
+
+<p>En la parte de <code>&lt;param&gt;</code> se indica la variable de entrada del bloque</p>
+
+<p>```</p>
 <param />
 
 <pre><code>&lt;name&gt;Vector size&lt;/name&gt;
@@ -350,27 +353,33 @@ En la parte de `&lt;param&gt;` se indica la variable de entrada del bloque
 &lt;type&gt;int&lt;/type&gt;
 </code></pre>
 <p>&lt;/param&gt;
-<code>
-El conector de entrada del bloque de procesamiento se define en `&lt;sink&gt;`
-</code></p>
+```</p>
+
+<p>El conector de entrada del bloque de procesamiento se define en <code>&lt;sink&gt;</code></p>
+
+<p>```</p>
 <sink>
     <name>in</name>
     <type>float</type>
   </sink>
-<p><code>
-El conector de salida en `source`
-</code></p>
+<p>```</p>
+
+<p>El conector de salida en <code>source</code></p>
+
+<p>```</p>
 <source />
 
 <pre><code>&lt;name&gt;out&lt;/name&gt;
 &lt;type&gt;float&lt;/type&gt;
 </code></pre>
 <p>&lt;/source&gt;
-```
-De igual manera se modifican las secciones de <code>&lt;name&gt;</code>, <code>&lt;param&gt;</code>, <code>&lt;sink&gt;</code> y <code>&lt;source&gt;</code> en el archivo <code>Tu_modulo_dec2bin_py_ff.xml</code> para el bloque de procesamiento del convertidor decimal a binario.</p>
+```</p>
 
-<p>El archivo quedaría finalmente de la siguiente forma:
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (Tu_modulo_bin2dec_py_ff.xml)</span> <a href='/downloads/code/Tu_modulo_bin2dec_py_ff.xml'>download</a></figcaption>
+<p>De igual manera se modifican las secciones de <code>&lt;name&gt;</code>, <code>&lt;param&gt;</code>, <code>&lt;sink&gt;</code> y <code>&lt;source&gt;</code> en el archivo <code>Tu_modulo_dec2bin_py_ff.xml</code> para el bloque de procesamiento del convertidor decimal a binario.</p>
+
+<p>El archivo quedaría finalmente de la siguiente forma:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (Tu_modulo_bin2dec_py_ff.xml)</span> <a href='/downloads/code/Tu_modulo_bin2dec_py_ff.xml'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -449,8 +458,9 @@ De igual manera se modifican las secciones de <code>&lt;name&gt;</code>, <code>&
 </span><span class='line'><span class="nt">&lt;/block&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>El archivo XML del convertidor decimal a binario quedaría de la siguiente forma:
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (Tu_modulo_dec2bin_py_ff.xml)</span> <a href='/downloads/code/Tu_modulo_dec2bin_py_ff.xml'>download</a></figcaption>
+<p>El archivo XML del convertidor decimal a binario quedaría de la siguiente forma:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (Tu_modulo_dec2bin_py_ff.xml)</span> <a href='/downloads/code/Tu_modulo_dec2bin_py_ff.xml'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>

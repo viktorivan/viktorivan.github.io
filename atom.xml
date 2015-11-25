@@ -4,7 +4,7 @@
   <title><![CDATA[Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2015-11-24T18:29:58-06:00</updated>
+  <updated>2015-11-24T18:42:09-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -394,43 +394,52 @@
 
 <p>Los bloques dentro de GNU Radio Companion (GRC) son archivos xml que se ubican en <code>~/gr-Tu_modulo/grc</code>, para el convertidor binario a decimal se llama <code>Tu_modulo_bin2dec_py_ff.xml</code> y para el convertidor decimal a binario <code>Tu_modulo_dec2bin_py_ff.xml</code>.</p>
 
-<p>Dentro del archivo xml hay varios parámetros que pueden ser personalizados, tal como el nombre del bloque, este parámetro se define en la línea correspondiente a <code>&lt;name&gt;</code>.
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">&lt;name&gt;Binary To Decimal Python&lt;/name&gt;</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-En la parte de <code>&lt;param&gt;</code> se indica la variable de entrada del bloque
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<p>Dentro del archivo xml hay varios parámetros que pueden ser personalizados, tal como el nombre del bloque, este parámetro se define en la línea correspondiente a <code>&lt;name&gt;</code>.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&lt;name&gt;Binary To Decimal Python&lt;/name&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>En la parte de <code>&lt;param&gt;</code> se indica la variable de entrada del bloque</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">  &lt;param&gt;
+</pre></td><td class="code"><pre><code class=""><span class="line">  &lt;param&gt;
 </span><span class="line">    &lt;name&gt;Vector size&lt;/name&gt;
 </span><span class="line">    &lt;key&gt;vec_size&lt;/key&gt;
 </span><span class="line">    &lt;type&gt;int&lt;/type&gt;
-</span><span class="line">  &lt;/param&gt;</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-El conector de entrada del bloque de procesamiento se define en <code>&lt;sink&gt;</code>
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+</span><span class="line">  &lt;/param&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>El conector de entrada del bloque de procesamiento se define en <code>&lt;sink&gt;</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">  &lt;sink&gt;
+</pre></td><td class="code"><pre><code class=""><span class="line">  &lt;sink&gt;
 </span><span class="line">    &lt;name&gt;in&lt;/name&gt;
 </span><span class="line">    &lt;type&gt;float&lt;/type&gt;
-</span><span class="line">  &lt;/sink&gt;</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-El conector de salida en <code>source</code>
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+</span><span class="line">  &lt;/sink&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>El conector de salida en <code>source</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">  &lt;source&gt;
+</pre></td><td class="code"><pre><code class=""><span class="line">  &lt;source&gt;
 </span><span class="line">    &lt;name&gt;out&lt;/name&gt;
 </span><span class="line">    &lt;type&gt;float&lt;/type&gt;
-</span><span class="line">  &lt;/source&gt;</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-De igual manera se modifican las secciones de <code>&lt;name&gt;</code>, <code>&lt;param&gt;</code>, <code>&lt;sink&gt;</code> y <code>&lt;source&gt;</code> en el archivo <code>Tu_modulo_dec2bin_py_ff.xml</code> para el bloque de procesamiento del convertidor decimal a binario.</p>
+</span><span class="line">  &lt;/source&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>El archivo quedaría finalmente de la siguiente forma:
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;figcaption&gt;<span> (Tu_modulo_bin2dec_py_ff.xml)</span> <a href="http://viktorivan.github.io/downloads/code/Tu_modulo_bin2dec_py_ff.xml">download</a>&lt;/figcaption&gt;
-&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<p>De igual manera se modifican las secciones de <code>&lt;name&gt;</code>, <code>&lt;param&gt;</code>, <code>&lt;sink&gt;</code> y <code>&lt;source&gt;</code> en el archivo <code>Tu_modulo_dec2bin_py_ff.xml</code> para el bloque de procesamiento del convertidor decimal a binario.</p>
+
+<p>El archivo quedaría finalmente de la siguiente forma:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span> (Tu_modulo_bin2dec_py_ff.xml)</span> <a href="http://viktorivan.github.io/downloads/code/Tu_modulo_bin2dec_py_ff.xml">download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -468,7 +477,7 @@ De igual manera se modifican las secciones de <code>&lt;name&gt;</code>, <code>&
 <span class="line-number">36</span>
 <span class="line-number">37</span>
 <span class="line-number">38</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class="xml"><span class="line"><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</pre></td><td class="code"><pre><code class="xml"><span class="line"><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
 </span><span class="line"><span class="nt">&lt;block&gt;</span>
 </span><span class="line">  <span class="nt">&lt;name&gt;</span>binary to decimal Python<span class="nt">&lt;/name&gt;</span>
 </span><span class="line">  <span class="nt">&lt;key&gt;</span>Tu_modulo_bin2dec_py_ff<span class="nt">&lt;/key&gt;</span>
@@ -506,11 +515,12 @@ De igual manera se modifican las secciones de <code>&lt;name&gt;</code>, <code>&
 </span><span class="line">    <span class="nt">&lt;type&gt;</span>float<span class="nt">&lt;/type&gt;</span>
 </span><span class="line">  <span class="nt">&lt;/source&gt;</span>
 </span><span class="line"><span class="nt">&lt;/block&gt;</span>
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;</p>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>El archivo XML del convertidor decimal a binario quedaría de la siguiente forma:
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;figcaption&gt;<span> (Tu_modulo_dec2bin_py_ff.xml)</span> <a href="http://viktorivan.github.io/downloads/code/Tu_modulo_dec2bin_py_ff.xml">download</a>&lt;/figcaption&gt;
-&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<p>El archivo XML del convertidor decimal a binario quedaría de la siguiente forma:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span> (Tu_modulo_dec2bin_py_ff.xml)</span> <a href="http://viktorivan.github.io/downloads/code/Tu_modulo_dec2bin_py_ff.xml">download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -548,7 +558,7 @@ De igual manera se modifican las secciones de <code>&lt;name&gt;</code>, <code>&
 <span class="line-number">36</span>
 <span class="line-number">37</span>
 <span class="line-number">38</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class="xml"><span class="line"><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</pre></td><td class="code"><pre><code class="xml"><span class="line"><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
 </span><span class="line"><span class="nt">&lt;block&gt;</span>
 </span><span class="line">  <span class="nt">&lt;name&gt;</span>Decimal to binary Python<span class="nt">&lt;/name&gt;</span>
 </span><span class="line">  <span class="nt">&lt;key&gt;</span>Tu_modulo_dec2bin_py_ff<span class="nt">&lt;/key&gt;</span>
@@ -586,7 +596,7 @@ De igual manera se modifican las secciones de <code>&lt;name&gt;</code>, <code>&
 </span><span class="line">    <span class="nt">&lt;type&gt;</span>float<span class="nt">&lt;/type&gt;</span>
 </span><span class="line">  <span class="nt">&lt;/source&gt;</span>
 </span><span class="line"><span class="nt">&lt;/block&gt;</span>
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;</p>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><em>Compilación de los bloques</em></p>
 
