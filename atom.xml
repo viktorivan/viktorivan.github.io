@@ -4,7 +4,7 @@
   <title><![CDATA[Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-03-14T16:11:10-06:00</updated>
+  <updated>2016-03-14T16:17:46-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -277,8 +277,9 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
     <link href="http://viktorivan.github.io/blog/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard/"/>
     <updated>2015-11-28T13:21:01-06:00</updated>
     <id>http://viktorivan.github.io/blog/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard</id>
-    <content type="html"><![CDATA[<p><em>Introducción.</em>
-En fechas recientes se ha vuelto popular el uso de sistemas reducidos que permiten instalar sistemas operativos en modo embebido, un ejemplo es <a href="https://www.raspberrypi.org">raspberry pi</a>, el cuál es un ecosistema que presenta varios <a href="https://www.raspberrypi.org/downloads/">sistemas operativos embebidos</a> de libre distribución. Así mismo existen otros ecosistemas orientados a propósitos mas específicos, tales como <a href="http://zedboard.org">Zedboard</a>, donde presentan varias alternativas de hardware de acuerdo a los requerimientos del usuario. Estas plataformas son basadas en Linux, por lo que proyectos como <a href="http://xillybus.com/xillinux">Xillinux</a> aprovechan al máximo las características del hardware y en conjunto con <a href="http://www.xilinx.com/products/design-tools/vivado.html">VIVADO</a> incluyen una plataforma de hardware adaptable a la tarjeta seleccionada.</p>
+    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
+
+<p>En fechas recientes se ha vuelto popular el uso de sistemas reducidos que permiten instalar sistemas operativos en modo embebido, un ejemplo es <a href="https://www.raspberrypi.org">raspberry pi</a>, el cuál es un ecosistema que presenta varios <a href="https://www.raspberrypi.org/downloads/">sistemas operativos embebidos</a> de libre distribución. Así mismo existen otros ecosistemas orientados a propósitos mas específicos, tales como <a href="http://zedboard.org">Zedboard</a>, donde presentan varias alternativas de hardware de acuerdo a los requerimientos del usuario. Estas plataformas son basadas en Linux, por lo que proyectos como <a href="http://xillybus.com/xillinux">Xillinux</a> aprovechan al máximo las características del hardware y en conjunto con <a href="http://www.xilinx.com/products/design-tools/vivado.html">VIVADO</a> incluyen una plataforma de hardware adaptable a la tarjeta seleccionada.</p>
 
 <!-- more -->
 
@@ -292,24 +293,19 @@ En fechas recientes se ha vuelto popular el uso de sistemas reducidos que permit
 Una vez teniendo el archivo generado se procede a la copia del sistema operativo a la memoria SD.</p>
 
 <ol>
-  <li>
-    <p>Para instalar Xillinux en la memoria SD, primero localizar en donde esta montada.</p>
+  <li>Para instalar Xillinux en la memoria SD, primero localizar en donde esta montada.
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span></figure></notextile></li>
+</ol>
+<p>&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">$ lsblk</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/notextile&gt;&lt;/div&gt; 
+2. Copiar la imagen de Xillinux en memoria SD.
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">$ sudo dd if=xillinux-1.3.img of=/dev/sdX bs=512</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;  <br />
+3. Comprobar que la copia quedo correcta y esperar como respuesta EOF.
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">$ sudo cmp xillinux-1.3.img /dev/sdX</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;  <br />
+4. Desmontar o expulsar la memoria y volver a insertar para ver las particiones nuevas.</p>
 
-    <p>$ lsblk</p>
-  </li>
-  <li>
-    <p>Copiar la imagen de Xillinux en memoria SD.</p>
-
-    <p>$ sudo dd if=xillinux-1.3.img of=/dev/sdX bs=512</p>
-  </li>
-  <li>
-    <p>Comprobar que la copia quedo correcta y esperar como respuesta EOF.</p>
-
-    <p>$ sudo cmp xillinux-1.3.img /dev/sdX</p>
-  </li>
-  <li>
-    <p>Desmontar o expulsar la memoria y volver a insertar para ver las particiones nuevas.</p>
-  </li>
+<ol>
   <li>
     <p>Copiar los archivos de bootfiles en la particion uno, por lo general es la menor.</p>
   </li>
@@ -320,18 +316,15 @@ Una vez teniendo el archivo generado se procede a la copia del sistema operativo
     <p>Insertar memoria en Zedboard, en caso de no arrancar presionar el micro switch PS-RST.</p>
   </li>
   <li>
-    <p>Para comunicarse con la Zedboard a traves del puerto serial.</p>
-
-    <p>$ sudo screen /dev/ttyACM0 115200</p>
-  </li>
-  <li>
-    <p>En caso de no tener el programa screen</p>
-
-    <p>$ sudo apt-get install screen</p>
+    <p>Para comunicarse con la Zedboard a traves del puerto serial.
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span></figure></notextile></p>
   </li>
 </ol>
-
-<p>En caso de que el sistema operativo de la Zedboard no cargue, desde una terminal con puerto serial se reinicia la tarjeta para entrar al u-boot presionando PS-RST y cuando indique presiobar cualquier tecla para evitar arranque. Una vez en u-boot se teclean los siguientes comandos</p>
+<p>&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">$ sudo screen /dev/ttyACM0 115200</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/notextile&gt;&lt;/div&gt;  <br />
+9. En caso de no tener el programa screen
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">$ sudo apt-get install screen</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
+En caso de que el sistema operativo de la Zedboard no cargue, desde una terminal con puerto serial se reinicia la tarjeta para entrar al u-boot presionando PS-RST y cuando indique presiobar cualquier tecla para evitar arranque. Una vez en u-boot se teclean los siguientes comandos</p>
 
 <pre><code>&gt; env default -a
 &gt; env save
