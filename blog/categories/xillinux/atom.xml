@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: xillinux | Iván Rodríguez]]></title>
+  <link href="http://viktorivan.github.io/blog/categories/xillinux/atom.xml" rel="self"/>
+  <link href="http://viktorivan.github.io/"/>
+  <updated>2016-03-14T16:11:10-06:00</updated>
+  <id>http://viktorivan.github.io/</id>
+  <author>
+    <name><![CDATA[Iván Rodríguez]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Instalación de Xillinux en tarjetas ZedBoard]]></title>
+    <link href="http://viktorivan.github.io/blog/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard/"/>
+    <updated>2015-11-28T13:21:01-06:00</updated>
+    <id>http://viktorivan.github.io/blog/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard</id>
+    <content type="html"><![CDATA[<p><em>Introducción.</em>
+En fechas recientes se ha vuelto popular el uso de sistemas reducidos que permiten instalar sistemas operativos en modo embebido, un ejemplo es <a href="https://www.raspberrypi.org">raspberry pi</a>, el cuál es un ecosistema que presenta varios <a href="https://www.raspberrypi.org/downloads/">sistemas operativos embebidos</a> de libre distribución. Así mismo existen otros ecosistemas orientados a propósitos mas específicos, tales como <a href="http://zedboard.org">Zedboard</a>, donde presentan varias alternativas de hardware de acuerdo a los requerimientos del usuario. Estas plataformas son basadas en Linux, por lo que proyectos como <a href="http://xillybus.com/xillinux">Xillinux</a> aprovechan al máximo las características del hardware y en conjunto con <a href="http://www.xilinx.com/products/design-tools/vivado.html">VIVADO</a> incluyen una plataforma de hardware adaptable a la tarjeta seleccionada.</p>
+
+<!-- more -->
+
+<p><em>Instalación.</em></p>
+
+<p>En la página de <a href="http://xillybus.com/xillinux">Xillinux</a> se indica donde descargar el sistema operativo, a diferencia de raspberry, es necesario realizar unos pasos antes de copiar los archivos a una memoria SD, ya que es necesario crear el archivo .bit que representa la plataforma de hardware de Zedboard.</p>
+
+<p>De acuerdo al <a href="http://xillybus.com/downloads/doc/xillybus_getting_started_zynq.pdf">manual</a>, es necesario crear antes el procesador <code>netlist</code> y generar los IP cores de Xilinx con ayuda de VIVADO.</p>
+
+<p><em>Copia a SD.</em>
+Una vez teniendo el archivo generado se procede a la copia del sistema operativo a la memoria SD.</p>
+
+<ol>
+  <li>
+    <p>Para instalar Xillinux en la memoria SD, primero localizar en donde esta montada.</p>
+
+    <p>$ lsblk</p>
+  </li>
+  <li>
+    <p>Copiar la imagen de Xillinux en memoria SD.</p>
+
+    <p>$ sudo dd if=xillinux-1.3.img of=/dev/sdX bs=512</p>
+  </li>
+  <li>
+    <p>Comprobar que la copia quedo correcta y esperar como respuesta EOF.</p>
+
+    <p>$ sudo cmp xillinux-1.3.img /dev/sdX</p>
+  </li>
+  <li>
+    <p>Desmontar o expulsar la memoria y volver a insertar para ver las particiones nuevas.</p>
+  </li>
+  <li>
+    <p>Copiar los archivos de bootfiles en la particion uno, por lo general es la menor.</p>
+  </li>
+  <li>
+    <p>Con gparted ajustar la segunda particion al tamaño de la memoria.</p>
+  </li>
+  <li>
+    <p>Insertar memoria en Zedboard, en caso de no arrancar presionar el micro switch PS-RST.</p>
+  </li>
+  <li>
+    <p>Para comunicarse con la Zedboard a traves del puerto serial.</p>
+
+    <p>$ sudo screen /dev/ttyACM0 115200</p>
+  </li>
+  <li>
+    <p>En caso de no tener el programa screen</p>
+
+    <p>$ sudo apt-get install screen</p>
+  </li>
+</ol>
+
+<p>En caso de que el sistema operativo de la Zedboard no cargue, desde una terminal con puerto serial se reinicia la tarjeta para entrar al u-boot presionando PS-RST y cuando indique presiobar cualquier tecla para evitar arranque. Una vez en u-boot se teclean los siguientes comandos</p>
+
+<pre><code>&gt; env default -a
+&gt; env save
+&gt; reset
+</code></pre>
+
+<p>viktorivan@openmailbox.org</p>
+
+<p>@viktor_ivan</p>
+]]></content>
+  </entry>
+  
+</feed>
