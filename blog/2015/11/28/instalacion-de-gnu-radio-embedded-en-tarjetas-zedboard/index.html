@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Instalación de GNU Radio embedded en tarjetas ZedBoard - Iván Rodríguez</title>
+  <meta name="author" content="Iván Rodríguez">
+
+  
+  <meta name="description" content="Resumen. El uso de sistemas embedidos se ha popularizado y beneficiado por las nuevas tecnologías, ya que ahora permiten implementar sistemas que no &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Iván Rodríguez" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Iván Rodríguez</a></h1>
+  
+    <h2>Un blog sobre un estudiante de doctorado de CICESE.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:viktorivan.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Instalación De GNU Radio Embedded en Tarjetas ZedBoard</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-28T13:21:27-06:00" pubdate data-updated="true">Nov 28<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><em>Resumen.</em></p>
+
+<p>El uso de sistemas embedidos se ha popularizado y beneficiado por las nuevas tecnologías, ya que ahora permiten implementar sistemas que no solo controlen de un modo básico y simple un dispositivo, sino que pueden formar parte de un ecosistema que incluya conectividad a Internet y por lo tanto monitoreo y control remoto. Adicionalmente, tendencias como el radio definido por software (SDR) han integrado a sus desarrollos la implementación en sistemas embebidos lo que permite el desarrollo de un sistema de comunicación completo en un ambiente embebido, disminuyendo costos y proporcionando portatibilidad.
+<!-- more --></p>
+
+<p><em>Instalación.</em></p>
+
+<p>A diferencia de los sistemas operativos convencionales, el instalar un sistema embebido puede verse limitado por la arquitectura de hardware del sistema embebido, por lo que su instalación puede llegar a ocupar varias horas o incluso interrumpirse por la falta de recursos. Una alternativa es la compilación cruzada, donde en una computadora con mejores prestaciones que el hardware de un sistema embebido compila todo el software necesario para el desarrollo del sistema operativo embebido, pero con las librerías que le corresponden al sistema embebido, esto es, se realizará la compilación de una arquitectura de un sistema embebido en una arquitectura de hardware diferente.</p>
+
+<p>Existen varios proyectos para el desarrollo de sistemas embebidos, tales como openembbeded o yocto, GNU Radio por su parte, proporciona un procedimiento para generar un sistema operativo embebido con GNU Radio integrado al momento de realizar la compilación cruzada.</p>
+
+<p>En una primera parte se descarga el proyecto de repo.</p>
+
+<pre><code>$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &gt; repo
+$ chmod a+x repo
+$ sudo mv repo /usr/local/bin/
+</code></pre>
+
+<p>Se crea el directorio de trabajo del proyecto.</p>
+
+<pre><code>$ mkdir oe-repo
+$ cd oe-repo
+</code></pre>
+
+<p>Se indica que el sistema embebido incluye GNU Radio.</p>
+
+<pre><code>$ repo init -u git://github.com/balister/oe-gnuradio-manifest.git -b fido
+</code></pre>
+
+<p>Se actualiza el proyecto e indica el modelo de plataforma a utilizar.     </p>
+
+<pre><code>$ repo sync
+$ TEMPLATECONF=`pwd`/meta-sdr/conf source ./oe-core/oe-init-build-env ./build ./bitbake
+</code></pre>
+
+<p>Al momento de ejecutar el proyecto puede generar diversos tipos de errores, tal como este, donde no se indicó la plataforma</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">You had no conf/local.conf file. This configuration file has therefore been
+</span><span class="line">created for you with some default values. You may wish to edit it to use a 
+</span><span class="line">different MACHINE (target hardware) or enable parallel build options to take 
+</span><span class="line">advantage of multiple cores for example. See the file for more information as 
+</span><span class="line">common configuration options are commented.
+</span><span class="line">
+</span><span class="line">You had no conf/bblayers.conf file. The configuration file has been created for
+</span><span class="line">you with some default values. To add additional metadata layers into your
+</span><span class="line">configuration please add entries to this file.
+</span><span class="line">
+</span><span class="line">The Yocto Project has extensive documentation about OE including a reference
+</span><span class="line">manual which can be found at:
+</span><span class="line">    http://yoctoproject.org/documentation
+</span><span class="line">
+</span><span class="line">For more information about OpenEmbedded see their website:
+</span><span class="line">    http://www.openembedded.org/
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">### Shell environment set up for builds. ###
+</span><span class="line">
+</span><span class="line">You can now run 'bitbake &lt;target&gt;'</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Se indica la plataforma de hardware del sistema embebido, en este caso es una tarjeta <code>Zedboard</code> y con el comando <code>bitbake</code> se inicia la creación del sistema embebido, debido a la descarga de software esta operación llega a consumir hasta 50 GB de disco duro, igualmente puede tardar mucho tiempo por la velocidad del enlace de Internet. </p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ export MACHINE="zedboard-zynq7"
+</span><span class="line">$ bitbake gnuradio-dev-image
+</span><span class="line">
+</span><span class="line">Parsing recipes: 100% |#######################################| Time: 00:00:30
+</span><span class="line">Parsing of 1939 .bb files complete (0 cached, 1939 parsed). 2455 targets, 247 skipped, 0 masked, 0 errors.
+</span><span class="line">ERROR: No recipes available for:
+</span><span class="line">  /home/cidte/oe-repo/oe-core/../meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv_3.0.bbappend
+</span><span class="line">  /home/cidte/oe-repo/oe-core/../meta-fsl-arm-extra/recipes-kernel/linux/linux-timesys_3.0.15.bbappend
+</span><span class="line">
+</span><span class="line">Summary: There was 1 ERROR message shown, returning a non-zero exit code.</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>En caso de que alguna receta no este disponible para su descarga será necesario eliminarla de la lista de recetas.</p>
+
+<pre><code>$ gedit conf/bblayers.conf
+</code></pre>
+
+<p>Dentro del archivo de configuración se busca los paquetes no disponibles y se borran.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">/home/cidte/oe-repo/oe-core/../meta-fsl-arm \
+</span><span class="line">/home/cidte/oe-repo/oe-core/../meta-fsl-arm-extra \</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Una vez hecha la modificación, se ejecuta nuevamente el comando <code>bitbake</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ bitbake gnuradio-dev-image
+</span><span class="line">
+</span><span class="line">Parsing recipes: 100% |#######################################| Time: 00:00:14
+</span><span class="line">Parsing of 1871 .bb files complete (0 cached, 1871 parsed). 2377 targets, 194 skipped, 0 masked, 0 errors.
+</span><span class="line">WARNING: No bb files matched BBFILE_PATTERN_ettus-e100 '^/home/cidte/oe-repo/oe-core/../meta-ettus/e100-bsp/'
+</span><span class="line">NOTE: Resolving any missing task queue dependencies
+</span><span class="line">NOTE: multiple providers are available for jpeg (jpeg, libjpeg-turbo)
+</span><span class="line">NOTE: consider defining a PREFERRED_PROVIDER entry to match jpeg
+</span><span class="line">NOTE: multiple providers are available for jpeg-native (jpeg-native, libjpeg-turbo-native)
+</span><span class="line">NOTE: consider defining a PREFERRED_PROVIDER entry to match jpeg-native
+</span><span class="line">
+</span><span class="line">Build Configuration:
+</span><span class="line">BB_VERSION        = "1.26.0"
+</span><span class="line">BUILD_SYS         = "x86_64-linux"
+</span><span class="line">NATIVELSBSTRING   = "elementary-OS-0.3.1"
+</span><span class="line">TARGET_SYS        = "arm-oe-linux-gnueabi"
+</span><span class="line">MACHINE           = "zedboard-zynq7"
+</span><span class="line">DISTRO            = "nodistro"
+</span><span class="line">DISTRO_VERSION    = "nodistro.0"
+</span><span class="line">TUNE_FEATURES     = "arm armv7a vfp neon callconvention-hard"
+</span><span class="line">TARGET_FPU        = "vfp-neon"
+</span><span class="line">meta              = "(nobranch):f0873b83d693af4a103999160d67fcf25c7eedc1"
+</span><span class="line">e100-bsp          
+</span><span class="line">e300-bsp          
+</span><span class="line">common            = "(nobranch):eed1cc7bd61aaefc711237f5952faa23f859454d"
+</span><span class="line">meta-xilinx       = "(nobranch):13779b9254bab450875a60ed8f21edd0e8876a71"
+</span><span class="line">meta-oe           
+</span><span class="line">meta-networking   
+</span><span class="line">meta-filesystems  
+</span><span class="line">meta-python       = "(nobranch):df2f700d66bace65f5d802225232d01cf511fe81"
+</span><span class="line">meta-sdr          = "(nobranch):033049a3fa7c97dbe57eaaa54b84b05cbdd6484f"
+</span><span class="line">meta-ti           = "(nobranch):2210ae2cdacc22105b76c5fa45957ebec104f1c6"
+</span><span class="line">
+</span><span class="line">NOTE: Preparing RunQueue
+</span><span class="line">NOTE: Executing SetScene Tasks
+</span><span class="line">NOTE: Executing RunQueue Tasks</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>Una vez terminado el proceso de compilación cruzada, el proyecto entrega una serie de archivos que son el sistema operativo embebido en la siguiente ubicación.</p>
+
+<pre><code>$ cd /home/cidte/oe-repo/build/tmp-glibc/deploy/images
+</code></pre>
+
+<p>Estos archivos deben ser copiados a una memoria SD, para ello es necesario que la memoria tenga dos particiones: una llamada BOOT, fat32, de 40 MB y que sea bootable y la segunda llamada rootfs, ext4 y de tamaño del resto de la memoria. Los archivos que se requieren en la memoria SD en la partición de BOOT son:</p>
+
+<pre><code>$ cp boot.bin /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp u-boot.elf /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp u-boot-dtb.img /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp uEnv.txt /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp uImage /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp zedboard-zynq7.dtb /&lt;ruta-a-memoria-SD&gt;/BOOT
+</code></pre>
+
+<p>Los archivos para la partición de rootfs estan en un comprimido, no es necesario que el archivo comprimido sea copiado a la memoria, por lo que se puede extraer directamente</p>
+
+<pre><code>$ sudo tar -C /&lt;ruta-a-memoria-SD&gt;/rootfs/ -xzpf gnuradio-dev-image-zedboard-zynq7.tar.gz
+</code></pre>
+
+<p>Adicionalmente, el proyecto permite obtener el SDK del sistema embebido.</p>
+
+<pre><code>$ export MACHINE="zedboard-zynq7"
+$ bitbake -c populate_sdk gnuradio-dev-image
+
+$ ls tmp-glibc/deploy/sdk/
+$ sudo sh tmp-glibc/deploy/sdk/oecore-x86_64-armv7ahf-vfp-neon-toolchain-nodistro.0.sh 
+$ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueabi 
+</code></pre>
+
+<p>Finalmente, se procede a encender la tarjeta Zedboard, en caso de que no arranque, desde el puerto serial se ejecuta:</p>
+
+<pre><code>&gt; env default -a
+&gt; env save
+&gt; reset
+</code></pre>
+
+<p><em>Acceso SHH con X11Forwarding.</em>    </p>
+
+<p>Para habilitar la conexión SSH con X11Forwarding, desde el puerto serial hay que modificar el archivo:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">/etc/ssh/sshd_config</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Descomentar <code>X11Forwarding no</code> y poner <code>X11Forwarding yes</code>.</p>
+
+<p>Reiniciar el servicio con el comando</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">/etc/init.d/sshd restart</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>De este modo, queda habilitado <code>X11Forwarding</code> en los enlaces SSH, sin embargo es necesario indicar <code>-X</code> en la configuración de la conexión.</p>
+
+<p><em>Conclusión.</em></p>
+
+<p>El desarrollo de un sistema embebido a través de compilación cruzada puede resultar bastante complejo, pero la ventaja principal es que solo se requiere realizar una vez y los archivos generados pueden ser distribuidos libremente para la tarjeta para la cual fue diseñada. Así también, debido a que el proyecto de GNU Radio se basa en yocto y openembedded, es viable agregar otros proyectos a través de bblayers.</p>
+
+<p>viktorivan@openmailbox.org</p>
+
+<p>@viktor_ivan</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Iván Rodríguez</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-28T13:21:27-06:00" pubdate data-updated="true">Nov 28<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/embedded/'>embedded</a>, <a class='category' href='/blog/categories/gnuradio/'>gnuradio</a>, <a class='category' href='/blog/categories/zedboard/'>zedboard</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard/" data-via="viktor_ivan" data-counturl="http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python/" title="Previous Post: Bloques de procesamiento de señal de GNU Radio en Python">&laquo; Bloques de procesamiento de señal de GNU Radio en Python</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard/">Instalación de GNU Radio embedded en tarjetas ZedBoard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python/">Bloques de procesamiento de señal de GNU Radio en Python</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/22/jupyter-una-aplicacion-web-para-computo-cientifico/">Jupyter, una aplicacion web para cómputo científico</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/21/ax-dot-25-en-gnu-radio/">AX.25 en GNU Radio</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/12/calculo-snr-ciego-para-ofdm/">Cálculo de SNR ciego para OFDM</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/viktorivan">@viktorivan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'viktorivan',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+<section>
+  <h1>About Me</h1>
+  <p>Soy estudiante de doctorado en <a href="http://www.cicese.edu.mx">CICESE</a> en donde realizamos investigación en temas relacionados con Radio definido por software (<a href="http://www.gnuradio.org">SDR</a>) orientado a las comunicaciones basadas en MIMO-OFDM de última generación.</p>
+  <p>Si quieres formar parte de nuestro equipo de trabajo o conocer nuestras líneas de investigación puedes ponerte en contacto con nosotros, nuestro grupo de trabajo es Comunicaciones Inalámbricas Móviles Avanzadas (<a href="http://cima.cicese.mx">CIMA</a>).</p>
+    
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Iván Rodríguez -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a>. Background image by <a href="http://www.flickr.com/photos/joeshlabotnik/">Josh Shlabotnik</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'viktorivanblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard/';
+        var disqus_url = 'http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+  <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: zedboard | Iván Rodríguez]]></title>
+  <link href="http://viktorivan.github.io/blog/categories/zedboard/atom.xml" rel="self"/>
+  <link href="http://viktorivan.github.io/"/>
+  <updated>2016-03-14T12:43:46-06:00</updated>
+  <id>http://viktorivan.github.io/</id>
+  <author>
+    <name><![CDATA[Iván Rodríguez]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Instalación de GNU Radio embedded en tarjetas ZedBoard]]></title>
+    <link href="http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard/"/>
+    <updated>2015-11-28T13:21:27-06:00</updated>
+    <id>http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard</id>
+    <content type="html"><![CDATA[<p><em>Resumen.</em></p>
+
+<p>El uso de sistemas embedidos se ha popularizado y beneficiado por las nuevas tecnologías, ya que ahora permiten implementar sistemas que no solo controlen de un modo básico y simple un dispositivo, sino que pueden formar parte de un ecosistema que incluya conectividad a Internet y por lo tanto monitoreo y control remoto. Adicionalmente, tendencias como el radio definido por software (SDR) han integrado a sus desarrollos la implementación en sistemas embebidos lo que permite el desarrollo de un sistema de comunicación completo en un ambiente embebido, disminuyendo costos y proporcionando portatibilidad.
+<!-- more --></p>
+
+<p><em>Instalación.</em></p>
+
+<p>A diferencia de los sistemas operativos convencionales, el instalar un sistema embebido puede verse limitado por la arquitectura de hardware del sistema embebido, por lo que su instalación puede llegar a ocupar varias horas o incluso interrumpirse por la falta de recursos. Una alternativa es la compilación cruzada, donde en una computadora con mejores prestaciones que el hardware de un sistema embebido compila todo el software necesario para el desarrollo del sistema operativo embebido, pero con las librerías que le corresponden al sistema embebido, esto es, se realizará la compilación de una arquitectura de un sistema embebido en una arquitectura de hardware diferente.</p>
+
+<p>Existen varios proyectos para el desarrollo de sistemas embebidos, tales como openembbeded o yocto, GNU Radio por su parte, proporciona un procedimiento para generar un sistema operativo embebido con GNU Radio integrado al momento de realizar la compilación cruzada.</p>
+
+<p>En una primera parte se descarga el proyecto de repo.</p>
+
+<pre><code>$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &gt; repo
+$ chmod a+x repo
+$ sudo mv repo /usr/local/bin/
+</code></pre>
+
+<p>Se crea el directorio de trabajo del proyecto.</p>
+
+<pre><code>$ mkdir oe-repo
+$ cd oe-repo
+</code></pre>
+
+<p>Se indica que el sistema embebido incluye GNU Radio.</p>
+
+<pre><code>$ repo init -u git://github.com/balister/oe-gnuradio-manifest.git -b fido
+</code></pre>
+
+<p>Se actualiza el proyecto e indica el modelo de plataforma a utilizar.     </p>
+
+<pre><code>$ repo sync
+$ TEMPLATECONF=`pwd`/meta-sdr/conf source ./oe-core/oe-init-build-env ./build ./bitbake
+</code></pre>
+
+<p>Al momento de ejecutar el proyecto puede generar diversos tipos de errores, tal como este, donde no se indicó la plataforma</p>
+
+<p>```
+You had no conf/local.conf file. This configuration file has therefore been
+created for you with some default values. You may wish to edit it to use a 
+different MACHINE (target hardware) or enable parallel build options to take 
+advantage of multiple cores for example. See the file for more information as 
+common configuration options are commented.</p>
+
+<p>You had no conf/bblayers.conf file. The configuration file has been created for
+you with some default values. To add additional metadata layers into your
+configuration please add entries to this file.</p>
+
+<p>The Yocto Project has extensive documentation about OE including a reference
+manual which can be found at:
+    http://yoctoproject.org/documentation</p>
+
+<p>For more information about OpenEmbedded see their website:
+    http://www.openembedded.org/</p>
+
+<h3 id="shell-environment-set-up-for-builds">Shell environment set up for builds.</h3>
+
+<p>You can now run ‘bitbake <target>'
+```</target></p>
+
+<p>Se indica la plataforma de hardware del sistema embebido, en este caso es una tarjeta <code>Zedboard</code> y con el comando <code>bitbake</code> se inicia la creación del sistema embebido, debido a la descarga de software esta operación llega a consumir hasta 50 GB de disco duro, igualmente puede tardar mucho tiempo por la velocidad del enlace de Internet. </p>
+
+<p>```
+$ export MACHINE=”zedboard-zynq7”
+$ bitbake gnuradio-dev-image</p>
+
+<p>Parsing recipes: 100% |#######################################| Time: 00:00:30
+Parsing of 1939 .bb files complete (0 cached, 1939 parsed). 2455 targets, 247 skipped, 0 masked, 0 errors.
+ERROR: No recipes available for:
+  /home/cidte/oe-repo/oe-core/../meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv<em>3.0.bbappend
+  /home/cidte/oe-repo/oe-core/../meta-fsl-arm-extra/recipes-kernel/linux/linux-timesys</em>3.0.15.bbappend</p>
+
+<p>Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+```
+En caso de que alguna receta no este disponible para su descarga será necesario eliminarla de la lista de recetas.</p>
+
+<pre><code>$ gedit conf/bblayers.conf
+</code></pre>
+
+<p>Dentro del archivo de configuración se busca los paquetes no disponibles y se borran.</p>
+
+<p><code>
+/home/cidte/oe-repo/oe-core/../meta-fsl-arm \
+/home/cidte/oe-repo/oe-core/../meta-fsl-arm-extra \
+</code></p>
+
+<p>Una vez hecha la modificación, se ejecuta nuevamente el comando <code>bitbake</code></p>
+
+<p>```
+$ bitbake gnuradio-dev-image</p>
+
+<p>Parsing recipes: 100% |#######################################| Time: 00:00:14
+Parsing of 1871 .bb files complete (0 cached, 1871 parsed). 2377 targets, 194 skipped, 0 masked, 0 errors.
+WARNING: No bb files matched BBFILE_PATTERN_ettus-e100 ‘^/home/cidte/oe-repo/oe-core/../meta-ettus/e100-bsp/’
+NOTE: Resolving any missing task queue dependencies
+NOTE: multiple providers are available for jpeg (jpeg, libjpeg-turbo)
+NOTE: consider defining a PREFERRED_PROVIDER entry to match jpeg
+NOTE: multiple providers are available for jpeg-native (jpeg-native, libjpeg-turbo-native)
+NOTE: consider defining a PREFERRED_PROVIDER entry to match jpeg-native</p>
+
+<p>Build Configuration:
+BB_VERSION        = “1.26.0”
+BUILD_SYS         = “x86_64-linux”
+NATIVELSBSTRING   = “elementary-OS-0.3.1”
+TARGET_SYS        = “arm-oe-linux-gnueabi”
+MACHINE           = “zedboard-zynq7”
+DISTRO            = “nodistro”
+DISTRO_VERSION    = “nodistro.0”
+TUNE_FEATURES     = “arm armv7a vfp neon callconvention-hard”
+TARGET_FPU        = “vfp-neon”
+meta              = “(nobranch):f0873b83d693af4a103999160d67fcf25c7eedc1”
+e100-bsp        <br />
+e300-bsp        <br />
+common            = “(nobranch):eed1cc7bd61aaefc711237f5952faa23f859454d”
+meta-xilinx       = “(nobranch):13779b9254bab450875a60ed8f21edd0e8876a71”
+meta-oe         <br />
+meta-networking <br />
+meta-filesystems<br />
+meta-python       = “(nobranch):df2f700d66bace65f5d802225232d01cf511fe81”
+meta-sdr          = “(nobranch):033049a3fa7c97dbe57eaaa54b84b05cbdd6484f”
+meta-ti           = “(nobranch):2210ae2cdacc22105b76c5fa45957ebec104f1c6”</p>
+
+<p>NOTE: Preparing RunQueue
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+```
+Una vez terminado el proceso de compilación cruzada, el proyecto entrega una serie de archivos que son el sistema operativo embebido en la siguiente ubicación.</p>
+
+<pre><code>$ cd /home/cidte/oe-repo/build/tmp-glibc/deploy/images
+</code></pre>
+
+<p>Estos archivos deben ser copiados a una memoria SD, para ello es necesario que la memoria tenga dos particiones: una llamada BOOT, fat32, de 40 MB y que sea bootable y la segunda llamada rootfs, ext4 y de tamaño del resto de la memoria. Los archivos que se requieren en la memoria SD en la partición de BOOT son:</p>
+
+<pre><code>$ cp boot.bin /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp u-boot.elf /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp u-boot-dtb.img /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp uEnv.txt /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp uImage /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp zedboard-zynq7.dtb /&lt;ruta-a-memoria-SD&gt;/BOOT
+</code></pre>
+
+<p>Los archivos para la partición de rootfs estan en un comprimido, no es necesario que el archivo comprimido sea copiado a la memoria, por lo que se puede extraer directamente</p>
+
+<pre><code>$ sudo tar -C /&lt;ruta-a-memoria-SD&gt;/rootfs/ -xzpf gnuradio-dev-image-zedboard-zynq7.tar.gz
+</code></pre>
+
+<p>Adicionalmente, el proyecto permite obtener el SDK del sistema embebido.</p>
+
+<pre><code>$ export MACHINE="zedboard-zynq7"
+$ bitbake -c populate_sdk gnuradio-dev-image
+
+$ ls tmp-glibc/deploy/sdk/
+$ sudo sh tmp-glibc/deploy/sdk/oecore-x86_64-armv7ahf-vfp-neon-toolchain-nodistro.0.sh 
+$ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueabi 
+</code></pre>
+
+<p>Finalmente, se procede a encender la tarjeta Zedboard, en caso de que no arranque, desde el puerto serial se ejecuta:</p>
+
+<pre><code>&gt; env default -a
+&gt; env save
+&gt; reset
+</code></pre>
+
+<p><em>Acceso SHH con X11Forwarding.</em>    </p>
+
+<p>Para habilitar la conexión SSH con X11Forwarding, desde el puerto serial hay que modificar el archivo:</p>
+
+<p><code>
+/etc/ssh/sshd_config
+</code></p>
+
+<p>Descomentar <code>X11Forwarding no</code> y poner <code>X11Forwarding yes</code>.</p>
+
+<p>Reiniciar el servicio con el comando</p>
+
+<p><code>
+/etc/init.d/sshd restart
+</code></p>
+
+<p>De este modo, queda habilitado <code>X11Forwarding</code> en los enlaces SSH, sin embargo es necesario indicar <code>-X</code> en la configuración de la conexión.</p>
+
+<p><em>Conclusión.</em></p>
+
+<p>El desarrollo de un sistema embebido a través de compilación cruzada puede resultar bastante complejo, pero la ventaja principal es que solo se requiere realizar una vez y los archivos generados pueden ser distribuidos libremente para la tarjeta para la cual fue diseñada. Así también, debido a que el proyecto de GNU Radio se basa en yocto y openembedded, es viable agregar otros proyectos a través de bblayers.</p>
+
+<p>viktorivan@openmailbox.org</p>
+
+<p>@viktor_ivan</p>
+]]></content>
+  </entry>
+  
+</feed>
