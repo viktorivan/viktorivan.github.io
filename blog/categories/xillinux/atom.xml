@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xillinux | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/xillinux/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-03-14T16:17:46-06:00</updated>
+  <updated>2016-03-14T16:19:56-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -34,18 +34,30 @@
 Una vez teniendo el archivo generado se procede a la copia del sistema operativo a la memoria SD.</p>
 
 <ol>
-  <li>Para instalar Xillinux en la memoria SD, primero localizar en donde esta montada.
-<code>
+  <li>Para instalar Xillinux en la memoria SD, primero localizar en donde esta montada.</li>
+</ol>
+
+<p><code>
 $ lsblk
-</code> </li>
-  <li>Copiar la imagen de Xillinux en memoria SD.
-<code>
+</code></p>
+
+<ol>
+  <li>Copiar la imagen de Xillinux en memoria SD.</li>
+</ol>
+
+<p><code>
 $ sudo dd if=xillinux-1.3.img of=/dev/sdX bs=512
-</code>    </li>
-  <li>Comprobar que la copia quedo correcta y esperar como respuesta EOF.
-<code>
+</code></p>
+
+<ol>
+  <li>Comprobar que la copia quedo correcta y esperar como respuesta EOF.</li>
+</ol>
+
+<p><code>
 $ sudo cmp xillinux-1.3.img /dev/sdX
-</code>    </li>
+</code></p>
+
+<ol>
   <li>
     <p>Desmontar o expulsar la memoria y volver a insertar para ver las particiones nuevas.</p>
   </li>
@@ -58,24 +70,29 @@ $ sudo cmp xillinux-1.3.img /dev/sdX
   <li>
     <p>Insertar memoria en Zedboard, en caso de no arrancar presionar el micro switch PS-RST.</p>
   </li>
-  <li>Para comunicarse con la Zedboard a traves del puerto serial.
-<code>
-$ sudo screen /dev/ttyACM0 115200
-</code>    </li>
   <li>
-    <p>En caso de no tener el programa screen
-<code>
-$ sudo apt-get install screen
-</code>
-En caso de que el sistema operativo de la Zedboard no cargue, desde una terminal con puerto serial se reinicia la tarjeta para entrar al u-boot presionando PS-RST y cuando indique presiobar cualquier tecla para evitar arranque. Una vez en u-boot se teclean los siguientes comandos</p>
-
-    <blockquote>
-      <p>env default -a
-env save
-reset</p>
-    </blockquote>
+    <p>Para comunicarse con la Zedboard a traves del puerto serial.</p>
   </li>
 </ol>
+
+<p><code>
+$ sudo screen /dev/ttyACM0 115200
+</code></p>
+
+<ol>
+  <li>En caso de no tener el programa screen.</li>
+</ol>
+
+<p><code>
+$ sudo apt-get install screen
+</code></p>
+
+<p>En caso de que el sistema operativo de la Zedboard no cargue, desde una terminal con puerto serial se reinicia la tarjeta para entrar al u-boot presionando PS-RST y cuando indique presiobar cualquier tecla para evitar arranque. Una vez en u-boot se teclean los siguientes comandos:</p>
+
+<pre><code>&gt; env default -a
+&gt; env save
+&gt; reset
+</code></pre>
 
 <p>viktorivan@openmailbox.org</p>
 
