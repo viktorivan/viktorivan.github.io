@@ -4,7 +4,7 @@
   <title><![CDATA[Category: embedded | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/embedded/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-03-15T08:33:21-06:00</updated>
+  <updated>2016-03-15T13:00:58-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -184,7 +184,7 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
 &gt; reset
 </code></pre>
 
-<p><em>Acceso SHH con X11Forwarding.</em>    </p>
+<p><em>Acceso SSH con X11Forwarding.</em>    </p>
 
 <p>Para habilitar la conexión SSH con X11Forwarding, desde el puerto serial hay que modificar el archivo:</p>
 
