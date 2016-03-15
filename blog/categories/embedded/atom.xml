@@ -4,7 +4,7 @@
   <title><![CDATA[Category: embedded | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/embedded/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-03-14T16:20:50-06:00</updated>
+  <updated>2016-03-15T08:33:21-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -20,7 +20,7 @@
     <id>http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard</id>
     <content type="html"><![CDATA[<p><em>Introducción.</em></p>
 
-<p>El uso de sistemas embedidos se ha popularizado y beneficiado por las nuevas tecnologías, ya que ahora permiten implementar sistemas que no solo controlen de un modo básico y simple un dispositivo, sino que pueden formar parte de un ecosistema que incluya conectividad a Internet y por lo tanto monitoreo y control remoto. Adicionalmente, tendencias como el radio definido por software (SDR) han integrado a sus desarrollos la implementación en sistemas embebidos lo que permite el desarrollo de un sistema de comunicación completo en un ambiente embebido, disminuyendo costos y proporcionando portatibilidad.
+<p>El uso de sistemas embebidos se ha popularizado y beneficiado por las nuevas tecnologías, ya que ahora permiten implementar sistemas que no solo controlen de un modo básico y simple un dispositivo, sino que pueden formar parte de un ecosistema que incluya conectividad a Internet y por lo tanto monitoreo y control remoto. Adicionalmente, tendencias como el radio definido por software (SDR) han integrado a sus desarrollos la implementación en sistemas embebidos lo que permite el desarrollo de un sistema de comunicación completo en un ambiente embebido, disminuyendo costos y proporcionando portatibilidad.
 <!-- more --></p>
 
 <p><em>Instalación.</em></p>
@@ -219,7 +219,7 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
     <id>http://viktorivan.github.io/blog/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard</id>
     <content type="html"><![CDATA[<p><em>Introducción.</em></p>
 
-<p>En fechas recientes se ha vuelto popular el uso de sistemas reducidos que permiten instalar sistemas operativos en modo embebido, un ejemplo es <a href="https://www.raspberrypi.org">raspberry pi</a>, el cuál es un ecosistema que presenta varios <a href="https://www.raspberrypi.org/downloads/">sistemas operativos embebidos</a> de libre distribución. Así mismo existen otros ecosistemas orientados a propósitos mas específicos, tales como <a href="http://zedboard.org">Zedboard</a>, donde presentan varias alternativas de hardware de acuerdo a los requerimientos del usuario. Estas plataformas son basadas en Linux, por lo que proyectos como <a href="http://xillybus.com/xillinux">Xillinux</a> aprovechan al máximo las características del hardware y en conjunto con <a href="http://www.xilinx.com/products/design-tools/vivado.html">VIVADO</a> incluyen una plataforma de hardware adaptable a la tarjeta seleccionada.</p>
+<p>En fechas recientes se ha vuelto popular el uso de sistemas reducidos que permiten instalar sistemas operativos en modo embebido, un ejemplo es <a href="https://www.raspberrypi.org">raspberry pi</a>, el cuál es un ecosistema que presenta varios <a href="https://www.raspberrypi.org/downloads/">sistemas operativos embebidos</a>  de libre distribución. Así mismo existen otros ecosistemas orientados a propósitos mas específicos, tales como <a href="http://zedboard.org">Zedboard</a>, donde presentan varias alternativas de hardware de acuerdo a los requerimientos del usuario. Estas plataformas son basadas en Linux, por lo que proyectos como <a href="http://xillybus.com/xillinux">Xillinux</a> aprovechan al máximo las características del hardware y en conjunto con <a href="http://www.xilinx.com/products/design-tools/vivado.html">VIVADO</a> incluyen una plataforma de hardware adaptable a la tarjeta seleccionada.</p>
 
 <!-- more -->
 
