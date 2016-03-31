@@ -4,7 +4,7 @@
   <title><![CDATA[Category: pybombs | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/pybombs/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-03-30T19:43:43-06:00</updated>
+  <updated>2016-03-30T19:48:36-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -22,9 +22,9 @@
 
 <p><a href="http://gnuradio.org">GNU Radio</a> es un proyecto de software libre orientado a radio definido por software, basado en Python; existen diversos medios para instalar el conjunto de herramientas que comprenden a GNU Radio, desde los repositorios utilizando <code>apt-get</code> hasta la instalación desde el código fuente del proyecto en la terminal, con ayuda de un script o con un gestor de paquetes. La ventaja de instalar GNU Radio desde el código fuente con respecto a los repositorios es la versión de instalación, ya que los repositorios pueden tardar en actualizarse con respecto a los avances del proyecto.</p>
 
-<p>Anteriormente, GNU Radio desarrolló una primera versión de <a href="https://github.com/gnuradio/pybombs/">PyBombs</a> que permitía la instalación del proyecto de una manera sencilla e inclusive intuitiva. Debido a la popularidad de PyBombs para la instalación de proyectos OOT de GNU Radio, se realizó una actualización que permite la fácil distribución e instalación de proyectos pero ahora es incluido desde el gestor <a href="https://pip.pypa.io">pip</a> de Python.</p>
-
 <!-- more -->
+
+<p>Anteriormente, GNU Radio desarrolló una primera versión de <a href="https://github.com/gnuradio/pybombs/">PyBombs</a> que permitía la instalación del proyecto de una manera sencilla e inclusive intuitiva. Debido a la popularidad de PyBombs para la instalación de proyectos OOT de GNU Radio, se realizó una actualización que permite la fácil distribución e instalación de proyectos pero ahora es incluido desde el gestor <a href="https://pip.pypa.io">pip</a> de Python.</p>
 
 <p><em>Instalación.</em></p>
 
