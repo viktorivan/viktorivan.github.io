@@ -4,7 +4,7 @@
   <title><![CDATA[Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-03-15T18:13:38-06:00</updated>
+  <updated>2016-03-30T19:43:43-06:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Instalación GNU Radio con PyBombs versión 2]]></title>
+    <link href="http://viktorivan.github.io/blog/2016/03/29/instalacion-gnu-radio-con-pybombs-version-2/"/>
+    <updated>2016-03-29T20:24:26-06:00</updated>
+    <id>http://viktorivan.github.io/blog/2016/03/29/instalacion-gnu-radio-con-pybombs-version-2</id>
+    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
+
+<p><a href="http://gnuradio.org">GNU Radio</a> es un proyecto de software libre orientado a radio definido por software, basado en Python; existen diversos medios para instalar el conjunto de herramientas que comprenden a GNU Radio, desde los repositorios utilizando <code>apt-get</code> hasta la instalación desde el código fuente del proyecto en la terminal, con ayuda de un script o con un gestor de paquetes. La ventaja de instalar GNU Radio desde el código fuente con respecto a los repositorios es la versión de instalación, ya que los repositorios pueden tardar en actualizarse con respecto a los avances del proyecto.</p>
+
+<p>Anteriormente, GNU Radio desarrolló una primera versión de <a href="https://github.com/gnuradio/pybombs/">PyBombs</a> que permitía la instalación del proyecto de una manera sencilla e inclusive intuitiva. Debido a la popularidad de PyBombs para la instalación de proyectos OOT de GNU Radio, se realizó una actualización que permite la fácil distribución e instalación de proyectos pero ahora es incluido desde el gestor <a href="https://pip.pypa.io">pip</a> de Python.</p>
+
+<!-- more -->
+
+<p><em>Instalación.</em></p>
+
+<p>Primeramente es necesario instalar el gestor pip de Python, desde una terminal.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo apt-get install python-pip python-dev build-essential 
+</span><span class="line">$ sudo pip install --upgrade pip 
+</span><span class="line">$ sudo pip install --upgrade virtualenv </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Una vez instalado el gestor de aplicaciones de Python, se procede a la instalación de PyBombs.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo pip install PyBOMBS</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Teniendo una vez instalado el proyecto de PyBombs, se descargan las recetas donde están indicadas las ubicaciones de los proyectos para su descarga. </p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git  
+</span><span class="line">$ pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Para que GNU Radio pueda ser ejecutado desde cualquier ubicación se tiene que indicar donde se instalará el proyecto.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo pybombs prefix init /usr/local -a myprefix</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Una vez inicializado el prefijo, se procede a la instalación de GNU Radio desde PyBombs.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo pybombs -p myprefix install gnuradio gr-osmosdr</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Para ejecutar la interfaz gráfica de GNU Radio, sólo se ejecuta el comando.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ gnuradio-companion</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><em>Conclusión.</em></p>
+
+<p>El proyecto de PyBombs de GNU Radio ha mostrado un cambio que puede interpretarse como positivo, ya que permite agregar proyectos OOT de una manera sencilla e incluso modificar las recetas para proyectos personales y facilitar su distribución e instalación.</p>
+
+<p>viktorivan@openmailbox.org</p>
+
+<p>@viktor_ivan</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Instalación de GNU Radio embedded en tarjetas ZedBoard]]></title>
