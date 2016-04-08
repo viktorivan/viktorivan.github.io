@@ -4,7 +4,7 @@
   <title><![CDATA[Category: out-of-tree | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/out-of-tree/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-04-08T18:18:37-05:00</updated>
+  <updated>2016-04-08T18:19:25-05:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cifrado en GNU Radio con gr-NaCl]]></title>
+    <link href="http://viktorivan.github.io/blog/2016/04/07/cifrado-en-gnu-radio-con-gr-nacl/"/>
+    <updated>2016-04-07T20:04:29-05:00</updated>
+    <id>http://viktorivan.github.io/blog/2016/04/07/cifrado-en-gnu-radio-con-gr-nacl</id>
+    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
+
+<p>Una forma sencilla de describir lo que es cifrado es: Aquello que está escrito con letras, símbolos o números que solo pueden comprenderse si se dispone de la clave necesaria para descifrarlos.</p>
+
+<p>En criptografía, el cifrado es un procedimiento que utiliza un algoritmo de cifrado con una clave para transformar un mensaje que se desea enviar, sin atender a su estructura lingüística o significado, de tal forma que sea incomprensible o, al menos, difícil de comprender a toda persona que no tenga la clave de descifrado del algoritmo.</p>
+
+<!--more-->
+
+<p>A veces el texto cifrado se escribe en bloques de igual longitud. A estos bloques se les denomina grupos. Estos grupos proporcionaban una forma de verificación adicional, ya que el texto cifrado obtenido debía tener un número entero de grupos. Si al cifrar el texto plano no se tiene ese número entero de grupos, entonces se suele rellenar al final con ceros o con caracteres sin sentido.</p>
+
+<p>En el caso de cifrado de conversaciones de voz o aplicaciones de tiempo real, el cifrado en bloques no es adecuado porque los flujos de datos que se pueden llegar a producir pueden ser fragmentos pequeños. Las muestras de datos pueden ser tan pequeñas como 8 bits, en caso de que los bloques sean de 64 bits, es necesario rellenar con ceros antes de cifrar y transmitirlos lo que puede traducirse en un uso ineficiente de la capacidad del sistema.</p>
+
+<p>Los cifradores de flujo son algoritmos de cifrado que pueden realizar el cifrado incrementalmente, convirtiendo los datos en claro en datos cifrado bit a bit. Esto se logra construyendo un generador de flujo de clave. Un flujo de clave es una secuencia de bits de tamaño arbitrario que puede emplearse para oscurecer los contenidos de un flujo de datos combinando el flujo de clave con el flujo de datos mediante la función XOR. Si el flujo de clave es seguro, el flujo de datos cifrados también lo será.</p>
+
+<p>Se puede construir un generador de flujo de clave iterando una función matemática sobre un rango de valores de entrada para producir un flujo continuo de valores de salida. Los valores de salida se concatenan entonces para construir bloques de datos en claro, y los bloques se cifran empleando una clave compartida por el emisor y el receptor.</p>
+
+<p>Para conservar la calidad de servicio del flujo de datos, los bloques del flujo de clave deberían producirse con un poco de antelación sobre el momento en que vayan a ser empleados, además el proceso que los produce no deberá exigir demasiado esfuerzo de procesamiento como para retrasar el flujo de datos.</p>
+
+<p><em>Cifrado de flujo Salsa20</em></p>
+
+<p><a href="https://cr.yp.to/snuffle.html">Salsa20</a> es un cifrador de flujo propuesto a eSTREAM por Daniel J. Bernstein. Utiliza una función pseudoaleatoria en operaciones ARX (add-rotate-xor), que son operaciones de sumas de 32 bits, suma bit a bit (XOR) y rotación. Salsa20 proyecta una clave de 256 bits, un nonce de 64 bits y un flujo de 64 bits a una salida de 512 bits. Esto provee a Salsa20 una ventaja inusual, la cuál es que el usuario pueda buscar eficientemente cualquier posición de la salida en tiempo constante. Tiene una velocidad de alrededor de 4 a 14 ciclos por byte en software en procesadores x86 modernos y un desempeño en hardware razonable. No está patentado, y Bernstein ha escrito varias implementaciones de dominio público, optimizadas para arquitecturas comunes.</p>
+
+<p>Un nonce es una frase o número arbitrario utilizado sólo una vez en una comunicación cifrada, tal como lo indica su traducción: mientras tanto. Un nonce puede ser una palabra aleatoria o pseudoaleatoria, incluso puede ser utilizado para verificar fecha y hora, ya que este dato puede ser parte del nonce. Para asegurar que nonce sea utilizado sólo una vez, esté debe ser variante en el tiempo (el incluir la hora podría ser suficiente) o pueden generarse una gran cantidad de bits aleatorios que aseguren que la probabilidad de que se repita sea muy pequeña. El uso de nonce permite que viejos mensajes no puedan ser utilizados durante un ataque.</p>
+
+<p><em>NaCl: Librería de cifrado y red.</em></p>
+
+<p><a href="https://nacl.cr.yp.to/">NaCl</a> (se pronuncia “sal”, por el cloruro de sodio) es una librería de software de alta velocidad y fácil de usar orientada a redes de comunicación, cifrado, descrifrado, firmas, entre otras cosas. El objetivo de NaCl es ofrecer todas las operaciones core que se necesitan para hacer herramientas de cifrado del más alto nivel.</p>
+
+<p><em>Librería de cifrado Sodium.</em></p>
+
+<p><a href="https://libsodium.org">Sodium</a> es una librería de software moderna, fácil de usar para cifrado, descifrado, firmas y hash de contraseñas. Es portátil, soporta compilación cruzada, instalable, es un paquete de bifurcación de NaCl con una API compatible y con una API extendida que mejora su uso.</p>
+
+<p>Sodium soporta una variedad de compiladores y sistemas operativos, incluyendo Windows, iOS y Android.</p>
+
+<p><em>gr-nacl: Módulo de GNU Radio para el cifrado de datos utilizando la librería NaCl.</em></p>
+
+<p>El módulo <a href="http://www.cgran.org/pages/gr-nacl.html">gr-nacl</a> para GNU Radio utiliza la librería de cifrado NaCl desarrollada con la bifurcación de la librería Sodium. Entre los bloques incluidos está el cifrado de llave pública y llave secreta. La implementación se basa en el cifrado de mensajes, el cual usa el sistema de mensajes de GNU Radio, adicionalmente, se implementó un sistema de cifrado por medio de flujos etiquetados (tagged streams). </p>
+
+<p><em>Instalación.</em></p>
+
+<p>Desde una terminal, se procede a instalar la librería de Sodium, </p>
+
+<p><code>
+git clone https://github.com/jedisct1/libsodium.git
+cd libsodium/
+./autogen.sh
+./configure
+make
+sudo make install
+</code></p>
+
+<p>Una vez instalado, se instala el módulo de gr-nacl para GNU Radio.</p>
+
+<p><code>
+git clone https://github.com/stwunsch/gr-nacl.git
+cd gr-nacl/
+mkdir build
+cd build
+cmake ../
+make
+ctest
+sudo make install
+sudo ldconfig
+</code></p>
+
+<p><em>Funcionamiento</em></p>
+
+<p>Una vez instalado gr-nacl, se procede a hacer una prueba de cifrado. En el ejemplo incluido en el proyecto se puede observar el archivo de entrada, que es un archivo de texto con la palabra: “This is a test text. Hello world!”. Una vez ejecutado el grc, se pueden observar tres archivos de salida, uno donde se muestra la palabra de entrada, el segundo donde se observa el archivo cifrado y por último el archivo descifrado.</p>
+
+<p><img src="/downloads/images/stream_encryption.png"></p>
+
+<p><em>Conclusión.</em></p>
+
+<p>Aunque el ejemplo mostrado es sencillo, es una base para implementarlo en sistemas mas complejos, como el cifrado de voz o mensajes de chat para su eventual transmisión con alguna tarjeta USRP. </p>
+
+<p>viktorivan@openmailbox.org</p>
+
+<p>@viktor_ivan</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Bloques de procesamiento de señal de GNU Radio en Python]]></title>
