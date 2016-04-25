@@ -97,56 +97,12 @@
 
 <p>La modulación digital consiste en una técnica donde la portadora es modulada para el envío de datos digitales (donde los datos se conforman generalmente por una cadena de unos y ceros) en vez de formas de ondas analógicas. Estos datos pueden representar información analógica (tal como la voz, audio, video), por lo que son el resultado de pasar previamente por una etapa de conversión de analógico a digital (ADC) para poder ser modulados digitalmente, esto es, tienen que representarse por medio de un valor definido dentro de un rango previamente especificado.</p>
 
-<p>Existen diversos tipos de moduladores digitales:</p>
-
-<ol>
-  <li>
-    <p>por cambio de fase (PSK).</p>
-  </li>
-  <li>
-    <p>por cambio de frecuencia (FSK).</p>
-  </li>
-  <li>
-    <p>por cambio de amplitud (ASK).</p>
-  </li>
-  <li>
-    <p>modulación de amplitud en cuadratura (QAM).</p>
-  </li>
-</ol>
-
-<p>Los cambios en alguna característica de la portadora están definidos previamente en una constelación, que es una tabla donde se indica que cambios se harán en la portadora si se presenta una combinación de bits en específico. Esto es, si en la entrada se recibe la cadena <code>010</code>, el modulador revisa la constelación donde se le indica que debe hacer un desfasamiento en la portadora de 135 grados. Cuando el receptor observe este cambio de fase, lo interpretará como la cadena de bits <code>010</code>.</p>
-
-<p><em>Modulación por desplazamiento diferencial de fase (DPSK).</em></p>
-
-<p>DPSK es una técnica de modulación que consiste en variar la fase actual de la portadora de acuerdo a los bits de entrada. La ventaja de este tipo de transmisión, en comparación con PSK, es que no requiere de una señal coherente para su sincronización, debido a los cambios de fase que realiza sobre la portadora, de este modo se pueden ignorar los cambios de fase que pueden presentarse en la señal por los efectos del canal inalámbricos.</p>
-
-<p>En el caso de DBPSK (donde la tasa de transmisión es un bit por símbolo), cuando se desea transmitir un <code>1</code> se le suma 180° a la fase actual de la portadora, en caso de que se desea transmitir un <code>0</code> se le suma 0° a la fase actual, por lo que no existe algún cambio de fase en la portadora. En cambio, para la modulación utilizando DQPSK (dos bits por símbolo), los cambios de fase son 0°, 90°, 180° y -90° que corresponden a los datos <code>00</code>, <code>01</code>, <code>11</code> y <code>10</code> respectivamente.</p>
-
-<p><em>Modulación por desplazamiento de frecuencia gausiana (GFSK)</em></p>
-
-<p>GFSK es una técnica que realiza transiciones suaves entre cada símbolo digital, evitando de este modo el cambio abrupto de frecuencia durante la transmisión, que ha diferencia de FSK, esta no realiza transiciones de frecuencia de un modo suave, llegando a presentarse algunas transiciones de frecuencia de 180°. GFSK consiste en un banco de filtros Gausianos donde los pulsos digitales (pulsos cuadrados que representan los unos y ceros) son suavizados antes de entrar a la etapa de modulación, esto es, los pulsos cuadrados tienen una forma de onda mas parecido a una onda senoidal, pero sin perder su periodo. Este filtro tiene la ventaja de reducir la potencia de la banda lateral, la interferencia con canales adyacentes pero el costo es el incremento de la interferencia intersímbolo.</p>
-
-<p><em>Simulación en GNU Radio</em></p>
-
-<p>GNU Radio incluye diferentes tipos de moduladores digitales dentro de sus bloques de procesamiento, permitiendo de este modo la fácil implementación de un modulador digital. En las figuras se puede observar un diagrama a bloques de un lazo cerrado utilizando modulación digital DPSK y GFSK respectivamente, en la cuál la señal a transmitir es una forma de onda senoidal que puede ser modificada en la frecuencia en tiempo real y así observar en el receptor que los cambios hechos en el transmisor son reflejados correctamente.</p>
-
-<p>En los diagramas a bloques se puede observar el bloque Packet Encoder, que consiste en agrupar los bits de acuerdo a la cantidad de símbolos disponibles en el modulador digital, en el caso de DQPSK los bits son agrupados de dos en dos, para DBPSK y GFSK son de uno en uno.</p>
-
-<p><img src="/downloads/images/gfsk.png" /></p>
-
-<p><img src="/downloads/images/dpsk.png" /></p>
-
-<p>Estos ejemplos se incluyen dentro del proyecto de GNU Radio.</p>
-
-<p><em>Conclusión.</em></p>
-
-<p>El uso de estos esquemas de modulación digital permiten una implementación rápida y sencilla con las tarjetas USRP, ya que son lo suficientemente robustos que no necesitan agregar etapas adicionales al receptor. GNU Radio incluye dentro del proyecto varios ejemplos de sus diferentes sistemas funcionando, de este modo, facilita el entendimiento de los sistemas de comunicación con dispositivos de hardware. </p>
-
-<p>viktorivan@openmailbox.org</p>
-
-<p>@viktor_ivan</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/04/09/dpsk-y-gfsk-en-gnu-radio/">Leer más &rarr;</a>
+    </footer>
   
 
 
