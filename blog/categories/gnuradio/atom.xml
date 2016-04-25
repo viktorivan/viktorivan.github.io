@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: gnuradio | Iván Rodríguez]]></title>
+  <title><![CDATA[Category: GNURadio | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/gnuradio/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-04-25T12:35:53-05:00</updated>
+  <updated>2016-04-25T18:46:04-05:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -14,1091 +14,116 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Cifrado en GNU Radio con gr-NaCl]]></title>
-    <link href="http://viktorivan.github.io/blog/2016/04/07/cifrado-en-gnu-radio-con-gr-nacl/"/>
-    <updated>2016-04-07T20:04:29-05:00</updated>
-    <id>http://viktorivan.github.io/blog/2016/04/07/cifrado-en-gnu-radio-con-gr-nacl</id>
-    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
-
-<p>Una forma sencilla de describir lo que es cifrado es: Aquello que está escrito con letras, símbolos o números que solo pueden comprenderse si se dispone de la clave necesaria para descifrarlos.</p>
-
-<p>En criptografía, el cifrado es un procedimiento que utiliza un algoritmo de cifrado con una clave para transformar un mensaje que se desea enviar, sin atender a su estructura lingüística o significado, de tal forma que sea incomprensible o, al menos, difícil de comprender a toda persona que no tenga la clave de descifrado del algoritmo.</p>
-
-<!--more-->
-
-<p>A veces el texto cifrado se escribe en bloques de igual longitud. A estos bloques se les denomina grupos. Estos grupos proporcionaban una forma de verificación adicional, ya que el texto cifrado obtenido debía tener un número entero de grupos. Si al cifrar el texto plano no se tiene ese número entero de grupos, entonces se suele rellenar al final con ceros o con caracteres sin sentido.</p>
-
-<p>En el caso de cifrado de conversaciones de voz o aplicaciones de tiempo real, el cifrado en bloques no es adecuado porque los flujos de datos que se pueden llegar a producir pueden ser fragmentos pequeños. Las muestras de datos pueden ser tan pequeñas como 8 bits, en caso de que los bloques sean de 64 bits, es necesario rellenar con ceros antes de cifrar y transmitirlos lo que puede traducirse en un uso ineficiente de la capacidad del sistema.</p>
-
-<p>Los cifradores de flujo son algoritmos de cifrado que pueden realizar el cifrado incrementalmente, convirtiendo los datos en claro en datos cifrado bit a bit. Esto se logra construyendo un generador de flujo de clave. Un flujo de clave es una secuencia de bits de tamaño arbitrario que puede emplearse para oscurecer los contenidos de un flujo de datos combinando el flujo de clave con el flujo de datos mediante la función XOR. Si el flujo de clave es seguro, el flujo de datos cifrados también lo será.</p>
-
-<p>Se puede construir un generador de flujo de clave iterando una función matemática sobre un rango de valores de entrada para producir un flujo continuo de valores de salida. Los valores de salida se concatenan entonces para construir bloques de datos en claro, y los bloques se cifran empleando una clave compartida por el emisor y el receptor.</p>
-
-<p>Para conservar la calidad de servicio del flujo de datos, los bloques del flujo de clave deberían producirse con un poco de antelación sobre el momento en que vayan a ser empleados, además el proceso que los produce no deberá exigir demasiado esfuerzo de procesamiento como para retrasar el flujo de datos.</p>
-
-<p><em>Cifrado de flujo Salsa20</em></p>
-
-<p><a href="https://cr.yp.to/snuffle.html">Salsa20</a> es un cifrador de flujo propuesto a eSTREAM por Daniel J. Bernstein. Utiliza una función pseudoaleatoria en operaciones ARX (add-rotate-xor), que son operaciones de sumas de 32 bits, suma bit a bit (XOR) y rotación. Salsa20 proyecta una clave de 256 bits, un nonce de 64 bits y un flujo de 64 bits a una salida de 512 bits. Esto provee a Salsa20 una ventaja inusual, la cuál es que el usuario pueda buscar eficientemente cualquier posición de la salida en tiempo constante. Tiene una velocidad de alrededor de 4 a 14 ciclos por byte en software en procesadores x86 modernos y un desempeño en hardware razonable. No está patentado, y Bernstein ha escrito varias implementaciones de dominio público, optimizadas para arquitecturas comunes.</p>
-
-<p>Un nonce es una frase o número arbitrario utilizado sólo una vez en una comunicación cifrada, tal como lo indica su traducción: mientras tanto. Un nonce puede ser una palabra aleatoria o pseudoaleatoria, incluso puede ser utilizado para verificar fecha y hora, ya que este dato puede ser parte del nonce. Para asegurar que nonce sea utilizado sólo una vez, esté debe ser variante en el tiempo (el incluir la hora podría ser suficiente) o pueden generarse una gran cantidad de bits aleatorios que aseguren que la probabilidad de que se repita sea muy pequeña. El uso de nonce permite que viejos mensajes no puedan ser utilizados durante un ataque.</p>
-
-<p><em>NaCl: Librería de cifrado y red.</em></p>
-
-<p><a href="https://nacl.cr.yp.to/">NaCl</a> (se pronuncia “sal”, por el cloruro de sodio) es una librería de software de alta velocidad y fácil de usar orientada a redes de comunicación, cifrado, descrifrado, firmas, entre otras cosas. El objetivo de NaCl es ofrecer todas las operaciones core que se necesitan para hacer herramientas de cifrado del más alto nivel.</p>
-
-<p><em>Librería de cifrado Sodium.</em></p>
-
-<p><a href="https://libsodium.org">Sodium</a> es una librería de software moderna, fácil de usar para cifrado, descifrado, firmas y hash de contraseñas. Es portátil, soporta compilación cruzada, instalable, es un paquete de bifurcación de NaCl con una API compatible y con una API extendida que mejora su uso.</p>
-
-<p>Sodium soporta una variedad de compiladores y sistemas operativos, incluyendo Windows, iOS y Android.</p>
-
-<p><em>gr-nacl: Módulo de GNU Radio para el cifrado de datos utilizando la librería NaCl.</em></p>
-
-<p>El módulo <a href="http://www.cgran.org/pages/gr-nacl.html">gr-nacl</a> para GNU Radio utiliza la librería de cifrado NaCl desarrollada con la bifurcación de la librería Sodium. Entre los bloques incluidos está el cifrado de llave pública y llave secreta. La implementación se basa en el cifrado de mensajes, el cual usa el sistema de mensajes de GNU Radio, adicionalmente, se implementó un sistema de cifrado por medio de flujos etiquetados (tagged streams). </p>
-
-<p><em>Instalación.</em></p>
-
-<p>Desde una terminal, se procede a instalar la librería de Sodium, </p>
-
-<p><code>
-git clone https://github.com/jedisct1/libsodium.git
-cd libsodium/
-./autogen.sh
-./configure
-make
-sudo make install
-</code></p>
-
-<p>Una vez instalado, se instala el módulo de gr-nacl para GNU Radio.</p>
-
-<p><code>
-git clone https://github.com/stwunsch/gr-nacl.git
-cd gr-nacl/
-mkdir build
-cd build
-cmake ../
-make
-ctest
-sudo make install
-sudo ldconfig
-</code></p>
-
-<p><em>Funcionamiento</em></p>
-
-<p>Una vez instalado gr-nacl, se procede a hacer una prueba de cifrado. En el ejemplo incluido en el proyecto se puede observar el archivo de entrada, que es un archivo de texto con la palabra: “This is a test text. Hello world!”. Una vez ejecutado el grc, se pueden observar tres archivos de salida, uno donde se muestra la palabra de entrada, el segundo donde se observa el archivo cifrado y por último el archivo descifrado.</p>
-
-<p><img src="/downloads/images/stream_encryption.png"></p>
-
-<p><em>Conclusión.</em></p>
-
-<p>Aunque el ejemplo mostrado es sencillo, es una base para implementarlo en sistemas mas complejos, como el cifrado de voz o mensajes de chat para su eventual transmisión con alguna tarjeta USRP. </p>
-
-<p>viktorivan@openmailbox.org</p>
-
-<p>@viktor_ivan</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Instalación GNU Radio con PyBombs versión 2]]></title>
-    <link href="http://viktorivan.github.io/blog/2016/03/29/instalacion-gnu-radio-con-pybombs-version-2/"/>
-    <updated>2016-03-29T20:24:26-06:00</updated>
-    <id>http://viktorivan.github.io/blog/2016/03/29/instalacion-gnu-radio-con-pybombs-version-2</id>
-    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
-
-<p><a href="http://gnuradio.org">GNU Radio</a> es un proyecto de software libre orientado a radio definido por software, basado en Python; existen diversos medios para instalar el conjunto de herramientas que comprenden a GNU Radio, desde los repositorios utilizando <code>apt-get</code> hasta la instalación desde el código fuente del proyecto en la terminal, con ayuda de un script o con un gestor de paquetes. La ventaja de instalar GNU Radio desde el código fuente con respecto a los repositorios es la versión de instalación, ya que los repositorios pueden tardar en actualizarse con respecto a los avances del proyecto.</p>
-
-<!-- more -->
-
-<p>Anteriormente, GNU Radio desarrolló una primera versión de <a href="https://github.com/gnuradio/pybombs/">PyBombs</a> que permitía la instalación del proyecto de una manera sencilla e inclusive intuitiva. Debido a la popularidad de PyBombs para la instalación de proyectos OOT de GNU Radio, se realizó una actualización que permite la fácil distribución e instalación de proyectos pero ahora es incluido desde el gestor <a href="https://pip.pypa.io">pip</a> de Python.</p>
-
-<p><em>Instalación.</em></p>
-
-<p>Primeramente es necesario instalar el gestor pip de Python, desde una terminal.</p>
-
-<p><code>
-$ sudo apt-get install python-pip python-dev build-essential 
-$ sudo pip install --upgrade pip 
-$ sudo pip install --upgrade virtualenv 
-</code></p>
-
-<p>Una vez instalado el gestor de aplicaciones de Python, se procede a la instalación de PyBombs.</p>
-
-<p><code>
-$ sudo pip install PyBOMBS
-</code></p>
-
-<p>Teniendo una vez instalado el proyecto de PyBombs, se descargan las recetas donde están indicadas las ubicaciones de los proyectos para su descarga. </p>
-
-<p><code>
-$ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git  
-$ pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git
-</code></p>
-
-<p>Para que GNU Radio pueda ser ejecutado desde cualquier ubicación se tiene que indicar donde se instalará el proyecto.</p>
-
-<p><code>
-$ sudo pybombs prefix init /usr/local -a myprefix
-</code></p>
-
-<p>Una vez inicializado el prefijo, se procede a la instalación de GNU Radio desde PyBombs.</p>
-
-<p><code>
-$ sudo pybombs -p myprefix install gnuradio gr-osmosdr
-</code></p>
-
-<p>Para ejecutar la interfaz gráfica de GNU Radio, sólo se ejecuta el comando.</p>
-
-<p><code>
-$ gnuradio-companion
-</code></p>
-
-<p><em>Conclusión.</em></p>
-
-<p>El proyecto de PyBombs de GNU Radio ha mostrado un cambio que puede interpretarse como positivo, ya que permite agregar proyectos OOT de una manera sencilla e incluso modificar las recetas para proyectos personales y facilitar su distribución e instalación.</p>
-
-<p>viktorivan@openmailbox.org</p>
-
-<p>@viktor_ivan</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Instalación de GNU Radio embedded en tarjetas ZedBoard]]></title>
-    <link href="http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard/"/>
-    <updated>2015-11-28T13:21:27-06:00</updated>
-    <id>http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard</id>
-    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
-
-<p>El uso de sistemas embebidos se ha popularizado y beneficiado por las nuevas tecnologías, ya que ahora permiten implementar sistemas que no solo controlen de un modo básico y simple un dispositivo, sino que pueden formar parte de un ecosistema que incluya conectividad a Internet y por lo tanto monitoreo y control remoto. Adicionalmente, tendencias como el radio definido por software (SDR) han integrado a sus desarrollos la implementación en sistemas embebidos lo que permite el desarrollo de un sistema de comunicación completo en un ambiente embebido, disminuyendo costos y proporcionando portatibilidad.
-<!-- more --></p>
-
-<p><em>Instalación.</em></p>
-
-<p>A diferencia de los sistemas operativos convencionales, el instalar un sistema embebido puede verse limitado por la arquitectura de hardware del sistema embebido, por lo que su instalación puede llegar a ocupar varias horas o incluso interrumpirse por la falta de recursos. Una alternativa es la compilación cruzada, donde en una computadora con mejores prestaciones que el hardware de un sistema embebido compila todo el software necesario para el desarrollo del sistema operativo embebido, pero con las librerías que le corresponden al sistema embebido, esto es, se realizará la compilación de una arquitectura de un sistema embebido en una arquitectura de hardware diferente.</p>
-
-<p>Existen varios proyectos para el desarrollo de sistemas embebidos, tales como <a href="http://www.openembedded.org">openembbeded</a>  o <a href="https://www.yoctoproject.org">yocto project</a>. <a href="http://gnuradio.org">GNU Radio</a> por su parte, proporciona un procedimiento para generar un sistema operativo embebido con <a href="https://gnuradio.org/redmine/projects/gnuradio/wiki/Embedded">GNU Radio</a>integrado al momento de realizar la compilación cruzada.</p>
-
-<p>Para el correcto funcionamientod de OpenEmbedded, se requiere de los siguientes prerequisitos.</p>
-
-<pre><code>$ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm
-</code></pre>
-
-<p>Una vez cumplidos los prerequisitos se procede a la descarga del proyecto repo.</p>
-
-<pre><code>$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &gt; repo
-$ chmod a+x repo
-$ sudo mv repo /usr/local/bin/
-</code></pre>
-
-<p>Se crea el directorio de trabajo del proyecto.</p>
-
-<pre><code>$ mkdir oe-repo
-$ cd oe-repo
-</code></pre>
-
-<p>Se indica que el sistema embebido incluye GNU Radio.</p>
-
-<pre><code>$ repo init -u git://github.com/balister/oe-gnuradio-manifest.git -b fido
-</code></pre>
-
-<p>Se actualiza el proyecto e indica el modelo de la plataforma a utilizar.     </p>
-
-<pre><code>$ repo sync
-$ TEMPLATECONF=`pwd`/meta-sdr/conf source ./oe-core/oe-init-build-env ./build ./bitbake
-</code></pre>
-
-<p>Al momento de ejecutar el proyecto puede generar diversos tipos de errores, tal como este, donde no se indicó la plataforma</p>
-
-<p>```
-You had no conf/local.conf file. This configuration file has therefore been
-created for you with some default values. You may wish to edit it to use a 
-different MACHINE (target hardware) or enable parallel build options to take 
-advantage of multiple cores for example. See the file for more information as 
-common configuration options are commented.</p>
-
-<p>You had no conf/bblayers.conf file. The configuration file has been created for
-you with some default values. To add additional metadata layers into your
-configuration please add entries to this file.</p>
-
-<p>The Yocto Project has extensive documentation about OE including a reference
-manual which can be found at:
-    http://yoctoproject.org/documentation</p>
-
-<p>For more information about OpenEmbedded see their website:
-    http://www.openembedded.org/</p>
-
-<h3 id="shell-environment-set-up-for-builds">Shell environment set up for builds.</h3>
-
-<p>You can now run ‘bitbake <target>'
-```</target></p>
-
-<p>Se indica la plataforma de hardware del sistema embebido, en este caso es una tarjeta <code>Zedboard</code> y con el comando <code>bitbake</code> se inicia la creación del sistema embebido, debido a la descarga de software esta operación llega a consumir hasta 50 GB de disco duro, igualmente puede tardar mucho tiempo por la velocidad del enlace de Internet. </p>
-
-<p><code>
-$ export MACHINE="zedboard-zynq7"
-$ bitbake gnuradio-dev-image
-</code></p>
-
-<p>En caso de que falte algún paquete, el proyecto indicará la falta del mismo.</p>
-
-<p>```
-NOTE: Your conf/bblayers.conf has been automatically updated.
-ERROR:  OE-core’s config sanity checker detected a potential misconfiguration.
-    Either fix the cause of this error or at your own risk disable the checker (see sanity.conf).
-    Following is the list of potential problems / advisories:</p>
-
-<pre><code>Please install the following missing utilities: chrpath ```
-</code></pre>
-
-<p>Este problema se soluciona a través de <code>apt-get</code>.</p>
-
-<pre><code>$ sudo apt-get install chrpath
-</code></pre>
-
-<p>Otro de los errores que se pueden presentar es la falta de recetas al momento de generar el sistema embebido.</p>
-
-<p>```
-Parsing recipes: 100% |#######################################| Time: 00:00:30
-Parsing of 1939 .bb files complete (0 cached, 1939 parsed). 2455 targets, 247 skipped, 0 masked, 0 errors.
-ERROR: No recipes available for:
-  /home/cidte/oe-repo/oe-core/../meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv<em>3.0.bbappend
-  /home/cidte/oe-repo/oe-core/../meta-fsl-arm-extra/recipes-kernel/linux/linux-timesys</em>3.0.15.bbappend</p>
-
-<p>Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-```
-En caso de que alguna receta no este disponible para su descarga será necesario eliminarla de la lista de recetas.</p>
-
-<pre><code>$ gedit conf/bblayers.conf
-</code></pre>
-
-<p>Dentro del archivo de configuración se busca los paquetes no disponibles y se borran.</p>
-
-<p><code>
-/home/cidte/oe-repo/oe-core/../meta-fsl-arm \
-/home/cidte/oe-repo/oe-core/../meta-fsl-arm-extra \
-</code></p>
-
-<p>Una vez hecha la modificación, se ejecuta nuevamente el comando <code>bitbake</code></p>
-
-<p>```
-$ bitbake gnuradio-dev-image</p>
-
-<p>Parsing recipes: 100% |#######################################| Time: 00:00:14
-Parsing of 1871 .bb files complete (0 cached, 1871 parsed). 2377 targets, 194 skipped, 0 masked, 0 errors.
-WARNING: No bb files matched BBFILE_PATTERN_ettus-e100 ‘^/home/cidte/oe-repo/oe-core/../meta-ettus/e100-bsp/’
-NOTE: Resolving any missing task queue dependencies
-NOTE: multiple providers are available for jpeg (jpeg, libjpeg-turbo)
-NOTE: consider defining a PREFERRED_PROVIDER entry to match jpeg
-NOTE: multiple providers are available for jpeg-native (jpeg-native, libjpeg-turbo-native)
-NOTE: consider defining a PREFERRED_PROVIDER entry to match jpeg-native</p>
-
-<p>Build Configuration:
-BB_VERSION        = “1.26.0”
-BUILD_SYS         = “x86_64-linux”
-NATIVELSBSTRING   = “elementary-OS-0.3.1”
-TARGET_SYS        = “arm-oe-linux-gnueabi”
-MACHINE           = “zedboard-zynq7”
-DISTRO            = “nodistro”
-DISTRO_VERSION    = “nodistro.0”
-TUNE_FEATURES     = “arm armv7a vfp neon callconvention-hard”
-TARGET_FPU        = “vfp-neon”
-meta              = “(nobranch):f0873b83d693af4a103999160d67fcf25c7eedc1”
-e100-bsp        <br />
-e300-bsp        <br />
-common            = “(nobranch):eed1cc7bd61aaefc711237f5952faa23f859454d”
-meta-xilinx       = “(nobranch):13779b9254bab450875a60ed8f21edd0e8876a71”
-meta-oe         <br />
-meta-networking <br />
-meta-filesystems<br />
-meta-python       = “(nobranch):df2f700d66bace65f5d802225232d01cf511fe81”
-meta-sdr          = “(nobranch):033049a3fa7c97dbe57eaaa54b84b05cbdd6484f”
-meta-ti           = “(nobranch):2210ae2cdacc22105b76c5fa45957ebec104f1c6”</p>
-
-<p>NOTE: Preparing RunQueue
-NOTE: Executing SetScene Tasks
-NOTE: Executing RunQueue Tasks
-```</p>
-
-<p><em>Copia a memoria SD.</em></p>
-
-<p>Una vez terminado el proceso de compilación cruzada, el proyecto entrega una serie de archivos que son el sistema operativo embebido en la siguiente ubicación.</p>
-
-<pre><code>$ cd /&lt;ruta-instalación-repo&gt;/oe-repo/build/tmp-glibc/deploy/images
-</code></pre>
-
-<p>Estos archivos deben ser copiados a una memoria SD, para ello es necesario que la memoria tenga dos particiones: una llamada BOOT, fat32, de 40 MB y que sea bootable y la segunda llamada rootfs, ext4 y de tamaño del resto de la memoria. Los archivos que se requieren en la memoria SD en la partición de BOOT son:</p>
-
-<pre><code>$ cp boot.bin /&lt;ruta-a-memoria-SD&gt;/BOOT
-$ cp u-boot.elf /&lt;ruta-a-memoria-SD&gt;/BOOT
-$ cp u-boot-dtb.img /&lt;ruta-a-memoria-SD&gt;/BOOT
-$ cp uEnv.txt /&lt;ruta-a-memoria-SD&gt;/BOOT
-$ cp uImage /&lt;ruta-a-memoria-SD&gt;/BOOT
-$ cp zedboard-zynq7.dtb /&lt;ruta-a-memoria-SD&gt;/BOOT
-</code></pre>
-
-<p>Los archivos para la partición de rootfs estan en un comprimido, no es necesario que el archivo comprimido sea copiado a la memoria, por lo que se puede extraer directamente</p>
-
-<pre><code>$ sudo tar -C /&lt;ruta-a-memoria-SD&gt;/rootfs/ -xzpf gnuradio-dev-image-zedboard-zynq7.tar.gz
-</code></pre>
-
-<p>Adicionalmente, el proyecto permite obtener el SDK del sistema embebido.</p>
-
-<pre><code>$ export MACHINE="zedboard-zynq7"
-$ bitbake -c populate_sdk gnuradio-dev-image
-
-$ ls tmp-glibc/deploy/sdk/
-$ sudo sh tmp-glibc/deploy/sdk/oecore-x86_64-armv7ahf-vfp-neon-toolchain-nodistro.0.sh 
-$ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueabi 
-</code></pre>
-
-<p><em>Comunicación con tarjeta Zedboard a través de puerto serial.</em></p>
-
-<p>El puerto <code>UART</code> de la tarjeta Zedboard es un puerto USB que se comunica de modo serial con la computadora, al momento de encender la tarjeta y estando conectada con la computadora por el puerto USB, se teclea el siguiente comando para buscar el puerto serial. </p>
-
-<pre><code>$ dmesg | grep tty
-</code></pre>
-
-<p>Existen diversas maneras de llamar al puerto serial, entre ellas:</p>
-
-<p><code>
-/dev/ttyS0 (puerto serial)
-/dev/ttyUSB0 (serial sobre USB)
-/dev/ttyACM0 (serial sobre USB)
-</code></p>
-
-<p>Una vez indentificado, se procede a comunicar con la tarjeta, en linux se puede utilizar el paquete <code>screen</code> para realizar la comunicación serial.</p>
-
-<pre><code>$ sudo apt-get install screen
-</code></pre>
-
-<p>Ya instalado el paquete, se procede a realizar el enlace a través del puerto serial.</p>
-
-<pre><code>$ screen /dev/ttyACM0 115200
-</code></pre>
-
-<p>Finalmente, se procede a encender la tarjeta Zedboard, en caso de que no arranque, desde el puerto serial se ejecuta:</p>
-
-<pre><code>&gt; env default -a
-&gt; env save
-&gt; reset
-</code></pre>
-
-<p>Para entrar a esta consola se tiene que evitar el autoboot de la tarjeta.</p>
-
-<p><em>Acceso SSH con X11Forwarding.</em>    </p>
-
-<p>Para habilitar la conexión SSH con X11Forwarding, desde el puerto serial hay que modificar el archivo:</p>
-
-<p><code>
-$ vi /etc/ssh/sshd_config
-</code></p>
-
-<p>Descomentar <code>X11Forwarding no</code> y poner <code>X11Forwarding yes</code>.</p>
-
-<p>Reiniciar el servicio con el comando</p>
-
-<p><code>
-$ /etc/init.d/sshd restart
-</code></p>
-
-<p>De este modo, queda habilitado <code>X11Forwarding</code> en los enlaces SSH, sin embargo es necesario indicar <code>-X</code> en la configuración de la conexión.</p>
-
-<p><em>Apagado remoto de la tarjeta Zedboard.</em></p>
-
-<p>Para apagar remotamente la tarjeta Zedboard sin dañar el sistema embebido es necesario teclear en la terminal de enlace remoto el comando.</p>
-
-<pre><code># shutdown -h now
-</code></pre>
-
-<p><em>Conclusión.</em></p>
-
-<p>El desarrollo de un sistema embebido a través de compilación cruzada puede resultar bastante complejo, pero la ventaja principal es que solo se requiere realizar una vez y los archivos generados pueden ser distribuidos libremente para la tarjeta para la cual fue diseñada. Así también, debido a que el proyecto de GNU Radio se basa en yocto y openembedded, es viable agregar otros proyectos a través de bblayers.</p>
-
-<p>viktorivan@openmailbox.org</p>
-
-<p>@viktor_ivan</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Bloques de procesamiento de señal de GNU Radio en Python]]></title>
-    <link href="http://viktorivan.github.io/blog/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python/"/>
-    <updated>2015-11-02T09:10:09-06:00</updated>
-    <id>http://viktorivan.github.io/blog/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python</id>
-    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
-
-<p>Debido a la popularidad de <a href="https://www.python.org">Python</a> para el procesamiento digital de señales en el ámbito científico a través de <a href="http://www.scipy.org/">SciPy</a>, el proyecto de <a href="http://www.gnuradio.org">GNU Radio</a> permite el desarrollo de bloques de procesamiento de señales que pueden ser escritos en lenguaje de programación Python y usar estas librerías sin ningún problema. Este tipo de módulos son conocidos como <code>out-of-tree</code>, ya que, aunque los módulos serán integrados dentro del catálogo de bloques de GNU Radio no se van a integrar al proyecto para su distribución conjunta, sino individual.</p>
-
-<!-- more -->
-
-<p><em>Procedimiento.</em></p>
-
-<p>Para crear un módulo <code>out-of-tree</code> se ejecuta desde una terminal de linux el siguiente comando</p>
-
-<p><code>
-$ gr_modtool create
-Name of the new module:Tu_modulo
-Creating out-of-tree module in ./gr-Tu_modulo... Done. 
-Use 'gr_modtool add' to add a new block to this currently empty module. 
-</code></p>
-
-<p>El nombre que se indique para el módulo es con el que va a aparecer en el catálogo de GNU Radio, en este caso Tu_modulo.</p>
-
-<p>Para crear los bloques que integrarán el módulo se utiliza la herramienta <code>gr_modtool</code> en la carpeta raíz del proyecto. En este caso se creará un bloque que realizará la función de un convertidor binario a decimal para los tipos de datos float basado en Python.</p>
-
-<p><code>
-$ cd gr-Tu_modulo
-$ gr_modtool add
-GNU Radio module name identified: Tu_modulo 
-('sink', 'source', 'sync', 'decimator', 'interpolator', 'general', 'tagged_stream', 'hier', 'noblock')
-Enter block type: decimator 
-Language (python/cpp): python
-Language: Python
-Enter name of block/code (without module name prefix): bin2dec_py_ff
-Block/code identifier: bin2dec_py_ff
-Enter valid argument list, including default arguments: vec_size
-Add Python QA code? [Y/n] 
-Adding file 'python/bin2dec_py_ff.py'...
-Adding file 'python/qa_bin2dec_py_ff.py'...
-Editing python/CMakeLists.txt...
-Adding file 'grc/prueba_bin2dec_py_ff.xml'...
-Editing grc/CMakeLists.txt...
-</code>
-y a su vez, se desarrollará un bloque que realice la operación inversa, esto es, un convertidor decimal a binario.</p>
-
-<p><code>
-$ gr_modtool add 
-GNU Radio module name identified: Tu_modulo 
-('sink', 'source', 'sync', 'decimator', 'interpolator', 'general', 'tagged_stream', 'hier', 'noblock')
-Enter block type: interpolator
-Language (python/cpp): python
-Language: Python
-Enter name of block/code (without module name prefix): dec2bin_py_ff
-Block/code identifier: dec2bin_py_ff
-Enter valid argument list, including default arguments: vec_size
-Add Python QA code? [Y/n] 
-Adding file 'python/dec2bin_py_ff.py'...
-Adding file 'python/qa_dec2bin_py_ff.py'...
-Editing python/CMakeLists.txt...
-Adding file 'grc/prueba_dec2bin_py_ff.xml'...
-Editing grc/CMakeLists.txt...
-</code></p>
-
-<p>de esta manera se han creado dos bloques que serán escritos en Python, un decimador para el convertidor binario a decimal y un interpolador para el decimal a binario.</p>
-
-<p>Los archivos donde se realizará la programación en código Python se ubican en <code>~/gr-Tu_modulo/python</code> y se llama <code>dec2bin_py_ff.py</code> para el convertidor decimal a binario y <code>bin2dec_py_ff.py</code> para el convertidor binario a decimal.</p>
-
-<p><em>Convertidor binario a decimal</em></p>
-
-<p>Dentro del archivo <code>bin2dec_py_ff.py</code> se puede observar que la librería de Scipy con Numpy ha sido declarada, en caso de que se requiera alguna librería en particular sólo se agrega con la instrucción <code>include</code>.</p>
-
-<p>En la parte de <code>class bin2dec_py_ff(gr.decim_block)</code> está la seccción donde se definen los parámetros iniciales del bloque, <code>def __init__(self, vec_size):</code>, en ella se define el tipo de datos de entrada y salida del bloque, así como el factor de decimación del bloque <code>decim=vec_size</code>. Para poder utilizar la variable <code>vec_size</code> fuera de la clase se puede utilizar <code>self.vec_size</code>, es importante notar que esta variable pertenece a la clase pero no a la función <code>__init__</code>, la variable <code>vec_size</code> representa la cantidad de bits que se requieren para convertir el número a decimal.</p>
-
-<p><code>
-class bin2dec_py_ff(gr.decim_block):
-    """
-    docstring for block bin2dec_py_ff
-    """
-    def __init__(self, vec_size):
-        gr.decim_block.__init__(self,
-            name="bin2dec_py_ff",
-            in_sig=[numpy.float32],
-            out_sig=[numpy.float32], decim=vec_size)
-    self.vec_size=vec_size 
-</code></p>
-
-<p>En la parte correspondiente a <code>// Do &lt;+signal processing+&gt;</code> es donde se realiza el procesamiento de datos que manipulará el bloque, para la conversión de binario a decimal se desarrolla el código de programación en Python, quedando de la siguiente manera:</p>
-
-<p><code>
-def work(self, input_items, output_items):
-	in0 = numpy.int_(input_items[0])
-	out = output_items[0]
-	j=0
-	for i in range(self.vec_size,len(in0)+1,self.vec_size):
-		out[j]= int(str("".join(str(x) for x in in0[i-self.vec_size:i])),2)
-		j += 1
-	return len(output_items[0])
-</code></p>
-
-<p>El archivo quedaría de la siguiente forma, ya con todas las modificaciones incluidas:</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (bin2dec_py_ff.py)</span> <a href='/downloads/code/bin2dec_py_ff.py'>download</a></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-</pre></td><td class='code'><pre><code class='py'><span class='line'><span class="c">#!/usr/bin/env python</span>
-</span><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
-</span><span class='line'><span class="c"># </span>
-</span><span class='line'><span class="c"># Copyright 2015 IVAN RODRIGUEZ.</span>
-</span><span class='line'><span class="c"># </span>
-</span><span class='line'><span class="c"># This is free software; you can redistribute it and/or modify</span>
-</span><span class='line'><span class="c"># it under the terms of the GNU General Public License as published by</span>
-</span><span class='line'><span class="c"># the Free Software Foundation; either version 3, or (at your option)</span>
-</span><span class='line'><span class="c"># any later version.</span>
-</span><span class='line'><span class="c"># </span>
-</span><span class='line'><span class="c"># This software is distributed in the hope that it will be useful,</span>
-</span><span class='line'><span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-</span><span class='line'><span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-</span><span class='line'><span class="c"># GNU General Public License for more details.</span>
-</span><span class='line'><span class="c"># </span>
-</span><span class='line'><span class="c"># You should have received a copy of the GNU General Public License</span>
-</span><span class='line'><span class="c"># along with this software; see the file COPYING.  If not, write to</span>
-</span><span class='line'><span class="c"># the Free Software Foundation, Inc., 51 Franklin Street,</span>
-</span><span class='line'><span class="c"># Boston, MA 02110-1301, USA.</span>
-</span><span class='line'><span class="c"># </span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">numpy</span>
-</span><span class='line'><span class="kn">from</span> <span class="nn">gnuradio</span> <span class="kn">import</span> <span class="n">gr</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">bin2dec_py_ff</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">decim_block</span><span class="p">):</span>
-</span><span class='line'>    <span class="sd">&quot;&quot;&quot;</span>
-</span><span class='line'><span class="sd">    docstring for block bin2dec_py_ff</span>
-</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec_size</span><span class="p">):</span>
-</span><span class='line'>        <span class="n">gr</span><span class="o">.</span><span class="n">decim_block</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-</span><span class='line'>            <span class="n">name</span><span class="o">=</span><span class="s">&quot;bin2dec_py_ff&quot;</span><span class="p">,</span>
-</span><span class='line'>            <span class="n">in_sig</span><span class="o">=</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span>
-</span><span class='line'>            <span class="n">out_sig</span><span class="o">=</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span> <span class="n">decim</span><span class="o">=</span><span class="n">vec_size</span><span class="p">)</span>
-</span><span class='line'>	<span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="o">=</span><span class="n">vec_size</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_items</span><span class="p">,</span> <span class="n">output_items</span><span class="p">):</span>
-</span><span class='line'>        <span class="n">in0</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int_</span><span class="p">(</span><span class="n">input_items</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span><span class='line'>        <span class="n">out</span> <span class="o">=</span> <span class="n">output_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'>        <span class="n">j</span><span class="o">=</span><span class="mi">0</span>
-</span><span class='line'>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">in0</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="p">):</span>
-</span><span class='line'>			<span class="n">out</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">in0</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="p">:</span><span class="n">i</span><span class="p">])),</span><span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>			<span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span class='line'>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_items</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p><em>Convertidor decimal a binario</em></p>
-
-<p>Para corroborar el correcto funcionamiento del bloque de convertidor binario a decimal se propone realizar un convertidor decimal a binario que realizará la operación inversa del bloque anterior.</p>
-
-<p>El archivo donde se realiza la programación es <code>dec2bin_py_ff.py</code>. Nuevamente, en la sección de <code>class dec2bin_py_ff(gr.interp_block):</code> se indica los tipos de datos de entrada y salida que manejará el bloque de procesamiento, así también el factor de interpolación definido por la variable <code>vec_size</code> y por último la variable <code>self.vec_size</code>, quedando como sigue:</p>
-
-<p><code>
-class dec2bin_py_ff(gr.interp_block):
-    """
-    docstring for block dec2bin_py_ff
-    """
-    def __init__(self, vec_size):
-        gr.interp_block.__init__(self,
-            name="dec2bin_py_ff",
-            in_sig=[numpy.float32],
-            out_sig=[numpy.float32], interp=vec_size)
-    self.vec_size=vec_size
-</code></p>
-
-<p>En la sección de <code>// Do &lt;+signal processing+&gt;</code> se escribe el código que realizará la conversión decimal a binario.</p>
-
-<p><code>
-def work(self, input_items, output_items):
-    in0 = input_items[0]
-    out = output_items[0]
-    f=numpy.zeros([len(in0),self.vec_size])
-    for i in range(0,len(in0)):
-        f[i,:] = numpy.int_([str(x) for x in numpy.binary_repr(in0[i], width = self.vec_size)])*1.0
-    out[:] = numpy.hstack(f)
-    return len(output_items[0])
-</code></p>
-
-<p>El archivo completo queda de la siguiente manera:</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (dec2bin_py_ff.py)</span> <a href='/downloads/code/dec2bin_py_ff.py'>download</a></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-</pre></td><td class='code'><pre><code class='py'><span class='line'><span class="c">#!/usr/bin/env python</span>
-</span><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
-</span><span class='line'><span class="c"># </span>
-</span><span class='line'><span class="c"># Copyright 2015 IVAN RODRIGUEZ.</span>
-</span><span class='line'><span class="c"># </span>
-</span><span class='line'><span class="c"># This is free software; you can redistribute it and/or modify</span>
-</span><span class='line'><span class="c"># it under the terms of the GNU General Public License as published by</span>
-</span><span class='line'><span class="c"># the Free Software Foundation; either version 3, or (at your option)</span>
-</span><span class='line'><span class="c"># any later version.</span>
-</span><span class='line'><span class="c"># </span>
-</span><span class='line'><span class="c"># This software is distributed in the hope that it will be useful,</span>
-</span><span class='line'><span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-</span><span class='line'><span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-</span><span class='line'><span class="c"># GNU General Public License for more details.</span>
-</span><span class='line'><span class="c"># </span>
-</span><span class='line'><span class="c"># You should have received a copy of the GNU General Public License</span>
-</span><span class='line'><span class="c"># along with this software; see the file COPYING.  If not, write to</span>
-</span><span class='line'><span class="c"># the Free Software Foundation, Inc., 51 Franklin Street,</span>
-</span><span class='line'><span class="c"># Boston, MA 02110-1301, USA.</span>
-</span><span class='line'><span class="c"># </span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">numpy</span>
-</span><span class='line'><span class="kn">from</span> <span class="nn">gnuradio</span> <span class="kn">import</span> <span class="n">gr</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">dec2bin_py_ff</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">interp_block</span><span class="p">):</span>
-</span><span class='line'>    <span class="sd">&quot;&quot;&quot;</span>
-</span><span class='line'><span class="sd">    docstring for block dec2bin_py_ff</span>
-</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec_size</span><span class="p">):</span>
-</span><span class='line'>        <span class="n">gr</span><span class="o">.</span><span class="n">interp_block</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-</span><span class='line'>            <span class="n">name</span><span class="o">=</span><span class="s">&quot;dec2bin_py_ff&quot;</span><span class="p">,</span>
-</span><span class='line'>            <span class="n">in_sig</span><span class="o">=</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span>
-</span><span class='line'>            <span class="n">out_sig</span><span class="o">=</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span> <span class="n">interp</span><span class="o">=</span><span class="n">vec_size</span><span class="p">)</span>
-</span><span class='line'>	<span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="o">=</span><span class="n">vec_size</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_items</span><span class="p">,</span> <span class="n">output_items</span><span class="p">):</span>
-</span><span class='line'>		<span class="n">in0</span> <span class="o">=</span> <span class="n">input_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'>		<span class="n">out</span> <span class="o">=</span> <span class="n">output_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'>		<span class="n">f</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">in0</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="p">])</span>
-</span><span class='line'>		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">in0</span><span class="p">)):</span>
-</span><span class='line'>			<span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int_</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="n">in0</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vec_size</span><span class="p">)])</span><span class="o">*</span><span class="mf">1.0</span>
-</span><span class='line'>		<span class="n">out</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</span><span class='line'>		<span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_items</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p><em>Interfaz GNU Radio Companion</em></p>
-
-<p>Los bloques dentro de GNU Radio Companion (GRC) son archivos xml que se ubican en <code>~/gr-Tu_modulo/grc</code>, para el convertidor binario a decimal se llama <code>Tu_modulo_bin2dec_py_ff.xml</code> y para el convertidor decimal a binario <code>Tu_modulo_dec2bin_py_ff.xml</code>.</p>
-
-<p>Dentro del archivo xml hay varios parámetros que pueden ser personalizados, tal como el nombre del bloque, este parámetro se define en la línea correspondiente a <code>&lt;name&gt;</code>.</p>
-
-<p>```</p>
-<name>Binary To Decimal Python</name>
-<p>```</p>
-
-<p>En la parte de <code>&lt;param&gt;</code> se indica la variable de entrada del bloque</p>
-
-<p>```</p>
-<param />
-
-<pre><code>&lt;name&gt;Vector size&lt;/name&gt;
-&lt;key&gt;vec_size&lt;/key&gt;
-&lt;type&gt;int&lt;/type&gt;
-</code></pre>
-<p>&lt;/param&gt;
-```</p>
-
-<p>El conector de entrada del bloque de procesamiento se define en <code>&lt;sink&gt;</code></p>
-
-<p>```</p>
-<sink>
-    <name>in</name>
-    <type>float</type>
-  </sink>
-<p>```</p>
-
-<p>El conector de salida en <code>source</code></p>
-
-<p>```</p>
-<source />
-
-<pre><code>&lt;name&gt;out&lt;/name&gt;
-&lt;type&gt;float&lt;/type&gt;
-</code></pre>
-<p>&lt;/source&gt;
-```</p>
-
-<p>De igual manera se modifican las secciones de <code>&lt;name&gt;</code>, <code>&lt;param&gt;</code>, <code>&lt;sink&gt;</code> y <code>&lt;source&gt;</code> en el archivo <code>Tu_modulo_dec2bin_py_ff.xml</code> para el bloque de procesamiento del convertidor decimal a binario.</p>
-
-<p>El archivo quedaría finalmente de la siguiente forma:</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (Tu_modulo_bin2dec_py_ff.xml)</span> <a href='/downloads/code/Tu_modulo_bin2dec_py_ff.xml'>download</a></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
-</span><span class='line'><span class="nt">&lt;block&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;name&gt;</span>binary to decimal Python<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;key&gt;</span>Tu_modulo_bin2dec_py_ff<span class="nt">&lt;/key&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;category&gt;</span>Tu_modulo<span class="nt">&lt;/category&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;import&gt;</span>import Tu_modulo<span class="nt">&lt;/import&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;make&gt;</span>Tu_modulo.bin2dec_py_ff($vec_size)<span class="nt">&lt;/make&gt;</span>
-</span><span class='line'>  <span class="c">&lt;!-- Make one &#39;param&#39; node for every Parameter you want settable from the GUI.</span>
-</span><span class='line'><span class="c">       Sub-nodes:</span>
-</span><span class='line'><span class="c">       * name</span>
-</span><span class='line'><span class="c">       * key (makes the value accessible as $keyname, e.g. in the make node)</span>
-</span><span class='line'><span class="c">       * type --&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;param&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;name&gt;</span>Vector size<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;key&gt;</span>vec_size<span class="nt">&lt;/key&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;type&gt;</span>int<span class="nt">&lt;/type&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/param&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c">&lt;!-- Make one &#39;sink&#39; node per input. Sub-nodes:</span>
-</span><span class='line'><span class="c">       * name (an identifier for the GUI)</span>
-</span><span class='line'><span class="c">       * type</span>
-</span><span class='line'><span class="c">       * vlen</span>
-</span><span class='line'><span class="c">       * optional (set to 1 for optional inputs) --&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;sink&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;name&gt;</span>in<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;type&gt;</span>float<span class="nt">&lt;/type&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/sink&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c">&lt;!-- Make one &#39;source&#39; node per output. Sub-nodes:</span>
-</span><span class='line'><span class="c">       * name (an identifier for the GUI)</span>
-</span><span class='line'><span class="c">       * type</span>
-</span><span class='line'><span class="c">       * vlen</span>
-</span><span class='line'><span class="c">       * optional (set to 1 for optional inputs) --&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;source&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;name&gt;</span>out<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;type&gt;</span>float<span class="nt">&lt;/type&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/source&gt;</span>
-</span><span class='line'><span class="nt">&lt;/block&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>El archivo XML del convertidor decimal a binario quedaría de la siguiente forma:</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (Tu_modulo_dec2bin_py_ff.xml)</span> <a href='/downloads/code/Tu_modulo_dec2bin_py_ff.xml'>download</a></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
-</span><span class='line'><span class="nt">&lt;block&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;name&gt;</span>Decimal to binary Python<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;key&gt;</span>Tu_modulo_dec2bin_py_ff<span class="nt">&lt;/key&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;category&gt;</span>Tu_modulo<span class="nt">&lt;/category&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;import&gt;</span>import Tu_modulo<span class="nt">&lt;/import&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;make&gt;</span>Tu_modulo.dec2bin_py_ff($vec_size)<span class="nt">&lt;/make&gt;</span>
-</span><span class='line'>  <span class="c">&lt;!-- Make one &#39;param&#39; node for every Parameter you want settable from the GUI.</span>
-</span><span class='line'><span class="c">       Sub-nodes:</span>
-</span><span class='line'><span class="c">       * name</span>
-</span><span class='line'><span class="c">       * key (makes the value accessible as $keyname, e.g. in the make node)</span>
-</span><span class='line'><span class="c">       * type --&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;param&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;name&gt;</span>Vector size<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;key&gt;</span>vec_size<span class="nt">&lt;/key&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;type&gt;</span>int<span class="nt">&lt;/type&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/param&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c">&lt;!-- Make one &#39;sink&#39; node per input. Sub-nodes:</span>
-</span><span class='line'><span class="c">       * name (an identifier for the GUI)</span>
-</span><span class='line'><span class="c">       * type</span>
-</span><span class='line'><span class="c">       * vlen</span>
-</span><span class='line'><span class="c">       * optional (set to 1 for optional inputs) --&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;sink&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;name&gt;</span>in<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;type&gt;</span>float<span class="nt">&lt;/type&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/sink&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c">&lt;!-- Make one &#39;source&#39; node per output. Sub-nodes:</span>
-</span><span class='line'><span class="c">       * name (an identifier for the GUI)</span>
-</span><span class='line'><span class="c">       * type</span>
-</span><span class='line'><span class="c">       * vlen</span>
-</span><span class='line'><span class="c">       * optional (set to 1 for optional inputs) --&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;source&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;name&gt;</span>out<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;type&gt;</span>float<span class="nt">&lt;/type&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/source&gt;</span>
-</span><span class='line'><span class="nt">&lt;/block&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p><em>Compilación de los bloques</em></p>
-
-<p>Una vez ya realizado todos los procesos referentes al código de programación de los bloques de procesamiento se procede a integrarlos en el proyecto de GNU Radio. Esto se realiza por medio de una serie de comandos desde una terminal de linux en la raíz del proyecto. En caso de no tener una carpeta de build, se crea por medio de comandos de linux</p>
-
-<p><code>
-$ mkdir build
-$ cd build
-</code>
-Una vez dentro de la carpeta de build, se procede a compilar el proyecto</p>
-
-<p><code>
-$ cmake ../
-$ make
-$ sudo make install
-$ sudo ldconfig
-</code>
-De esa manera queda integrado el módulo out-of-tree dentro de GNU Radio.</p>
-
-<p><em>Archivos de prueba QA</em></p>
-
-<p>Un modo para corroborar el correcto funcionamiento del bloque de procesamiento es a través de los archivos QA que se ubican en <code>~/gr-Tu_modulo/python</code>. Estos archivos permiten hacer una comparación de los datos de salida y los datos esperados de salida de acuerdo a una secuencia de datos de entrada previamente definida. Un ejemplo para probar el convertidor binario a decimal sería:</p>
-
-<p><code>
-def test_001_t (self):
-    # set up fg
-    src_data = [1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0]
-    expected_result = [5.0, 7.0, 0.0, 1.0, 2.0]
-    src = blocks.vector_source_f (src_data)
-    conv = bin2dec_py_ff (3)
-    snk = blocks.vector_sink_f ()
-    self.tb.connect (src, conv)
-    self.tb.connect (conv, snk)
-    self.tb.run ()
-    # check data
-    result_data = snk.data ()
-    self.assertFloatTuplesAlmostEqual (expected_result, result_data,2)
-</code></p>
-
-<p>Una vez modificado el archivo QA, se procede a ejecutarlo desde una terminal de Linux con el comando de <code>python</code>, cabe recordar que la terminal debe abrirse en <code>~/gr-Tu_modulo/python</code>.</p>
-
-<p>```
-$ python qa_dec2bin_py_ff.py 
-.
-———————————————————————-
-Ran 1 test in 0.002s</p>
-
-<p>OK
-```</p>
-
-<p>Si el código funciona correctamente, se nos mostrará que no hubo error al momento de ejecutar.</p>
-
-<p>viktorivan@openmailbox.org</p>
-
-<p>@viktor_ivan</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AX.25 en GNU Radio]]></title>
-    <link href="http://viktorivan.github.io/blog/2015/10/21/ax-dot-25-en-gnu-radio/"/>
-    <updated>2015-10-21T12:35:32-05:00</updated>
-    <id>http://viktorivan.github.io/blog/2015/10/21/ax-dot-25-en-gnu-radio</id>
+    <title type="html"><![CDATA[Redes cooperativas DFTS-OFDM con GNU Radio]]></title>
+    <link href="http://viktorivan.github.io/blog/2014/05/19/redes-cooperativas-dfts-ofdm-con-gnu-radio/"/>
+    <updated>2014-05-19T16:44:59-05:00</updated>
+    <id>http://viktorivan.github.io/blog/2014/05/19/redes-cooperativas-dfts-ofdm-con-gnu-radio</id>
     <content type="html"><![CDATA[<p><em>Resumen.</em></p>
 
-<p>Debido a la versatilidad que ofrece <a href="http://www.gnuradio.org">GNU Radio</a> para adaptarse a la mayoría de los protocolos de radio, es factible desarrollar proyectos independientes que puedan trabajar sobre estos protocolos usándolo como base. Un ejemplo de ello es el proyecto <a href="https://github.com/dl1ksv/gr-ax25">gr-ax25</a> para GNU Radio, donde a través de <a href="http://www.python.org">Python</a> desarrollan una interfaz gráfica que captura los paquetes transmitidos por este protocolo, entre ellos la ISS y APRS.</p>
+<p>El desarrollo de nuevos sistemas de comunicación, en el ambiente académico, normalmente queda en proyectos de software, limitados a resultados de simulación sin poder dar el paso a la implementación del mismo. Es muy bien sabido que los problemas de software no son lo mismos que los problemas que pueden presentarse en las plataformas de hardware, por lo que el uso de herramientas de SDR (Software Defined Radio) como <a href="http://www.gnuradio.org">GNU Radio</a> en combinación con las tarjetas <a href="http://www.ettus.com">USRP</a> (Universal Software Radio Peripheral) facilitan el dar ese paso de la simulación en plataformas de software a la emulación en plataformas de hardware de una forma transparente.</p>
+
+<p>A continuación se muestra el desarrollo de una plataforma de comunicación inalámbrica basada en DFTS-OFDM (Direct Fourier Transform Spread - Orthogonal Frequency Division Modulation) en combinación con protocolos de relay en una implementación de una antena y dos saltos.</p>
 
 <!-- more -->
 
 <p><em>Introducción.</em></p>
 
-<p>De acuerdo con <a href="http://www.ax25.net">AX25 Layer 2</a>, la comunidad de radio amateur expresó su necesidad y deseo de definir un protocolo que pueda aceptar y entregar datos de manera fiable sobre diversos enlaces de comunicación entre dos terminales de señalización. El protocolo de capa 2 AX.25 versión 2.2 ofrece este servicio, independientemente de la existencia de capas superiores.</p>
+<p><em>Comunicaciones cooperativas</em></p>
 
-<p>Este protocolo trabaja suficientemente bien tanto en ambientes de radio amateur half-duplex o full-duplex. Así mismo también trabaja sobre conexiones directas entre estaciones de radio amateur portátiles o punto-multipunto.  </p>
+<p>Las comunicaciones cooperativas consiste en una técnica donde los dispositivos de comunicación presentes en un área pueden ayudarse entre ellos. La implementación de redes de relays permite a los dispositivos sin capacidad MIMO (Multiple-Input Multiple-Output) aprovechar las ventajas de una transmisión en un canal MIMO a través de tecnologías como MIMO virtual, distribuido o cooperativo, ya que estos dispositivos sólo cuentan con una antena. En este tipo de tecnologías permite que nodos de relay fijos o móviles formen parte de un arreglo de antenas mayor, donde en conjunto presentarán una ganancia de diversidad, aunque ésta no será mayor a la ganancia de diversidad de un enlace MIMO punto a punto.</p>
 
-<p><em>Instalación</em></p>
+<p>La forma como es procesada la señal recibida en el nodo relay, ya sea sólo amplificando y reenviando la señal recibida o incluso decodificando o ecualizando y reenviando la señal recibida, define el protocol de relay que es utilizado en la comunicación cooperativa.</p>
 
-<p><em>Prerequisitos</em></p>
+<p><em>Protocolos de Relay.</em></p>
 
-<p>gr-ax25 utiliza los proyectos <a href="https://github.com/dl1ksv/gr-display">gr-display</a> y <a href="https://github.com/dl1ksv/gr-fcdproplus">gr-fcdproplus</a> para el ejemplo que incluye en su distribución.</p>
+<p>Las comunicaciones cooperativas generan trayectorias independientes entre el usuario y la estación base introduciendo un canal relay. El canal relay puede considerarse como un canal auxiliar del canal directo entre la fuente y el destino. El nodo relay se ubica a varias longitudes de onda de distancia de la fuente, lo que garantiza que el canal relay tenga un desvanecimiento independiente del canal directo, lo que eventualmente permitirá tener un canal MIMO de rango completo.</p>
 
-<p><em>Instalación de gr-display</em></p>
+<p>El esquema de transmisión de un protocolo de cooperación se divide en dos fases para evitar interferencias.</p>
 
-<p>gr-display es una herramienta que permite desplegar texto en la interfaz gráfica de GRC.</p>
+<p>Fase 1: Una fuente envía su información al destino y la información también es recibida por el relay al mismo tiempo.
+Fase 2: El relay envía su información al destino. </p>
 
-<p>Desde una terminal de linux se clona el repositorio de <a href="http://www.github.com">github</a> con git y se instala de acuerdo al procedimiento definido por GNU Radio para módulos out-of-tree.</p>
+<p>Adicionalmente puede considerarse que en la Fase 1 el destino no recibe información, solo el relay.</p>
 
-<p><code>
-$ git clone https://github.com/dl1ksv/gr-display.git
-$ cd gr-display
-$ mkdir build
-$ cd build
-$ cmake ../
-$ make
-$ sudo make install
-$ sudo ldconfig
-</code></p>
+<p><em>Amplifica y envía.</em></p>
 
-<p><em>Instalación de gr-fcdproplus</em></p>
+<p>En este protocolo, el relay amplifica la señal de la fuente y envía esta a su destino de una forma ideal para ecualizar el efecto del canal entre la fuente y el relay. El relay hace esto simplemente escalando la señal recibida por un factor que es inversamente proporcional a la potencia recibida.   </p>
 
-<p>Esta herramienta permite utilizar los dispositivos de <a href="http://www.funcubedongle.com/">FUNcube Dongle</a> dentro del ambiente de GNU Radio.</p>
+<p><em>Decodifica y envía.</em></p>
 
-<p>Para instalar se  requiere de instalar algunos prerequisitos antes de descargar el repositorio desde github y proceder con a la instalación.</p>
+<p>Este protocolo consiste en que el nodo relay decodifique la señal recibida, la vuelva a codificar y entonces retransmita esta nueva señal al destino. Si la señal en el relay es incorrecta, esta puede ser reenviada al destino y su decodificación no tendría sentido. </p>
 
-<p>Instalando <a href="https://github.com/signal11/hidapi">HIDAPI</a></p>
+<p><em>Ecualiza y envía.</em></p>
 
-<p><code>
-$ sudo apt-get install libudev-dev libusb-1.0-0-dev libfox-1.6-dev autotools-dev autoconf automake libtool
-$ git clone https://github.com/signal11/hidapi.git
-$ cd hidapi
-$ ./bootstrap
-$ ./configure
-$ make
-$ sudo make install
-</code></p>
+<p>En este protocolo, el relay recibe el símbolo de la fuente, estima el canal y elimina los efectos del canal de la Fase 1. Una vez hecho esto, el símbolo sin efectos del canal es transmitido a su destino.</p>
 
-<p>Instalando gr-fcdproplus</p>
+<p><em>DFTS-OFDM</em></p>
 
-<p><code>
-$ git clone https://github.com/dl1ksv/gr-fcdproplus.git
-$ cd gr-fcdproplus
-$ mkdir build
-$ cmake ../
-$ make
-$ sudo make install
-$ sudo ldconfig
-</code></p>
+<p>Para disminuir el PAPR, 3GPP LTE-Advanced propone usar en el enlace de subida una tecnología conocida como SC-FDMA (Single Carrier - Frequency Division Medium Access) o DFTS-OFDM, esta técnica consiste en precodificar el símbolo de datos con una transformada discreta de Fourier y las muestras obtenidas de la etapa de precodificación son transmitidas en paralelo en un grupo de subportadoras. La forma de onda resultante en el dominio del tiempo tiene las características de una forma de onda de una señal de portadora única, esto es, tiene un PAPR bajo aunque la forma de onda no es de una señal de portadora única. </p>
 
-<p><em>Instalación de gr-ax25</em></p>
+<p>El transmisor DFTS-OFDM maneja bloques de tamaño N, los cuales contienen las muestras (valores complejos) de los símbolos modulados digitalmente, la etapa de DFT de N-puntos genera una representación de los símbolos de entrada en el dominio del tiempo. Las muestras son proyectadas en algunas de las M subportadoras disponibles de la etapa de IFFT de M-puntos, transformando la amplitud de las subportadoras en una señal compleja en el dominio del tiempo.</p>
 
-<p>Una vez instalados los prerequisitos, se procede a instalar gr-ax25 desde una terminal.</p>
+<p><em>GNU Radio.</em></p>
 
-<p><code>
-$ git clone https://github.com/dl1ksv/gr-ax25.git
-$ cd gr-ax25
-$ mkdir build
-$ cd build
-$ cmake ../
-$ make
-$ sudo make install
-$ sudo ldconfig
-</code></p>
+<p><a href="http://www.gnuradio.org">GNU Radio</a> es una plataforma de SDR de software libre que permite el desarrollo de proyectos a través de una interfaz gráfica llamada GRC. Además, ofrece diversos bloques de procesamiento orientados a las telecomunicaciones, por lo que el desarrollo de sistemas de comunicación modernos es una taréa relativamente sencilla de implementar.</p>
 
-<p>Para la demostración, gr-ax25 incluye en <code>gr-ax25/apps</code> un archivo llamado <code>APRS.grc</code>, este diagrama de flujo de GRC contiene un bloque jerárquico llamado <code>detectmarkspace.grc</code>, para que <code>APRS.grc</code> detecte el bloque jerárqico, es necesario que dentro de <code>detectmarkspace.grc</code> se presione el botón que genera los archivos .py, una vez hecho esto se procede a correr el archivo <code>APRS.grc</code> con el dispositivo de FUNcube Dongle instalado.</p>
+<p><em>Plataforma DFTS-OFDM</em></p>
 
-<p>Así mismo, se puede remplazar el bloque de FUNcube por uno de UHD para las tarjetas USRP, tal como se muestra a continuación.</p>
+<p>Para el desarrollo de una plataforma DFTS-OFDM en GNU Radio se consideraron las siguientes etapas en la transmisión y recepción del sistema.</p>
 
-<p><img src="/downloads/images/APRS.png"></p>
+<ol>
+  <li>CRC de 32 bits.</li>
+  <li>Modulador digital 16-QAM.</li>
+  <li>Esparcimiento DFT de 192 puntos.</li>
+  <li>Modulador OFDM de 2048 puntos.</li>
+</ol>
 
-<p>De esta forma queda instalado el protocolo AX.25 en una plataforma de GNU Radio. Una vez funcionando el archivo <code>APRS.grc</code>, se mostrará una interfaz gráfica que desplegará en una pestaña el espectro recibido y en otra el mensaje recibido por AX.25 de la ISS o por APRS, tal como se muestra a continuación.</p>
+<p>Así mismo la secuencia para la transmisión de datos es la siguiente:</p>
 
-<p><img src="/downloads/images/APRSspectral.png">
-<img src="/downloads/images/APRSax25.png"></p>
+<ol>
+  <li>Envío de encabezado (3 Símbolos).</li>
+  <li>Envío de palabras de sincronía (2 palabras).</li>
+  <li>Envío de carga (&gt;1 símbolo).</li>
+</ol>
+
+<p>La etapa de recepción  de datos se implementa de la siguiente manera:</p>
+
+<ol>
+  <li>Detección de símbolo OFDM en el canal.</li>
+  <li>Detección de cabecera y carga.</li>
+  <li>Detección de palabras de sincronía para estimación de canal.</li>
+  <li>Detección de carga.</li>
+</ol>
+
+<p>Tanto las etapas de detección de cabecera y carga en el receptor incluyen etapas de DFTS, OFDM y demodulación digital 16-QAM, adicionalmente a la carga se le realiza una verificación de CRC.</p>
+
+<p><img src="/downloads/images/ofdm2048dfts192.png"></p>
+
+<p><em>DFTS-OFDM en modo relay con protocolo AF</em></p>
+
+<p>El protocolo de AF indica que los símbolos recibidos en el nodo relay serán enviados a su destino sólo amplificando la señal recibida, esta amplificación depende del SNR recibido, quedando de la siguiente manera:</p>
+
+<p><img src="/downloads/images/ofdm2048dfts192AF.png"></p>
+
+<p><em>DFTS-OFDM en modo relay con protocolo DF</em></p>
+
+<p>El protocolo DF es de los mas complejos de implementar, el nodo relay debe obtener los datos hasta la etapa de CRC y volver a generar el símbolo para retransmitirlo al destino. </p>
+
+<p>La implementación del protocolo DF en GNU Radio queda de la siguiente manera:</p>
+
+<p><img src="/downloads/images/ofdm2048dfts192DF.png"></p>
+
+<p><em>DFTS-OFDM en modo relay con protocolo EF</em></p>
+
+<p>El protocolo EF realiza una ecualización a los símbolos recibidos y los reenvía a su destino, al momento de implementar es necesario volver a generar los símbolos de cabecera y enviar nuevas palabras de sincronía para la estimación del canal en la fase 2 de la transmisión.</p>
+
+<p>El diagrama a bloques del protocolo EF queda de la siguiente manera:</p>
+
+<p><img src="/downloads/images/ofdm2048dfts192EF.png"></p>
+
+<p><em>Conclusión</em></p>
+
+<p>Las herramientas de SDR propician el desarrollo e implementación de nuevas tecnologías de radio, ya que no se requiere de una infraestructura cara y compleja para su utilización, se puede resumir en el uso de una computadora con linux. Para la emulación el paso es muy sencillo, solo se requiere conectar las tarjetas <a href="http://www.ettus.com/">USRP</a> en el puerto USB o de red y se tendrá un sistema de radio funcionando.</p>
 
 <p>viktorivan@openmailbox.org</p>
 

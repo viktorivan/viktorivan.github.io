@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Instalación de Xillinux en tarjetas ZedBoard - Iván Rodríguez</title>
+  <title>DPSK y GFSK en GNU Radio - Iván Rodríguez</title>
   <meta name="author" content="Iván Rodríguez">
 
   
-  <meta name="description" content="Introducción. En fechas recientes se ha vuelto popular el uso de sistemas reducidos que permiten instalar sistemas operativos en modo embebido, un &hellip;">
+  <meta name="description" content="Introducción.
+La modulación digital consiste en una técnica donde la portadora es modulada para el envío de datos digitales (donde los datos se &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://viktorivan.github.io/blog/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard/">
+  <link rel="canonical" href="http://viktorivan.github.io/blog/2016/04/09/dpsk-y-gfsk-en-gnu-radio/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Instalación De Xillinux en Tarjetas ZedBoard</h1>
+      <h1 class="entry-title">DPSK Y GFSK en GNU Radio</h1>
     
     
       <p class="meta">
@@ -83,83 +84,49 @@
   
 
 
-<time datetime="2015-11-28T13:21:01-06:00" pubdate data-updated="true">Nov 28<span>th</span>, 2015</time>
+<time datetime="2016-04-09T07:34:39-05:00" pubdate data-updated="true">Apr 9<span>th</span>, 2016</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><em>Introducción.</em></p>
+<div class="entry-content"><p><em>Introducción.</em>
+La modulación digital consiste en una técnica donde la portadora es modulada para el envío de datos digitales (donde los datos se conforman generalmente por una cadena de unos y ceros) en vez de formas de ondas analógicas. Estos datos pueden representar información analógica (tal como la voz, audio, video), por lo que son el resultado de pasar previamente por una etapa de conversión de analógico a digital (ADC) para poder ser modulados digitalmente, esto es, tienen que representarse por medio de un valor definido dentro de un rango previamente especificado.</p>
 
-<p>En fechas recientes se ha vuelto popular el uso de sistemas reducidos que permiten instalar sistemas operativos en modo embebido, un ejemplo es <a href="https://www.raspberrypi.org">raspberry pi</a>, el cuál es un ecosistema que presenta varios <a href="https://www.raspberrypi.org/downloads/">sistemas operativos embebidos</a>  de libre distribución. Así mismo existen otros ecosistemas orientados a propósitos mas específicos, tales como <a href="http://zedboard.org">Zedboard</a>, donde presentan varias alternativas de hardware de acuerdo a los requerimientos del usuario. Estas plataformas son basadas en Linux, por lo que proyectos como <a href="http://xillybus.com/xillinux">Xillinux</a> aprovechan al máximo las características del hardware y en conjunto con <a href="http://www.xilinx.com/products/design-tools/vivado.html">VIVADO</a> incluyen una plataforma de hardware adaptable a la tarjeta seleccionada.</p>
+<p>Existen diversos tipos de moduladores digitales:
+	+ por cambio de fase (PSK)
+    + por cambio de frecuencia (FSK)
+    + por cambio de amplitud (ASK)
+    + modulaci&#8217;on de amplitud en cuadratura (QAM)</p>
 
-<!-- more -->
+<p>Los cambios en alguna característica de la portadora están definidos previamente en una constelación, que es una tabla donde se indica que cambios se harán en la portadora si se presenta una combinación de bits en específico. Esto es, si en la entrada se recibe la cadena <code>010</code>, el modulador revisa la constelación donde se le indica que debe hacer un desfasamiento en la portadora de 135 grados. Cuando el receptor observe este cambio de fase, lo interpretará como la cadena de bits <code>010</code>.</p>
 
-<p><em>Instalación.</em></p>
+<p><em>Modulación por desplazamiento diferencial de fase (DPSK).</em></p>
 
-<p>En la página de <a href="http://xillybus.com/xillinux">Xillinux</a> se indica donde descargar el sistema operativo, a diferencia de raspberry, es necesario realizar unos pasos antes de copiar los archivos a una memoria SD, ya que es necesario crear el archivo .bit que representa la plataforma de hardware de Zedboard.</p>
+<p>DPSK es una técnica de modulación que consiste en variar la fase actual de la portadora de acuerdo a los bits de entrada. La ventaja de este tipo de transmisión, en comparación con PSK, es que no requiere de una señal coherente para su sincronización, debido a los cambios de fase que realiza sobre la portadora, de este modo se pueden ignorar los cambios de fase que pueden presentarse en la señal por los efectos del canal inalámbricos.</p>
 
-<p>De acuerdo al <a href="http://xillybus.com/downloads/doc/xillybus_getting_started_zynq.pdf">manual</a>, es necesario crear antes el procesador <code>netlist</code> y generar los IP cores de Xilinx con ayuda de VIVADO.</p>
+<p>En el caso de DBPSK (donde la tasa de transmisión es un bit por s&#8217;imbolo), cuando se desea transmitir un <code>1</code> se le suma 180° a la fase actual de la portadora, en caso de que se desea transmitir un <code>0' se le suma 0&amp;deg; a la fase actual, por lo que no existe alg\'un cambio de fase en la portadora. En cambio, para la modulaci\'on utilizando DQPSK (dos bits por s\'imbolo), los cambios de fase son 0&amp;deg;, 90&amp;deg;, 180&amp;deg; y -90&amp;deg; que corresponden a los datos </code>00<code>, </code>01<code>, </code>11<code> y </code>10` respectivamente.</p>
 
-<p><em>Copia a SD.</em>
-Una vez teniendo el archivo generado se procede a la copia del sistema operativo a la memoria SD.</p>
+<p><em>Modulación por desplazamiento de frecuencia gausiana (GFSK)</em></p>
 
-<ol>
-  <li>Para instalar Xillinux en la memoria SD, primero localizar en donde esta montada.</li>
-</ol>
+<p>GFSK es una técnica que realiza transiciones suaves entre cada símbolo digital, evitando de este modo el cambio abrupto de frecuencia durante la transmisión, que ha diferencia de FSK, esta no realiza transiciones de frecuencia de un modo suave, llegando a presentarse algunas transiciones de frecuencia de 180°. GFSK consiste en un banco de filtros Gausianos donde los pulsos digitales (pulsos cuadrados que representan los unos y ceros) son suavizados antes de entrar a la etapa de modulación, esto es, los pulsos cuadrados tienen una forma de onda mas parecido a una onda senoidal, pero sin perder su periodo. Este filtro tiene la ventaja de reducir la potencia de la banda lateral, la interferencia con canales adyacentes pero el costo es el incremento de la interferencia intersímbolo.</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ lsblk</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p><em>Simulación en GNU Radio</em></p>
 
-<ol>
-  <li>Copiar la imagen de Xillinux en memoria SD.</li>
-</ol>
+<p>GNU Radio incluye diferentes tipos de moduladores digitales dentro de sus bloques de procesamiento, permitiendo de este modo la fácil implementación de un modulador digital. En las figuras se puede observar un diagrama a bloques de un lazo cerrado utilizando modulación digital DPSK y GFSK respectivamente, en la cuál la señal a transmitir es una forma de onda senoidal que puede ser modificada en la frecuencia en tiempo real y así observar en el receptor que los cambios hechos en el transmisor son reflejados correctamente.</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo dd if=xillinux-1.3.img of=/dev/sdX bs=512</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>En los diagramas a bloques se puede observar el bloque Packet Encoder, que consiste en agrupar los bits de acuerdo a la cantidad de símbolos disponibles en el modulador digital, en el caso de DQPSK los bits son agrupados de dos en dos, para DBPSK y GFSK son de uno en uno.</p>
 
-<ol>
-  <li>Comprobar que la copia quedo correcta y esperar como respuesta EOF.</li>
-</ol>
+<p><img src="/downloads/images/gfsk.png" /></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo cmp xillinux-1.3.img /dev/sdX</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p><img src="/downloads/images/dpsk.png" /></p>
 
-<ol>
-  <li>
-    <p>Desmontar o expulsar la memoria y volver a insertar para ver las particiones nuevas.</p>
-  </li>
-  <li>
-    <p>Copiar los archivos de bootfiles en la particion uno, por lo general es la menor.</p>
-  </li>
-  <li>
-    <p>Con gparted ajustar la segunda particion al tamaño de la memoria.</p>
-  </li>
-  <li>
-    <p>Insertar memoria en Zedboard, en caso de no arrancar presionar el micro switch PS-RST.</p>
-  </li>
-  <li>
-    <p>Para comunicarse con la Zedboard a traves del puerto serial.</p>
-  </li>
-</ol>
+<p>Estos ejemplos se incluyen dentro del proyecto de GNU Radio.</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo screen /dev/ttyACM0 115200</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p><em>Conclusión.</em></p>
 
-<ol>
-  <li>En caso de no tener el programa screen.</li>
-</ol>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo apt-get install screen</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>En caso de que el sistema operativo de la Zedboard no cargue, desde una terminal con puerto serial se reinicia la tarjeta para entrar al u-boot presionando PS-RST y cuando indique presiobar cualquier tecla para evitar arranque. Una vez en u-boot se teclean los siguientes comandos:</p>
-
-<pre><code>&gt; env default -a
-&gt; env save
-&gt; reset
-</code></pre>
+<p>El uso de estos esquemas de modulación digital permiten una implementación rápida y sencilla con las tarjetas USRP, ya que son lo suficientemente robustos que no necesitan agregar etapas adicionales al receptor. GNU Radio incluye dentro del proyecto varios ejemplos de sus diferentes sistemas funcionando, de este modo, facilita el entendimiento de los sistemas de comunicación con dispositivos de hardware. </p>
 
 <p>viktorivan@openmailbox.org</p>
 
@@ -186,12 +153,12 @@ Una vez teniendo el archivo generado se procede a la copia del sistema operativo
   
 
 
-<time datetime="2015-11-28T13:21:01-06:00" pubdate data-updated="true">Nov 28<span>th</span>, 2015</time>
+<time datetime="2016-04-09T07:34:39-05:00" pubdate data-updated="true">Apr 9<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/embedded/'>embedded</a>, <a class='category' href='/blog/categories/xillinux/'>xillinux</a>, <a class='category' href='/blog/categories/zedboard/'>zedboard</a>
+    <a class='category' href='/blog/categories/dpsk/'>dpsk</a>, <a class='category' href='/blog/categories/gfsk/'>gfsk</a>, <a class='category' href='/blog/categories/gnuradio/'>gnuradio</a>, <a class='category' href='/blog/categories/sdr/'>sdr</a>
   
 </span>
 
@@ -200,7 +167,7 @@ Una vez teniendo el archivo generado se procede a la copia del sistema operativo
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://viktorivan.github.io/blog/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard/" data-via="viktor_ivan" data-counturl="http://viktorivan.github.io/blog/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://viktorivan.github.io/blog/2016/04/09/dpsk-y-gfsk-en-gnu-radio/" data-via="viktor_ivan" data-counturl="http://viktorivan.github.io/blog/2016/04/09/dpsk-y-gfsk-en-gnu-radio/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -213,10 +180,8 @@ Una vez teniendo el archivo generado se procede a la copia del sistema operativo
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python/" title="Previous Post: Bloques de procesamiento de señal de GNU Radio en Python">&laquo; Bloques de procesamiento de señal de GNU Radio en Python</a>
+        <a class="basic-alignment left" href="/blog/2016/04/07/cifrado-en-gnu-radio-con-gr-nacl/" title="Previous Post: Cifrado en GNU Radio con gr-NaCl">&laquo; Cifrado en GNU Radio con gr-NaCl</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard/" title="Next Post: Instalación de GNU Radio embedded en tarjetas ZedBoard">Instalación de GNU Radio embedded en tarjetas ZedBoard &raquo;</a>
       
     </p>
   </footer>
@@ -316,8 +281,8 @@ Una vez teniendo el archivo generado se procede a la copia del sistema operativo
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://viktorivan.github.io/blog/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard/';
-        var disqus_url = 'http://viktorivan.github.io/blog/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard/';
+        var disqus_identifier = 'http://viktorivan.github.io/blog/2016/04/09/dpsk-y-gfsk-en-gnu-radio/';
+        var disqus_url = 'http://viktorivan.github.io/blog/2016/04/09/dpsk-y-gfsk-en-gnu-radio/';
         var disqus_script = 'embed.js';
       
     (function () {
