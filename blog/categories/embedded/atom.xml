@@ -4,7 +4,7 @@
   <title><![CDATA[Category: embedded | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/embedded/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-04-08T18:19:25-05:00</updated>
+  <updated>2016-04-25T12:33:09-05:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -29,7 +29,12 @@
 
 <p>Existen varios proyectos para el desarrollo de sistemas embebidos, tales como <a href="http://www.openembedded.org">openembbeded</a>  o <a href="https://www.yoctoproject.org">yocto project</a>. <a href="http://gnuradio.org">GNU Radio</a> por su parte, proporciona un procedimiento para generar un sistema operativo embebido con <a href="https://gnuradio.org/redmine/projects/gnuradio/wiki/Embedded">GNU Radio</a>integrado al momento de realizar la compilación cruzada.</p>
 
-<p>En una primera parte se descarga el proyecto de repo.</p>
+<p>Para el correcto funcionamientod de OpenEmbedded, se requiere de los siguientes prerequisitos.</p>
+
+<pre><code>$ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm
+</code></pre>
+
+<p>Una vez cumplidos los prerequisitos se procede a la descarga del proyecto repo.</p>
 
 <pre><code>$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &gt; repo
 $ chmod a+x repo
@@ -47,7 +52,7 @@ $ cd oe-repo
 <pre><code>$ repo init -u git://github.com/balister/oe-gnuradio-manifest.git -b fido
 </code></pre>
 
-<p>Se actualiza el proyecto e indica el modelo de plataforma a utilizar.     </p>
+<p>Se actualiza el proyecto e indica el modelo de la plataforma a utilizar.     </p>
 
 <pre><code>$ repo sync
 $ TEMPLATECONF=`pwd`/meta-sdr/conf source ./oe-core/oe-init-build-env ./build ./bitbake
@@ -80,11 +85,31 @@ manual which can be found at:
 
 <p>Se indica la plataforma de hardware del sistema embebido, en este caso es una tarjeta <code>Zedboard</code> y con el comando <code>bitbake</code> se inicia la creación del sistema embebido, debido a la descarga de software esta operación llega a consumir hasta 50 GB de disco duro, igualmente puede tardar mucho tiempo por la velocidad del enlace de Internet. </p>
 
-<p>```
-$ export MACHINE=”zedboard-zynq7”
-$ bitbake gnuradio-dev-image</p>
+<p><code>
+$ export MACHINE="zedboard-zynq7"
+$ bitbake gnuradio-dev-image
+</code></p>
 
-<p>Parsing recipes: 100% |#######################################| Time: 00:00:30
+<p>En caso de que falte algún paquete, el proyecto indicará la falta del mismo.</p>
+
+<p>```
+NOTE: Your conf/bblayers.conf has been automatically updated.
+ERROR:  OE-core’s config sanity checker detected a potential misconfiguration.
+    Either fix the cause of this error or at your own risk disable the checker (see sanity.conf).
+    Following is the list of potential problems / advisories:</p>
+
+<pre><code>Please install the following missing utilities: chrpath ```
+</code></pre>
+
+<p>Este problema se soluciona a través de <code>apt-get</code>.</p>
+
+<pre><code>$ sudo apt-get install chrpath
+</code></pre>
+
+<p>Otro de los errores que se pueden presentar es la falta de recetas al momento de generar el sistema embebido.</p>
+
+<p>```
+Parsing recipes: 100% |#######################################| Time: 00:00:30
 Parsing of 1939 .bb files complete (0 cached, 1939 parsed). 2455 targets, 247 skipped, 0 masked, 0 errors.
 ERROR: No recipes available for:
   /home/cidte/oe-repo/oe-core/../meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv<em>3.0.bbappend
@@ -149,7 +174,7 @@ NOTE: Executing RunQueue Tasks
 
 <p>Una vez terminado el proceso de compilación cruzada, el proyecto entrega una serie de archivos que son el sistema operativo embebido en la siguiente ubicación.</p>
 
-<pre><code>$ cd /home/cidte/oe-repo/build/tmp-glibc/deploy/images
+<pre><code>$ cd /&lt;ruta-instalación-repo&gt;/oe-repo/build/tmp-glibc/deploy/images
 </code></pre>
 
 <p>Estos archivos deben ser copiados a una memoria SD, para ello es necesario que la memoria tenga dos particiones: una llamada BOOT, fat32, de 40 MB y que sea bootable y la segunda llamada rootfs, ext4 y de tamaño del resto de la memoria. Los archivos que se requieren en la memoria SD en la partición de BOOT son:</p>
@@ -177,6 +202,31 @@ $ sudo sh tmp-glibc/deploy/sdk/oecore-x86_64-armv7ahf-vfp-neon-toolchain-nodistr
 $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueabi 
 </code></pre>
 
+<p><em>Comunicación con tarjeta Zedboard a través de puerto serial.</em></p>
+
+<p>El puerto <code>UART</code> de la tarjeta Zedboard es un puerto USB que se comunica de modo serial con la computadora, al momento de encender la tarjeta y estando conectada con la computadora por el puerto USB, se teclea el siguiente comando para buscar el puerto serial. </p>
+
+<pre><code>$ dmesg | grep tty
+</code></pre>
+
+<p>Existen diversas maneras de llamar al puerto serial, entre ellas:</p>
+
+<p><code>
+/dev/ttyS0 (puerto serial)
+/dev/ttyUSB0 (serial sobre USB)
+/dev/ttyACM0 (serial sobre USB)
+</code></p>
+
+<p>Una vez indentificado, se procede a comunicar con la tarjeta, en linux se puede utilizar el paquete <code>screen</code> para realizar la comunicación serial.</p>
+
+<pre><code>$ sudo apt-get install screen
+</code></pre>
+
+<p>Ya instalado el paquete, se procede a realizar el enlace a través del puerto serial.</p>
+
+<pre><code>$ screen /dev/ttyACM0 115200
+</code></pre>
+
 <p>Finalmente, se procede a encender la tarjeta Zedboard, en caso de que no arranque, desde el puerto serial se ejecuta:</p>
 
 <pre><code>&gt; env default -a
@@ -184,12 +234,14 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
 &gt; reset
 </code></pre>
 
+<p>Para entrar a esta consola se tiene que evitar el autoboot de la tarjeta.</p>
+
 <p><em>Acceso SSH con X11Forwarding.</em>    </p>
 
 <p>Para habilitar la conexión SSH con X11Forwarding, desde el puerto serial hay que modificar el archivo:</p>
 
 <p><code>
-/etc/ssh/sshd_config
+$ vi /etc/ssh/sshd_config
 </code></p>
 
 <p>Descomentar <code>X11Forwarding no</code> y poner <code>X11Forwarding yes</code>.</p>
@@ -197,10 +249,17 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
 <p>Reiniciar el servicio con el comando</p>
 
 <p><code>
-/etc/init.d/sshd restart
+$ /etc/init.d/sshd restart
 </code></p>
 
 <p>De este modo, queda habilitado <code>X11Forwarding</code> en los enlaces SSH, sin embargo es necesario indicar <code>-X</code> en la configuración de la conexión.</p>
+
+<p><em>Apagado remoto de la tarjeta Zedboard.</em></p>
+
+<p>Para apagar remotamente la tarjeta Zedboard sin dañar el sistema embebido es necesario teclear en la terminal de enlace remoto el comando.</p>
+
+<pre><code># shutdown -h now
+</code></pre>
 
 <p><em>Conclusión.</em></p>
 
