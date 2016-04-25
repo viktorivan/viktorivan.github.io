@@ -4,7 +4,7 @@
   <title><![CDATA[Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-04-25T12:33:09-05:00</updated>
+  <updated>2016-04-25T12:35:53-05:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -12,24 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Vocoders para banda angosta en GNU Radio]]></title>
-    <link href="http://viktorivan.github.io/blog/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio/"/>
-    <updated>2016-04-09T07:35:02-05:00</updated>
-    <id>http://viktorivan.github.io/blog/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[DPSK y GFSK en GNU Radio]]></title>
-    <link href="http://viktorivan.github.io/blog/2016/04/09/dpsk-y-gfsk-en-gnu-radio/"/>
-    <updated>2016-04-09T07:34:39-05:00</updated>
-    <id>http://viktorivan.github.io/blog/2016/04/09/dpsk-y-gfsk-en-gnu-radio</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cifrado en GNU Radio con gr-NaCl]]></title>
