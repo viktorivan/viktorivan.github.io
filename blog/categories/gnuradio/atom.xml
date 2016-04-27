@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: GNURadio | Iván Rodríguez]]></title>
+  <title><![CDATA[Category: gnuradio | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/gnuradio/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-04-25T18:55:52-05:00</updated>
+  <updated>2016-04-27T09:34:03-05:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -14,116 +14,527 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Redes cooperativas DFTS-OFDM con GNU Radio]]></title>
-    <link href="http://viktorivan.github.io/blog/2014/05/19/redes-cooperativas-dfts-ofdm-con-gnu-radio/"/>
-    <updated>2014-05-19T16:44:59-05:00</updated>
-    <id>http://viktorivan.github.io/blog/2014/05/19/redes-cooperativas-dfts-ofdm-con-gnu-radio</id>
-    <content type="html"><![CDATA[<p><em>Resumen.</em></p>
+    <title type="html"><![CDATA[Vocoders para banda angosta en GNU Radio]]></title>
+    <link href="http://viktorivan.github.io/blog/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio/"/>
+    <updated>2016-04-09T07:35:02-05:00</updated>
+    <id>http://viktorivan.github.io/blog/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio</id>
+    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
 
-<p>El desarrollo de nuevos sistemas de comunicación, en el ambiente académico, normalmente queda en proyectos de software, limitados a resultados de simulación sin poder dar el paso a la implementación del mismo. Es muy bien sabido que los problemas de software no son lo mismos que los problemas que pueden presentarse en las plataformas de hardware, por lo que el uso de herramientas de SDR (Software Defined Radio) como <a href="http://www.gnuradio.org">GNU Radio</a> en combinación con las tarjetas <a href="http://www.ettus.com">USRP</a> (Universal Software Radio Peripheral) facilitan el dar ese paso de la simulación en plataformas de software a la emulación en plataformas de hardware de una forma transparente.</p>
+<p>Un vocoder analiza el habla midiendo los cambios en el tiempo de sus características espectrales. El resultado es una serie de señales que representan a las frecuencias que se modificaron en un tiempo particular mientras el usuario hablaba. En otras palabras, la señal se divide en un número de bandas de frecuencias y el nivel de la señal presente en cada banda de frecuencia es la representación instantánea de su energía espectral. De este modo, el vocoder reduce sustancialmente la cantidad de información requerida para almacenar una charla. </p>
 
-<p>A continuación se muestra el desarrollo de una plataforma de comunicación inalámbrica basada en DFTS-OFDM (Direct Fourier Transform Spread - Orthogonal Frequency Division Modulation) en combinación con protocolos de relay en una implementación de una antena y dos saltos.</p>
+<!--more-->
+
+<p>En el codificador, la voz se envía a un banco de filtros de varias bandas, la señal filtrada de cada una de esas bandas se pasa a través de un seguidor de envolvente y las señales de control (amplitudes de la señal) de esta etapa son enviadas al decodificador. En el receptor, la etapa de decodificación utiliza estas señales de control para configurar correctamente los filtros correspondientes para resintetizar la voz. Estas señales de control ocupan un menor ancho de banda que la voz original, por lo que permite la multicanalización en los enlaces y el uso de banda angosta para su transmisión.</p>
+
+<p><em>CODEC2.</em></p>
+
+<p>Codec2 es un codec para conversaciones de audio de baja tasa de bit libre de patente y de fuente abierta. Codec2 comprime las conversaciones utilizando codificación senoidal, el cuál es un método especializado para conversaciones humanas. Fue diseñado para ser utilizado en radio amateur y otras aplicaciones de voz de alta compresión.</p>
+
+<p>Los modos de codec2 son: 3200, 2400, 1600, 1400, 1300, 1200 y 700 bps. Su desempeño es mejor que varios codecs de tasa baja. Por ejemplo, utiliza la mitad del ancho de banda de el método de Excitación Multi-Banda Avanzada para codificar una conversación con una calidad similar. La entrada del codec es un audio muestreado con PCM de 16 bits y la salida son paquetes de bytes. El audio recuperado de estos bytes es de 8 KHz. </p>
+
+<p>Por ejemplo, para el modo 3200, tiene 20 ms de audio convertidos en 64 Bits. Estos 64 Bits salen cada 20 ms, para una tasa de transmisión mínima de 3200 bps. Estos 64 Bits son enviados como 8 bytes al canal de datos.</p>
+
+<p><em>Modulación delta de pendiente variable contínua (CVSD).</em></p>
+
+<p>CVSD es un método de codificación de voz que utiliza modulación delta con escalones de tamaño variable. CVSD codifica 1 bit por muestra, por lo que un audio de 16 KHz es codificado a 16 Kbps. El codificador mantiene una muestra de referencia y un tamaño de escalón. Cada muestra de entrada se compara con la muestra de referencia. Si la muestra de entrada es grande, el codificador envía un 1 bit y le suma el tamaño del escalón de la muestra de referencia. Si la muestra de entrada es pequeña, el codificador envía un 0 bit y le resta el tamaño del escalón de la muestra de referencia. Además, el codificador guarda los N bits previos de la salida (Los valores comunes de N son 3 y 4) para determinar los ajustes del tamaño del escalón. </p>
+
+<p>El proceso de la decodificación se realiza a partir de la muestra de referencia, sumando o restando el tamaño del escalón de acuerdo al flujo de bits. La secuencia de muestras de referencia ajustadas son la forma de onda reconstruida, y el tamaño del escalón se ajusta de acuerdo a los 1 y 0 lógicos tal como en el codificador.</p>
+
+<p>CVSD tiene un compromiso entre sencillez, baja tasa de bit y calidad. Las tasas de bit comunes son de 9.6 a 128 Kbps</p>
+
+<p><em>Simulación con GNU Radio.</em></p>
+
+<p>Para la implementación de los vocoders en GNU Radio se requiere de un archivo de audio de una conversación a una tasa de muestreo de 8 KHz, los archivos de música no son recomendados ya que los vocoders están optimizados para comprimir voz. El tipo de dato de este archivo es interpretado como float, para hacer el cambio a short se tiene que multiplicar por 32767 y en el receptor dividir por la misma cantidad para mantener la igualdad de los datos durante la simulación.</p>
+
+<p>Como requisito, CODEC2 pide que las muestras no tengan algún tipo de empaquetamiento, por lo que se agrega el bloque de Packed to Unpacked con un tamaño de 16 bits. Finalmente en el receptor se agrega un bloque de remuestreo para adaptar la señal reconstruida de 8 KHz a la tasa de muestreo de la tarjeta de audio, en este caso de 48 KHz.</p>
+
+<p><img src="/downloads/images/codec2_test_grc.png"></p>
+
+<p>Los datos de salida del codec son una secuencia bits de 1 y 0 logicos que pueden ser enviados al modulador digital para su transmisión posterior. De igual modo, es posible agregar una visualización de los datos a la salida del decodificador, para hacer una comparación de los datos codificados y decodificados. </p>
+
+<p><img src="/downloads/images/codec2_sim.png"></p>
+
+<p>La implementación del codec CVSD es similar a la simulación de CODEC2, se puede observar que la salida del codec CVSD es diferente a la salida de CODEC2, no entrega vectorizado los datos, sino en un flujo de datos Char que pueden ser enviados directamente al modulador digital.</p>
+
+<p><img src="/downloads/images/cvsd_test_grc.png"></p>
+
+<p>Los datos de salida del codec no son una secuencia de bits, sino muestras con valores entre -100 y 100.</p>
+
+<p><img src="/downloads/images/cvsd_sim.png"></p>
+
+<p><em>Conclusión.</em></p>
+
+<p>El uso de vocoders es muy utilizado en los sistemas de comunicación actuales, ya que permiten tener varios enlaces de voz compartiendo el mismo canal, o en su defecto, realizar una conversación en canales de banda angosta, todo esto usando enlaces de comunicación digital. GNU Radio permite la implementación de un sistema de comunicación de voz con vocoders que pueden ser combinados con otros esquemas para tener un sistema completo funcional. </p>
+
+<p>viktorivan@openmailbox.org</p>
+
+<p>@viktor_ivan</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[DPSK y GFSK en GNU Radio]]></title>
+    <link href="http://viktorivan.github.io/blog/2016/04/09/dpsk-y-gfsk-en-gnu-radio/"/>
+    <updated>2016-04-09T07:34:39-05:00</updated>
+    <id>http://viktorivan.github.io/blog/2016/04/09/dpsk-y-gfsk-en-gnu-radio</id>
+    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
+
+<p>La modulación digital consiste en una técnica donde la portadora es modulada para el envío de datos digitales (donde los datos se conforman generalmente por una cadena de unos y ceros) en vez de formas de ondas analógicas. Estos datos pueden representar información analógica (tal como la voz, audio, video), por lo que son el resultado de pasar previamente por una etapa de conversión de analógico a digital (ADC) para poder ser modulados digitalmente, esto es, tienen que representarse por medio de un valor definido dentro de un rango previamente especificado.</p>
+
+<!--more-->
+
+<p>Existen diversos tipos de moduladores digitales:</p>
+
+<ol>
+  <li>
+    <p>por cambio de fase (PSK).</p>
+  </li>
+  <li>
+    <p>por cambio de frecuencia (FSK).</p>
+  </li>
+  <li>
+    <p>por cambio de amplitud (ASK).</p>
+  </li>
+  <li>
+    <p>modulación de amplitud en cuadratura (QAM).</p>
+  </li>
+</ol>
+
+<p>Los cambios en alguna característica de la portadora están definidos previamente en una constelación, que es una tabla donde se indica que cambios se harán en la portadora si se presenta una combinación de bits en específico. Esto es, si en la entrada se recibe la cadena <code>010</code>, el modulador revisa la constelación donde se le indica que debe hacer un desfasamiento en la portadora de 135 grados. Cuando el receptor observe este cambio de fase, lo interpretará como la cadena de bits <code>010</code>.</p>
+
+<p><em>Modulación por desplazamiento diferencial de fase (DPSK).</em></p>
+
+<p>DPSK es una técnica de modulación que consiste en variar la fase actual de la portadora de acuerdo a los bits de entrada. La ventaja de este tipo de transmisión, en comparación con PSK, es que no requiere de una señal coherente para su sincronización, debido a los cambios de fase que realiza sobre la portadora, de este modo se pueden ignorar los cambios de fase que pueden presentarse en la señal por los efectos del canal inalámbricos.</p>
+
+<p>En el caso de DBPSK (donde la tasa de transmisión es un bit por símbolo), cuando se desea transmitir un <code>1</code> se le suma 180° a la fase actual de la portadora, en caso de que se desea transmitir un <code>0</code> se le suma 0° a la fase actual, por lo que no existe algún cambio de fase en la portadora. En cambio, para la modulación utilizando DQPSK (dos bits por símbolo), los cambios de fase son 0°, 90°, 180° y -90° que corresponden a los datos <code>00</code>, <code>01</code>, <code>11</code> y <code>10</code> respectivamente.</p>
+
+<p><em>Modulación por desplazamiento de frecuencia gausiana (GFSK)</em></p>
+
+<p>GFSK es una técnica que realiza transiciones suaves entre cada símbolo digital, evitando de este modo el cambio abrupto de frecuencia durante la transmisión, que ha diferencia de FSK, esta no realiza transiciones de frecuencia de un modo suave, llegando a presentarse algunas transiciones de frecuencia de 180°. GFSK consiste en un banco de filtros Gausianos donde los pulsos digitales (pulsos cuadrados que representan los unos y ceros) son suavizados antes de entrar a la etapa de modulación, esto es, los pulsos cuadrados tienen una forma de onda mas parecido a una onda senoidal, pero sin perder su periodo. Este filtro tiene la ventaja de reducir la potencia de la banda lateral, la interferencia con canales adyacentes pero el costo es el incremento de la interferencia intersímbolo.</p>
+
+<p><em>Simulación en GNU Radio</em></p>
+
+<p>GNU Radio incluye diferentes tipos de moduladores digitales dentro de sus bloques de procesamiento, permitiendo de este modo la fácil implementación de un modulador digital. En las figuras se puede observar un diagrama a bloques de un lazo cerrado utilizando modulación digital DPSK y GFSK respectivamente, en la cuál la señal a transmitir es una forma de onda senoidal que puede ser modificada en la frecuencia en tiempo real y así observar en el receptor que los cambios hechos en el transmisor son reflejados correctamente.</p>
+
+<p>En los diagramas a bloques se puede observar el bloque Packet Encoder, que consiste en agrupar los bits de acuerdo a la cantidad de símbolos disponibles en el modulador digital, en el caso de DQPSK los bits son agrupados de dos en dos, para DBPSK y GFSK son de uno en uno.</p>
+
+<p><img src="/downloads/images/gfsk.png"></p>
+
+<p><img src="/downloads/images/dpsk.png"></p>
+
+<p>Estos ejemplos se incluyen dentro del proyecto de GNU Radio.</p>
+
+<p><em>Conclusión.</em></p>
+
+<p>El uso de estos esquemas de modulación digital permiten una implementación rápida y sencilla con las tarjetas USRP, ya que son lo suficientemente robustos que no necesitan agregar etapas adicionales al receptor. GNU Radio incluye dentro del proyecto varios ejemplos de sus diferentes sistemas funcionando, de este modo, facilita el entendimiento de los sistemas de comunicación con dispositivos de hardware. </p>
+
+<p>viktorivan@openmailbox.org</p>
+
+<p>@viktor_ivan</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Cifrado en GNU Radio con gr-NaCl]]></title>
+    <link href="http://viktorivan.github.io/blog/2016/04/07/cifrado-en-gnu-radio-con-gr-nacl/"/>
+    <updated>2016-04-07T20:04:29-05:00</updated>
+    <id>http://viktorivan.github.io/blog/2016/04/07/cifrado-en-gnu-radio-con-gr-nacl</id>
+    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
+
+<p>Una forma sencilla de describir lo que es cifrado es: Aquello que está escrito con letras, símbolos o números que solo pueden comprenderse si se dispone de la clave necesaria para descifrarlos.</p>
+
+<p>En criptografía, el cifrado es un procedimiento que utiliza un algoritmo de cifrado con una clave para transformar un mensaje que se desea enviar, sin atender a su estructura lingüística o significado, de tal forma que sea incomprensible o, al menos, difícil de comprender a toda persona que no tenga la clave de descifrado del algoritmo.</p>
+
+<!--more-->
+
+<p>A veces el texto cifrado se escribe en bloques de igual longitud. A estos bloques se les denomina grupos. Estos grupos proporcionaban una forma de verificación adicional, ya que el texto cifrado obtenido debía tener un número entero de grupos. Si al cifrar el texto plano no se tiene ese número entero de grupos, entonces se suele rellenar al final con ceros o con caracteres sin sentido.</p>
+
+<p>En el caso de cifrado de conversaciones de voz o aplicaciones de tiempo real, el cifrado en bloques no es adecuado porque los flujos de datos que se pueden llegar a producir pueden ser fragmentos pequeños. Las muestras de datos pueden ser tan pequeñas como 8 bits, en caso de que los bloques sean de 64 bits, es necesario rellenar con ceros antes de cifrar y transmitirlos lo que puede traducirse en un uso ineficiente de la capacidad del sistema.</p>
+
+<p>Los cifradores de flujo son algoritmos de cifrado que pueden realizar el cifrado incrementalmente, convirtiendo los datos en claro en datos cifrado bit a bit. Esto se logra construyendo un generador de flujo de clave. Un flujo de clave es una secuencia de bits de tamaño arbitrario que puede emplearse para oscurecer los contenidos de un flujo de datos combinando el flujo de clave con el flujo de datos mediante la función XOR. Si el flujo de clave es seguro, el flujo de datos cifrados también lo será.</p>
+
+<p>Se puede construir un generador de flujo de clave iterando una función matemática sobre un rango de valores de entrada para producir un flujo continuo de valores de salida. Los valores de salida se concatenan entonces para construir bloques de datos en claro, y los bloques se cifran empleando una clave compartida por el emisor y el receptor.</p>
+
+<p>Para conservar la calidad de servicio del flujo de datos, los bloques del flujo de clave deberían producirse con un poco de antelación sobre el momento en que vayan a ser empleados, además el proceso que los produce no deberá exigir demasiado esfuerzo de procesamiento como para retrasar el flujo de datos.</p>
+
+<p><em>Cifrado de flujo Salsa20</em></p>
+
+<p><a href="https://cr.yp.to/snuffle.html">Salsa20</a> es un cifrador de flujo propuesto a eSTREAM por Daniel J. Bernstein. Utiliza una función pseudoaleatoria en operaciones ARX (add-rotate-xor), que son operaciones de sumas de 32 bits, suma bit a bit (XOR) y rotación. Salsa20 proyecta una clave de 256 bits, un nonce de 64 bits y un flujo de 64 bits a una salida de 512 bits. Esto provee a Salsa20 una ventaja inusual, la cuál es que el usuario pueda buscar eficientemente cualquier posición de la salida en tiempo constante. Tiene una velocidad de alrededor de 4 a 14 ciclos por byte en software en procesadores x86 modernos y un desempeño en hardware razonable. No está patentado, y Bernstein ha escrito varias implementaciones de dominio público, optimizadas para arquitecturas comunes.</p>
+
+<p>Un nonce es una frase o número arbitrario utilizado sólo una vez en una comunicación cifrada, tal como lo indica su traducción: mientras tanto. Un nonce puede ser una palabra aleatoria o pseudoaleatoria, incluso puede ser utilizado para verificar fecha y hora, ya que este dato puede ser parte del nonce. Para asegurar que nonce sea utilizado sólo una vez, esté debe ser variante en el tiempo (el incluir la hora podría ser suficiente) o pueden generarse una gran cantidad de bits aleatorios que aseguren que la probabilidad de que se repita sea muy pequeña. El uso de nonce permite que viejos mensajes no puedan ser utilizados durante un ataque.</p>
+
+<p><em>NaCl: Librería de cifrado y red.</em></p>
+
+<p><a href="https://nacl.cr.yp.to/">NaCl</a> (se pronuncia “sal”, por el cloruro de sodio) es una librería de software de alta velocidad y fácil de usar orientada a redes de comunicación, cifrado, descrifrado, firmas, entre otras cosas. El objetivo de NaCl es ofrecer todas las operaciones core que se necesitan para hacer herramientas de cifrado del más alto nivel.</p>
+
+<p><em>Librería de cifrado Sodium.</em></p>
+
+<p><a href="https://libsodium.org">Sodium</a> es una librería de software moderna, fácil de usar para cifrado, descifrado, firmas y hash de contraseñas. Es portátil, soporta compilación cruzada, instalable, es un paquete de bifurcación de NaCl con una API compatible y con una API extendida que mejora su uso.</p>
+
+<p>Sodium soporta una variedad de compiladores y sistemas operativos, incluyendo Windows, iOS y Android.</p>
+
+<p><em>gr-nacl: Módulo de GNU Radio para el cifrado de datos utilizando la librería NaCl.</em></p>
+
+<p>El módulo <a href="http://www.cgran.org/pages/gr-nacl.html">gr-nacl</a> para GNU Radio utiliza la librería de cifrado NaCl desarrollada con la bifurcación de la librería Sodium. Entre los bloques incluidos está el cifrado de llave pública y llave secreta. La implementación se basa en el cifrado de mensajes, el cual usa el sistema de mensajes de GNU Radio, adicionalmente, se implementó un sistema de cifrado por medio de flujos etiquetados (tagged streams). </p>
+
+<p><em>Instalación.</em></p>
+
+<p>Desde una terminal, se procede a instalar la librería de Sodium, </p>
+
+<p><code>
+git clone https://github.com/jedisct1/libsodium.git
+cd libsodium/
+./autogen.sh
+./configure
+make
+sudo make install
+</code></p>
+
+<p>Una vez instalado, se instala el módulo de gr-nacl para GNU Radio.</p>
+
+<p><code>
+git clone https://github.com/stwunsch/gr-nacl.git
+cd gr-nacl/
+mkdir build
+cd build
+cmake ../
+make
+ctest
+sudo make install
+sudo ldconfig
+</code></p>
+
+<p><em>Funcionamiento</em></p>
+
+<p>Una vez instalado gr-nacl, se procede a hacer una prueba de cifrado. En el ejemplo incluido en el proyecto se puede observar el archivo de entrada, que es un archivo de texto con la palabra: “This is a test text. Hello world!”. Una vez ejecutado el grc, se pueden observar tres archivos de salida, uno donde se muestra la palabra de entrada, el segundo donde se observa el archivo cifrado y por último el archivo descifrado.</p>
+
+<p><img src="/downloads/images/stream_encryption.png"></p>
+
+<p><em>Conclusión.</em></p>
+
+<p>Aunque el ejemplo mostrado es sencillo, es una base para implementarlo en sistemas mas complejos, como el cifrado de voz o mensajes de chat para su eventual transmisión con alguna tarjeta USRP. </p>
+
+<p>viktorivan@openmailbox.org</p>
+
+<p>@viktor_ivan</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Instalación GNU Radio con PyBombs versión 2]]></title>
+    <link href="http://viktorivan.github.io/blog/2016/03/29/instalacion-gnu-radio-con-pybombs-version-2/"/>
+    <updated>2016-03-29T20:24:26-06:00</updated>
+    <id>http://viktorivan.github.io/blog/2016/03/29/instalacion-gnu-radio-con-pybombs-version-2</id>
+    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
+
+<p><a href="http://gnuradio.org">GNU Radio</a> es un proyecto de software libre orientado a radio definido por software, basado en Python; existen diversos medios para instalar el conjunto de herramientas que comprenden a GNU Radio, desde los repositorios utilizando <code>apt-get</code> hasta la instalación desde el código fuente del proyecto en la terminal, con ayuda de un script o con un gestor de paquetes. La ventaja de instalar GNU Radio desde el código fuente con respecto a los repositorios es la versión de instalación, ya que los repositorios pueden tardar en actualizarse con respecto a los avances del proyecto.</p>
 
 <!-- more -->
 
-<p><em>Introducción.</em></p>
+<p>Anteriormente, GNU Radio desarrolló una primera versión de <a href="https://github.com/gnuradio/pybombs/">PyBombs</a> que permitía la instalación del proyecto de una manera sencilla e inclusive intuitiva. Debido a la popularidad de PyBombs para la instalación de proyectos OOT de GNU Radio, se realizó una actualización que permite la fácil distribución e instalación de proyectos pero ahora es incluido desde el gestor <a href="https://pip.pypa.io">pip</a> de Python.</p>
 
-<p><em>Comunicaciones cooperativas</em></p>
+<p><em>Instalación.</em></p>
 
-<p>Las comunicaciones cooperativas consiste en una técnica donde los dispositivos de comunicación presentes en un área pueden ayudarse entre ellos. La implementación de redes de relays permite a los dispositivos sin capacidad MIMO (Multiple-Input Multiple-Output) aprovechar las ventajas de una transmisión en un canal MIMO a través de tecnologías como MIMO virtual, distribuido o cooperativo, ya que estos dispositivos sólo cuentan con una antena. En este tipo de tecnologías permite que nodos de relay fijos o móviles formen parte de un arreglo de antenas mayor, donde en conjunto presentarán una ganancia de diversidad, aunque ésta no será mayor a la ganancia de diversidad de un enlace MIMO punto a punto.</p>
+<p>Primeramente es necesario instalar el gestor pip de Python, desde una terminal.</p>
 
-<p>La forma como es procesada la señal recibida en el nodo relay, ya sea sólo amplificando y reenviando la señal recibida o incluso decodificando o ecualizando y reenviando la señal recibida, define el protocol de relay que es utilizado en la comunicación cooperativa.</p>
+<p><code>
+$ sudo apt-get install python-pip python-dev build-essential 
+$ sudo pip install --upgrade pip 
+$ sudo pip install --upgrade virtualenv 
+</code></p>
 
-<p><em>Protocolos de Relay.</em></p>
+<p>Una vez instalado el gestor de aplicaciones de Python, se procede a la instalación de PyBombs.</p>
 
-<p>Las comunicaciones cooperativas generan trayectorias independientes entre el usuario y la estación base introduciendo un canal relay. El canal relay puede considerarse como un canal auxiliar del canal directo entre la fuente y el destino. El nodo relay se ubica a varias longitudes de onda de distancia de la fuente, lo que garantiza que el canal relay tenga un desvanecimiento independiente del canal directo, lo que eventualmente permitirá tener un canal MIMO de rango completo.</p>
+<p><code>
+$ sudo pip install PyBOMBS
+</code></p>
 
-<p>El esquema de transmisión de un protocolo de cooperación se divide en dos fases para evitar interferencias.</p>
+<p>Teniendo una vez instalado el proyecto de PyBombs, se descargan las recetas donde están indicadas las ubicaciones de los proyectos para su descarga. </p>
 
-<p>Fase 1: Una fuente envía su información al destino y la información también es recibida por el relay al mismo tiempo.
-Fase 2: El relay envía su información al destino. </p>
+<p><code>
+$ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git  
+$ pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git
+</code></p>
 
-<p>Adicionalmente puede considerarse que en la Fase 1 el destino no recibe información, solo el relay.</p>
+<p>Para que GNU Radio pueda ser ejecutado desde cualquier ubicación se tiene que indicar donde se instalará el proyecto.</p>
 
-<p><em>Amplifica y envía.</em></p>
+<p><code>
+$ sudo pybombs prefix init /usr/local -a myprefix
+</code></p>
 
-<p>En este protocolo, el relay amplifica la señal de la fuente y envía esta a su destino de una forma ideal para ecualizar el efecto del canal entre la fuente y el relay. El relay hace esto simplemente escalando la señal recibida por un factor que es inversamente proporcional a la potencia recibida.   </p>
+<p>Una vez inicializado el prefijo, se procede a la instalación de GNU Radio desde PyBombs.</p>
 
-<p><em>Decodifica y envía.</em></p>
+<p><code>
+$ sudo pybombs -p myprefix install gnuradio gr-osmosdr
+</code></p>
 
-<p>Este protocolo consiste en que el nodo relay decodifique la señal recibida, la vuelva a codificar y entonces retransmita esta nueva señal al destino. Si la señal en el relay es incorrecta, esta puede ser reenviada al destino y su decodificación no tendría sentido. </p>
+<p>Para ejecutar la interfaz gráfica de GNU Radio, sólo se ejecuta el comando.</p>
 
-<p><em>Ecualiza y envía.</em></p>
+<p><code>
+$ gnuradio-companion
+</code></p>
 
-<p>En este protocolo, el relay recibe el símbolo de la fuente, estima el canal y elimina los efectos del canal de la Fase 1. Una vez hecho esto, el símbolo sin efectos del canal es transmitido a su destino.</p>
+<p><em>Conclusión.</em></p>
 
-<p><em>DFTS-OFDM</em></p>
+<p>El proyecto de PyBombs de GNU Radio ha mostrado un cambio que puede interpretarse como positivo, ya que permite agregar proyectos OOT de una manera sencilla e incluso modificar las recetas para proyectos personales y facilitar su distribución e instalación.</p>
 
-<p>Para disminuir el PAPR, 3GPP LTE-Advanced propone usar en el enlace de subida una tecnología conocida como SC-FDMA (Single Carrier - Frequency Division Medium Access) o DFTS-OFDM, esta técnica consiste en precodificar el símbolo de datos con una transformada discreta de Fourier y las muestras obtenidas de la etapa de precodificación son transmitidas en paralelo en un grupo de subportadoras. La forma de onda resultante en el dominio del tiempo tiene las características de una forma de onda de una señal de portadora única, esto es, tiene un PAPR bajo aunque la forma de onda no es de una señal de portadora única. </p>
+<p>viktorivan@openmailbox.org</p>
 
-<p>El transmisor DFTS-OFDM maneja bloques de tamaño N, los cuales contienen las muestras (valores complejos) de los símbolos modulados digitalmente, la etapa de DFT de N-puntos genera una representación de los símbolos de entrada en el dominio del tiempo. Las muestras son proyectadas en algunas de las M subportadoras disponibles de la etapa de IFFT de M-puntos, transformando la amplitud de las subportadoras en una señal compleja en el dominio del tiempo.</p>
+<p>@viktor_ivan</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Instalación de GNU Radio embedded en tarjetas ZedBoard]]></title>
+    <link href="http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard/"/>
+    <updated>2015-11-28T13:21:27-06:00</updated>
+    <id>http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard</id>
+    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
 
-<p><em>GNU Radio.</em></p>
+<p>El uso de sistemas embebidos se ha popularizado y beneficiado por las nuevas tecnologías, ya que ahora permiten implementar sistemas que no solo controlen de un modo básico y simple un dispositivo, sino que pueden formar parte de un ecosistema que incluya conectividad a Internet y por lo tanto monitoreo y control remoto. Adicionalmente, tendencias como el radio definido por software (SDR) han integrado a sus desarrollos la implementación en sistemas embebidos lo que permite el desarrollo de un sistema de comunicación completo en un ambiente embebido, disminuyendo costos y proporcionando portatibilidad.
+<!-- more --></p>
 
-<p><a href="http://www.gnuradio.org">GNU Radio</a> es una plataforma de SDR de software libre que permite el desarrollo de proyectos a través de una interfaz gráfica llamada GRC. Además, ofrece diversos bloques de procesamiento orientados a las telecomunicaciones, por lo que el desarrollo de sistemas de comunicación modernos es una taréa relativamente sencilla de implementar.</p>
+<p><em>Instalación.</em></p>
 
-<p><em>Plataforma DFTS-OFDM</em></p>
+<p>A diferencia de los sistemas operativos convencionales, el instalar un sistema embebido puede verse limitado por la arquitectura de hardware del sistema embebido, por lo que su instalación puede llegar a ocupar varias horas o incluso interrumpirse por la falta de recursos. Una alternativa es la compilación cruzada, donde en una computadora con mejores prestaciones que el hardware de un sistema embebido compila todo el software necesario para el desarrollo del sistema operativo embebido, pero con las librerías que le corresponden al sistema embebido, esto es, se realizará la compilación de una arquitectura de un sistema embebido en una arquitectura de hardware diferente.</p>
 
-<p>Para el desarrollo de una plataforma DFTS-OFDM en GNU Radio se consideraron las siguientes etapas en la transmisión y recepción del sistema.</p>
+<p>Existen varios proyectos para el desarrollo de sistemas embebidos, tales como <a href="http://www.openembedded.org">openembbeded</a>  o <a href="https://www.yoctoproject.org">yocto project</a>. <a href="http://gnuradio.org">GNU Radio</a> por su parte, proporciona un procedimiento para generar un sistema operativo embebido con <a href="https://gnuradio.org/redmine/projects/gnuradio/wiki/Embedded">GNU Radio</a>integrado al momento de realizar la compilación cruzada.</p>
 
-<ol>
-  <li>CRC de 32 bits.</li>
-  <li>Modulador digital 16-QAM.</li>
-  <li>Esparcimiento DFT de 192 puntos.</li>
-  <li>Modulador OFDM de 2048 puntos.</li>
-</ol>
+<p>Para el correcto funcionamientod de OpenEmbedded, se requiere de los siguientes prerequisitos.</p>
 
-<p>Así mismo la secuencia para la transmisión de datos es la siguiente:</p>
+<pre><code>$ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm
+</code></pre>
 
-<ol>
-  <li>Envío de encabezado (3 Símbolos).</li>
-  <li>Envío de palabras de sincronía (2 palabras).</li>
-  <li>Envío de carga (&gt;1 símbolo).</li>
-</ol>
+<p>Una vez cumplidos los prerequisitos se procede a la descarga del proyecto repo.</p>
 
-<p>La etapa de recepción  de datos se implementa de la siguiente manera:</p>
+<pre><code>$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &gt; repo
+$ chmod a+x repo
+$ sudo mv repo /usr/local/bin/
+</code></pre>
 
-<ol>
-  <li>Detección de símbolo OFDM en el canal.</li>
-  <li>Detección de cabecera y carga.</li>
-  <li>Detección de palabras de sincronía para estimación de canal.</li>
-  <li>Detección de carga.</li>
-</ol>
+<p>Se crea el directorio de trabajo del proyecto.</p>
 
-<p>Tanto las etapas de detección de cabecera y carga en el receptor incluyen etapas de DFTS, OFDM y demodulación digital 16-QAM, adicionalmente a la carga se le realiza una verificación de CRC.</p>
+<pre><code>$ mkdir oe-repo
+$ cd oe-repo
+</code></pre>
 
-<p><img src="/downloads/images/ofdm2048dfts192.png"></p>
+<p>Se indica que el sistema embebido incluye GNU Radio.</p>
 
-<p><em>DFTS-OFDM en modo relay con protocolo AF</em></p>
+<pre><code>$ repo init -u git://github.com/balister/oe-gnuradio-manifest.git -b fido
+</code></pre>
 
-<p>El protocolo de AF indica que los símbolos recibidos en el nodo relay serán enviados a su destino sólo amplificando la señal recibida, esta amplificación depende del SNR recibido, quedando de la siguiente manera:</p>
+<p>Se actualiza el proyecto e indica el modelo de la plataforma a utilizar.     </p>
 
-<p><img src="/downloads/images/ofdm2048dfts192AF.png"></p>
+<pre><code>$ repo sync
+$ TEMPLATECONF=`pwd`/meta-sdr/conf source ./oe-core/oe-init-build-env ./build ./bitbake
+</code></pre>
 
-<p><em>DFTS-OFDM en modo relay con protocolo DF</em></p>
+<p>Al momento de ejecutar el proyecto puede generar diversos tipos de errores, tal como este, donde no se indicó la plataforma</p>
 
-<p>El protocolo DF es de los mas complejos de implementar, el nodo relay debe obtener los datos hasta la etapa de CRC y volver a generar el símbolo para retransmitirlo al destino. </p>
+<p>```
+You had no conf/local.conf file. This configuration file has therefore been
+created for you with some default values. You may wish to edit it to use a 
+different MACHINE (target hardware) or enable parallel build options to take 
+advantage of multiple cores for example. See the file for more information as 
+common configuration options are commented.</p>
 
-<p>La implementación del protocolo DF en GNU Radio queda de la siguiente manera:</p>
+<p>You had no conf/bblayers.conf file. The configuration file has been created for
+you with some default values. To add additional metadata layers into your
+configuration please add entries to this file.</p>
 
-<p><img src="/downloads/images/ofdm2048dfts192DF.png"></p>
+<p>The Yocto Project has extensive documentation about OE including a reference
+manual which can be found at:
+    http://yoctoproject.org/documentation</p>
 
-<p><em>DFTS-OFDM en modo relay con protocolo EF</em></p>
+<p>For more information about OpenEmbedded see their website:
+    http://www.openembedded.org/</p>
 
-<p>El protocolo EF realiza una ecualización a los símbolos recibidos y los reenvía a su destino, al momento de implementar es necesario volver a generar los símbolos de cabecera y enviar nuevas palabras de sincronía para la estimación del canal en la fase 2 de la transmisión.</p>
+<h3 id="shell-environment-set-up-for-builds">Shell environment set up for builds.</h3>
 
-<p>El diagrama a bloques del protocolo EF queda de la siguiente manera:</p>
+<p>You can now run ‘bitbake <target>'
+```</target></p>
 
-<p><img src="/downloads/images/ofdm2048dfts192EF.png"></p>
+<p>Se indica la plataforma de hardware del sistema embebido, en este caso es una tarjeta <code>Zedboard</code> y con el comando <code>bitbake</code> se inicia la creación del sistema embebido, debido a la descarga de software esta operación llega a consumir hasta 50 GB de disco duro, igualmente puede tardar mucho tiempo por la velocidad del enlace de Internet. </p>
 
-<p><em>Conclusión</em></p>
+<p><code>
+$ export MACHINE="zedboard-zynq7"
+$ bitbake gnuradio-dev-image
+</code></p>
 
-<p>Las herramientas de SDR propician el desarrollo e implementación de nuevas tecnologías de radio, ya que no se requiere de una infraestructura cara y compleja para su utilización, se puede resumir en el uso de una computadora con linux. Para la emulación el paso es muy sencillo, solo se requiere conectar las tarjetas <a href="http://www.ettus.com/">USRP</a> en el puerto USB o de red y se tendrá un sistema de radio funcionando.</p>
+<p>En caso de que falte algún paquete, el proyecto indicará la falta del mismo.</p>
+
+<p>```
+NOTE: Your conf/bblayers.conf has been automatically updated.
+ERROR:  OE-core’s config sanity checker detected a potential misconfiguration.
+    Either fix the cause of this error or at your own risk disable the checker (see sanity.conf).
+    Following is the list of potential problems / advisories:</p>
+
+<pre><code>Please install the following missing utilities: chrpath ```
+</code></pre>
+
+<p>Este problema se soluciona a través de <code>apt-get</code>.</p>
+
+<pre><code>$ sudo apt-get install chrpath
+</code></pre>
+
+<p>Otro de los errores que se pueden presentar es la falta de recetas al momento de generar el sistema embebido.</p>
+
+<p>```
+Parsing recipes: 100% |#######################################| Time: 00:00:30
+Parsing of 1939 .bb files complete (0 cached, 1939 parsed). 2455 targets, 247 skipped, 0 masked, 0 errors.
+ERROR: No recipes available for:
+  /home/cidte/oe-repo/oe-core/../meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv<em>3.0.bbappend
+  /home/cidte/oe-repo/oe-core/../meta-fsl-arm-extra/recipes-kernel/linux/linux-timesys</em>3.0.15.bbappend</p>
+
+<p>Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+```
+En caso de que alguna receta no este disponible para su descarga será necesario eliminarla de la lista de recetas.</p>
+
+<pre><code>$ gedit conf/bblayers.conf
+</code></pre>
+
+<p>Dentro del archivo de configuración se busca los paquetes no disponibles y se borran.</p>
+
+<p><code>
+/home/cidte/oe-repo/oe-core/../meta-fsl-arm \
+/home/cidte/oe-repo/oe-core/../meta-fsl-arm-extra \
+</code></p>
+
+<p>Una vez hecha la modificación, se ejecuta nuevamente el comando <code>bitbake</code></p>
+
+<p>```
+$ bitbake gnuradio-dev-image</p>
+
+<p>Parsing recipes: 100% |#######################################| Time: 00:00:14
+Parsing of 1871 .bb files complete (0 cached, 1871 parsed). 2377 targets, 194 skipped, 0 masked, 0 errors.
+WARNING: No bb files matched BBFILE_PATTERN_ettus-e100 ‘^/home/cidte/oe-repo/oe-core/../meta-ettus/e100-bsp/’
+NOTE: Resolving any missing task queue dependencies
+NOTE: multiple providers are available for jpeg (jpeg, libjpeg-turbo)
+NOTE: consider defining a PREFERRED_PROVIDER entry to match jpeg
+NOTE: multiple providers are available for jpeg-native (jpeg-native, libjpeg-turbo-native)
+NOTE: consider defining a PREFERRED_PROVIDER entry to match jpeg-native</p>
+
+<p>Build Configuration:
+BB_VERSION        = “1.26.0”
+BUILD_SYS         = “x86_64-linux”
+NATIVELSBSTRING   = “elementary-OS-0.3.1”
+TARGET_SYS        = “arm-oe-linux-gnueabi”
+MACHINE           = “zedboard-zynq7”
+DISTRO            = “nodistro”
+DISTRO_VERSION    = “nodistro.0”
+TUNE_FEATURES     = “arm armv7a vfp neon callconvention-hard”
+TARGET_FPU        = “vfp-neon”
+meta              = “(nobranch):f0873b83d693af4a103999160d67fcf25c7eedc1”
+e100-bsp        <br />
+e300-bsp        <br />
+common            = “(nobranch):eed1cc7bd61aaefc711237f5952faa23f859454d”
+meta-xilinx       = “(nobranch):13779b9254bab450875a60ed8f21edd0e8876a71”
+meta-oe         <br />
+meta-networking <br />
+meta-filesystems<br />
+meta-python       = “(nobranch):df2f700d66bace65f5d802225232d01cf511fe81”
+meta-sdr          = “(nobranch):033049a3fa7c97dbe57eaaa54b84b05cbdd6484f”
+meta-ti           = “(nobranch):2210ae2cdacc22105b76c5fa45957ebec104f1c6”</p>
+
+<p>NOTE: Preparing RunQueue
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+```</p>
+
+<p><em>Copia a memoria SD.</em></p>
+
+<p>Una vez terminado el proceso de compilación cruzada, el proyecto entrega una serie de archivos que son el sistema operativo embebido en la siguiente ubicación.</p>
+
+<pre><code>$ cd /&lt;ruta-instalación-repo&gt;/oe-repo/build/tmp-glibc/deploy/images
+</code></pre>
+
+<p>Estos archivos deben ser copiados a una memoria SD, para ello es necesario que la memoria tenga dos particiones: una llamada BOOT, fat32, de 40 MB y que sea bootable y la segunda llamada rootfs, ext4 y de tamaño del resto de la memoria. Los archivos que se requieren en la memoria SD en la partición de BOOT son:</p>
+
+<pre><code>$ cp boot.bin /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp u-boot.elf /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp u-boot-dtb.img /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp uEnv.txt /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp uImage /&lt;ruta-a-memoria-SD&gt;/BOOT
+$ cp zedboard-zynq7.dtb /&lt;ruta-a-memoria-SD&gt;/BOOT
+</code></pre>
+
+<p>Los archivos para la partición de rootfs estan en un comprimido, no es necesario que el archivo comprimido sea copiado a la memoria, por lo que se puede extraer directamente</p>
+
+<pre><code>$ sudo tar -C /&lt;ruta-a-memoria-SD&gt;/rootfs/ -xzpf gnuradio-dev-image-zedboard-zynq7.tar.gz
+</code></pre>
+
+<p>Adicionalmente, el proyecto permite obtener el SDK del sistema embebido.</p>
+
+<pre><code>$ export MACHINE="zedboard-zynq7"
+$ bitbake -c populate_sdk gnuradio-dev-image
+
+$ ls tmp-glibc/deploy/sdk/
+$ sudo sh tmp-glibc/deploy/sdk/oecore-x86_64-armv7ahf-vfp-neon-toolchain-nodistro.0.sh 
+$ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueabi 
+</code></pre>
+
+<p><em>Comunicación con tarjeta Zedboard a través de puerto serial.</em></p>
+
+<p>El puerto <code>UART</code> de la tarjeta Zedboard es un puerto USB que se comunica de modo serial con la computadora, al momento de encender la tarjeta y estando conectada con la computadora por el puerto USB, se teclea el siguiente comando para buscar el puerto serial. </p>
+
+<pre><code>$ dmesg | grep tty
+</code></pre>
+
+<p>Existen diversas maneras de llamar al puerto serial, entre ellas:</p>
+
+<p><code>
+/dev/ttyS0 (puerto serial)
+/dev/ttyUSB0 (serial sobre USB)
+/dev/ttyACM0 (serial sobre USB)
+</code></p>
+
+<p>Una vez indentificado, se procede a comunicar con la tarjeta, en linux se puede utilizar el paquete <code>screen</code> para realizar la comunicación serial.</p>
+
+<pre><code>$ sudo apt-get install screen
+</code></pre>
+
+<p>Ya instalado el paquete, se procede a realizar el enlace a través del puerto serial.</p>
+
+<pre><code>$ screen /dev/ttyACM0 115200
+</code></pre>
+
+<p>Finalmente, se procede a encender la tarjeta Zedboard, en caso de que no arranque, desde el puerto serial se ejecuta:</p>
+
+<pre><code>&gt; env default -a
+&gt; env save
+&gt; reset
+</code></pre>
+
+<p>Para entrar a esta consola se tiene que evitar el autoboot de la tarjeta.</p>
+
+<p><em>Acceso SSH con X11Forwarding.</em>    </p>
+
+<p>Para habilitar la conexión SSH con X11Forwarding, desde el puerto serial hay que modificar el archivo:</p>
+
+<p><code>
+$ vi /etc/ssh/sshd_config
+</code></p>
+
+<p>Descomentar <code>X11Forwarding no</code> y poner <code>X11Forwarding yes</code>.</p>
+
+<p>Reiniciar el servicio con el comando</p>
+
+<p><code>
+$ /etc/init.d/sshd restart
+</code></p>
+
+<p>De este modo, queda habilitado <code>X11Forwarding</code> en los enlaces SSH, sin embargo es necesario indicar <code>-X</code> en la configuración de la conexión.</p>
+
+<p><em>Apagado remoto de la tarjeta Zedboard.</em></p>
+
+<p>Para apagar remotamente la tarjeta Zedboard sin dañar el sistema embebido es necesario teclear en la terminal de enlace remoto el comando.</p>
+
+<pre><code># shutdown -h now
+</code></pre>
+
+<p><em>Conclusión.</em></p>
+
+<p>El desarrollo de un sistema embebido a través de compilación cruzada puede resultar bastante complejo, pero la ventaja principal es que solo se requiere realizar una vez y los archivos generados pueden ser distribuidos libremente para la tarjeta para la cual fue diseñada. Así también, debido a que el proyecto de GNU Radio se basa en yocto y openembedded, es viable agregar otros proyectos a través de bblayers.</p>
 
 <p>viktorivan@openmailbox.org</p>
 

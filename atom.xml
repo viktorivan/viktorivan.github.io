@@ -4,7 +4,7 @@
   <title><![CDATA[Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-04-25T18:55:52-05:00</updated>
+  <updated>2016-04-27T09:34:03-05:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vocoders para banda angosta en GNU Radio]]></title>
+    <link href="http://viktorivan.github.io/blog/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio/"/>
+    <updated>2016-04-09T07:35:02-05:00</updated>
+    <id>http://viktorivan.github.io/blog/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio</id>
+    <content type="html"><![CDATA[<p><em>Introducción.</em></p>
+
+<p>Un vocoder analiza el habla midiendo los cambios en el tiempo de sus características espectrales. El resultado es una serie de señales que representan a las frecuencias que se modificaron en un tiempo particular mientras el usuario hablaba. En otras palabras, la señal se divide en un número de bandas de frecuencias y el nivel de la señal presente en cada banda de frecuencia es la representación instantánea de su energía espectral. De este modo, el vocoder reduce sustancialmente la cantidad de información requerida para almacenar una charla. </p>
+
+<!--more-->
+
+<p>En el codificador, la voz se envía a un banco de filtros de varias bandas, la señal filtrada de cada una de esas bandas se pasa a través de un seguidor de envolvente y las señales de control (amplitudes de la señal) de esta etapa son enviadas al decodificador. En el receptor, la etapa de decodificación utiliza estas señales de control para configurar correctamente los filtros correspondientes para resintetizar la voz. Estas señales de control ocupan un menor ancho de banda que la voz original, por lo que permite la multicanalización en los enlaces y el uso de banda angosta para su transmisión.</p>
+
+<p><em>CODEC2.</em></p>
+
+<p>Codec2 es un codec para conversaciones de audio de baja tasa de bit libre de patente y de fuente abierta. Codec2 comprime las conversaciones utilizando codificación senoidal, el cuál es un método especializado para conversaciones humanas. Fue diseñado para ser utilizado en radio amateur y otras aplicaciones de voz de alta compresión.</p>
+
+<p>Los modos de codec2 son: 3200, 2400, 1600, 1400, 1300, 1200 y 700 bps. Su desempeño es mejor que varios codecs de tasa baja. Por ejemplo, utiliza la mitad del ancho de banda de el método de Excitación Multi-Banda Avanzada para codificar una conversación con una calidad similar. La entrada del codec es un audio muestreado con PCM de 16 bits y la salida son paquetes de bytes. El audio recuperado de estos bytes es de 8 KHz. </p>
+
+<p>Por ejemplo, para el modo 3200, tiene 20 ms de audio convertidos en 64 Bits. Estos 64 Bits salen cada 20 ms, para una tasa de transmisión mínima de 3200 bps. Estos 64 Bits son enviados como 8 bytes al canal de datos.</p>
+
+<p><em>Modulación delta de pendiente variable contínua (CVSD).</em></p>
+
+<p>CVSD es un método de codificación de voz que utiliza modulación delta con escalones de tamaño variable. CVSD codifica 1 bit por muestra, por lo que un audio de 16 KHz es codificado a 16 Kbps. El codificador mantiene una muestra de referencia y un tamaño de escalón. Cada muestra de entrada se compara con la muestra de referencia. Si la muestra de entrada es grande, el codificador envía un 1 bit y le suma el tamaño del escalón de la muestra de referencia. Si la muestra de entrada es pequeña, el codificador envía un 0 bit y le resta el tamaño del escalón de la muestra de referencia. Además, el codificador guarda los N bits previos de la salida (Los valores comunes de N son 3 y 4) para determinar los ajustes del tamaño del escalón. </p>
+
+<p>El proceso de la decodificación se realiza a partir de la muestra de referencia, sumando o restando el tamaño del escalón de acuerdo al flujo de bits. La secuencia de muestras de referencia ajustadas son la forma de onda reconstruida, y el tamaño del escalón se ajusta de acuerdo a los 1 y 0 lógicos tal como en el codificador.</p>
+
+<p>CVSD tiene un compromiso entre sencillez, baja tasa de bit y calidad. Las tasas de bit comunes son de 9.6 a 128 Kbps</p>
+
+<p><em>Simulación con GNU Radio.</em></p>
+
+<p>Para la implementación de los vocoders en GNU Radio se requiere de un archivo de audio de una conversación a una tasa de muestreo de 8 KHz, los archivos de música no son recomendados ya que los vocoders están optimizados para comprimir voz. El tipo de dato de este archivo es interpretado como float, para hacer el cambio a short se tiene que multiplicar por 32767 y en el receptor dividir por la misma cantidad para mantener la igualdad de los datos durante la simulación.</p>
+
+<p>Como requisito, CODEC2 pide que las muestras no tengan algún tipo de empaquetamiento, por lo que se agrega el bloque de Packed to Unpacked con un tamaño de 16 bits. Finalmente en el receptor se agrega un bloque de remuestreo para adaptar la señal reconstruida de 8 KHz a la tasa de muestreo de la tarjeta de audio, en este caso de 48 KHz.</p>
+
+<p><img src="http://viktorivan.github.io/downloads/images/codec2_test_grc.png" /></p>
+
+<p>Los datos de salida del codec son una secuencia bits de 1 y 0 logicos que pueden ser enviados al modulador digital para su transmisión posterior. De igual modo, es posible agregar una visualización de los datos a la salida del decodificador, para hacer una comparación de los datos codificados y decodificados. </p>
+
+<p><img src="http://viktorivan.github.io/downloads/images/codec2_sim.png" /></p>
+
+<p>La implementación del codec CVSD es similar a la simulación de CODEC2, se puede observar que la salida del codec CVSD es diferente a la salida de CODEC2, no entrega vectorizado los datos, sino en un flujo de datos Char que pueden ser enviados directamente al modulador digital.</p>
+
+<p><img src="http://viktorivan.github.io/downloads/images/cvsd_test_grc.png" /></p>
+
+<p>Los datos de salida del codec no son una secuencia de bits, sino muestras con valores entre -100 y 100.</p>
+
+<p><img src="http://viktorivan.github.io/downloads/images/cvsd_sim.png" /></p>
+
+<p><em>Conclusión.</em></p>
+
+<p>El uso de vocoders es muy utilizado en los sistemas de comunicación actuales, ya que permiten tener varios enlaces de voz compartiendo el mismo canal, o en su defecto, realizar una conversación en canales de banda angosta, todo esto usando enlaces de comunicación digital. GNU Radio permite la implementación de un sistema de comunicación de voz con vocoders que pueden ser combinados con otros esquemas para tener un sistema completo funcional. </p>
+
+<p>viktorivan@openmailbox.org</p>
+
+<p>@viktor_ivan</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[DPSK y GFSK en GNU Radio]]></title>
