@@ -325,7 +325,14 @@ $ cp zedboard-zynq7.dtb /&lt;ruta-a-memoria-SD&gt;/BOOT
 <p>Los archivos para la partición de rootfs estan en un comprimido, no es necesario que el archivo comprimido sea copiado a la memoria, por lo que se puede extraer directamente</p>
 
 <pre><code>$ sudo tar -C /&lt;ruta-a-memoria-SD&gt;/rootfs/ -xzpf gnuradio-dev-image-zedboard-zynq7.tar.gz
+$ sudo tar -C /&lt;ruta-a-memoria-SD&gt;/rootfs/ -xzpf modules-zedboard-zynq7.tgz
 </code></pre>
+
+<p>Cabe mencionar que puede ser posible que el sistema no arranque debido a problemas con el archivo <code>boot.bin</code>, para solucionar el problema sólo hay que sustituirlo por uno que funcione correctamente o en su defecto crear uno utilizando las herramientas de ISE y SDK.</p>
+
+<p>Con respecto a los archivos utilizados en <code>rootfs</code>, no existe ningún problema si son sustituidos utilizando archivos de <code>BOOT</code> de otra versión, ya que los archivos de <code>rootfs</code> representan el sistema operativo y los archivos de <code>BOOT</code> la plataforma de hardware.</p>
+
+<p><em>SDK.</em></p>
 
 <p>Adicionalmente, el proyecto permite obtener el SDK del sistema embebido.</p>
 
