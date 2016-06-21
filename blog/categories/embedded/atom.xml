@@ -4,7 +4,7 @@
   <title><![CDATA[Category: embedded | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/embedded/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-05-02T13:12:47-05:00</updated>
+  <updated>2016-06-21T13:33:10-05:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -248,18 +248,25 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
 <p>Para habilitar la conexión SSH con X11Forwarding, desde el puerto serial hay que modificar el archivo:</p>
 
 <p><code>
-$ vi /etc/ssh/sshd_config
+# vi /etc/ssh/sshd_config
 </code></p>
 
-<p>Descomentar <code>X11Forwarding no</code> y poner <code>X11Forwarding yes</code>.</p>
+<p>Descomentar <code>X11Forwarding no</code> y poner <code>X11Forwarding yes</code>. En caso de no conocer como funciona el editor <code>vi</code> se puede buscar los comandos básicos en Internet. </p>
 
 <p>Reiniciar el servicio con el comando</p>
 
 <p><code>
-$ /etc/init.d/sshd restart
+# /etc/init.d/sshd restart
 </code></p>
 
 <p>De este modo, queda habilitado <code>X11Forwarding</code> en los enlaces SSH, sin embargo es necesario indicar <code>-X</code> en la configuración de la conexión.</p>
+
+<p><em>Fijar contraseña al usuario root.</em></p>
+
+<p>La contraseña de root se fija desde la terminal con el siguiente comando</p>
+
+<pre><code># passwd
+</code></pre>
 
 <p><em>Apagado remoto de la tarjeta Zedboard.</em></p>
 

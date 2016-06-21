@@ -384,16 +384,23 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
 <p>Para habilitar la conexión SSH con X11Forwarding, desde el puerto serial hay que modificar el archivo:</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ vi /etc/ssh/sshd_config</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line"># vi /etc/ssh/sshd_config</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Descomentar <code>X11Forwarding no</code> y poner <code>X11Forwarding yes</code>.</p>
+<p>Descomentar <code>X11Forwarding no</code> y poner <code>X11Forwarding yes</code>. En caso de no conocer como funciona el editor <code>vi</code> se puede buscar los comandos básicos en Internet. </p>
 
 <p>Reiniciar el servicio con el comando</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ /etc/init.d/sshd restart</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line"># /etc/init.d/sshd restart</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>De este modo, queda habilitado <code>X11Forwarding</code> en los enlaces SSH, sin embargo es necesario indicar <code>-X</code> en la configuración de la conexión.</p>
+
+<p><em>Fijar contraseña al usuario root.</em></p>
+
+<p>La contraseña de root se fija desde la terminal con el siguiente comando</p>
+
+<pre><code># passwd
+</code></pre>
 
 <p><em>Apagado remoto de la tarjeta Zedboard.</em></p>
 
