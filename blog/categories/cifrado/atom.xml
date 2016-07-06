@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cifrado | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/cifrado/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-06-21T13:33:10-05:00</updated>
+  <updated>2016-07-06T09:49:02-05:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -81,6 +81,14 @@ make
 ctest
 sudo make install
 sudo ldconfig
+</code></p>
+
+<p><em>Instalación utilizando PyBombs</em></p>
+
+<p>De igual modo, se puede instalar el proyecto de gr-NaCl utilizando los comandos de PyBombs.</p>
+
+<p><code>
+$ sudo pybombs -p myprefix install gr-nacl
 </code></p>
 
 <p><em>Funcionamiento</em></p>

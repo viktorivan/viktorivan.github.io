@@ -192,6 +192,15 @@
 </span><span class="line">$ sudo make install
 </span><span class="line">$ sudo ldconfig</span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<p><em>Instalación utilizando PyBombs</em></p>
+
+<p>Si se tiene instalado PyBombs, es posible instalar el proyecto con una sola línea de comando.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo pybombs -p myprefix install gr-ax25 gr-display gr-fcdproplus</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><em>Funcionamiento</em></p>
+
 <p>Para la demostración, gr-ax25 incluye en <code>gr-ax25/apps</code> un archivo llamado <code>APRS.grc</code>, este diagrama de flujo de GRC contiene un bloque jerárquico llamado <code>detectmarkspace.grc</code>, para que <code>APRS.grc</code> detecte el bloque jerárqico, es necesario que dentro de <code>detectmarkspace.grc</code> se presione el botón que genera los archivos .py, una vez hecho esto se procede a correr el archivo <code>APRS.grc</code> con el dispositivo de FUNcube Dongle instalado.</p>
 
 <p>Así mismo, se puede remplazar el bloque de FUNcube por uno de UHD para las tarjetas USRP, tal como se muestra a continuación.</p>

@@ -105,9 +105,11 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo apt-get install python-pip python-dev build-essential 
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo apt-get install python-pip python-dev build-essential git
 </span><span class="line">$ sudo pip install --upgrade pip 
-</span><span class="line">$ sudo pip install --upgrade virtualenv </span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">$ sudo pip install --upgrade virtualenv 
+</span><span class="line">$ sudo pip install setuptools</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Una vez instalado el gestor de aplicaciones de Python, se procede a la instalación de PyBombs.</p>
 
@@ -118,7 +120,7 @@
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git  
+</pre></td><td class="code"><pre><code class=""><span class="line">$ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
 </span><span class="line">$ pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Para que GNU Radio pueda ser ejecutado desde cualquier ubicación se tiene que indicar donde se instalará el proyecto.</p>
@@ -135,6 +137,22 @@
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">$ gnuradio-companion</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><em>Íconos de GNU Radio</em></p>
+
+<p>Para la instalación de los íconos, desde una terminal se ejecuta el comando:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo /usr/local/libexec/gnuradio/grc_setup_freedesktop install</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>De este modo, de manera automática se agregarán los íconos a los diferentes menús de la distribución de Linux.</p>
+
+<p><em>Imágenes del firmware de USRP</em></p>
+
+<p>Para poder utilizar las tarjetas USRP en el entorno de GNU Radio es necesario descargar las imágenes del firmware, esto se realiza con el siguiente comando:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo /usr/local/lib/uhd/utils/uhd_images_downloader.py</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><em>Otros comandos de PyBombs para GNU Radio</em></p>
 
@@ -184,6 +202,45 @@
 <p>Una vez eliminado todos estos archivos, se procede a descargar los archivos <code>recipes</code> e indicar el prefijo. De este modo, PyBombs instalará el entorno de GNU Radio sin tomar en consideración las versiones previas descargadas.</p>
 
 <p>En caso de que el problema de la actualización persista, será necesario eliminar todos los archivos de GNU Radio ubicados en <code>usr/local/</code>, realizando de este modo una desinstalación manual del entorno.</p>
+
+<p><em>Permisos de UHD para GNU Radio</em></p>
+
+<p>En caso de que al querer ejecutar un archivo de GRC que incluya el bloque de UHD y salga el error siguiente:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">UHD Error:
+</span><span class="line">    USB open failed: insufficient permissions.
+</span><span class="line">    See the application notes for your device.
+</span><span class="line">    
+</span><span class="line">    RuntimeError: LookupError: KeyError: No devices found for -----&gt;
+</span><span class="line">Empty Device Address</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Se debe a que no se tienen los permisos para utilizar el puerto USB, una solución rápida es ejecutar GRC con permisos de root.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo gnuradio-companion</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Para evitar ejecutar GRC como superusuario, es necesario actualizar las reglas, en primera instancia hay que localizar el archivo de las reglas de UDH, copiar el archivo en la ubicación de las reglas y finalmente volver a cargar las reglas del sistema. </p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo find / -name uhd-usrp.rules
+</span><span class="line">/usr/local/src/uhd/host/utils/uhd-usrp.rules
+</span><span class="line">/usr/local/lib/uhd/utils/uhd-usrp.rules
+</span><span class="line">
+</span><span class="line">$ sudo cp /usr/local/src/uhd/host/utils/uhd-usrp.rules /etc/udev/rules.d/
+</span><span class="line">
+</span><span class="line">$ sudo udevadm control --reload-rules</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><em>Conclusión.</em></p>
 

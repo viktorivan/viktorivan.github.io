@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ax25 | Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/blog/categories/ax25/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-06-21T13:33:10-05:00</updated>
+  <updated>2016-07-06T09:49:02-05:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -97,6 +97,16 @@ $ make
 $ sudo make install
 $ sudo ldconfig
 </code></p>
+
+<p><em>Instalación utilizando PyBombs</em></p>
+
+<p>Si se tiene instalado PyBombs, es posible instalar el proyecto con una sola línea de comando.</p>
+
+<p><code>
+$ sudo pybombs -p myprefix install gr-ax25 gr-display gr-fcdproplus
+</code></p>
+
+<p><em>Funcionamiento</em></p>
 
 <p>Para la demostración, gr-ax25 incluye en <code>gr-ax25/apps</code> un archivo llamado <code>APRS.grc</code>, este diagrama de flujo de GRC contiene un bloque jerárquico llamado <code>detectmarkspace.grc</code>, para que <code>APRS.grc</code> detecte el bloque jerárqico, es necesario que dentro de <code>detectmarkspace.grc</code> se presione el botón que genera los archivos .py, una vez hecho esto se procede a correr el archivo <code>APRS.grc</code> con el dispositivo de FUNcube Dongle instalado.</p>
 

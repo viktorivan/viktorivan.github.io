@@ -4,7 +4,7 @@
   <title><![CDATA[Iván Rodríguez]]></title>
   <link href="http://viktorivan.github.io/atom.xml" rel="self"/>
   <link href="http://viktorivan.github.io/"/>
-  <updated>2016-06-21T13:33:10-05:00</updated>
+  <updated>2016-07-06T09:49:02-05:00</updated>
   <id>http://viktorivan.github.io/</id>
   <author>
     <name><![CDATA[Iván Rodríguez]]></name>
@@ -215,6 +215,13 @@
 </span><span class="line">sudo make install
 </span><span class="line">sudo ldconfig</span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<p><em>Instalación utilizando PyBombs</em></p>
+
+<p>De igual modo, se puede instalar el proyecto de gr-NaCl utilizando los comandos de PyBombs.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo pybombs -p myprefix install gr-nacl</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <p><em>Funcionamiento</em></p>
 
 <p>Una vez instalado gr-nacl, se procede a hacer una prueba de cifrado. En el ejemplo incluido en el proyecto se puede observar el archivo de entrada, que es un archivo de texto con la palabra: “This is a test text. Hello world!”. Una vez ejecutado el grc, se pueden observar tres archivos de salida, uno donde se muestra la palabra de entrada, el segundo donde se observa el archivo cifrado y por último el archivo descifrado.</p>
@@ -251,9 +258,11 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo apt-get install python-pip python-dev build-essential 
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo apt-get install python-pip python-dev build-essential git
 </span><span class="line">$ sudo pip install --upgrade pip 
-</span><span class="line">$ sudo pip install --upgrade virtualenv </span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">$ sudo pip install --upgrade virtualenv 
+</span><span class="line">$ sudo pip install setuptools</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Una vez instalado el gestor de aplicaciones de Python, se procede a la instalación de PyBombs.</p>
 
@@ -264,7 +273,7 @@
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git  
+</pre></td><td class="code"><pre><code class=""><span class="line">$ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
 </span><span class="line">$ pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Para que GNU Radio pueda ser ejecutado desde cualquier ubicación se tiene que indicar donde se instalará el proyecto.</p>
@@ -281,6 +290,22 @@
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">$ gnuradio-companion</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><em>Íconos de GNU Radio</em></p>
+
+<p>Para la instalación de los íconos, desde una terminal se ejecuta el comando:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo /usr/local/libexec/gnuradio/grc_setup_freedesktop install</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>De este modo, de manera automática se agregarán los íconos a los diferentes menús de la distribución de Linux.</p>
+
+<p><em>Imágenes del firmware de USRP</em></p>
+
+<p>Para poder utilizar las tarjetas USRP en el entorno de GNU Radio es necesario descargar las imágenes del firmware, esto se realiza con el siguiente comando:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo /usr/local/lib/uhd/utils/uhd_images_downloader.py</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><em>Otros comandos de PyBombs para GNU Radio</em></p>
 
@@ -330,6 +355,45 @@
 <p>Una vez eliminado todos estos archivos, se procede a descargar los archivos <code>recipes</code> e indicar el prefijo. De este modo, PyBombs instalará el entorno de GNU Radio sin tomar en consideración las versiones previas descargadas.</p>
 
 <p>En caso de que el problema de la actualización persista, será necesario eliminar todos los archivos de GNU Radio ubicados en <code>usr/local/</code>, realizando de este modo una desinstalación manual del entorno.</p>
+
+<p><em>Permisos de UHD para GNU Radio</em></p>
+
+<p>En caso de que al querer ejecutar un archivo de GRC que incluya el bloque de UHD y salga el error siguiente:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">UHD Error:
+</span><span class="line">    USB open failed: insufficient permissions.
+</span><span class="line">    See the application notes for your device.
+</span><span class="line">    
+</span><span class="line">    RuntimeError: LookupError: KeyError: No devices found for -----&gt;
+</span><span class="line">Empty Device Address</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Se debe a que no se tienen los permisos para utilizar el puerto USB, una solución rápida es ejecutar GRC con permisos de root.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo gnuradio-companion</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Para evitar ejecutar GRC como superusuario, es necesario actualizar las reglas, en primera instancia hay que localizar el archivo de las reglas de UDH, copiar el archivo en la ubicación de las reglas y finalmente volver a cargar las reglas del sistema. </p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo find / -name uhd-usrp.rules
+</span><span class="line">/usr/local/src/uhd/host/utils/uhd-usrp.rules
+</span><span class="line">/usr/local/lib/uhd/utils/uhd-usrp.rules
+</span><span class="line">
+</span><span class="line">$ sudo cp /usr/local/src/uhd/host/utils/uhd-usrp.rules /etc/udev/rules.d/
+</span><span class="line">
+</span><span class="line">$ sudo udevadm control --reload-rules</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><em>Conclusión.</em></p>
 
@@ -1576,6 +1640,15 @@ Una vez teniendo el archivo generado se procede a la copia del sistema operativo
 </span><span class="line">$ make
 </span><span class="line">$ sudo make install
 </span><span class="line">$ sudo ldconfig</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><em>Instalación utilizando PyBombs</em></p>
+
+<p>Si se tiene instalado PyBombs, es posible instalar el proyecto con una sola línea de comando.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo pybombs -p myprefix install gr-ax25 gr-display gr-fcdproplus</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><em>Funcionamiento</em></p>
 
 <p>Para la demostración, gr-ax25 incluye en <code>gr-ax25/apps</code> un archivo llamado <code>APRS.grc</code>, este diagrama de flujo de GRC contiene un bloque jerárquico llamado <code>detectmarkspace.grc</code>, para que <code>APRS.grc</code> detecte el bloque jerárqico, es necesario que dentro de <code>detectmarkspace.grc</code> se presione el botón que genera los archivos .py, una vez hecho esto se procede a correr el archivo <code>APRS.grc</code> con el dispositivo de FUNcube Dongle instalado.</p>
 
