@@ -1,95 +1,77 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
-    <url>
-        <loc>http://viktorivan.github.io/blog/2013/09/29/capa-fisica-de-lte-a/</loc>
-        <lastmod>2014-11-19T20:02:21-06:00</lastmod>
-    </url>
-    <url>
-        <loc>http://viktorivan.github.io/blog/2013/10/20/comunicaciones-cooperativas/</loc>
-        <lastmod>2014-11-19T20:02:21-06:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://viktorivan.github.io/blog/2014/03/19/bloques-de-procesamiento-de-senales-en-gnu-radio/
-        </loc>
-        <lastmod>2015-11-03T12:03:22-06:00</lastmod>
-    </url>
-    <url>
-        <loc>http://viktorivan.github.io/blog/2014/03/19/librerias-externas-en-gnu-radio/</loc>
-        <lastmod>2014-11-22T13:39:41-06:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://viktorivan.github.io/blog/2014/05/19/redes-cooperativas-dfts-ofdm-con-gnu-radio/
-        </loc>
-        <lastmod>2014-11-19T20:02:21-06:00</lastmod>
-    </url>
-    <url>
-        <loc>http://viktorivan.github.io/blog/2014/06/13/scipy-como-alternativa-a-matlab/</loc>
-        <lastmod>2014-11-19T20:02:21-06:00</lastmod>
-    </url>
-    <url>
-        <loc>http://viktorivan.github.io/blog/2014/11/12/calculo-snr-ciego-para-ofdm/</loc>
-        <lastmod>2014-11-20T12:33:54-06:00</lastmod>
-    </url>
-    <url>
-        <loc>http://viktorivan.github.io/blog/2015/10/21/ax-dot-25-en-gnu-radio/</loc>
-        <lastmod>2016-06-23T13:26:29-05:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://viktorivan.github.io/blog/2015/10/22/jupyter-una-aplicacion-web-para-computo-cientifico/
-        </loc>
-        <lastmod>2016-03-30T19:41:46-06:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://viktorivan.github.io/blog/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python/
-        </loc>
-        <lastmod>2015-11-24T18:40:51-06:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://viktorivan.github.io/blog/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard/
-        </loc>
-        <lastmod>2016-03-15T08:32:47-06:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://viktorivan.github.io/blog/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard/
-        </loc>
-        <lastmod>2016-05-16T16:58:05-05:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://viktorivan.github.io/blog/2016/03/29/instalacion-gnu-radio-con-pybombs-version-2/
-        </loc>
-        <lastmod>2016-07-05T14:38:47-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://viktorivan.github.io/blog/2016/04/07/cifrado-en-gnu-radio-con-gr-nacl/</loc>
-        <lastmod>2016-06-23T13:24:04-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://viktorivan.github.io/blog/2016/04/09/dpsk-y-gfsk-en-gnu-radio/</loc>
-        <lastmod>2016-04-28T19:26:56-05:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://viktorivan.github.io/blog/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio/
-        </loc>
-        <lastmod>2016-04-28T19:27:21-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://viktorivan.github.io/blog/archives/</loc>
-        <lastmod>2016-07-05T14:38:47-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://viktorivan.github.io/robots.txt</loc>
-        <lastmod>2014-03-17T19:21:51-06:00</lastmod>
-    </url>
-    <url>
-        <loc>http://viktorivan.github.io/</loc>
-        <lastmod>2016-07-05T14:38:47-05:00</lastmod>
-    </url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://viktorivan.github.io/keysight/m8190a/matlab/2016/08/17/configuracion-inicial-del-generador-de-funciones-m8190a-de-keysight.html</loc>
+<lastmod>2016-08-17T23:05:19+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/gnuradio/codec2/cvsd/sdr/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio.html</loc>
+<lastmod>2016-04-09T12:35:02+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/gfsk/dpsk/sdr/gnuradio/2016/04/09/dpsk-y-gfsk-en-gnu-radio.html</loc>
+<lastmod>2016-04-09T12:34:39+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/cifrado/gnuradio/out-of-tree/2016/04/08/cifrado-en-gnu-radio-con-gr-nacl.html</loc>
+<lastmod>2016-04-08T01:04:29+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/30/instalacion-gnu-radio-con-pybombs-version-2.html</loc>
+<lastmod>2016-03-30T02:24:26+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html</loc>
+<lastmod>2015-11-28T19:21:27+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/xillinux/embedded/zedboard/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard.html</loc>
+<lastmod>2015-11-28T19:21:01+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/gnuradio/dsp/sdr/out-of-tree/python/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python.html</loc>
+<lastmod>2015-11-02T15:10:09+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/ipython/jupyter/python/2015/10/22/jupyter-una-aplicacion-web-para-computo-cientifico.html</loc>
+<lastmod>2015-10-22T22:32:15+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/gnuradio/ax25/radio/amateur/2015/10/21/ax-dot-25-en-gnu-radio.html</loc>
+<lastmod>2015-10-21T17:35:32+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/snr/ofdm/blind/ciego/2014/11/13/calculo-snr-ciego-para-ofdm.html</loc>
+<lastmod>2014-11-13T01:10:05+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/matlab/scipy/programacion/2014/06/13/scipy-como-alternativa-a-matlab.html</loc>
+<lastmod>2014-06-13T14:38:58+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/gnuradio/dfts-ofdm/relay/2014/05/19/redes-cooperativas-dfts-ofdm-con-gnu-radio.html</loc>
+<lastmod>2014-05-19T21:44:59+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/itpp/gnuradio/sdr/dsp/2014/03/20/librerias-externas-en-gnu-radio.html</loc>
+<lastmod>2014-03-20T02:04:12+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/gnuradio/dsp/sdr/out-of-tree/c++/2014/03/19/bloques-de-procesamiento-de-senales-en-gnu-radio.html</loc>
+<lastmod>2014-03-19T19:06:58+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/relay/lte-a/4g/2013/10/20/comunicaciones-cooperativas.html</loc>
+<lastmod>2013-10-20T22:06:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/lte-a/phy/4g/celular/sc-fdma/dfts-ofdm/2013/09/29/capa-fisica-de-lte-a.html</loc>
+<lastmod>2013-09-29T12:43:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://viktorivan.github.io/about/</loc>
+</url>
+<url>
+<loc>http://viktorivan.github.io/</loc>
+</url>
 </urlset>
