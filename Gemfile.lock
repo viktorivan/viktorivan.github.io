@@ -58,11 +58,11 @@ GEM
       jekyll (>= 2.0)
     pathutil (0.14.0)
       forwardable-extended (~> 2.6)
-    rb-fsevent (0.9.7)
+    rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
     rouge (1.11.1)
-    rubypants (0.5.0)
+    rubypants (0.6.0)
     rubypants-unicode (0.2.5)
     safe_yaml (1.0.4)
     sass (3.4.22)
@@ -89,4 +89,4 @@ RUBY VERSION
    ruby 2.1.5p273
 
 BUNDLED WITH
-   1.13.1
+   1.13.6

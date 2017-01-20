@@ -6,9 +6,265 @@
 </description>
     <link>http://viktorivan.github.io/</link>
     <atom:link href="http://viktorivan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 27 Sep 2016 21:32:18 +0000</pubDate>
-    <lastBuildDate>Tue, 27 Sep 2016 21:32:18 +0000</lastBuildDate>
+    <pubDate>Fri, 20 Jan 2017 11:25:32 -0600</pubDate>
+    <lastBuildDate>Fri, 20 Jan 2017 11:25:32 -0600</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Instalación De ADI Linux Embedded De Analog Devices</title>
+        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;El desarrollo de sistemas operativos embebidos personalizados permite a los fabricantes de hardware tener un ecosistema de programación con las herramientas y drivers necesarios para la implementación rápida de sistemas de comunicación en sus plataformas de evaluación.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.analog.com&quot;&gt;Analog Devices&lt;/a&gt; ha desarrollado un sistema operativo (ADI) que contiene un entorno de programación para aplicaciones basadas en SDR capaz de conectarse a una red para acceso y control remoto.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;&lt;em&gt;Descarga de ADI.&lt;/em&gt;
+La imágen de ADI se encuentra en la página de &lt;a href=&quot;https://wiki.analog.com/resources/tools-software/linux-software/zynq_images&quot;&gt;Zynq &amp;amp; Altera SoC Quick Start Guide&lt;/a&gt;, en ella se pueden descargar diferentes versiones de ADI, también se puede observar una lista de las plataformas compatibles con el sistema operativo.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Instalación de ADI en la memoria SD.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;De acuerdo a la página de &lt;a href=&quot;https://wiki.analog.com/resources/tools-software/linux-software/zynq_images/linux_hosts&quot;&gt;Linux Download and setting up the image&lt;/a&gt;, primero se descomprime el archivo descargado de la imágen de ADI.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ unxz 2014_R2-2015_02_06.img.xz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;El archivo extraído tiene terminación &lt;code class=&quot;highlighter-rouge&quot;&gt;img&lt;/code&gt;, el cual es una imágen del sistema operativo que se copiará en la memoria SD.&lt;/p&gt;
+
+&lt;p&gt;Con el comando &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo dd&lt;/code&gt; se copiará la imágen en la memoria SD, para ello se debe conocer la ubicación y desmontar la memoria SD. Este proceso de escritura suele tardar varios minutos.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ lsblk
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo umount /dev/mmcblk0p1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo dd if=2014_R2-2015_02_06.img of=/dev/mmcblk0 bs=4194304
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Para evitar algún tipo de error al momento de retirar la memoria SD, se recomienda limpiar los buffers del sistema, esto se hace con el siguiente comando.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sync
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;Configuración de tarjeta de evaluación.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Una vez preparada la memoria SD, se procede con la configuración de los jumpers de la tarjeta de evaluación de acuerdo a la siguiente &lt;a href=&quot;https://wiki.analog.com/_detail/resources/eval/user-guides/ad-fmcomms2-ebz/quickstart/zed_sw.jpg?id=resources%3Aeval%3Auser-guides%3Aad-fmcomms2-ebz%3Aquickstart%3Azynq&quot;&gt;imágen&lt;/a&gt;, de este modo se le indicará que existe un sistema operativo y que está ubicado en la ranura de la memoria SD. En la página de &lt;a href=&quot;https://wiki.analog.com/resources/eval/user-guides/ad-fmcomms2-ebz/quickstart/zynq&quot;&gt;AD-FMCOMMS2/3/4/5-EBZ Zynq and ZED Quick Start Guide&lt;/a&gt; se puede observar a detalle los pasos a seguir.&lt;/p&gt;
+
+&lt;p&gt;Finalmente, la tarjeta de evaluación funciona con un sistema operativo embebido, el cual puede ser utilizado con un monitor HDMI y teclado o remotamente a través de &lt;code class=&quot;highlighter-rouge&quot;&gt;SSH&lt;/code&gt; o &lt;code class=&quot;highlighter-rouge&quot;&gt;VNC&lt;/code&gt; conectado a la red.&lt;/p&gt;
+
+&lt;p&gt;Por defecto, el sistema operativo tiene habilitado el puerto &lt;code class=&quot;highlighter-rouge&quot;&gt;SSH&lt;/code&gt;, y los usuarios son: &lt;code class=&quot;highlighter-rouge&quot;&gt;analog&lt;/code&gt; con contraseña &lt;code class=&quot;highlighter-rouge&quot;&gt;analog&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt; con contraseña &lt;code class=&quot;highlighter-rouge&quot;&gt;analog&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh -X analog@dirección-ip
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;La opción &lt;code class=&quot;highlighter-rouge&quot;&gt;-X&lt;/code&gt; es opcional y sirve para habilitar el modo gráfico desde la terminar &lt;code class=&quot;highlighter-rouge&quot;&gt;SSH&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Para habilitar el escritorio remoto de &lt;code class=&quot;highlighter-rouge&quot;&gt;VNC&lt;/code&gt;, se debe de ejecutar el comando de &lt;code class=&quot;highlighter-rouge&quot;&gt;vino-preferences&lt;/code&gt; desde una terminal, en caso de que no se haya indicado la opción &lt;code class=&quot;highlighter-rouge&quot;&gt;-X&lt;/code&gt; al conectarse por &lt;code class=&quot;highlighter-rouge&quot;&gt;SSH&lt;/code&gt; este desplegará un error.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo vino-preferences
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Aunque la ventana de &lt;code class=&quot;highlighter-rouge&quot;&gt;vino-preferences&lt;/code&gt; no actualice en tiempo real, los cambios se pueden verificar cerrando la ventana y ejecutando el comando nuevamente.&lt;/p&gt;
+
+&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
+
+&lt;p&gt;@viktor_ivan&lt;/p&gt;
+</description>
+        <pubDate>Tue, 01 Nov 2016 16:06:17 -0600</pubDate>
+        <link>http://viktorivan.github.io/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices.html</link>
+        <guid isPermaLink="true">http://viktorivan.github.io/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices.html</guid>
+        
+        
+        <category>ADI</category>
+        
+        <category>linux-embedded</category>
+        
+        <category>analog-devices</category>
+        
+        <category>picozed</category>
+        
+        <category>zedboard</category>
+        
+      </item>
+    
+      <item>
+        <title>Compilación Cruzada De GNU Radio Y Proyectos OOT en Linux Embebido</title>
+        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;El uso de sistemas embebidos se ha popularizado debido a que permiten implementar sistemas para un uso específico utilizando un entorno amigable de programación. Existen sistemas muy populares como &lt;a href=&quot;https://www.raspberrypi.org/&quot;&gt;Raspberry Pi&lt;/a&gt; de bajo costo, pero hay otros sistemas con un grado de especialización mayor, como es el caso de &lt;a href=&quot;http://zedboard.org/&quot;&gt;Zedboard&lt;/a&gt;, el cual permite la implementación de aceleradores de hardware e integración con dispositivos de comunicación reconfigurable.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;&lt;em&gt;Compilación Cruzada.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;El término de compilación cruzada se refiere al proceso de compilación de los archivos para el sistema operativo basado en ARM, utilizando una computadora con un procesador diferente. De este modo, aprovechando el poder de cómputo de una computadora personal es posible generar los archivos que se utilizarán en el sistema embebido, la ventaja principal de la compilación cruzada es la reducción del tiempo que se requiere para instalar aplicaciones si se utilizara en cambio el procesador ARM.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;GNU Radio Embedded.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Existen diferentes sistemas operativos embebedidos, ya sea basados en &lt;a href=&quot;https://developer.microsoft.com/en-us/windows/iot&quot;&gt;Windows&lt;/a&gt;, &lt;a href=&quot;https://source.android.com/&quot;&gt;Android&lt;/a&gt; o &lt;a href=&quot;http://elinux.org/&quot;&gt;Linux&lt;/a&gt;, los cuales permiten la interacción y control de la plataforma de hardware a través de protolos como &lt;code class=&quot;highlighter-rouge&quot;&gt;SSH&lt;/code&gt; o &lt;code class=&quot;highlighter-rouge&quot;&gt;Escritorio Remoto&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;En el caso de Linux Embedded, existen herramientas que permiten generar una versión personalizada del sistema operativo, tal como &lt;a href=&quot;https://www.yoctoproject.org/&quot;&gt;Yocto&lt;/a&gt; y &lt;a href=&quot;http://openembedded.org/&quot;&gt;Open Embedded&lt;/a&gt;, donde, a través de selección de capas (layers), el usuario puede escoger las aplicaciones que se descargarán y compilarán para generar el sistema operativo embebido.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://gnuradio.org/redmine/projects/gnuradio/wiki/Embedded&quot;&gt;GNU Radio Embedded&lt;/a&gt; es un desarrollo del proyecto de &lt;a href=&quot;http://gnuradio.org/&quot;&gt;GNU Radio&lt;/a&gt; donde, con ayuda de Open Embedded, se crea un sistema operativo embebido personalizado que incluye las herramientas de GNU Radio, adicionalmente, incluye un Software Development Kit (SDK) para actualizar las librerías y programas de GNU Radio a través de compilación cruzada.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Instalación de GNU Radio con compilación cruzada.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Instalación de SDK de GNU Radio.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Previo a la descarga del proyecto que se instalará a través de compilación cruzada, se requiere de la instalación del SDK (Software development Kit) de GNU Radio, en el post de &lt;a href=&quot;/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html&quot;&gt;Instalación de GNU Radio embedded en tarjetas ZedBoard&lt;/a&gt; se indica como instalar el SDK.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Descarga de proyecto de GNU Radio.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;El proyecto de GNU Radio se puede descargar a través de sus repositorios con la herramienta de git.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone --recursive http://git.gnuradio.org/git/gnuradio.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Al terminar, se creará una carpeta que contendrá el proyecto recién descargado, dentro esta carpeta se requiere ejecutar el comando que habilitará el entorno del SDK para la compilación cruzada.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd gnuradio 
+$ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueabi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Una vez habilitado el entorno, se procede a la generación de los archivos compatibles con el sistema operativo basado en ARM.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir build-arm
+$ cd build-arm
+$ cmake -Wno-dev    -DCMAKE_TOOLCHAIN_FILE=/usr/local/src/gnuradio/cmake/Toolchains/oe-sdk_cross.cmake -DENABLE_GR_WXGUI=OFF -DENABLE_GR_VOCODER=OFF -DENABLE_GR_DTV=OFF -DENABLE_GR_ATSC=OFF -DENABLE_DOXYGEN=OFF -DCMAKE_INSTALL_PREFIX=/usr ../
+$ make
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Si se desea instalar un proyecto OOT, sólo cambia los parámetros del comando de cmake.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cmake -Wno-dev -DCMAKE_TOOLCHAIN_FILE=/usr/local/src/gnuradio/cmake/Toolchains/oe-sdk_cross.cmake -DENABLE_DOXYGEN=OFF ../
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Una vez terminado este proceso, se copian los archivos generados a la tarjeta SD, en la partición de &lt;code class=&quot;highlighter-rouge&quot;&gt;rootfs&lt;/code&gt;, donde está instalado el sistema operativo embebido.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo make install DESTDIR=ruta-a-memoria-sd/rootfs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Para actualizar la versión de GNU Radio del SDK, se copian los archivos de de GNU Radio en la siguiente ruta.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo make install DESTDIR=/usr/local/oecore-x86_64/sysroots/armv7a-...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Una vez instalado GNU Radio en la memoria SD del sistema operativo embebido, se verifica en con el sistema embebido el correcto funcionamiento del sistema operativo y de GNU Radio.&lt;/p&gt;
+
+&lt;p&gt;Tradicionalmente en GNU Radio se tiene que ejecutar el comando &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo ldconfig&lt;/code&gt; para terminar el proceso de instalación, en el caso de GNU Radio Embebido, desde la terminal remota de SSH o algún cliente remoto, se puede ejecutar este comando para finalizar el proceso de instalación.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ touch /etc/ld.so.conf
+$ echo /usr/local/lib &amp;gt;&amp;gt; /etc/ld.so.conf
+$ ldconfig
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;En caso de que se hayan instalado paquetes OOT, se tiene que indicar la ubicación de la instalación en la variable &lt;code class=&quot;highlighter-rouge&quot;&gt;PYTHONPATH&lt;/code&gt;, si no se desea estar ejecutando esta variable cada vez que se inicia el sistema operativo, se puede mover los archivos al directorio &lt;code class=&quot;highlighter-rouge&quot;&gt;dist-packages&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ export PYTHONPATH=/usr/local/lib/python2.7/site-packages/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;Conclusión.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Los sistemas embebidos son sistemas mínimos donde la actualización o instalación de aplicaciones pueden requerir de mucho tiempo o incluso ser un proceso que no se pueda realizar en esa plataforma de hardware. La compilación cruzada es una herramienta que permite ahorrar tiempo en este tipo de operaciones, facilitando al usuario la implementación de programas y eliminando erorres de compilación en la plataforma de hardware embebida.&lt;/p&gt;
+
+&lt;p&gt;GNU Radio en combinación con Linux Embedded nos permite implementar sistemas de radio configurable en plataformas dedicadas de una forma rápida y sencilla, donde con ayuda del SDK es fácil instalar y actualizar los proyectos de GNU Radio.&lt;/p&gt;
+
+&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
+
+&lt;p&gt;@viktor_ivan&lt;/p&gt;
+</description>
+        <pubDate>Fri, 28 Oct 2016 10:23:44 -0500</pubDate>
+        <link>http://viktorivan.github.io/gnuracio/cross-compiling/linux-embedded/2016/10/28/compilacin-cruzada-de-gnu-radio-y-proyectos-oot-en-linux-embebido.html</link>
+        <guid isPermaLink="true">http://viktorivan.github.io/gnuracio/cross-compiling/linux-embedded/2016/10/28/compilacin-cruzada-de-gnu-radio-y-proyectos-oot-en-linux-embebido.html</guid>
+        
+        
+        <category>gnuracio</category>
+        
+        <category>cross-compiling</category>
+        
+        <category>linux-embedded</category>
+        
+      </item>
+    
+      <item>
+        <title>Instalación De ADI IIO Oscilloscope De Analog Devices en Linux</title>
+        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;
+El desarrollo de plataformas conectadas a la red permite que instrumentos de medición puedan ser controlados remotamente desde una computadora, de este modo, se puede compartir la instrumentación de un laboratorio sin necesidad de moverlo.&lt;/p&gt;
+
+&lt;p&gt;Las tarjetas de evaluación de radio definido por software (SDR) tienen la capacidad de programarse como instrumentos de medición, ya sea como osciloscopio, analizador de espectro o de redes, entre otros. También permiten el monitoreo y control remoto de sus periféricos a través de servicios de su sistema operativo embebido.&lt;/p&gt;
+
+&lt;p&gt;El sistema operativo ADI de Analog Devices incluye un oscisloscopio y analizador de espectro que funciona tanto en la plataforma de SDR como en una computadora, lo que permite al usuario realizar mediciones de zonas remotas sin estar de forma presencial en el laboratorio.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;&lt;em&gt;Instalación.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;El programa de &lt;a href=&quot;https://github.com/analogdevicesinc/iio-oscilloscope&quot;&gt;ADI IIO Oscilloscope&lt;/a&gt; se instala tanto en la plataforma de SDR, el cual está instalado por defecto en ADI Linux Embedded y en la computadora donde se desee realizar el monitoreo.&lt;/p&gt;
+
+&lt;p&gt;Los prerequisitos de instalación para Linux son:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt install libcurl4-gnutls-dev libjansson-dev libgtkdatabox-0.9.2-0-dev libmatio-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Una vez instalados los prerequisitos, se procede a la descarga del proyecto ADI IIO Oscilloscope desde github.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone https://github.com/analogdevicesinc/iio-oscilloscope.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Una vez descargado el proyecto, este creará una carpeta llamada &lt;code class=&quot;highlighter-rouge&quot;&gt;iio-oscilloscope&lt;/code&gt;, en ella se realizarán los pasos para instalar el programa en Linux.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd iio-oscilloscope/
+
+$ make
+
+$ sudo make install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Una vez terminada la instalación del programa, se procede a ejecutar el programa desde la terminal de comandos.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo osc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;De igual modo se puede ejecutar el programa con el ícono de &lt;code class=&quot;highlighter-rouge&quot;&gt;ADI IIO Oscilloscope&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Debido a que no se tiene instalada la tarjeta de RF de manera local en la computadora, se debe de indicar la dirección IP de la tarjeta de evaluación donde se encuentra instalada la tarjeta de RF de Analog Devices. Para ello se hace click en &lt;code class=&quot;highlighter-rouge&quot;&gt;settings&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;connect&lt;/code&gt;, se selecciona la opción de &lt;code class=&quot;highlighter-rouge&quot;&gt;Remote Devices (network)&lt;/code&gt; y se indica la dirección IP en la campo de &lt;code class=&quot;highlighter-rouge&quot;&gt;Hostname&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/connect_osc.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finalmente se puede observar las señales capturadas en la tarjeta de RF a través de la ventana del programa de ADI IIO Oscilloscope.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/settings_osc.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/spectrum_osc.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
+
+&lt;p&gt;@viktor_ivan&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 28 Oct 2016 10:16:39 -0500</pubDate>
+        <link>http://viktorivan.github.io/analog-devices/adi/oscilloscope/linux/2016/10/28/instalacin-de-adi-iio-oscilloscope-de-analog-devices-en-linux.html</link>
+        <guid isPermaLink="true">http://viktorivan.github.io/analog-devices/adi/oscilloscope/linux/2016/10/28/instalacin-de-adi-iio-oscilloscope-de-analog-devices-en-linux.html</guid>
+        
+        
+        <category>analog-devices</category>
+        
+        <category>ADI</category>
+        
+        <category>oscilloscope</category>
+        
+        <category>linux</category>
+        
+      </item>
     
       <item>
         <title>Configuración inicial del generador de funciones M8190A de Keysight</title>
@@ -101,7 +357,7 @@
 
 &lt;p&gt;@viktor_ivan&lt;/p&gt;
 </description>
-        <pubDate>Wed, 17 Aug 2016 23:05:19 +0000</pubDate>
+        <pubDate>Wed, 17 Aug 2016 18:05:19 -0500</pubDate>
         <link>http://viktorivan.github.io/keysight/m8190a/matlab/2016/08/17/configuracion-inicial-del-generador-de-funciones-m8190a-de-keysight.html</link>
         <guid isPermaLink="true">http://viktorivan.github.io/keysight/m8190a/matlab/2016/08/17/configuracion-inicial-del-generador-de-funciones-m8190a-de-keysight.html</guid>
         
@@ -168,7 +424,7 @@
 
 &lt;p&gt;@viktor_ivan&lt;/p&gt;
 </description>
-        <pubDate>Sat, 09 Apr 2016 12:35:02 +0000</pubDate>
+        <pubDate>Sat, 09 Apr 2016 07:35:02 -0500</pubDate>
         <link>http://viktorivan.github.io/gnuradio/codec2/cvsd/sdr/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio.html</link>
         <guid isPermaLink="true">http://viktorivan.github.io/gnuradio/codec2/cvsd/sdr/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio.html</guid>
         
@@ -240,7 +496,7 @@
 
 &lt;p&gt;@viktor_ivan&lt;/p&gt;
 </description>
-        <pubDate>Sat, 09 Apr 2016 12:34:39 +0000</pubDate>
+        <pubDate>Sat, 09 Apr 2016 07:34:39 -0500</pubDate>
         <link>http://viktorivan.github.io/gfsk/dpsk/sdr/gnuradio/2016/04/09/dpsk-y-gfsk-en-gnu-radio.html</link>
         <guid isPermaLink="true">http://viktorivan.github.io/gfsk/dpsk/sdr/gnuradio/2016/04/09/dpsk-y-gfsk-en-gnu-radio.html</guid>
         
@@ -344,9 +600,9 @@ sudo ldconfig
 
 &lt;p&gt;@viktor_ivan&lt;/p&gt;
 </description>
-        <pubDate>Fri, 08 Apr 2016 01:04:29 +0000</pubDate>
-        <link>http://viktorivan.github.io/cifrado/gnuradio/out-of-tree/2016/04/08/cifrado-en-gnu-radio-con-gr-nacl.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/cifrado/gnuradio/out-of-tree/2016/04/08/cifrado-en-gnu-radio-con-gr-nacl.html</guid>
+        <pubDate>Thu, 07 Apr 2016 20:04:29 -0500</pubDate>
+        <link>http://viktorivan.github.io/cifrado/gnuradio/out-of-tree/2016/04/07/cifrado-en-gnu-radio-con-gr-nacl.html</link>
+        <guid isPermaLink="true">http://viktorivan.github.io/cifrado/gnuradio/out-of-tree/2016/04/07/cifrado-en-gnu-radio-con-gr-nacl.html</guid>
         
         
         <category>cifrado</category>
@@ -516,9 +772,9 @@ $ sudo udevadm control --reload-rules
 
 &lt;p&gt;@viktor_ivan&lt;/p&gt;
 </description>
-        <pubDate>Wed, 30 Mar 2016 02:24:26 +0000</pubDate>
-        <link>http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/30/instalacion-gnu-radio-con-pybombs-version-2.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/30/instalacion-gnu-radio-con-pybombs-version-2.html</guid>
+        <pubDate>Tue, 29 Mar 2016 20:24:26 -0600</pubDate>
+        <link>http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/29/instalacion-gnu-radio-con-pybombs-version-2.html</link>
+        <guid isPermaLink="true">http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/29/instalacion-gnu-radio-con-pybombs-version-2.html</guid>
         
         
         <category>gnuradio</category>
@@ -814,7 +1070,7 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
 
 &lt;p&gt;@viktor_ivan&lt;/p&gt;
 </description>
-        <pubDate>Sat, 28 Nov 2015 19:21:27 +0000</pubDate>
+        <pubDate>Sat, 28 Nov 2015 13:21:27 -0600</pubDate>
         <link>http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html</link>
         <guid isPermaLink="true">http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html</guid>
         
@@ -910,7 +1166,7 @@ Una vez teniendo el archivo generado se procede a la copia del sistema operativo
 
 &lt;p&gt;@viktor_ivan&lt;/p&gt;
 </description>
-        <pubDate>Sat, 28 Nov 2015 19:21:01 +0000</pubDate>
+        <pubDate>Sat, 28 Nov 2015 13:21:01 -0600</pubDate>
         <link>http://viktorivan.github.io/xillinux/embedded/zedboard/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard.html</link>
         <guid isPermaLink="true">http://viktorivan.github.io/xillinux/embedded/zedboard/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard.html</guid>
         
@@ -920,618 +1176,6 @@ Una vez teniendo el archivo generado se procede a la copia del sistema operativo
         <category>embedded</category>
         
         <category>zedboard</category>
-        
-      </item>
-    
-      <item>
-        <title>Bloques de procesamiento de señal de GNU Radio en Python</title>
-        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Debido a la popularidad de &lt;a href=&quot;https://www.python.org&quot;&gt;Python&lt;/a&gt; para el procesamiento digital de señales en el ámbito científico a través de &lt;a href=&quot;http://www.scipy.org/&quot;&gt;SciPy&lt;/a&gt;, el proyecto de &lt;a href=&quot;http://www.gnuradio.org&quot;&gt;GNU Radio&lt;/a&gt; permite el desarrollo de bloques de procesamiento de señales que pueden ser escritos en lenguaje de programación Python y usar estas librerías sin ningún problema. Este tipo de módulos son conocidos como &lt;code class=&quot;highlighter-rouge&quot;&gt;out-of-tree&lt;/code&gt;, ya que, aunque los módulos serán integrados dentro del catálogo de bloques de GNU Radio no se van a integrar al proyecto para su distribución conjunta, sino individual.&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
-&lt;p&gt;&lt;em&gt;Procedimiento.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Para crear un módulo &lt;code class=&quot;highlighter-rouge&quot;&gt;out-of-tree&lt;/code&gt; se ejecuta desde una terminal de linux el siguiente comando&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gr_modtool create
-Name of the new module:Tu_modulo
-Creating out-of-tree module in ./gr-Tu_modulo... Done. 
-Use 'gr_modtool add' to add a new block to this currently empty module. 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;El nombre que se indique para el módulo es con el que va a aparecer en el catálogo de GNU Radio, en este caso Tu_modulo.&lt;/p&gt;
-
-&lt;p&gt;Para crear los bloques que integrarán el módulo se utiliza la herramienta &lt;code class=&quot;highlighter-rouge&quot;&gt;gr_modtool&lt;/code&gt; en la carpeta raíz del proyecto. En este caso se creará un bloque que realizará la función de un convertidor binario a decimal para los tipos de datos float basado en Python.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd gr-Tu_modulo
-$ gr_modtool add
-GNU Radio module name identified: Tu_modulo 
-('sink', 'source', 'sync', 'decimator', 'interpolator', 'general', 'tagged_stream', 'hier', 'noblock')
-Enter block type: decimator 
-Language (python/cpp): python
-Language: Python
-Enter name of block/code (without module name prefix): bin2dec_py_ff
-Block/code identifier: bin2dec_py_ff
-Enter valid argument list, including default arguments: vec_size
-Add Python QA code? [Y/n] 
-Adding file 'python/bin2dec_py_ff.py'...
-Adding file 'python/qa_bin2dec_py_ff.py'...
-Editing python/CMakeLists.txt...
-Adding file 'grc/prueba_bin2dec_py_ff.xml'...
-Editing grc/CMakeLists.txt...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;y a su vez, se desarrollará un bloque que realice la operación inversa, esto es, un convertidor decimal a binario.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gr_modtool add 
-GNU Radio module name identified: Tu_modulo 
-('sink', 'source', 'sync', 'decimator', 'interpolator', 'general', 'tagged_stream', 'hier', 'noblock')
-Enter block type: interpolator
-Language (python/cpp): python
-Language: Python
-Enter name of block/code (without module name prefix): dec2bin_py_ff
-Block/code identifier: dec2bin_py_ff
-Enter valid argument list, including default arguments: vec_size
-Add Python QA code? [Y/n] 
-Adding file 'python/dec2bin_py_ff.py'...
-Adding file 'python/qa_dec2bin_py_ff.py'...
-Editing python/CMakeLists.txt...
-Adding file 'grc/prueba_dec2bin_py_ff.xml'...
-Editing grc/CMakeLists.txt...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;de esta manera se han creado dos bloques que serán escritos en Python, un decimador para el convertidor binario a decimal y un interpolador para el decimal a binario.&lt;/p&gt;
-
-&lt;p&gt;Los archivos donde se realizará la programación en código Python se ubican en &lt;code class=&quot;highlighter-rouge&quot;&gt;~/gr-Tu_modulo/python&lt;/code&gt; y se llama &lt;code class=&quot;highlighter-rouge&quot;&gt;dec2bin_py_ff.py&lt;/code&gt; para el convertidor decimal a binario y &lt;code class=&quot;highlighter-rouge&quot;&gt;bin2dec_py_ff.py&lt;/code&gt; para el convertidor binario a decimal.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Convertidor binario a decimal&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Dentro del archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;bin2dec_py_ff.py&lt;/code&gt; se puede observar que la librería de Scipy con Numpy ha sido declarada, en caso de que se requiera alguna librería en particular sólo se agrega con la instrucción &lt;code class=&quot;highlighter-rouge&quot;&gt;include&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;En la parte de &lt;code class=&quot;highlighter-rouge&quot;&gt;class bin2dec_py_ff(gr.decim_block)&lt;/code&gt; está la seccción donde se definen los parámetros iniciales del bloque, &lt;code class=&quot;highlighter-rouge&quot;&gt;def __init__(self, vec_size):&lt;/code&gt;, en ella se define el tipo de datos de entrada y salida del bloque, así como el factor de decimación del bloque &lt;code class=&quot;highlighter-rouge&quot;&gt;decim=vec_size&lt;/code&gt;. Para poder utilizar la variable &lt;code class=&quot;highlighter-rouge&quot;&gt;vec_size&lt;/code&gt; fuera de la clase se puede utilizar &lt;code class=&quot;highlighter-rouge&quot;&gt;self.vec_size&lt;/code&gt;, es importante notar que esta variable pertenece a la clase pero no a la función &lt;code class=&quot;highlighter-rouge&quot;&gt;__init__&lt;/code&gt;, la variable &lt;code class=&quot;highlighter-rouge&quot;&gt;vec_size&lt;/code&gt; representa la cantidad de bits que se requieren para convertir el número a decimal.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class bin2dec_py_ff(gr.decim_block):
-    &quot;&quot;&quot;
-    docstring for block bin2dec_py_ff
-    &quot;&quot;&quot;
-    def __init__(self, vec_size):
-        gr.decim_block.__init__(self,
-            name=&quot;bin2dec_py_ff&quot;,
-            in_sig=[numpy.float32],
-            out_sig=[numpy.float32], decim=vec_size)
-    self.vec_size=vec_size 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;En la parte correspondiente a &lt;code class=&quot;highlighter-rouge&quot;&gt;// Do &amp;lt;+signal processing+&amp;gt;&lt;/code&gt; es donde se realiza el procesamiento de datos que manipulará el bloque, para la conversión de binario a decimal se desarrolla el código de programación en Python, quedando de la siguiente manera:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def work(self, input_items, output_items):
-	in0 = numpy.int_(input_items[0])
-	out = output_items[0]
-	j=0
-	for i in range(self.vec_size,len(in0)+1,self.vec_size):
-		out[j]= int(str(&quot;&quot;.join(str(x) for x in in0[i-self.vec_size:i])),2)
-		j += 1
-	return len(output_items[0])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;El archivo quedaría de la siguiente forma, ya con todas las modificaciones incluidas:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/env python&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# &lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# Copyright 2015 IVAN RODRIGUEZ.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# &lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# This is free software; you can redistribute it and/or modify&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# it under the terms of the GNU General Public License as published by&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# the Free Software Foundation; either version 3, or (at your option)&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# any later version.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# &lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# This software is distributed in the hope that it will be useful,&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# but WITHOUT ANY WARRANTY; without even the implied warranty of&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# GNU General Public License for more details.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# &lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# You should have received a copy of the GNU General Public License&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# along with this software; see the file COPYING.  If not, write to&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# the Free Software Foundation, Inc., 51 Franklin Street,&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# Boston, MA 02110-1301, USA.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# &lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;gnuradio&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gr&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;bin2dec_py_ff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decim_block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
-    docstring for block bin2dec_py_ff
-    &quot;&quot;&quot;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;gr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decim_block&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bin2dec_py_ff&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;in_sig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;float32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;out_sig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;float32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;
-
-
-
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;work&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input_items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output_items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;in0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;int_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input_items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output_items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;in0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])),&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output_items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;Convertidor decimal a binario&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Para corroborar el correcto funcionamiento del bloque de convertidor binario a decimal se propone realizar un convertidor decimal a binario que realizará la operación inversa del bloque anterior.&lt;/p&gt;
-
-&lt;p&gt;El archivo donde se realiza la programación es &lt;code class=&quot;highlighter-rouge&quot;&gt;dec2bin_py_ff.py&lt;/code&gt;. Nuevamente, en la sección de &lt;code class=&quot;highlighter-rouge&quot;&gt;class dec2bin_py_ff(gr.interp_block):&lt;/code&gt; se indica los tipos de datos de entrada y salida que manejará el bloque de procesamiento, así también el factor de interpolación definido por la variable &lt;code class=&quot;highlighter-rouge&quot;&gt;vec_size&lt;/code&gt; y por último la variable &lt;code class=&quot;highlighter-rouge&quot;&gt;self.vec_size&lt;/code&gt;, quedando como sigue:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class dec2bin_py_ff(gr.interp_block):
-    &quot;&quot;&quot;
-    docstring for block dec2bin_py_ff
-    &quot;&quot;&quot;
-    def __init__(self, vec_size):
-        gr.interp_block.__init__(self,
-            name=&quot;dec2bin_py_ff&quot;,
-            in_sig=[numpy.float32],
-            out_sig=[numpy.float32], interp=vec_size)
-    self.vec_size=vec_size
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;En la sección de &lt;code class=&quot;highlighter-rouge&quot;&gt;// Do &amp;lt;+signal processing+&amp;gt;&lt;/code&gt; se escribe el código que realizará la conversión decimal a binario.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def work(self, input_items, output_items):
-    in0 = input_items[0]
-    out = output_items[0]
-    f=numpy.zeros([len(in0),self.vec_size])
-    for i in range(0,len(in0)):
-        f[i,:] = numpy.int_([str(x) for x in numpy.binary_repr(in0[i], width = self.vec_size)])*1.0
-    out[:] = numpy.hstack(f)
-    return len(output_items[0])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;El archivo completo queda de la siguiente manera:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/env python&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# &lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# Copyright 2015 IVAN RODRIGUEZ.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# &lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# This is free software; you can redistribute it and/or modify&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# it under the terms of the GNU General Public License as published by&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# the Free Software Foundation; either version 3, or (at your option)&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# any later version.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# &lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# This software is distributed in the hope that it will be useful,&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# but WITHOUT ANY WARRANTY; without even the implied warranty of&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# GNU General Public License for more details.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# &lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# You should have received a copy of the GNU General Public License&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# along with this software; see the file COPYING.  If not, write to&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# the Free Software Foundation, Inc., 51 Franklin Street,&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# Boston, MA 02110-1301, USA.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# &lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;gnuradio&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gr&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;dec2bin_py_ff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interp_block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
-    docstring for block dec2bin_py_ff
-    &quot;&quot;&quot;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;gr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interp_block&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dec2bin_py_ff&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;in_sig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;float32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;out_sig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;float32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;
-
-
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;work&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input_items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output_items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;in0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input_items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output_items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;in0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;in0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,:]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;int_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binary_repr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;in0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vec_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hstack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output_items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;Interfaz GNU Radio Companion&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Los bloques dentro de GNU Radio Companion (GRC) son archivos xml que se ubican en &lt;code class=&quot;highlighter-rouge&quot;&gt;~/gr-Tu_modulo/grc&lt;/code&gt;, para el convertidor binario a decimal se llama &lt;code class=&quot;highlighter-rouge&quot;&gt;Tu_modulo_bin2dec_py_ff.xml&lt;/code&gt; y para el convertidor decimal a binario &lt;code class=&quot;highlighter-rouge&quot;&gt;Tu_modulo_dec2bin_py_ff.xml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Dentro del archivo xml hay varios parámetros que pueden ser personalizados, tal como el nombre del bloque, este parámetro se define en la línea correspondiente a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;name&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;name&amp;gt;Binary To Decimal Python&amp;lt;/name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;En la parte de &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;param&amp;gt;&lt;/code&gt; se indica la variable de entrada del bloque&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &amp;lt;param&amp;gt;
-    &amp;lt;name&amp;gt;Vector size&amp;lt;/name&amp;gt;
-    &amp;lt;key&amp;gt;vec_size&amp;lt;/key&amp;gt;
-    &amp;lt;type&amp;gt;int&amp;lt;/type&amp;gt;
-  &amp;lt;/param&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;El conector de entrada del bloque de procesamiento se define en &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;sink&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &amp;lt;sink&amp;gt;
-    &amp;lt;name&amp;gt;in&amp;lt;/name&amp;gt;
-    &amp;lt;type&amp;gt;float&amp;lt;/type&amp;gt;
-  &amp;lt;/sink&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;El conector de salida en &lt;code class=&quot;highlighter-rouge&quot;&gt;source&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &amp;lt;source&amp;gt;
-    &amp;lt;name&amp;gt;out&amp;lt;/name&amp;gt;
-    &amp;lt;type&amp;gt;float&amp;lt;/type&amp;gt;
-  &amp;lt;/source&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;De igual manera se modifican las secciones de &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;name&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;param&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;sink&amp;gt;&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;source&amp;gt;&lt;/code&gt; en el archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;Tu_modulo_dec2bin_py_ff.xml&lt;/code&gt; para el bloque de procesamiento del convertidor decimal a binario.&lt;/p&gt;
-
-&lt;p&gt;El archivo quedaría finalmente de la siguiente forma:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;block&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;binary to decimal Python&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;Tu_modulo_bin2dec_py_ff&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;category&amp;gt;&lt;/span&gt;Tu_modulo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/category&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;import&amp;gt;&lt;/span&gt;import Tu_modulo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/import&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;make&amp;gt;&lt;/span&gt;Tu_modulo.bin2dec_py_ff($vec_size)&lt;span class=&quot;nt&quot;&gt;&amp;lt;/make&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Make one 'param' node for every Parameter you want settable from the GUI.
-       Sub-nodes:
-       * name
-       * key (makes the value accessible as $keyname, e.g. in the make node)
-       * type --&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;param&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Vector size&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;vec_size&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;type&amp;gt;&lt;/span&gt;int&lt;span class=&quot;nt&quot;&gt;&amp;lt;/type&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/param&amp;gt;&lt;/span&gt;
-
-  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Make one 'sink' node per input. Sub-nodes:
-       * name (an identifier for the GUI)
-       * type
-       * vlen
-       * optional (set to 1 for optional inputs) --&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;sink&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;in&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;type&amp;gt;&lt;/span&gt;float&lt;span class=&quot;nt&quot;&gt;&amp;lt;/type&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/sink&amp;gt;&lt;/span&gt;
-
-  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Make one 'source' node per output. Sub-nodes:
-       * name (an identifier for the GUI)
-       * type
-       * vlen
-       * optional (set to 1 for optional inputs) --&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;source&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;out&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;type&amp;gt;&lt;/span&gt;float&lt;span class=&quot;nt&quot;&gt;&amp;lt;/type&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/source&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/block&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;El archivo XML del convertidor decimal a binario quedaría de la siguiente forma:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;block&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Decimal to binary Python&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;Tu_modulo_dec2bin_py_ff&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;category&amp;gt;&lt;/span&gt;Tu_modulo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/category&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;import&amp;gt;&lt;/span&gt;import Tu_modulo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/import&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;make&amp;gt;&lt;/span&gt;Tu_modulo.dec2bin_py_ff($vec_size)&lt;span class=&quot;nt&quot;&gt;&amp;lt;/make&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Make one 'param' node for every Parameter you want settable from the GUI.
-       Sub-nodes:
-       * name
-       * key (makes the value accessible as $keyname, e.g. in the make node)
-       * type --&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;param&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Vector size&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;vec_size&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;type&amp;gt;&lt;/span&gt;int&lt;span class=&quot;nt&quot;&gt;&amp;lt;/type&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/param&amp;gt;&lt;/span&gt;
-
-  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Make one 'sink' node per input. Sub-nodes:
-       * name (an identifier for the GUI)
-       * type
-       * vlen
-       * optional (set to 1 for optional inputs) --&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;sink&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;in&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;type&amp;gt;&lt;/span&gt;float&lt;span class=&quot;nt&quot;&gt;&amp;lt;/type&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/sink&amp;gt;&lt;/span&gt;
-
-  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Make one 'source' node per output. Sub-nodes:
-       * name (an identifier for the GUI)
-       * type
-       * vlen
-       * optional (set to 1 for optional inputs) --&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;source&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;out&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;type&amp;gt;&lt;/span&gt;float&lt;span class=&quot;nt&quot;&gt;&amp;lt;/type&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/source&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/block&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;Compilación de los bloques&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Una vez ya realizado todos los procesos referentes al código de programación de los bloques de procesamiento se procede a integrarlos en el proyecto de GNU Radio. Esto se realiza por medio de una serie de comandos desde una terminal de linux en la raíz del proyecto. En caso de no tener una carpeta de build, se crea por medio de comandos de linux&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir build
-$ cd build
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;Una vez dentro de la carpeta de build, se procede a compilar el proyecto&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cmake ../
-$ make
-$ sudo make install
-$ sudo ldconfig
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;De esa manera queda integrado el módulo out-of-tree dentro de GNU Radio.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Archivos de prueba QA&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Un modo para corroborar el correcto funcionamiento del bloque de procesamiento es a través de los archivos QA que se ubican en &lt;code class=&quot;highlighter-rouge&quot;&gt;~/gr-Tu_modulo/python&lt;/code&gt;. Estos archivos permiten hacer una comparación de los datos de salida y los datos esperados de salida de acuerdo a una secuencia de datos de entrada previamente definida. Un ejemplo para probar el convertidor binario a decimal sería:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def test_001_t (self):
-    # set up fg
-    src_data = [1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0]
-    expected_result = [5.0, 7.0, 0.0, 1.0, 2.0]
-    src = blocks.vector_source_f (src_data)
-    conv = bin2dec_py_ff (3)
-    snk = blocks.vector_sink_f ()
-    self.tb.connect (src, conv)
-    self.tb.connect (conv, snk)
-    self.tb.run ()
-    # check data
-    result_data = snk.data ()
-    self.assertFloatTuplesAlmostEqual (expected_result, result_data,2)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Una vez modificado el archivo QA, se procede a ejecutarlo desde una terminal de Linux con el comando de &lt;code class=&quot;highlighter-rouge&quot;&gt;python&lt;/code&gt;, cabe recordar que la terminal debe abrirse en &lt;code class=&quot;highlighter-rouge&quot;&gt;~/gr-Tu_modulo/python&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ python qa_dec2bin_py_ff.py 
-.
-----------------------------------------------------------------------
-Ran 1 test in 0.002s
-
-OK
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Si el código funciona correctamente, se nos mostrará que no hubo error al momento de ejecutar.&lt;/p&gt;
-
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-</description>
-        <pubDate>Mon, 02 Nov 2015 15:10:09 +0000</pubDate>
-        <link>http://viktorivan.github.io/gnuradio/dsp/sdr/out-of-tree/python/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/gnuradio/dsp/sdr/out-of-tree/python/2015/11/02/bloques-de-procesamiento-de-senal-de-gnu-radio-en-python.html</guid>
-        
-        
-        <category>gnuradio</category>
-        
-        <category>dsp</category>
-        
-        <category>sdr</category>
-        
-        <category>out-of-tree</category>
-        
-        <category>python</category>
-        
-      </item>
-    
-      <item>
-        <title>Jupyter, una aplicacion web para cómputo científico</title>
-        <description>&lt;p&gt;&lt;em&gt;Resumen.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Hoy en día, la enseñanza interactiva por medio de plataformas web de diversos lenguajes de programación es muy común, ya que esto permite que desde cualquier plataforma se puedan desarrollar prácticas y así mismo evaluarlas en tiempo real.&lt;/p&gt;
-
-&lt;p&gt;Una opción es &lt;a href=&quot;http://www.jupyter.org&quot;&gt;Jupyter Notebook&lt;/a&gt;, esta plataforma web de código abierto permite trabajar con múltiples lenguajes de programación a través de libretas, permitiendo su fácil distribución entre los usuarios.&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
-&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.jupyter.org&quot;&gt;Jupyter Notebook&lt;/a&gt; es una aplicación web para datos interactivos de ciencia y cómputo científico, que permite al autor crear documentos que combinen live-code con texto narrativo, ecuaciones, imágenes, video y visualizaciones. Estos documentos pueden compartirse por medio de &lt;a href=&quot;http://www.github.com&quot;&gt;GitHub&lt;/a&gt;, &lt;a href=&quot;http://www.dropbox.com&quot;&gt;Dropbox&lt;/a&gt; y el visor de Jupyter Notebook &lt;a href=&quot;http://nbviewer.ipython.org/&quot;&gt;nbviewer&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Instalación.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Jupyter Notebook es una aplicación que requiere de python3 y se instala a través de pip3, para ello, desde una terminal se instalan los paquetes necesarios para su funcionamiento.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install build-essential python3-dev python3-pip
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Una vez instalados los prerequisitos se procede a la instalación de Jupyter por medio de pip3&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pip3 install jupyter
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Para corroborar la correcta instalación de Jupyter Notebook, desde una terminal ejecutamos&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ipython notebook
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Este comando abrirá una ventana del navegador de internet y se mostrará los archivos y folder de la raíz donde fue ejecutado el comando.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/jupyter.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Una libreta disponible de Jupyter es &lt;a href=&quot;https://github.com/unpingco/Python-for-Signal-Processing&quot;&gt;Python for Signal Processing&lt;/a&gt;, en ella se puede aprender procesamiento de señales en Python. La descarga de la libreta se realiza con los siguientes comandos&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone https://github.com/unpingco/Python-for-Signal-Processing.git
-$ cd Python-for-Signal-Processing/
-$ ipython notebook
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;/images/pythonDSP.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-</description>
-        <pubDate>Thu, 22 Oct 2015 22:32:15 +0000</pubDate>
-        <link>http://viktorivan.github.io/ipython/jupyter/python/2015/10/22/jupyter-una-aplicacion-web-para-computo-cientifico.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/ipython/jupyter/python/2015/10/22/jupyter-una-aplicacion-web-para-computo-cientifico.html</guid>
-        
-        
-        <category>ipython</category>
-        
-        <category>jupyter</category>
-        
-        <category>python</category>
-        
-      </item>
-    
-      <item>
-        <title>AX.25 en GNU Radio</title>
-        <description>&lt;p&gt;&lt;em&gt;Resumen.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Debido a la versatilidad que ofrece &lt;a href=&quot;http://www.gnuradio.org&quot;&gt;GNU Radio&lt;/a&gt; para adaptarse a la mayoría de los protocolos de radio, es factible desarrollar proyectos independientes que puedan trabajar sobre estos protocolos usándolo como base. Un ejemplo de ello es el proyecto &lt;a href=&quot;https://github.com/dl1ksv/gr-ax25&quot;&gt;gr-ax25&lt;/a&gt; para GNU Radio, donde a través de &lt;a href=&quot;http://www.python.org&quot;&gt;Python&lt;/a&gt; desarrollan una interfaz gráfica que captura los paquetes transmitidos por este protocolo, entre ellos la ISS y APRS.&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
-&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;De acuerdo con &lt;a href=&quot;http://www.ax25.net&quot;&gt;AX25 Layer 2&lt;/a&gt;, la comunidad de radio amateur expresó su necesidad y deseo de definir un protocolo que pueda aceptar y entregar datos de manera fiable sobre diversos enlaces de comunicación entre dos terminales de señalización. El protocolo de capa 2 AX.25 versión 2.2 ofrece este servicio, independientemente de la existencia de capas superiores.&lt;/p&gt;
-
-&lt;p&gt;Este protocolo trabaja suficientemente bien tanto en ambientes de radio amateur half-duplex o full-duplex. Así mismo también trabaja sobre conexiones directas entre estaciones de radio amateur portátiles o punto-multipunto.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Instalación&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Prerequisitos&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;gr-ax25 utiliza los proyectos &lt;a href=&quot;https://github.com/dl1ksv/gr-display&quot;&gt;gr-display&lt;/a&gt; y &lt;a href=&quot;https://github.com/dl1ksv/gr-fcdproplus&quot;&gt;gr-fcdproplus&lt;/a&gt; para el ejemplo que incluye en su distribución.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Instalación de gr-display&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;gr-display es una herramienta que permite desplegar texto en la interfaz gráfica de GRC.&lt;/p&gt;
-
-&lt;p&gt;Desde una terminal de linux se clona el repositorio de &lt;a href=&quot;http://www.github.com&quot;&gt;github&lt;/a&gt; con git y se instala de acuerdo al procedimiento definido por GNU Radio para módulos out-of-tree.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone https://github.com/dl1ksv/gr-display.git
-$ cd gr-display
-$ mkdir build
-$ cd build
-$ cmake ../
-$ make
-$ sudo make install
-$ sudo ldconfig
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;Instalación de gr-fcdproplus&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Esta herramienta permite utilizar los dispositivos de &lt;a href=&quot;http://www.funcubedongle.com/&quot;&gt;FUNcube Dongle&lt;/a&gt; dentro del ambiente de GNU Radio.&lt;/p&gt;
-
-&lt;p&gt;Para instalar se  requiere de instalar algunos prerequisitos antes de descargar el repositorio desde github y proceder con a la instalación.&lt;/p&gt;
-
-&lt;p&gt;Instalando &lt;a href=&quot;https://github.com/signal11/hidapi&quot;&gt;HIDAPI&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install libudev-dev libusb-1.0-0-dev libfox-1.6-dev autotools-dev autoconf automake libtool
-$ git clone https://github.com/signal11/hidapi.git
-$ cd hidapi
-$ ./bootstrap
-$ ./configure
-$ make
-$ sudo make install
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Instalando gr-fcdproplus&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone https://github.com/dl1ksv/gr-fcdproplus.git
-$ cd gr-fcdproplus
-$ mkdir build
-$ cmake ../
-$ make
-$ sudo make install
-$ sudo ldconfig
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;Instalación de gr-ax25&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Una vez instalados los prerequisitos, se procede a instalar gr-ax25 desde una terminal.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone https://github.com/dl1ksv/gr-ax25.git
-$ cd gr-ax25
-$ mkdir build
-$ cd build
-$ cmake ../
-$ make
-$ sudo make install
-$ sudo ldconfig
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;Instalación utilizando PyBombs&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Si se tiene instalado PyBombs, es posible instalar el proyecto con una sola línea de comando.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pybombs -p myprefix install gr-ax25 gr-display gr-fcdproplus
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;Funcionamiento&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Para la demostración, gr-ax25 incluye en &lt;code class=&quot;highlighter-rouge&quot;&gt;gr-ax25/apps&lt;/code&gt; un archivo llamado &lt;code class=&quot;highlighter-rouge&quot;&gt;APRS.grc&lt;/code&gt;, este diagrama de flujo de GRC contiene un bloque jerárquico llamado &lt;code class=&quot;highlighter-rouge&quot;&gt;detectmarkspace.grc&lt;/code&gt;, para que &lt;code class=&quot;highlighter-rouge&quot;&gt;APRS.grc&lt;/code&gt; detecte el bloque jerárqico, es necesario que dentro de &lt;code class=&quot;highlighter-rouge&quot;&gt;detectmarkspace.grc&lt;/code&gt; se presione el botón que genera los archivos .py, una vez hecho esto se procede a correr el archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;APRS.grc&lt;/code&gt; con el dispositivo de FUNcube Dongle instalado.&lt;/p&gt;
-
-&lt;p&gt;Así mismo, se puede remplazar el bloque de FUNcube por uno de UHD para las tarjetas USRP, tal como se muestra a continuación.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/APRS.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;De esta forma queda instalado el protocolo AX.25 en una plataforma de GNU Radio. Una vez funcionando el archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;APRS.grc&lt;/code&gt;, se mostrará una interfaz gráfica que desplegará en una pestaña el espectro recibido y en otra el mensaje recibido por AX.25 de la ISS o por APRS, tal como se muestra a continuación.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/APRSspectral.png&quot; /&gt;
-&lt;img src=&quot;/images/APRSax25.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-</description>
-        <pubDate>Wed, 21 Oct 2015 17:35:32 +0000</pubDate>
-        <link>http://viktorivan.github.io/gnuradio/ax25/radio/amateur/2015/10/21/ax-dot-25-en-gnu-radio.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/gnuradio/ax25/radio/amateur/2015/10/21/ax-dot-25-en-gnu-radio.html</guid>
-        
-        
-        <category>gnuradio</category>
-        
-        <category>ax25</category>
-        
-        <category>radio</category>
-        
-        <category>amateur</category>
         
       </item>
     
