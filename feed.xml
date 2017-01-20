@@ -6,8 +6,8 @@
 </description>
     <link>http://viktorivan.github.io/</link>
     <atom:link href="http://viktorivan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Jan 2017 11:25:32 -0600</pubDate>
-    <lastBuildDate>Fri, 20 Jan 2017 11:25:32 -0600</lastBuildDate>
+    <pubDate>Fri, 20 Jan 2017 12:52:09 -0600</pubDate>
+    <lastBuildDate>Fri, 20 Jan 2017 12:52:09 -0600</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -154,7 +154,7 @@ $ make
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo make install DESTDIR=ruta-a-memoria-sd/rootfs
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;Para actualizar la versión de GNU Radio del SDK, se copian los archivos de de GNU Radio en la siguiente ruta.&lt;/p&gt;
+&lt;p&gt;Para actualizar la versión de GNU Radio del SDK, se copian los archivos de GNU Radio en la siguiente ruta.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo make install DESTDIR=/usr/local/oecore-x86_64/sysroots/armv7a-...
 &lt;/code&gt;&lt;/pre&gt;
