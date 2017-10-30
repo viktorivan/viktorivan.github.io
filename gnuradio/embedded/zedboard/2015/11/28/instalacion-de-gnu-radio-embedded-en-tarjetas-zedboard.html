@@ -9,12 +9,13 @@
   <title>Instalación de GNU Radio embedded en tarjetas ZedBoard</title>
   <meta name="description" content="Introducción. El uso de sistemas embebidos se ha popularizado y beneficiado por las nuevas tecnologías, ya que ahora permiten implementar sistemas que no sol...">
 
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html">
-  <link rel="alternate" type="application/rss+xml" title="Iván Rodríguez" href="http://viktorivan.github.io/feed.xml">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://0.0.0.0:4000/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html">
+  <link rel="alternate" type="application/rss+xml" title="Iván Rodríguez" href="/feed.xml">
   <script type="text/javascript" async
-    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+  
 </head>
 
 
@@ -23,37 +24,52 @@
     <header class="site-header" role="banner">
 
   <div class="wrapper">
-
+    
+    
     <a class="site-title" href="/">Iván Rodríguez</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
 
-    <nav class="site-nav">
-      <a href="#" class="menu-icon">
-        <svg viewBox="0 0 18 15">
-          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-        </svg>
-      </a>
-
-      <div class="trigger">
-        
+        <div class="trigger">
           
-          <a class="page-link" href="/about/">Acerca de</a>
+            
+            
           
-        
+            
+            
+            <a class="page-link" href="/about/">Acerca de</a>
+            
           
-        
+            
+            
           
-        
+            
+            
           
-        
+            
+            
           
-        
-      </div>
-    </nav>
-
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
   </div>
-
 </header>
 
 
@@ -63,7 +79,12 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Instalación de GNU Radio embedded en tarjetas ZedBoard</h1>
-    <p class="post-meta"><time datetime="2015-11-28T13:21:27-06:00" itemprop="datePublished">Nov 28, 2015</time></p>
+    <p class="post-meta">
+      <time datetime="2015-11-28T19:21:27+00:00" itemprop="datePublished">
+        
+        Nov 28, 2015
+      </time>
+      </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -80,44 +101,39 @@
 
 <p>Para el correcto funcionamientod de OpenEmbedded, se requiere de los siguientes prerequisitos.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm
+</code></pre></div></div>
 
 <p>Una vez cumplidos los prerequisitos se procede a la descarga del proyecto repo.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &gt; repo
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &gt; repo
 $ chmod a+x repo
 $ sudo mv repo /usr/local/bin/
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Se crea el directorio de trabajo del proyecto.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ mkdir oe-repo
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir oe-repo
 $ cd oe-repo
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Se indica que el sistema embebido incluye GNU Radio.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ repo init -u git://github.com/balister/oe-gnuradio-manifest.git -b fido
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ repo init -u git://github.com/balister/oe-gnuradio-manifest.git -b fido
+</code></pre></div></div>
 
 <p>Se actualiza el proyecto e indica el modelo de la plataforma a utilizar.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ repo sync
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ repo sync
 $ TEMPLATECONF=`pwd`/meta-sdr/conf source ./oe-core/oe-init-build-env ./build ./bitbake
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Al momento de ejecutar el proyecto puede generar diversos tipos de errores, tal como este, donde no se indicó la plataforma</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>You had no conf/local.conf file. This configuration file has therefore been
-created for you with some default values. You may wish to edit it to use a 
-different MACHINE (target hardware) or enable parallel build options to take 
-advantage of multiple cores for example. See the file for more information as 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You had no conf/local.conf file. This configuration file has therefore been
+created for you with some default values. You may wish to edit it to use a
+different MACHINE (target hardware) or enable parallel build options to take
+advantage of multiple cores for example. See the file for more information as
 common configuration options are commented.
 
 You had no conf/bblayers.conf file. The configuration file has been created for
@@ -135,60 +151,53 @@ For more information about OpenEmbedded see their website:
 ### Shell environment set up for builds. ###
 
 You can now run 'bitbake &lt;target&gt;'
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Se indica la plataforma de hardware del sistema embebido, en este caso es una tarjeta <code class="highlighter-rouge">Zedboard</code> y con el comando <code class="highlighter-rouge">bitbake</code> se inicia la creación del sistema embebido, debido a la descarga de software esta operación llega a consumir hasta 50 GB de disco duro, igualmente puede tardar mucho tiempo por la velocidad del enlace de Internet.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ export MACHINE="zedboard-zynq7"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export MACHINE="zedboard-zynq7"
 $ bitbake gnuradio-dev-image
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>En caso de que falte algún paquete, el proyecto indicará la falta del mismo.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>NOTE: Your conf/bblayers.conf has been automatically updated.
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NOTE: Your conf/bblayers.conf has been automatically updated.
 ERROR:  OE-core's config sanity checker detected a potential misconfiguration.
     Either fix the cause of this error or at your own risk disable the checker (see sanity.conf).
     Following is the list of potential problems / advisories:
 
     Please install the following missing utilities: chrpath
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Este problema se soluciona a través de <code class="highlighter-rouge">apt-get</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo apt-get install chrpath
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt-get install chrpath
+</code></pre></div></div>
 
 <p>Otro de los errores que se pueden presentar es la falta de recetas al momento de generar el sistema embebido.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Parsing recipes: 100% |#######################################| Time: 00:00:30
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Parsing recipes: 100% |#######################################| Time: 00:00:30
 Parsing of 1939 .bb files complete (0 cached, 1939 parsed). 2455 targets, 247 skipped, 0 masked, 0 errors.
 ERROR: No recipes available for:
   /home/cidte/oe-repo/oe-core/../meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv_3.0.bbappend
   /home/cidte/oe-repo/oe-core/../meta-fsl-arm-extra/recipes-kernel/linux/linux-timesys_3.0.15.bbappend
 
 Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>En caso de que alguna receta no este disponible para su descarga será necesario eliminarla de la lista de recetas.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ gedit conf/bblayers.conf
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gedit conf/bblayers.conf
+</code></pre></div></div>
 
 <p>Dentro del archivo de configuración se busca los paquetes no disponibles y se borran.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/home/cidte/oe-repo/oe-core/../meta-fsl-arm \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/home/cidte/oe-repo/oe-core/../meta-fsl-arm \
 /home/cidte/oe-repo/oe-core/../meta-fsl-arm-extra \
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Una vez hecha la modificación, se ejecuta nuevamente el comando <code class="highlighter-rouge">bitbake</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ bitbake gnuradio-dev-image
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ bitbake gnuradio-dev-image
 
 Parsing recipes: 100% |#######################################| Time: 00:00:14
 Parsing of 1871 .bb files complete (0 cached, 1871 parsed). 2377 targets, 194 skipped, 0 masked, 0 errors.
@@ -224,34 +233,30 @@ meta-ti           = "(nobranch):2210ae2cdacc22105b76c5fa45957ebec104f1c6"
 NOTE: Preparing RunQueue
 NOTE: Executing SetScene Tasks
 NOTE: Executing RunQueue Tasks
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><em>Copia a memoria SD.</em></p>
 
 <p>Una vez terminado el proceso de compilación cruzada, el proyecto entrega una serie de archivos que son el sistema operativo embebido en la siguiente ubicación.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ cd /&lt;ruta-instalación-repo&gt;/oe-repo/build/tmp-glibc/deploy/images
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd /&lt;ruta-instalación-repo&gt;/oe-repo/build/tmp-glibc/deploy/images
+</code></pre></div></div>
 
 <p>Estos archivos deben ser copiados a una memoria SD, para ello es necesario que la memoria tenga dos particiones: una llamada BOOT, fat32, de 40 MB y que sea bootable y la segunda llamada rootfs, ext4 y de tamaño del resto de la memoria. Los archivos que se requieren en la memoria SD en la partición de BOOT son:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ cp boot.bin /&lt;ruta-a-memoria-SD&gt;/BOOT
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cp boot.bin /&lt;ruta-a-memoria-SD&gt;/BOOT
 $ cp u-boot.elf /&lt;ruta-a-memoria-SD&gt;/BOOT
 $ cp u-boot-dtb.img /&lt;ruta-a-memoria-SD&gt;/BOOT
 $ cp uEnv.txt /&lt;ruta-a-memoria-SD&gt;/BOOT
 $ cp uImage /&lt;ruta-a-memoria-SD&gt;/BOOT
 $ cp zedboard-zynq7.dtb /&lt;ruta-a-memoria-SD&gt;/BOOT
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Los archivos para la partición de rootfs estan en un comprimido, no es necesario que el archivo comprimido sea copiado a la memoria, por lo que se puede extraer directamente</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo tar -C /&lt;ruta-a-memoria-SD&gt;/rootfs/ -xzpf gnuradio-dev-image-zedboard-zynq7.tar.gz
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo tar -C /&lt;ruta-a-memoria-SD&gt;/rootfs/ -xzpf gnuradio-dev-image-zedboard-zynq7.tar.gz
 $ sudo tar -C /&lt;ruta-a-memoria-SD&gt;/rootfs/ -xzpf modules-zedboard-zynq7.tgz
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Cabe mencionar que puede ser posible que el sistema no arranque debido a problemas con el archivo <code class="highlighter-rouge">boot.bin</code>, para solucionar el problema sólo hay que sustituirlo por uno que funcione correctamente o en su defecto crear uno utilizando las herramientas de ISE y SDK.</p>
 
@@ -261,50 +266,44 @@ $ sudo tar -C /&lt;ruta-a-memoria-SD&gt;/rootfs/ -xzpf modules-zedboard-zynq7.tg
 
 <p>Adicionalmente, el proyecto permite obtener el SDK del sistema embebido.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ export MACHINE="zedboard-zynq7"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export MACHINE="zedboard-zynq7"
 $ bitbake -c populate_sdk gnuradio-dev-image
 
 $ ls tmp-glibc/deploy/sdk/
-$ sudo sh tmp-glibc/deploy/sdk/oecore-x86_64-armv7ahf-vfp-neon-toolchain-nodistro.0.sh 
-$ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueabi 
-</code></pre>
-</div>
+$ sudo sh tmp-glibc/deploy/sdk/oecore-x86_64-armv7ahf-vfp-neon-toolchain-nodistro.0.sh
+$ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueabi
+</code></pre></div></div>
 
 <p><em>Comunicación con tarjeta Zedboard a través de puerto serial.</em></p>
 
 <p>El puerto <code class="highlighter-rouge">UART</code> de la tarjeta Zedboard es un puerto USB que se comunica de modo serial con la computadora, al momento de encender la tarjeta y estando conectada con la computadora por el puerto USB, se teclea el siguiente comando para buscar el puerto serial.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ dmesg | grep tty
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ dmesg | grep tty
+</code></pre></div></div>
 
 <p>Existen diversas maneras de llamar al puerto serial, entre ellas:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/dev/ttyS0 (puerto serial)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/dev/ttyS0 (puerto serial)
 /dev/ttyUSB0 (serial sobre USB)
 /dev/ttyACM0 (serial sobre USB)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Una vez indentificado, se procede a comunicar con la tarjeta, en linux se puede utilizar el paquete <code class="highlighter-rouge">screen</code> para realizar la comunicación serial.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo apt-get install screen
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt-get install screen
+</code></pre></div></div>
 
 <p>Ya instalado el paquete, se procede a realizar el enlace a través del puerto serial.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ screen /dev/ttyACM0 115200
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ screen /dev/ttyACM0 115200
+</code></pre></div></div>
 
 <p>Finalmente, se procede a encender la tarjeta Zedboard, en caso de que no arranque, desde el puerto serial se ejecuta:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&gt; env default -a
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; env default -a
 &gt; env save
 &gt; reset
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Para entrar a esta consola se tiene que evitar el autoboot de la tarjeta.</p>
 
@@ -312,17 +311,15 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
 
 <p>Para habilitar la conexión SSH con X11Forwarding, desde el puerto serial hay que modificar el archivo:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># vi /etc/ssh/sshd_config
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># vi /etc/ssh/sshd_config
+</code></pre></div></div>
 
 <p>Descomentar <code class="highlighter-rouge">X11Forwarding no</code> y poner <code class="highlighter-rouge">X11Forwarding yes</code>. En caso de no conocer como funciona el editor <code class="highlighter-rouge">vi</code> se puede buscar los comandos básicos en Internet.</p>
 
 <p>Reiniciar el servicio con el comando</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># /etc/init.d/sshd restart
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># /etc/init.d/sshd restart
+</code></pre></div></div>
 
 <p>De este modo, queda habilitado <code class="highlighter-rouge">X11Forwarding</code> en los enlaces SSH, sin embargo es necesario indicar <code class="highlighter-rouge">-X</code> en la configuración de la conexión.</p>
 
@@ -330,41 +327,42 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
 
 <p>La contraseña de root se fija desde la terminal con el siguiente comando</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># passwd
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># passwd
+</code></pre></div></div>
 
 <p><em>Apagado remoto de la tarjeta Zedboard.</em></p>
 
 <p>Para apagar remotamente la tarjeta Zedboard sin dañar el sistema embebido es necesario teclear en la terminal de enlace remoto el comando.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># shutdown -h now
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># shutdown -h now
+</code></pre></div></div>
 
 <p><em>Conclusión.</em></p>
 
 <p>El desarrollo de un sistema embebido a través de compilación cruzada puede resultar bastante complejo, pero la ventaja principal es que solo se requiere realizar una vez y los archivos generados pueden ser distribuidos libremente para la tarjeta para la cual fue diseñada. Así también, debido a que el proyecto de GNU Radio se basa en yocto y openembedded, es viable agregar otros proyectos a través de bblayers.</p>
 
-<p>viktorivan@openmailbox.org</p>
-
 <p>@viktor_ivan</p>
 
-    <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-url="http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" data-text="Instalación de GNU Radio embedded en tarjetas ZedBoard -" data-dnt="true">Twitter</a>
-    <div class="g-plusone" data-href="http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" data-annotation="none" data-width="" data-size="medium"></div>
-    <div class="g-plus" data-action="share" data-href="http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" data-annotation="none" data-width="" data-size="medium"></div>
-    <div class="fb-like" data-href="http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" data-layout="button" data-action="like" data-show-faces="false" data-colorscheme="light" data-kid-directed-site="false" data-share="false"></div>
-    <div class="fb-send" data-href="http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" data-colorscheme="light" data-kid-directed-site="false"></div>
-    <div id="disqus_thread"></div> <script type="text/javascript"> var disqus_shortname = 'viktorivanblog'; var disqus_url = 'http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html'; var disqus_identifier = 'http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html'; var disqus_title = 'Instalación de GNU Radio embedded en tarjetas ZedBoard'; (function () { var s = document.createElement('script'); s.async = true; s.type = 'text/javascript'; s.src = '//viktorivanblog.disqus.com/embed.js'; (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s); }()); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-url="http://0.0.0.0:4000/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" data-text="Instalación de GNU Radio embedded en tarjetas ZedBoard -" data-dnt="true">Twitter</a>
+    <div class="g-plusone" data-href="http://0.0.0.0:4000/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" data-annotation="none" data-width="" data-size="medium"></div>
+    <div class="g-plus" data-action="share" data-href="http://0.0.0.0:4000/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" data-annotation="none" data-width="" data-size="medium"></div>
+    <div class="fb-like" data-href="http://0.0.0.0:4000/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" data-layout="button" data-action="like" data-show-faces="false" data-colorscheme="light" data-kid-directed-site="false" data-share="false"></div>
+    <div class="fb-send" data-href="http://0.0.0.0:4000/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" data-colorscheme="light" data-kid-directed-site="false"></div>
+    <div id="disqus_thread"></div> <script type="text/javascript"> var disqus_shortname = 'viktorivanblog'; var disqus_url = 'http://0.0.0.0:4000/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html'; var disqus_identifier = 'http://0.0.0.0:4000/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html'; var disqus_title = 'Instalación de GNU Radio embedded en tarjetas ZedBoard'; (function () { var s = document.createElement('script'); s.async = true; s.type = 'text/javascript'; s.src = '//viktorivanblog.disqus.com/embed.js'; (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s); }()); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
   </div>
 
+  
+    
+
+  
 </article>
 
       </div>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      <div id="fb-root"></div> <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+      <script type="text/javascript"> (function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/platform.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })(); </script>
     </main>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <div id="fb-root"></div> <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
-    <script type="text/javascript"> (function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/platform.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })(); </script>
+
     <footer class="site-footer">
 
   <div class="wrapper">
@@ -374,8 +372,12 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
-          <li>Iván Rodríguez</li>
-          <li><a href="mailto:"></a></li>
+          <li>
+            
+              Iván Rodríguez
+            
+            </li>
+            
         </ul>
       </div>
 
@@ -383,7 +385,7 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/viktorivan"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+            <a href="https://github.com/viktorivan"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
 </span><span class="username">viktorivan</span></a>
 
           </li>
@@ -391,7 +393,7 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
 
           
           <li>
-            <a href="https://twitter.com/viktor_ivan"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+            <a href="https://twitter.com/viktor_ivan"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
 </span><span class="username">viktor_ivan</span></a>
 
           </li>
@@ -400,8 +402,7 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
       </div>
 
       <div class="footer-col footer-col-3">
-        <p>Un blog sobre radio definido por software.
-</p>
+        <p>Un blog sobre radio definido por software.</p>
       </div>
     </div>
 

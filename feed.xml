@@ -1,18 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Iván Rodríguez</title>
-    <description>Un blog sobre radio definido por software.
-</description>
-    <link>http://viktorivan.github.io/</link>
-    <atom:link href="http://viktorivan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Jan 2017 12:52:09 -0600</pubDate>
-    <lastBuildDate>Fri, 20 Jan 2017 12:52:09 -0600</lastBuildDate>
-    <generator>Jekyll v3.2.1</generator>
-    
-      <item>
-        <title>Instalación De ADI Linux Embedded De Analog Devices</title>
-        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2017-10-28T00:11:52+00:00</updated><id>http://0.0.0.0:4000/</id><title type="html">Iván Rodríguez</title><subtitle>Un blog sobre radio definido por software.</subtitle><entry><title type="html">Instalación De ADI Linux Embedded De Analog Devices</title><link href="http://0.0.0.0:4000/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices.html" rel="alternate" type="text/html" title="Instalación De ADI Linux Embedded De Analog Devices" /><published>2016-11-01T22:06:17+00:00</published><updated>2016-11-01T22:06:17+00:00</updated><id>http://0.0.0.0:4000/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices</id><content type="html" xml:base="http://0.0.0.0:4000/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices.html">&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;El desarrollo de sistemas operativos embebidos personalizados permite a los fabricantes de hardware tener un ecosistema de programación con las herramientas y drivers necesarios para la implementación rápida de sistemas de comunicación en sus plataformas de evaluación.&lt;/p&gt;
 
@@ -27,28 +13,23 @@ La imágen de ADI se encuentra en la página de &lt;a href=&quot;https://wiki.an
 
 &lt;p&gt;De acuerdo a la página de &lt;a href=&quot;https://wiki.analog.com/resources/tools-software/linux-software/zynq_images/linux_hosts&quot;&gt;Linux Download and setting up the image&lt;/a&gt;, primero se descomprime el archivo descargado de la imágen de ADI.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ unxz 2014_R2-2015_02_06.img.xz
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ unxz 2014_R2-2015_02_06.img.xz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;El archivo extraído tiene terminación &lt;code class=&quot;highlighter-rouge&quot;&gt;img&lt;/code&gt;, el cual es una imágen del sistema operativo que se copiará en la memoria SD.&lt;/p&gt;
 
 &lt;p&gt;Con el comando &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo dd&lt;/code&gt; se copiará la imágen en la memoria SD, para ello se debe conocer la ubicación y desmontar la memoria SD. Este proceso de escritura suele tardar varios minutos.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ lsblk
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ lsblk
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo umount /dev/mmcblk0p1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo umount /dev/mmcblk0p1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo dd if=2014_R2-2015_02_06.img of=/dev/mmcblk0 bs=4194304
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo dd if=2014_R2-2015_02_06.img of=/dev/mmcblk0 bs=4194304
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Para evitar algún tipo de error al momento de retirar la memoria SD, se recomienda limpiar los buffers del sistema, esto se hace con el siguiente comando.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sync
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sync
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Configuración de tarjeta de evaluación.&lt;/em&gt;&lt;/p&gt;
 
@@ -58,44 +39,19 @@ La imágen de ADI se encuentra en la página de &lt;a href=&quot;https://wiki.an
 
 &lt;p&gt;Por defecto, el sistema operativo tiene habilitado el puerto &lt;code class=&quot;highlighter-rouge&quot;&gt;SSH&lt;/code&gt;, y los usuarios son: &lt;code class=&quot;highlighter-rouge&quot;&gt;analog&lt;/code&gt; con contraseña &lt;code class=&quot;highlighter-rouge&quot;&gt;analog&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt; con contraseña &lt;code class=&quot;highlighter-rouge&quot;&gt;analog&lt;/code&gt;.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh -X analog@dirección-ip
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh -X analog@dirección-ip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;La opción &lt;code class=&quot;highlighter-rouge&quot;&gt;-X&lt;/code&gt; es opcional y sirve para habilitar el modo gráfico desde la terminar &lt;code class=&quot;highlighter-rouge&quot;&gt;SSH&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Para habilitar el escritorio remoto de &lt;code class=&quot;highlighter-rouge&quot;&gt;VNC&lt;/code&gt;, se debe de ejecutar el comando de &lt;code class=&quot;highlighter-rouge&quot;&gt;vino-preferences&lt;/code&gt; desde una terminal, en caso de que no se haya indicado la opción &lt;code class=&quot;highlighter-rouge&quot;&gt;-X&lt;/code&gt; al conectarse por &lt;code class=&quot;highlighter-rouge&quot;&gt;SSH&lt;/code&gt; este desplegará un error.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo vino-preferences
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo vino-preferences
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Aunque la ventana de &lt;code class=&quot;highlighter-rouge&quot;&gt;vino-preferences&lt;/code&gt; no actualice en tiempo real, los cambios se pueden verificar cerrando la ventana y ejecutando el comando nuevamente.&lt;/p&gt;
 
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-</description>
-        <pubDate>Tue, 01 Nov 2016 16:06:17 -0600</pubDate>
-        <link>http://viktorivan.github.io/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices.html</guid>
-        
-        
-        <category>ADI</category>
-        
-        <category>linux-embedded</category>
-        
-        <category>analog-devices</category>
-        
-        <category>picozed</category>
-        
-        <category>zedboard</category>
-        
-      </item>
-    
-      <item>
-        <title>Compilación Cruzada De GNU Radio Y Proyectos OOT en Linux Embebido</title>
-        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">Introducción. El desarrollo de sistemas operativos embebidos personalizados permite a los fabricantes de hardware tener un ecosistema de programación con las herramientas y drivers necesarios para la implementación rápida de sistemas de comunicación en sus plataformas de evaluación. Analog Devices ha desarrollado un sistema operativo (ADI) que contiene un entorno de programación para aplicaciones basadas en SDR capaz de conectarse a una red para acceso y control remoto.</summary></entry><entry><title type="html">Compilación Cruzada De GNU Radio Y Proyectos OOT en Linux Embebido</title><link href="http://0.0.0.0:4000/gnuracio/cross-compiling/linux-embedded/2016/10/28/compilacin-cruzada-de-gnu-radio-y-proyectos-oot-en-linux-embebido.html" rel="alternate" type="text/html" title="Compilación Cruzada De GNU Radio Y Proyectos OOT en Linux Embebido" /><published>2016-10-28T15:23:44+00:00</published><updated>2016-10-28T15:23:44+00:00</updated><id>http://0.0.0.0:4000/gnuracio/cross-compiling/linux-embedded/2016/10/28/compilacin-cruzada-de-gnu-radio-y-proyectos-oot-en-linux-embebido</id><content type="html" xml:base="http://0.0.0.0:4000/gnuracio/cross-compiling/linux-embedded/2016/10/28/compilacin-cruzada-de-gnu-radio-y-proyectos-oot-en-linux-embebido.html">&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;El uso de sistemas embebidos se ha popularizado debido a que permiten implementar sistemas para un uso específico utilizando un entorno amigable de programación. Existen sistemas muy populares como &lt;a href=&quot;https://www.raspberrypi.org/&quot;&gt;Raspberry Pi&lt;/a&gt; de bajo costo, pero hay otros sistemas con un grado de especialización mayor, como es el caso de &lt;a href=&quot;http://zedboard.org/&quot;&gt;Zedboard&lt;/a&gt;, el cual permite la implementación de aceleradores de hardware e integración con dispositivos de comunicación reconfigurable.&lt;/p&gt;
 
@@ -123,57 +79,49 @@ La imágen de ADI se encuentra en la página de &lt;a href=&quot;https://wiki.an
 
 &lt;p&gt;El proyecto de GNU Radio se puede descargar a través de sus repositorios con la herramienta de git.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone --recursive http://git.gnuradio.org/git/gnuradio.git
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone --recursive http://git.gnuradio.org/git/gnuradio.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Al terminar, se creará una carpeta que contendrá el proyecto recién descargado, dentro esta carpeta se requiere ejecutar el comando que habilitará el entorno del SDK para la compilación cruzada.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd gnuradio 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd gnuradio
 $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueabi
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Una vez habilitado el entorno, se procede a la generación de los archivos compatibles con el sistema operativo basado en ARM.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir build-arm
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir build-arm
 $ cd build-arm
 $ cmake -Wno-dev    -DCMAKE_TOOLCHAIN_FILE=/usr/local/src/gnuradio/cmake/Toolchains/oe-sdk_cross.cmake -DENABLE_GR_WXGUI=OFF -DENABLE_GR_VOCODER=OFF -DENABLE_GR_DTV=OFF -DENABLE_GR_ATSC=OFF -DENABLE_DOXYGEN=OFF -DCMAKE_INSTALL_PREFIX=/usr ../
 $ make
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Si se desea instalar un proyecto OOT, sólo cambia los parámetros del comando de cmake.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cmake -Wno-dev -DCMAKE_TOOLCHAIN_FILE=/usr/local/src/gnuradio/cmake/Toolchains/oe-sdk_cross.cmake -DENABLE_DOXYGEN=OFF ../
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cmake -Wno-dev -DCMAKE_TOOLCHAIN_FILE=/usr/local/src/gnuradio/cmake/Toolchains/oe-sdk_cross.cmake -DENABLE_DOXYGEN=OFF ../
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Una vez terminado este proceso, se copian los archivos generados a la tarjeta SD, en la partición de &lt;code class=&quot;highlighter-rouge&quot;&gt;rootfs&lt;/code&gt;, donde está instalado el sistema operativo embebido.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo make install DESTDIR=ruta-a-memoria-sd/rootfs
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo make install DESTDIR=ruta-a-memoria-sd/rootfs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Para actualizar la versión de GNU Radio del SDK, se copian los archivos de GNU Radio en la siguiente ruta.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo make install DESTDIR=/usr/local/oecore-x86_64/sysroots/armv7a-...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo make install DESTDIR=/usr/local/oecore-x86_64/sysroots/armv7a-...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Una vez instalado GNU Radio en la memoria SD del sistema operativo embebido, se verifica en con el sistema embebido el correcto funcionamiento del sistema operativo y de GNU Radio.&lt;/p&gt;
 
 &lt;p&gt;Tradicionalmente en GNU Radio se tiene que ejecutar el comando &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo ldconfig&lt;/code&gt; para terminar el proceso de instalación, en el caso de GNU Radio Embebido, desde la terminal remota de SSH o algún cliente remoto, se puede ejecutar este comando para finalizar el proceso de instalación.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ touch /etc/ld.so.conf
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ touch /etc/ld.so.conf
 $ echo /usr/local/lib &amp;gt;&amp;gt; /etc/ld.so.conf
 $ ldconfig
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;En caso de que se hayan instalado paquetes OOT, se tiene que indicar la ubicación de la instalación en la variable &lt;code class=&quot;highlighter-rouge&quot;&gt;PYTHONPATH&lt;/code&gt;, si no se desea estar ejecutando esta variable cada vez que se inicia el sistema operativo, se puede mover los archivos al directorio &lt;code class=&quot;highlighter-rouge&quot;&gt;dist-packages&lt;/code&gt;.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ export PYTHONPATH=/usr/local/lib/python2.7/site-packages/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ export PYTHONPATH=/usr/local/lib/python2.7/site-packages/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Conclusión.&lt;/em&gt;&lt;/p&gt;
 
@@ -181,26 +129,7 @@ $ ldconfig
 
 &lt;p&gt;GNU Radio en combinación con Linux Embedded nos permite implementar sistemas de radio configurable en plataformas dedicadas de una forma rápida y sencilla, donde con ayuda del SDK es fácil instalar y actualizar los proyectos de GNU Radio.&lt;/p&gt;
 
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-</description>
-        <pubDate>Fri, 28 Oct 2016 10:23:44 -0500</pubDate>
-        <link>http://viktorivan.github.io/gnuracio/cross-compiling/linux-embedded/2016/10/28/compilacin-cruzada-de-gnu-radio-y-proyectos-oot-en-linux-embebido.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/gnuracio/cross-compiling/linux-embedded/2016/10/28/compilacin-cruzada-de-gnu-radio-y-proyectos-oot-en-linux-embebido.html</guid>
-        
-        
-        <category>gnuracio</category>
-        
-        <category>cross-compiling</category>
-        
-        <category>linux-embedded</category>
-        
-      </item>
-    
-      <item>
-        <title>Instalación De ADI IIO Oscilloscope De Analog Devices en Linux</title>
-        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;
+&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">Introducción. El uso de sistemas embebidos se ha popularizado debido a que permiten implementar sistemas para un uso específico utilizando un entorno amigable de programación. Existen sistemas muy populares como Raspberry Pi de bajo costo, pero hay otros sistemas con un grado de especialización mayor, como es el caso de Zedboard, el cual permite la implementación de aceleradores de hardware e integración con dispositivos de comunicación reconfigurable.</summary></entry><entry><title type="html">Instalación De ADI IIO Oscilloscope De Analog Devices en Linux</title><link href="http://0.0.0.0:4000/analog-devices/adi/oscilloscope/linux/2016/10/28/instalacin-de-adi-iio-oscilloscope-de-analog-devices-en-linux.html" rel="alternate" type="text/html" title="Instalación De ADI IIO Oscilloscope De Analog Devices en Linux" /><published>2016-10-28T15:16:39+00:00</published><updated>2016-10-28T15:16:39+00:00</updated><id>http://0.0.0.0:4000/analog-devices/adi/oscilloscope/linux/2016/10/28/instalacin-de-adi-iio-oscilloscope-de-analog-devices-en-linux</id><content type="html" xml:base="http://0.0.0.0:4000/analog-devices/adi/oscilloscope/linux/2016/10/28/instalacin-de-adi-iio-oscilloscope-de-analog-devices-en-linux.html">&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;
 El desarrollo de plataformas conectadas a la red permite que instrumentos de medición puedan ser controlados remotamente desde una computadora, de este modo, se puede compartir la instrumentación de un laboratorio sin necesidad de moverlo.&lt;/p&gt;
 
 &lt;p&gt;Las tarjetas de evaluación de radio definido por software (SDR) tienen la capacidad de programarse como instrumentos de medición, ya sea como osciloscopio, analizador de espectro o de redes, entre otros. También permiten el monitoreo y control remoto de sus periféricos a través de servicios de su sistema operativo embebido.&lt;/p&gt;
@@ -215,25 +144,21 @@ El desarrollo de plataformas conectadas a la red permite que instrumentos de med
 
 &lt;p&gt;Los prerequisitos de instalación para Linux son:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt install libcurl4-gnutls-dev libjansson-dev libgtkdatabox-0.9.2-0-dev libmatio-dev
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt install libcurl4-gnutls-dev libjansson-dev libgtkdatabox-0.9.2-0-dev libmatio-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Una vez instalados los prerequisitos, se procede a la descarga del proyecto ADI IIO Oscilloscope desde github.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone https://github.com/analogdevicesinc/iio-oscilloscope.git
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone https://github.com/analogdevicesinc/iio-oscilloscope.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Una vez descargado el proyecto, este creará una carpeta llamada &lt;code class=&quot;highlighter-rouge&quot;&gt;iio-oscilloscope&lt;/code&gt;, en ella se realizarán los pasos para instalar el programa en Linux.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd iio-oscilloscope/
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd iio-oscilloscope/
 
 $ make
 
 $ sudo make install
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Una vez terminada la instalación del programa, se procede a ejecutar el programa desde la terminal de comandos.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo osc
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo osc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;De igual modo se puede ejecutar el programa con el ícono de &lt;code class=&quot;highlighter-rouge&quot;&gt;ADI IIO Oscilloscope&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Debido a que no se tiene instalada la tarjeta de RF de manera local en la computadora, se debe de indicar la dirección IP de la tarjeta de evaluación donde se encuentra instalada la tarjeta de RF de Analog Devices. Para ello se hace click en &lt;code class=&quot;highlighter-rouge&quot;&gt;settings&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;connect&lt;/code&gt;, se selecciona la opción de &lt;code class=&quot;highlighter-rouge&quot;&gt;Remote Devices (network)&lt;/code&gt; y se indica la dirección IP en la campo de &lt;code class=&quot;highlighter-rouge&quot;&gt;Hostname&lt;/code&gt;.&lt;/p&gt;
@@ -246,29 +171,7 @@ $ sudo make install
 
 &lt;p&gt;&lt;img src=&quot;/images/spectrum_osc.png&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 28 Oct 2016 10:16:39 -0500</pubDate>
-        <link>http://viktorivan.github.io/analog-devices/adi/oscilloscope/linux/2016/10/28/instalacin-de-adi-iio-oscilloscope-de-analog-devices-en-linux.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/analog-devices/adi/oscilloscope/linux/2016/10/28/instalacin-de-adi-iio-oscilloscope-de-analog-devices-en-linux.html</guid>
-        
-        
-        <category>analog-devices</category>
-        
-        <category>ADI</category>
-        
-        <category>oscilloscope</category>
-        
-        <category>linux</category>
-        
-      </item>
-    
-      <item>
-        <title>Configuración inicial del generador de funciones M8190A de Keysight</title>
-        <description>&lt;p&gt;&lt;em&gt;Descripción.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">Introducción. El desarrollo de plataformas conectadas a la red permite que instrumentos de medición puedan ser controlados remotamente desde una computadora, de este modo, se puede compartir la instrumentación de un laboratorio sin necesidad de moverlo. Las tarjetas de evaluación de radio definido por software (SDR) tienen la capacidad de programarse como instrumentos de medición, ya sea como osciloscopio, analizador de espectro o de redes, entre otros. También permiten el monitoreo y control remoto de sus periféricos a través de servicios de su sistema operativo embebido. El sistema operativo ADI de Analog Devices incluye un oscisloscopio y analizador de espectro que funciona tanto en la plataforma de SDR como en una computadora, lo que permite al usuario realizar mediciones de zonas remotas sin estar de forma presencial en el laboratorio.</summary></entry><entry><title type="html">Configuración inicial del generador de funciones M8190A de Keysight</title><link href="http://0.0.0.0:4000/keysight/m8190a/matlab/2016/08/17/configuracion-inicial-del-generador-de-funciones-m8190a-de-keysight.html" rel="alternate" type="text/html" title="Configuración inicial del generador de funciones M8190A de Keysight" /><published>2016-08-17T23:05:19+00:00</published><updated>2016-08-17T23:05:19+00:00</updated><id>http://0.0.0.0:4000/keysight/m8190a/matlab/2016/08/17/configuracion-inicial-del-generador-de-funciones-m8190a-de-keysight</id><content type="html" xml:base="http://0.0.0.0:4000/keysight/m8190a/matlab/2016/08/17/configuracion-inicial-del-generador-de-funciones-m8190a-de-keysight.html">&lt;p&gt;&lt;em&gt;Descripción.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;El generador de ondas arbitrarias de 12 Giga Muestras por segundo (GSa/s), es un dispositivo que genera señales de alta precisión a un gran ancho de banda por la fidelidad de su generador AWG. Es compatible con diferentes plataformas de software, tales como MATLAB y BenchLink Waveform Builder Pro.&lt;/p&gt;
 
@@ -353,26 +256,7 @@ $ sudo make install
 
 &lt;p&gt;&lt;img src=&quot;/images/senaliqtools.png&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-</description>
-        <pubDate>Wed, 17 Aug 2016 18:05:19 -0500</pubDate>
-        <link>http://viktorivan.github.io/keysight/m8190a/matlab/2016/08/17/configuracion-inicial-del-generador-de-funciones-m8190a-de-keysight.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/keysight/m8190a/matlab/2016/08/17/configuracion-inicial-del-generador-de-funciones-m8190a-de-keysight.html</guid>
-        
-        
-        <category>keysight</category>
-        
-        <category>M8190A</category>
-        
-        <category>matlab</category>
-        
-      </item>
-    
-      <item>
-        <title>Vocoders para banda angosta en GNU Radio</title>
-        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name>Iván Rodríguez</name></author><summary type="html">Descripción. El generador de ondas arbitrarias de 12 Giga Muestras por segundo (GSa/s), es un dispositivo que genera señales de alta precisión a un gran ancho de banda por la fidelidad de su generador AWG. Es compatible con diferentes plataformas de software, tales como MATLAB y BenchLink Waveform Builder Pro. Entre las características de este dispositivo se puede mencionar: una resolución de 14 bits para 8 GSa/s y 12 bits para 12 GSa/s, generación de formas de onda arbitrarias de alta velocidad, tasa de muestreo variable de 125 MSa/s hasta 8 o 12 GSa/s, rango dinámico libre de espurios (SFDR) hasta 90dBc y un ancho de banda analógico de 5 GHz. Entre las aplicaciones en la que se puede utilizar este dispositivo, están: radar, satélite, señales multinivel, pruebas de jitter, video digital, medición de relación de potencia a ruido, OFDM, radio definido por software, entre otros.</summary></entry><entry><title type="html">Vocoders para banda angosta en GNU Radio</title><link href="http://0.0.0.0:4000/gnuradio/codec2/cvsd/sdr/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio.html" rel="alternate" type="text/html" title="Vocoders para banda angosta en GNU Radio" /><published>2016-04-09T12:35:02+00:00</published><updated>2016-04-09T12:35:02+00:00</updated><id>http://0.0.0.0:4000/gnuradio/codec2/cvsd/sdr/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio</id><content type="html" xml:base="http://0.0.0.0:4000/gnuradio/codec2/cvsd/sdr/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio.html">&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Un vocoder analiza el habla midiendo los cambios en el tiempo de sus características espectrales. El resultado es una serie de señales que representan a las frecuencias que se modificaron en un tiempo particular mientras el usuario hablaba. En otras palabras, la señal se divide en un número de bandas de frecuencias y el nivel de la señal presente en cada banda de frecuencia es la representación instantánea de su energía espectral. De este modo, el vocoder reduce sustancialmente la cantidad de información requerida para almacenar una charla.&lt;/p&gt;
 
@@ -420,28 +304,7 @@ $ sudo make install
 
 &lt;p&gt;El uso de vocoders es muy utilizado en los sistemas de comunicación actuales, ya que permiten tener varios enlaces de voz compartiendo el mismo canal, o en su defecto, realizar una conversación en canales de banda angosta, todo esto usando enlaces de comunicación digital. GNU Radio permite la implementación de un sistema de comunicación de voz con vocoders que pueden ser combinados con otros esquemas para tener un sistema completo funcional.&lt;/p&gt;
 
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-</description>
-        <pubDate>Sat, 09 Apr 2016 07:35:02 -0500</pubDate>
-        <link>http://viktorivan.github.io/gnuradio/codec2/cvsd/sdr/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/gnuradio/codec2/cvsd/sdr/2016/04/09/vocoders-para-banda-angosta-en-gnu-radio.html</guid>
-        
-        
-        <category>gnuradio</category>
-        
-        <category>codec2</category>
-        
-        <category>cvsd</category>
-        
-        <category>sdr</category>
-        
-      </item>
-    
-      <item>
-        <title>DPSK y GFSK en GNU Radio</title>
-        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">Introducción. Un vocoder analiza el habla midiendo los cambios en el tiempo de sus características espectrales. El resultado es una serie de señales que representan a las frecuencias que se modificaron en un tiempo particular mientras el usuario hablaba. En otras palabras, la señal se divide en un número de bandas de frecuencias y el nivel de la señal presente en cada banda de frecuencia es la representación instantánea de su energía espectral. De este modo, el vocoder reduce sustancialmente la cantidad de información requerida para almacenar una charla.</summary></entry><entry><title type="html">DPSK y GFSK en GNU Radio</title><link href="http://0.0.0.0:4000/gfsk/dpsk/sdr/gnuradio/2016/04/09/dpsk-y-gfsk-en-gnu-radio.html" rel="alternate" type="text/html" title="DPSK y GFSK en GNU Radio" /><published>2016-04-09T12:34:39+00:00</published><updated>2016-04-09T12:34:39+00:00</updated><id>http://0.0.0.0:4000/gfsk/dpsk/sdr/gnuradio/2016/04/09/dpsk-y-gfsk-en-gnu-radio</id><content type="html" xml:base="http://0.0.0.0:4000/gfsk/dpsk/sdr/gnuradio/2016/04/09/dpsk-y-gfsk-en-gnu-radio.html">&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;La modulación digital consiste en una técnica donde la portadora es modulada para el envío de datos digitales (donde los datos se conforman generalmente por una cadena de unos y ceros) en vez de formas de ondas analógicas. Estos datos pueden representar información analógica (tal como la voz, audio, video), por lo que son el resultado de pasar previamente por una etapa de conversión de analógico a digital (ADC) para poder ser modulados digitalmente, esto es, tienen que representarse por medio de un valor definido dentro de un rango previamente especificado.&lt;/p&gt;
 
@@ -492,28 +355,7 @@ $ sudo make install
 
 &lt;p&gt;El uso de estos esquemas de modulación digital permiten una implementación rápida y sencilla con las tarjetas USRP, ya que son lo suficientemente robustos que no necesitan agregar etapas adicionales al receptor. GNU Radio incluye dentro del proyecto varios ejemplos de sus diferentes sistemas funcionando, de este modo, facilita el entendimiento de los sistemas de comunicación con dispositivos de hardware.&lt;/p&gt;
 
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-</description>
-        <pubDate>Sat, 09 Apr 2016 07:34:39 -0500</pubDate>
-        <link>http://viktorivan.github.io/gfsk/dpsk/sdr/gnuradio/2016/04/09/dpsk-y-gfsk-en-gnu-radio.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/gfsk/dpsk/sdr/gnuradio/2016/04/09/dpsk-y-gfsk-en-gnu-radio.html</guid>
-        
-        
-        <category>gfsk</category>
-        
-        <category>dpsk</category>
-        
-        <category>sdr</category>
-        
-        <category>gnuradio</category>
-        
-      </item>
-    
-      <item>
-        <title>Cifrado en GNU Radio con gr-NaCl</title>
-        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">Introducción. La modulación digital consiste en una técnica donde la portadora es modulada para el envío de datos digitales (donde los datos se conforman generalmente por una cadena de unos y ceros) en vez de formas de ondas analógicas. Estos datos pueden representar información analógica (tal como la voz, audio, video), por lo que son el resultado de pasar previamente por una etapa de conversión de analógico a digital (ADC) para poder ser modulados digitalmente, esto es, tienen que representarse por medio de un valor definido dentro de un rango previamente especificado.</summary></entry><entry><title type="html">Cifrado en GNU Radio con gr-NaCl</title><link href="http://0.0.0.0:4000/cifrado/gnuradio/out-of-tree/2016/04/08/cifrado-en-gnu-radio-con-gr-nacl.html" rel="alternate" type="text/html" title="Cifrado en GNU Radio con gr-NaCl" /><published>2016-04-08T01:04:29+00:00</published><updated>2016-04-08T01:04:29+00:00</updated><id>http://0.0.0.0:4000/cifrado/gnuradio/out-of-tree/2016/04/08/cifrado-en-gnu-radio-con-gr-nacl</id><content type="html" xml:base="http://0.0.0.0:4000/cifrado/gnuradio/out-of-tree/2016/04/08/cifrado-en-gnu-radio-con-gr-nacl.html">&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Una forma sencilla de describir lo que es cifrado es: Aquello que está escrito con letras, símbolos o números que solo pueden comprenderse si se dispone de la clave necesaria para descifrarlos.&lt;/p&gt;
 
@@ -555,18 +397,17 @@ $ sudo make install
 
 &lt;p&gt;Desde una terminal, se procede a instalar la librería de Sodium,&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/jedisct1/libsodium.git
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/jedisct1/libsodium.git
 cd libsodium/
 ./autogen.sh
 ./configure
 make
 sudo make install
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Una vez instalado, se instala el módulo de gr-nacl para GNU Radio.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/stwunsch/gr-nacl.git
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/stwunsch/gr-nacl.git
 cd gr-nacl/
 mkdir build
 cd build
@@ -575,16 +416,14 @@ make
 ctest
 sudo make install
 sudo ldconfig
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Instalación utilizando PyBombs&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;De igual modo, se puede instalar el proyecto de gr-NaCl utilizando los comandos de PyBombs.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pybombs -p myprefix install gr-nacl
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pybombs -p myprefix install gr-nacl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Funcionamiento&lt;/em&gt;&lt;/p&gt;
 
@@ -596,26 +435,7 @@ sudo ldconfig
 
 &lt;p&gt;Aunque el ejemplo mostrado es sencillo, es una base para implementarlo en sistemas mas complejos, como el cifrado de voz o mensajes de chat para su eventual transmisión con alguna tarjeta USRP.&lt;/p&gt;
 
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-</description>
-        <pubDate>Thu, 07 Apr 2016 20:04:29 -0500</pubDate>
-        <link>http://viktorivan.github.io/cifrado/gnuradio/out-of-tree/2016/04/07/cifrado-en-gnu-radio-con-gr-nacl.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/cifrado/gnuradio/out-of-tree/2016/04/07/cifrado-en-gnu-radio-con-gr-nacl.html</guid>
-        
-        
-        <category>cifrado</category>
-        
-        <category>gnuradio</category>
-        
-        <category>out-of-tree</category>
-        
-      </item>
-    
-      <item>
-        <title>Instalación GNU Radio con PyBombs versión 2</title>
-        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">Introducción. Una forma sencilla de describir lo que es cifrado es: Aquello que está escrito con letras, símbolos o números que solo pueden comprenderse si se dispone de la clave necesaria para descifrarlos. En criptografía, el cifrado es un procedimiento que utiliza un algoritmo de cifrado con una clave para transformar un mensaje que se desea enviar, sin atender a su estructura lingüística o significado, de tal forma que sea incomprensible o, al menos, difícil de comprender a toda persona que no tenga la clave de descifrado del algoritmo.</summary></entry><entry><title type="html">Instalación GNU Radio con PyBombs versión 2</title><link href="http://0.0.0.0:4000/gnuradio/pybombs/instalacion/2016/03/30/instalacion-gnu-radio-con-pybombs-version-2.html" rel="alternate" type="text/html" title="Instalación GNU Radio con PyBombs versión 2" /><published>2016-03-30T02:24:26+00:00</published><updated>2016-03-30T02:24:26+00:00</updated><id>http://0.0.0.0:4000/gnuradio/pybombs/instalacion/2016/03/30/instalacion-gnu-radio-con-pybombs-version-2</id><content type="html" xml:base="http://0.0.0.0:4000/gnuradio/pybombs/instalacion/2016/03/30/instalacion-gnu-radio-con-pybombs-version-2.html">&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://gnuradio.org&quot;&gt;GNU Radio&lt;/a&gt; es un proyecto de software libre orientado a radio definido por software, basado en Python; existen diversos medios para instalar el conjunto de herramientas que comprenden a GNU Radio, desde los repositorios utilizando &lt;code class=&quot;highlighter-rouge&quot;&gt;apt-get&lt;/code&gt; hasta la instalación desde el código fuente del proyecto en la terminal, con ayuda de un script o con un gestor de paquetes. La ventaja de instalar GNU Radio desde el código fuente con respecto a los repositorios es la versión de instalación, ya que los repositorios pueden tardar en actualizarse con respecto a los avances del proyecto.&lt;/p&gt;
 
@@ -627,51 +447,44 @@ sudo ldconfig
 
 &lt;p&gt;Primeramente es necesario instalar el gestor pip de Python, desde una terminal.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install python-pip python-dev build-essential git
-$ sudo pip install --upgrade pip 
-$ sudo pip install --upgrade virtualenv 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install python-pip python-dev build-essential git
+$ sudo pip install --upgrade pip
+$ sudo pip install --upgrade virtualenv
 $ sudo pip install setuptools
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Una vez instalado el gestor de aplicaciones de Python, se procede a la instalación de PyBombs.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pip install -Iv PyBOMBS==2.1.0
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pip install -Iv PyBOMBS==2.1.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Teniendo una vez instalado el proyecto de PyBombs, se descargan las recetas donde están indicadas las ubicaciones de los proyectos para su descarga.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
 $ pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Para que GNU Radio pueda ser ejecutado desde cualquier ubicación se tiene que indicar donde se instalará el proyecto.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pybombs prefix init /usr/local -a myprefix
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pybombs prefix init /usr/local -a myprefix
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Una vez inicializado el prefijo, se procede a la instalación de GNU Radio desde PyBombs.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pybombs -p myprefix install gnuradio gr-osmosdr
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pybombs -p myprefix install gnuradio gr-osmosdr
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Para ejecutar la interfaz gráfica de GNU Radio, sólo se ejecuta el comando.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gnuradio-companion
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gnuradio-companion
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Íconos de GNU Radio&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Para la instalación de los íconos, desde una terminal se ejecuta el comando:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo /usr/local/libexec/gnuradio/grc_setup_freedesktop install
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo /usr/local/libexec/gnuradio/grc_setup_freedesktop install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;De este modo, de manera automática se agregarán los íconos a los diferentes menús de la distribución de Linux.&lt;/p&gt;
 
@@ -679,47 +492,41 @@ $ pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.gi
 
 &lt;p&gt;Para poder utilizar las tarjetas USRP en el entorno de GNU Radio es necesario descargar las imágenes del firmware, esto se realiza con el siguiente comando:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo /usr/local/lib/uhd/utils/uhd_images_downloader.py
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo /usr/local/lib/uhd/utils/uhd_images_downloader.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Otros comandos de PyBombs para GNU Radio&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;La aplicación de PyBombs tiene diferentes parámetros que permiten agregar, actualizar o remover diferentes elementos del entorno de GNU Radio.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;usage: pybombs [-h] [--version] [-p PREFIX] [--prefix-conf PREFIX_CONF]
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;usage: pybombs [-h] [--version] [-p PREFIX] [--prefix-conf PREFIX_CONF]
                [--config CONFIG] [--config-file CONFIG_FILE] [-r RECIPES] [-q]
                [-v] [-y]
                &amp;lt;command&amp;gt; ...
 pybombs: error: argument &amp;lt;command&amp;gt;: invalid choice: 'upgrade' (choose from 'config', 'lint', 'remove', 'update', 'install', 'rebuild', 'refetch', 'fetch', 'help', 'show', 'digraph', 'inv', 'deploy', 'recipes', 'prefix')
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Para actualizar el entorno o uno de los elementos de GNU Radio se utiliza el comando:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pybombs -p myprefix update gnuradio
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pybombs -p myprefix update gnuradio
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Si se desea conocer la lista de las aplicaciones instaladas,&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pybombs -p myprefix update inv
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pybombs -p myprefix update inv
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Actualización de GNU Radio&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;El entorno de GNU Radio se puede actualizar con el comando de update de PyBombs&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pybombs -p myprefix update gnuradio
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pybombs -p myprefix update gnuradio
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;En caso de que se presenten errores durante la actualización, puede que sea necesario mandar descargar nuevamente el código fuente de GNU Radio&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pybombs -p myprefix rebuild gnuradio
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pybombs -p myprefix rebuild gnuradio
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;En caso de que todavía se presenten errores, es necesario reinicializar PyBombs, esto se hace eliminando diversas carpetas ocultas.&lt;/p&gt;
 
@@ -737,57 +544,35 @@ pybombs: error: argument &amp;lt;command&amp;gt;: invalid choice: 'upgrade' (cho
 
 &lt;p&gt;En caso de que al querer ejecutar un archivo de GRC que incluya el bloque de UHD y salga el error siguiente:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;UHD Error:
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;UHD Error:
     USB open failed: insufficient permissions.
     See the application notes for your device.
-    
+
     RuntimeError: LookupError: KeyError: No devices found for -----&amp;gt;
 Empty Device Address
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Se debe a que no se tienen los permisos para utilizar el puerto USB, una solución rápida es ejecutar GRC con permisos de root.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo gnuradio-companion
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo gnuradio-companion
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Para evitar ejecutar GRC como superusuario, es necesario actualizar las reglas, en primera instancia hay que localizar el archivo de las reglas de UDH, copiar el archivo en la ubicación de las reglas y finalmente volver a cargar las reglas del sistema.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo find / -name uhd-usrp.rules
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo find / -name uhd-usrp.rules
 /usr/local/src/uhd/host/utils/uhd-usrp.rules
 /usr/local/lib/uhd/utils/uhd-usrp.rules
 
 $ sudo cp /usr/local/src/uhd/host/utils/uhd-usrp.rules /etc/udev/rules.d/
 
 $ sudo udevadm control --reload-rules
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Conclusión.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;El proyecto de PyBombs de GNU Radio ha mostrado un cambio que puede interpretarse como positivo, ya que permite agregar proyectos OOT de una manera sencilla e incluso modificar las recetas para proyectos personales y facilitar su distribución e instalación.&lt;/p&gt;
 
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-</description>
-        <pubDate>Tue, 29 Mar 2016 20:24:26 -0600</pubDate>
-        <link>http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/29/instalacion-gnu-radio-con-pybombs-version-2.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/29/instalacion-gnu-radio-con-pybombs-version-2.html</guid>
-        
-        
-        <category>gnuradio</category>
-        
-        <category>pybombs</category>
-        
-        <category>instalacion</category>
-        
-      </item>
-    
-      <item>
-        <title>Instalación de GNU Radio embedded en tarjetas ZedBoard</title>
-        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">Introducción. GNU Radio es un proyecto de software libre orientado a radio definido por software, basado en Python; existen diversos medios para instalar el conjunto de herramientas que comprenden a GNU Radio, desde los repositorios utilizando apt-get hasta la instalación desde el código fuente del proyecto en la terminal, con ayuda de un script o con un gestor de paquetes. La ventaja de instalar GNU Radio desde el código fuente con respecto a los repositorios es la versión de instalación, ya que los repositorios pueden tardar en actualizarse con respecto a los avances del proyecto.</summary></entry><entry><title type="html">Instalación de GNU Radio embedded en tarjetas ZedBoard</title><link href="http://0.0.0.0:4000/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" rel="alternate" type="text/html" title="Instalación de GNU Radio embedded en tarjetas ZedBoard" /><published>2015-11-28T19:21:27+00:00</published><updated>2015-11-28T19:21:27+00:00</updated><id>http://0.0.0.0:4000/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard</id><content type="html" xml:base="http://0.0.0.0:4000/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html">&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;El uso de sistemas embebidos se ha popularizado y beneficiado por las nuevas tecnologías, ya que ahora permiten implementar sistemas que no solo controlen de un modo básico y simple un dispositivo, sino que pueden formar parte de un ecosistema que incluya conectividad a Internet y por lo tanto monitoreo y control remoto. Adicionalmente, tendencias como el radio definido por software (SDR) han integrado a sus desarrollos la implementación en sistemas embebidos lo que permite el desarrollo de un sistema de comunicación completo en un ambiente embebido, disminuyendo costos y proporcionando portatibilidad.
 &lt;!-- more --&gt;&lt;/p&gt;
@@ -800,44 +585,39 @@ $ sudo udevadm control --reload-rules
 
 &lt;p&gt;Para el correcto funcionamientod de OpenEmbedded, se requiere de los siguientes prerequisitos.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Una vez cumplidos los prerequisitos se procede a la descarga del proyecto repo.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &amp;gt; repo
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &amp;gt; repo
 $ chmod a+x repo
 $ sudo mv repo /usr/local/bin/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Se crea el directorio de trabajo del proyecto.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir oe-repo
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir oe-repo
 $ cd oe-repo
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Se indica que el sistema embebido incluye GNU Radio.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ repo init -u git://github.com/balister/oe-gnuradio-manifest.git -b fido
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ repo init -u git://github.com/balister/oe-gnuradio-manifest.git -b fido
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Se actualiza el proyecto e indica el modelo de la plataforma a utilizar.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ repo sync
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ repo sync
 $ TEMPLATECONF=`pwd`/meta-sdr/conf source ./oe-core/oe-init-build-env ./build ./bitbake
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Al momento de ejecutar el proyecto puede generar diversos tipos de errores, tal como este, donde no se indicó la plataforma&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;You had no conf/local.conf file. This configuration file has therefore been
-created for you with some default values. You may wish to edit it to use a 
-different MACHINE (target hardware) or enable parallel build options to take 
-advantage of multiple cores for example. See the file for more information as 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;You had no conf/local.conf file. This configuration file has therefore been
+created for you with some default values. You may wish to edit it to use a
+different MACHINE (target hardware) or enable parallel build options to take
+advantage of multiple cores for example. See the file for more information as
 common configuration options are commented.
 
 You had no conf/bblayers.conf file. The configuration file has been created for
@@ -855,60 +635,53 @@ For more information about OpenEmbedded see their website:
 ### Shell environment set up for builds. ###
 
 You can now run 'bitbake &amp;lt;target&amp;gt;'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Se indica la plataforma de hardware del sistema embebido, en este caso es una tarjeta &lt;code class=&quot;highlighter-rouge&quot;&gt;Zedboard&lt;/code&gt; y con el comando &lt;code class=&quot;highlighter-rouge&quot;&gt;bitbake&lt;/code&gt; se inicia la creación del sistema embebido, debido a la descarga de software esta operación llega a consumir hasta 50 GB de disco duro, igualmente puede tardar mucho tiempo por la velocidad del enlace de Internet.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ export MACHINE=&quot;zedboard-zynq7&quot;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ export MACHINE=&quot;zedboard-zynq7&quot;
 $ bitbake gnuradio-dev-image
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;En caso de que falte algún paquete, el proyecto indicará la falta del mismo.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NOTE: Your conf/bblayers.conf has been automatically updated.
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NOTE: Your conf/bblayers.conf has been automatically updated.
 ERROR:  OE-core's config sanity checker detected a potential misconfiguration.
     Either fix the cause of this error or at your own risk disable the checker (see sanity.conf).
     Following is the list of potential problems / advisories:
 
     Please install the following missing utilities: chrpath
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Este problema se soluciona a través de &lt;code class=&quot;highlighter-rouge&quot;&gt;apt-get&lt;/code&gt;.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install chrpath
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install chrpath
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Otro de los errores que se pueden presentar es la falta de recetas al momento de generar el sistema embebido.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Parsing recipes: 100% |#######################################| Time: 00:00:30
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Parsing recipes: 100% |#######################################| Time: 00:00:30
 Parsing of 1939 .bb files complete (0 cached, 1939 parsed). 2455 targets, 247 skipped, 0 masked, 0 errors.
 ERROR: No recipes available for:
   /home/cidte/oe-repo/oe-core/../meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv_3.0.bbappend
   /home/cidte/oe-repo/oe-core/../meta-fsl-arm-extra/recipes-kernel/linux/linux-timesys_3.0.15.bbappend
 
 Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;En caso de que alguna receta no este disponible para su descarga será necesario eliminarla de la lista de recetas.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gedit conf/bblayers.conf
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gedit conf/bblayers.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Dentro del archivo de configuración se busca los paquetes no disponibles y se borran.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/home/cidte/oe-repo/oe-core/../meta-fsl-arm \
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/home/cidte/oe-repo/oe-core/../meta-fsl-arm \
 /home/cidte/oe-repo/oe-core/../meta-fsl-arm-extra \
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Una vez hecha la modificación, se ejecuta nuevamente el comando &lt;code class=&quot;highlighter-rouge&quot;&gt;bitbake&lt;/code&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ bitbake gnuradio-dev-image
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ bitbake gnuradio-dev-image
 
 Parsing recipes: 100% |#######################################| Time: 00:00:14
 Parsing of 1871 .bb files complete (0 cached, 1871 parsed). 2377 targets, 194 skipped, 0 masked, 0 errors.
@@ -944,34 +717,30 @@ meta-ti           = &quot;(nobranch):2210ae2cdacc22105b76c5fa45957ebec104f1c6&qu
 NOTE: Preparing RunQueue
 NOTE: Executing SetScene Tasks
 NOTE: Executing RunQueue Tasks
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Copia a memoria SD.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Una vez terminado el proceso de compilación cruzada, el proyecto entrega una serie de archivos que son el sistema operativo embebido en la siguiente ubicación.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd /&amp;lt;ruta-instalación-repo&amp;gt;/oe-repo/build/tmp-glibc/deploy/images
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd /&amp;lt;ruta-instalación-repo&amp;gt;/oe-repo/build/tmp-glibc/deploy/images
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Estos archivos deben ser copiados a una memoria SD, para ello es necesario que la memoria tenga dos particiones: una llamada BOOT, fat32, de 40 MB y que sea bootable y la segunda llamada rootfs, ext4 y de tamaño del resto de la memoria. Los archivos que se requieren en la memoria SD en la partición de BOOT son:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cp boot.bin /&amp;lt;ruta-a-memoria-SD&amp;gt;/BOOT
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cp boot.bin /&amp;lt;ruta-a-memoria-SD&amp;gt;/BOOT
 $ cp u-boot.elf /&amp;lt;ruta-a-memoria-SD&amp;gt;/BOOT
 $ cp u-boot-dtb.img /&amp;lt;ruta-a-memoria-SD&amp;gt;/BOOT
 $ cp uEnv.txt /&amp;lt;ruta-a-memoria-SD&amp;gt;/BOOT
 $ cp uImage /&amp;lt;ruta-a-memoria-SD&amp;gt;/BOOT
 $ cp zedboard-zynq7.dtb /&amp;lt;ruta-a-memoria-SD&amp;gt;/BOOT
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Los archivos para la partición de rootfs estan en un comprimido, no es necesario que el archivo comprimido sea copiado a la memoria, por lo que se puede extraer directamente&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo tar -C /&amp;lt;ruta-a-memoria-SD&amp;gt;/rootfs/ -xzpf gnuradio-dev-image-zedboard-zynq7.tar.gz
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo tar -C /&amp;lt;ruta-a-memoria-SD&amp;gt;/rootfs/ -xzpf gnuradio-dev-image-zedboard-zynq7.tar.gz
 $ sudo tar -C /&amp;lt;ruta-a-memoria-SD&amp;gt;/rootfs/ -xzpf modules-zedboard-zynq7.tgz
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Cabe mencionar que puede ser posible que el sistema no arranque debido a problemas con el archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;boot.bin&lt;/code&gt;, para solucionar el problema sólo hay que sustituirlo por uno que funcione correctamente o en su defecto crear uno utilizando las herramientas de ISE y SDK.&lt;/p&gt;
 
@@ -981,50 +750,44 @@ $ sudo tar -C /&amp;lt;ruta-a-memoria-SD&amp;gt;/rootfs/ -xzpf modules-zedboard-
 
 &lt;p&gt;Adicionalmente, el proyecto permite obtener el SDK del sistema embebido.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ export MACHINE=&quot;zedboard-zynq7&quot;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ export MACHINE=&quot;zedboard-zynq7&quot;
 $ bitbake -c populate_sdk gnuradio-dev-image
 
 $ ls tmp-glibc/deploy/sdk/
-$ sudo sh tmp-glibc/deploy/sdk/oecore-x86_64-armv7ahf-vfp-neon-toolchain-nodistro.0.sh 
-$ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueabi 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+$ sudo sh tmp-glibc/deploy/sdk/oecore-x86_64-armv7ahf-vfp-neon-toolchain-nodistro.0.sh
+$ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueabi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Comunicación con tarjeta Zedboard a través de puerto serial.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;El puerto &lt;code class=&quot;highlighter-rouge&quot;&gt;UART&lt;/code&gt; de la tarjeta Zedboard es un puerto USB que se comunica de modo serial con la computadora, al momento de encender la tarjeta y estando conectada con la computadora por el puerto USB, se teclea el siguiente comando para buscar el puerto serial.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ dmesg | grep tty
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ dmesg | grep tty
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Existen diversas maneras de llamar al puerto serial, entre ellas:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/dev/ttyS0 (puerto serial)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/dev/ttyS0 (puerto serial)
 /dev/ttyUSB0 (serial sobre USB)
 /dev/ttyACM0 (serial sobre USB)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Una vez indentificado, se procede a comunicar con la tarjeta, en linux se puede utilizar el paquete &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt; para realizar la comunicación serial.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install screen
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install screen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Ya instalado el paquete, se procede a realizar el enlace a través del puerto serial.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ screen /dev/ttyACM0 115200
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ screen /dev/ttyACM0 115200
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Finalmente, se procede a encender la tarjeta Zedboard, en caso de que no arranque, desde el puerto serial se ejecuta:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; env default -a
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; env default -a
 &amp;gt; env save
 &amp;gt; reset
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Para entrar a esta consola se tiene que evitar el autoboot de la tarjeta.&lt;/p&gt;
 
@@ -1032,17 +795,15 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
 
 &lt;p&gt;Para habilitar la conexión SSH con X11Forwarding, desde el puerto serial hay que modificar el archivo:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# vi /etc/ssh/sshd_config
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# vi /etc/ssh/sshd_config
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Descomentar &lt;code class=&quot;highlighter-rouge&quot;&gt;X11Forwarding no&lt;/code&gt; y poner &lt;code class=&quot;highlighter-rouge&quot;&gt;X11Forwarding yes&lt;/code&gt;. En caso de no conocer como funciona el editor &lt;code class=&quot;highlighter-rouge&quot;&gt;vi&lt;/code&gt; se puede buscar los comandos básicos en Internet.&lt;/p&gt;
 
 &lt;p&gt;Reiniciar el servicio con el comando&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# /etc/init.d/sshd restart
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# /etc/init.d/sshd restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;De este modo, queda habilitado &lt;code class=&quot;highlighter-rouge&quot;&gt;X11Forwarding&lt;/code&gt; en los enlaces SSH, sin embargo es necesario indicar &lt;code class=&quot;highlighter-rouge&quot;&gt;-X&lt;/code&gt; en la configuración de la conexión.&lt;/p&gt;
 
@@ -1050,42 +811,21 @@ $ . /usr/local/oecore-x86_64/environment-setup-armv7ahf-vfp-neon-oe-linux-gnueab
 
 &lt;p&gt;La contraseña de root se fija desde la terminal con el siguiente comando&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# passwd
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# passwd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Apagado remoto de la tarjeta Zedboard.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Para apagar remotamente la tarjeta Zedboard sin dañar el sistema embebido es necesario teclear en la terminal de enlace remoto el comando.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# shutdown -h now
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# shutdown -h now
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Conclusión.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;El desarrollo de un sistema embebido a través de compilación cruzada puede resultar bastante complejo, pero la ventaja principal es que solo se requiere realizar una vez y los archivos generados pueden ser distribuidos libremente para la tarjeta para la cual fue diseñada. Así también, debido a que el proyecto de GNU Radio se basa en yocto y openembedded, es viable agregar otros proyectos a través de bblayers.&lt;/p&gt;
 
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-</description>
-        <pubDate>Sat, 28 Nov 2015 13:21:27 -0600</pubDate>
-        <link>http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html</guid>
-        
-        
-        <category>gnuradio</category>
-        
-        <category>embedded</category>
-        
-        <category>zedboard</category>
-        
-      </item>
-    
-      <item>
-        <title>Instalación de Xillinux en tarjetas ZedBoard</title>
-        <description>&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">Introducción. El uso de sistemas embebidos se ha popularizado y beneficiado por las nuevas tecnologías, ya que ahora permiten implementar sistemas que no solo controlen de un modo básico y simple un dispositivo, sino que pueden formar parte de un ecosistema que incluya conectividad a Internet y por lo tanto monitoreo y control remoto. Adicionalmente, tendencias como el radio definido por software (SDR) han integrado a sus desarrollos la implementación en sistemas embebidos lo que permite el desarrollo de un sistema de comunicación completo en un ambiente embebido, disminuyendo costos y proporcionando portatibilidad.</summary></entry><entry><title type="html">Instalación de Xillinux en tarjetas ZedBoard</title><link href="http://0.0.0.0:4000/xillinux/embedded/zedboard/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard.html" rel="alternate" type="text/html" title="Instalación de Xillinux en tarjetas ZedBoard" /><published>2015-11-28T19:21:01+00:00</published><updated>2015-11-28T19:21:01+00:00</updated><id>http://0.0.0.0:4000/xillinux/embedded/zedboard/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard</id><content type="html" xml:base="http://0.0.0.0:4000/xillinux/embedded/zedboard/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard.html">&lt;p&gt;&lt;em&gt;Introducción.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;En fechas recientes se ha vuelto popular el uso de sistemas reducidos que permiten instalar sistemas operativos en modo embebido, un ejemplo es &lt;a href=&quot;https://www.raspberrypi.org&quot;&gt;raspberry pi&lt;/a&gt;, el cuál es un ecosistema que presenta varios &lt;a href=&quot;https://www.raspberrypi.org/downloads/&quot;&gt;sistemas operativos embebidos&lt;/a&gt;  de libre distribución. Así mismo existen otros ecosistemas orientados a propósitos mas específicos, tales como &lt;a href=&quot;http://zedboard.org&quot;&gt;Zedboard&lt;/a&gt;, donde presentan varias alternativas de hardware de acuerdo a los requerimientos del usuario. Estas plataformas son basadas en Linux, por lo que proyectos como &lt;a href=&quot;http://xillybus.com/xillinux&quot;&gt;Xillinux&lt;/a&gt; aprovechan al máximo las características del hardware y en conjunto con &lt;a href=&quot;http://www.xilinx.com/products/design-tools/vivado.html&quot;&gt;VIVADO&lt;/a&gt; incluyen una plataforma de hardware adaptable a la tarjeta seleccionada.&lt;/p&gt;
 
@@ -1104,25 +844,22 @@ Una vez teniendo el archivo generado se procede a la copia del sistema operativo
   &lt;li&gt;Para instalar Xillinux en la memoria SD, primero localizar en donde esta montada.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ lsblk
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ lsblk
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Copiar la imagen de Xillinux en memoria SD.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo dd if=xillinux-1.3.img of=/dev/sdX bs=512
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo dd if=xillinux-1.3.img of=/dev/sdX bs=512
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Comprobar que la copia quedo correcta y esperar como respuesta EOF.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo cmp xillinux-1.3.img /dev/sdX
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo cmp xillinux-1.3.img /dev/sdX
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -1142,42 +879,21 @@ Una vez teniendo el archivo generado se procede a la copia del sistema operativo
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo screen /dev/ttyACM0 115200
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo screen /dev/ttyACM0 115200
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ol&gt;
   &lt;li&gt;En caso de no tener el programa screen.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install screen
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install screen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;En caso de que el sistema operativo de la Zedboard no cargue, desde una terminal con puerto serial se reinicia la tarjeta para entrar al u-boot presionando PS-RST y cuando indique presiobar cualquier tecla para evitar arranque. Una vez en u-boot se teclean los siguientes comandos:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; env default -a
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; env default -a
 &amp;gt; env save
 &amp;gt; reset
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;viktorivan@openmailbox.org&lt;/p&gt;
-
-&lt;p&gt;@viktor_ivan&lt;/p&gt;
-</description>
-        <pubDate>Sat, 28 Nov 2015 13:21:01 -0600</pubDate>
-        <link>http://viktorivan.github.io/xillinux/embedded/zedboard/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard.html</link>
-        <guid isPermaLink="true">http://viktorivan.github.io/xillinux/embedded/zedboard/2015/11/28/instalacion-de-xillinux-en-tarjetas-zedboard.html</guid>
-        
-        
-        <category>xillinux</category>
-        
-        <category>embedded</category>
-        
-        <category>zedboard</category>
-        
-      </item>
-    
-  </channel>
-</rss>
+&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">Introducción. En fechas recientes se ha vuelto popular el uso de sistemas reducidos que permiten instalar sistemas operativos en modo embebido, un ejemplo es raspberry pi, el cuál es un ecosistema que presenta varios sistemas operativos embebidos de libre distribución. Así mismo existen otros ecosistemas orientados a propósitos mas específicos, tales como Zedboard, donde presentan varias alternativas de hardware de acuerdo a los requerimientos del usuario. Estas plataformas son basadas en Linux, por lo que proyectos como Xillinux aprovechan al máximo las características del hardware y en conjunto con VIVADO incluyen una plataforma de hardware adaptable a la tarjeta seleccionada.</summary></entry></feed>

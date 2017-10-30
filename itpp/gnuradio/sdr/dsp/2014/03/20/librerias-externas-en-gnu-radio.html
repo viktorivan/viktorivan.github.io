@@ -9,12 +9,13 @@
   <title>Librerías externas en GNU Radio</title>
   <meta name="description" content="Introducción. Aunque GNU Radio es un proyecto versátil conformado con una gran cantidad de herramientas que permiten realizar múltiples procesos en Software ...">
 
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://viktorivan.github.io/itpp/gnuradio/sdr/dsp/2014/03/19/librerias-externas-en-gnu-radio.html">
-  <link rel="alternate" type="application/rss+xml" title="Iván Rodríguez" href="http://viktorivan.github.io/feed.xml">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://0.0.0.0:4000/itpp/gnuradio/sdr/dsp/2014/03/20/librerias-externas-en-gnu-radio.html">
+  <link rel="alternate" type="application/rss+xml" title="Iván Rodríguez" href="/feed.xml">
   <script type="text/javascript" async
-    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+  
 </head>
 
 
@@ -23,37 +24,52 @@
     <header class="site-header" role="banner">
 
   <div class="wrapper">
-
+    
+    
     <a class="site-title" href="/">Iván Rodríguez</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
 
-    <nav class="site-nav">
-      <a href="#" class="menu-icon">
-        <svg viewBox="0 0 18 15">
-          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-        </svg>
-      </a>
-
-      <div class="trigger">
-        
+        <div class="trigger">
           
-          <a class="page-link" href="/about/">Acerca de</a>
+            
+            
           
-        
+            
+            
+            <a class="page-link" href="/about/">Acerca de</a>
+            
           
-        
+            
+            
           
-        
+            
+            
           
-        
+            
+            
           
-        
-      </div>
-    </nav>
-
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
   </div>
-
 </header>
 
 
@@ -63,7 +79,12 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Librerías externas en GNU Radio</h1>
-    <p class="post-meta"><time datetime="2014-03-19T20:04:12-06:00" itemprop="datePublished">Mar 19, 2014</time></p>
+    <p class="post-meta">
+      <time datetime="2014-03-20T02:04:12+00:00" itemprop="datePublished">
+        
+        Mar 20, 2014
+      </time>
+      </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -81,7 +102,7 @@
 
 <p>En el caso de IT++, el archivo se llama <code class="highlighter-rouge">FindITPP.cmake</code> y se tiene que guardar en <code class="highlighter-rouge">~/gr-Tu_modulo/cmake/modules</code>, quedando el archivo cmake como sigue.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>INCLUDE(FindPkgConfig)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INCLUDE(FindPkgConfig)
 PKG_CHECK_MODULES(PC_ITPP QUIET gnuradio-core)
 
 FIND_PATH(
@@ -109,28 +130,25 @@ FIND_LIBRARY(
 INCLUDE(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(ITPP DEFAULT_MSG ITPP_LIBRARIES ITPP_INCLUDE_DIRS)
 MARK_AS_ADVANCED(ITPP_LIBRARIES ITPP_INCLUDE_DIRS)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Así mismo hay que indicar a CMAKE que tiene que utilizar el nuevo archivo cmake, para ello se modifica el archivo <code class="highlighter-rouge">CmakeLists.txt</code> ubicado en la raíz del proyecto.</p>
 
 <p>En la sección <code class="highlighter-rouge"># Find gnuradio build dependencies</code> se agrega la línea</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>find_package(ITPP)
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find_package(ITPP)
+</code></pre></div></div>
 
 <p>En la parte final de la sección permite agregar un mensaje de error en caso de que la biblioteca no este instalada en el sistema.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>if(NOT ITPP_FOUND)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if(NOT ITPP_FOUND)
     message(FATAL_ERROR "IT++ Core required to compile Tu_Modulo")
 endif()
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>En la sección de <code class="highlighter-rouge"># Setup the include and linker paths</code> se agrega la línea <code class="highlighter-rouge">${ITPP_INCLUDE_DIRS}</code> para <code class="highlighter-rouge">include_directories</code> y la línea <code class="highlighter-rouge">${ITPP_LIBRARY_DIRS}</code> para <code class="highlighter-rouge">link_directories</code>, quedando como sigue:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>include_directories(
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>include_directories(
     ${CMAKE_SOURCE_DIR}/lib
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_BINARY_DIR}/lib
@@ -147,12 +165,11 @@ link_directories(
     ${ITPP_LIBRARY_DIRS}
     ${GNURADIO_RUNTIME_LIBRARY_DIRS}
 )
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Finalmente el archivo <code class="highlighter-rouge">CMakeLists.txt</code>, con sus modificaciones incluidas, quedaría:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># Copyright 2011,2012 Free Software Foundation, Inc.
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Copyright 2011,2012 Free Software Foundation, Inc.
 #
 # This file is part of GNU Radio
 #
@@ -306,8 +323,7 @@ add_subdirectory(docs)
 install(FILES cmake/Modules/Tu_moduloConfig.cmake        
     DESTINATION lib/cmake/Tu_modulo
 )
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><em>Desarrollo de bloques con IT++</em></p>
 
@@ -315,15 +331,15 @@ install(FILES cmake/Modules/Tu_moduloConfig.cmake
 
 <p>Desde una terminal de linux, se ejecuta <code class="highlighter-rouge">gr_modtool</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ gr_modtool add
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gr_modtool add
 GNU Radio module name identified: Tu_modulo
 Enter code type: sync
 Language: C++
 Enter name of block/code (without module name prefix): encodconv_vff
 Block/code identifier: encodconv_vff
 Enter valid argument list, including default arguments: int val1, int val2, int val3
-Add Python QA code? [Y/n] 
-Add C++ QA code? [y/N] 
+Add Python QA code? [Y/n]
+Add C++ QA code? [y/N]
 Adding file 'lib/encodconv_vff_impl.h'...
 Adding file 'lib/encodconv_vff_impl.cc'...
 Adding file 'include/Tu_modulo/encodconv_vff.h'...
@@ -332,19 +348,18 @@ Adding file 'python/qa_encodconv_vff.py'...
 Editing python/CMakeLists.txt...
 Adding file 'grc/Tu_modulo_encodconv_vff.xml'...
 Editing grc/CMakeLists.txt...
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>Para el decodificador, se crea un bloque con las mismas características</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ gr_modtool add
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gr_modtool add
 GNU Radio module name identified: Tu_modulo
 Enter code type: sync
 Language: C++
 Enter name of block/code (without module name prefix): decodconv_vff
 Block/code identifier: decodconv_vff
 Enter valid argument list, including default arguments: int val1, int val2, int val3
-Add Python QA code? [Y/n] 
-Add C++ QA code? [y/N] 
+Add Python QA code? [Y/n]
+Add C++ QA code? [y/N]
 Adding file 'lib/decodconv_vff_impl.h'...
 Adding file 'lib/decodconv_vff_impl.cc'...
 Adding file 'include/Tu_modulo/decodconv_vff.h'...
@@ -353,19 +368,17 @@ Adding file 'python/qa_decodconv_vff.py'...
 Editing python/CMakeLists.txt...
 Adding file 'grc/Tu_modulo_decodconv_vff.xml'...
 Editing grc/CmakeLists.txt...
-</code></pre>
-</div>
+</code></pre></div></div>
 <p><em>Codificador convolucional</em></p>
 
 <p>Dentro del archivo <code class="highlighter-rouge">encodconv_vff_impl.cc</code> que se ubica en <code class="highlighter-rouge">~/gr-Tu_modulo/lib</code> se indica que se utilizará la biblioteca de IT++</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>#include &lt;itpp/itcomm.h&gt;
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;itpp/itcomm.h&gt;
+</code></pre></div></div>
 
 <p>En la sección de <code class="highlighter-rouge">encodconv_vff_impl::encodconv_vff_impl(int val1, int val2, int val3)</code> se indican los parámetros del bloque tales como la cantidad de flujos de datos, tamaño de los paquetes de entrada y salida, así como asignar a las variables internas las variables públicas que se capturaron en el bloque de GRC.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>encodconv_vff_impl::encodconv_vff_impl(int val1, int val2, int val3)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>encodconv_vff_impl::encodconv_vff_impl(int val1, int val2, int val3)
   : gr::sync_block("encodconv_vff",
           gr::io_signature::make(1, 1, sizeof(float) * val3),
           gr::io_signature::make(1, 1, sizeof(float) * val3 * sizeof(val1)))
@@ -373,13 +386,13 @@ Editing grc/CmakeLists.txt...
 	polsize = sizeof(val1);
 	cl = val2;
 	pz = val3;
-  
+
 	for (int i = 0; i &lt; 0x100; i++){
 		polynom[i] = i;
 	}
-	
+
 	memcpy(polynom, (char*)&amp;val1, sizeof(val1));
-	
+
 	// -- Channel code parameters --
 
 	itpp::ivec generator(polsize);
@@ -388,16 +401,15 @@ Editing grc/CmakeLists.txt...
 		generator[i] = polynom[i];
 	}
 
-	code.set_generator_polynomials(generator, cl);	
+	code.set_generator_polynomials(generator, cl);
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Como se puede observar, varias funciones de IT++ se han utilizado como parte del código del bloque de procesamiento, para llamar cualquier otra función solo se indica con el formato <code class="highlighter-rouge">itpp::función</code>, de esta manera, el compilador reconocerá que la función forma parte de la biblioteca de IT++.</p>
 
 <p>En la sección de procesamiento de la señal <code class="highlighter-rouge">// Do &lt;+signal processing+&gt;</code> se realizará la codificación convolucional de los paquetes de entrada de acuerdo a los parámetros previamente definidos, por lo que el código final queda como sigue:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>int
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int
 encodconv_vff_impl::work(int noutput_items,
 		  gr_vector_const_void_star &amp;input_items,
 		  gr_vector_void_star &amp;output_items)
@@ -407,10 +419,10 @@ encodconv_vff_impl::work(int noutput_items,
 
     itpp::bvec tempin(pz * sizeof(float));
 	itpp::bvec tempout(pz * polsize * sizeof(float));
-  
+
 	for (int j = 0; j &lt; (pz * sizeof(float)); j++){
 		tempin[j] = in[j];
-	}	
+	}
 
 	code.encode_tailbite(tempin, tempout);
 
@@ -421,28 +433,27 @@ encodconv_vff_impl::work(int noutput_items,
     // Tell runtime system how many output items we produced.
     return noutput_items;
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>La operación de codificación es realizada por el comando <code class="highlighter-rouge">code.encode_tailbite(tempin, tempout);
 </code>, disminuyendo así la cantidad de líneas para desarrollar un codificador convolucional.</p>
 
 <p>La versión final del código es</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cm">/* -*- c++ -*- */</span>
-<span class="cm">/* 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* -*- c++ -*- */</span>
+<span class="cm">/*
  * Copyright 2014 IVAN RODRIGUEZ.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -478,13 +489,13 @@ encodconv_vff_impl::work(int noutput_items,
     	<span class="n">polsize</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">val1</span><span class="p">);</span>
 		<span class="n">cl</span> <span class="o">=</span> <span class="n">val2</span><span class="p">;</span>
 		<span class="n">pz</span> <span class="o">=</span> <span class="n">val3</span><span class="p">;</span>
-  
+
 		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mh">0x100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
 			<span class="n">polynom</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
 		<span class="p">}</span>
-		
+
 		<span class="n">memcpy</span><span class="p">(</span><span class="n">polynom</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">val1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">val1</span><span class="p">));</span>
-		
+
 		<span class="c1">// -- Channel code parameters --
 </span>
 		<span class="n">itpp</span><span class="o">::</span><span class="n">ivec</span> <span class="n">generator</span><span class="p">(</span><span class="n">polsize</span><span class="p">);</span>
@@ -493,7 +504,7 @@ encodconv_vff_impl::work(int noutput_items,
 			<span class="n">generator</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">polynom</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 		<span class="p">}</span>
 
-		<span class="n">code</span><span class="p">.</span><span class="n">set_generator_polynomials</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">cl</span><span class="p">);</span>	
+		<span class="n">code</span><span class="p">.</span><span class="n">set_generator_polynomials</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">cl</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="cm">/*
@@ -513,10 +524,10 @@ encodconv_vff_impl::work(int noutput_items,
 
         <span class="n">itpp</span><span class="o">::</span><span class="n">bvec</span> <span class="n">tempin</span><span class="p">(</span><span class="n">pz</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 		<span class="n">itpp</span><span class="o">::</span><span class="n">bvec</span> <span class="n">tempout</span><span class="p">(</span><span class="n">pz</span> <span class="o">*</span> <span class="n">polsize</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
-  
+
 		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">pz</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
 			<span class="n">tempin</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">in</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-		<span class="p">}</span>	
+		<span class="p">}</span>
 
 		<span class="n">code</span><span class="p">.</span><span class="n">encode_tailbite</span><span class="p">(</span><span class="n">tempin</span><span class="p">,</span> <span class="n">tempout</span><span class="p">);</span>
 
@@ -531,20 +542,18 @@ encodconv_vff_impl::work(int noutput_items,
   <span class="p">}</span> <span class="cm">/* namespace Tu_modulo */</span>
 <span class="p">}</span> <span class="cm">/* namespace gr */</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><em>Decodificador convolucional</em></p>
 
 <p>De manera similar al codificador convolucional, es necesario modificar el archivo <code class="highlighter-rouge">decodconv_vff_impl.cc</code>, en una primera instancia se agrega la línea donde se indica que se utilizará la biblioteca de IT++.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>#include &lt;itpp/itcomm.h&gt;
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;itpp/itcomm.h&gt;
+</code></pre></div></div>
 
 <p>En la sección de <code class="highlighter-rouge">decodconv_vff_impl::decodconv_vff_impl(int val1, int val2, int val3)</code> se indican los parámetros del bloque,</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>decodconv_vff_impl::decodconv_vff_impl(int val1, int val2, int val3)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>decodconv_vff_impl::decodconv_vff_impl(int val1, int val2, int val3)
   : gr::sync_block("decodconv_vff",
           gr::io_signature::make(1, 1, sizeof(float) * val3 * sizeof(val1)),
           gr::io_signature::make(1, 1, sizeof(float) * val3))
@@ -552,13 +561,13 @@ encodconv_vff_impl::work(int noutput_items,
 	polsize = sizeof(val1);
 	cl = val2;
 	pz = val3;
-  
+
 	for (int i = 0; i &lt; 0x100; i++){
 		polynom[i] = i;
 	}
 
 	memcpy(polynom, (char*)&amp;val1, sizeof(val1));
-	
+
 	// -- Channel code parameters --
 
 	itpp::ivec generator(polsize);
@@ -569,12 +578,11 @@ encodconv_vff_impl::work(int noutput_items,
 
 	code.set_generator_polynomials(generator, cl);
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>De igual manera, en la sección de procesamiento de la señal del bloque de procesamiento <code class="highlighter-rouge">// Do &lt;+signal processing+&gt;</code> se realizará la decodificación de los paquetes de entrada de acuerdo a los parámetros previamente definidos utilizando la biblioteca de IT++,</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>int
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int
 decodconv_vff_impl::work(int noutput_items,
 		  gr_vector_const_void_star &amp;input_items,
 		  gr_vector_void_star &amp;output_items)
@@ -602,27 +610,26 @@ itpp::vec tempin(pz * polsize * sizeof(float));
     // Tell runtime system how many output items we produced.
     return noutput_items;
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>En este bloque la operación de decodificación es realizada por el comando <code class="highlighter-rouge">code.decode_tailbite(tempin, tempout);</code></p>
 
 <p>El código final del bloque de procesamiento es</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cm">/* -*- c++ -*- */</span>
-<span class="cm">/* 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* -*- c++ -*- */</span>
+<span class="cm">/*
  * Copyright 2014 IVAN RODRIGUEZ.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -658,13 +665,13 @@ itpp::vec tempin(pz * polsize * sizeof(float));
     	<span class="n">polsize</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">val1</span><span class="p">);</span>
 		<span class="n">cl</span> <span class="o">=</span> <span class="n">val2</span><span class="p">;</span>
 		<span class="n">pz</span> <span class="o">=</span> <span class="n">val3</span><span class="p">;</span>
-  
+
 		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mh">0x100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
 			<span class="n">polynom</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
 		<span class="p">}</span>
 
 		<span class="n">memcpy</span><span class="p">(</span><span class="n">polynom</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">val1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">val1</span><span class="p">));</span>
-		
+
 		<span class="c1">// -- Channel code parameters --
 </span>
 		<span class="n">itpp</span><span class="o">::</span><span class="n">ivec</span> <span class="n">generator</span><span class="p">(</span><span class="n">polsize</span><span class="p">);</span>
@@ -715,8 +722,7 @@ itpp::vec tempin(pz * polsize * sizeof(float));
   <span class="p">}</span> <span class="cm">/* namespace Tu_modulo */</span>
 <span class="p">}</span> <span class="cm">/* namespace gr */</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><em>Definiendo las variables públicas en los archivos de cabecera</em></p>
 
@@ -724,40 +730,38 @@ itpp::vec tempin(pz * polsize * sizeof(float));
 
 <p>Dentro del archivo <code class="highlighter-rouge">encodconv_vff_impl.h</code> se indica la biblioteca de IT++</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>#include &lt;itpp/itcomm.h&gt;
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;itpp/itcomm.h&gt;
+</code></pre></div></div>
 
 <p>en la sección de <code class="highlighter-rouge">public</code> se indican las variables a utilizar</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> public:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> public:
   encodconv_vff_impl(int val1, int val2, int val3);
   unsigned char polynom [0x100];
   int polsize;
   int cl;
   int pz;
   itpp::Convolutional_Code code;
-  
+
   ~encodconv_vff_impl();
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>El archivo h del bloque de procesamiento del codificador convolucional queda como sigue</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cm">/* -*- c++ -*- */</span>
-<span class="cm">/* 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* -*- c++ -*- */</span>
+<span class="cm">/*
  * Copyright 2014 IVAN RODRIGUEZ.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -785,7 +789,7 @@ itpp::vec tempin(pz * polsize * sizeof(float));
       <span class="kt">int</span> <span class="n">cl</span><span class="p">;</span>
       <span class="kt">int</span> <span class="n">pz</span><span class="p">;</span>
       <span class="n">itpp</span><span class="o">::</span><span class="n">Convolutional_Code</span> <span class="n">code</span><span class="p">;</span>
-      
+
       <span class="o">~</span><span class="n">encodconv_vff_impl</span><span class="p">();</span>
 
       <span class="c1">// Where all the action really happens
@@ -799,14 +803,12 @@ itpp::vec tempin(pz * polsize * sizeof(float));
 </span>
 <span class="cp">#endif </span><span class="cm">/* INCLUDED_TU_MODULO_ENCODCONV_VFF_IMPL_H */</span><span class="cp">
 </span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>De igual manera en el archivo de cabecera del decodificador <code class="highlighter-rouge">decodconv_vff_impl.h</code> se indica la biblioteca de IT++</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>#include &lt;itpp/itcomm.h&gt;
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;itpp/itcomm.h&gt;
+</code></pre></div></div>
 
 <p>y en la sección de <code class="highlighter-rouge">public</code> las variables requeridas para el procesamiento de la señal,
      public:
@@ -817,26 +819,25 @@ itpp::vec tempin(pz * polsize * sizeof(float));
       int pz;
       itpp::Convolutional_Code code;</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  ~decodconv_vff_impl();
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ~decodconv_vff_impl();
+</code></pre></div></div>
 
 <p>El archivo de cabecera, en su versión final queda,</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cm">/* -*- c++ -*- */</span>
-<span class="cm">/* 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* -*- c++ -*- */</span>
+<span class="cm">/*
  * Copyright 2014 IVAN RODRIGUEZ.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -864,7 +865,7 @@ itpp::vec tempin(pz * polsize * sizeof(float));
       <span class="kt">int</span> <span class="n">cl</span><span class="p">;</span>
       <span class="kt">int</span> <span class="n">pz</span><span class="p">;</span>
       <span class="n">itpp</span><span class="o">::</span><span class="n">Convolutional_Code</span> <span class="n">code</span><span class="p">;</span>
-      
+
       <span class="o">~</span><span class="n">decodconv_vff_impl</span><span class="p">();</span>
       <span class="c1">// Where all the action really happens
 </span>      <span class="kt">int</span> <span class="n">work</span><span class="p">(</span><span class="kt">int</span> <span class="n">noutput_items</span><span class="p">,</span>
@@ -877,8 +878,7 @@ itpp::vec tempin(pz * polsize * sizeof(float));
 </span>
 <span class="cp">#endif </span><span class="cm">/* INCLUDED_TU_MODULO_DECODCONV_VFF_IMPL_H */</span><span class="cp">
 </span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><em>Interfaz gráfica de GRC</em></p>
 
@@ -886,7 +886,7 @@ itpp::vec tempin(pz * polsize * sizeof(float));
 
 <p>Los parámetros a modificar son <code class="highlighter-rouge">&lt;name&gt;</code>, <code class="highlighter-rouge">&lt;param&gt;</code>, <code class="highlighter-rouge">&lt;sink&gt;</code> y <code class="highlighter-rouge">&lt;source&gt;</code>, los bloques del decodificador y codificador convolucional quedan como sigue,</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;block&gt;</span>
   <span class="nt">&lt;name&gt;</span>Convolutional Encoder<span class="nt">&lt;/name&gt;</span>
   <span class="nt">&lt;key&gt;</span>Tu_modulo_encodconv_vff<span class="nt">&lt;/key&gt;</span>
@@ -909,13 +909,13 @@ itpp::vec tempin(pz * polsize * sizeof(float));
     <span class="nt">&lt;key&gt;</span>val2<span class="nt">&lt;/key&gt;</span>
     <span class="nt">&lt;type&gt;</span>int<span class="nt">&lt;/type&gt;</span>
   <span class="nt">&lt;/param&gt;</span>
- 
+
   <span class="nt">&lt;param&gt;</span>
     <span class="nt">&lt;name&gt;</span>Packet Size<span class="nt">&lt;/name&gt;</span>
     <span class="nt">&lt;key&gt;</span>val3<span class="nt">&lt;/key&gt;</span>
     <span class="nt">&lt;type&gt;</span>int<span class="nt">&lt;/type&gt;</span>
   <span class="nt">&lt;/param&gt;</span>
-  
+
   <span class="nt">&lt;param&gt;</span>
     <span class="nt">&lt;name&gt;</span>Rate (1/N)<span class="nt">&lt;/name&gt;</span>
     <span class="nt">&lt;key&gt;</span>val4<span class="nt">&lt;/key&gt;</span>
@@ -944,10 +944,9 @@ itpp::vec tempin(pz * polsize * sizeof(float));
     <span class="nt">&lt;vlen&gt;</span>$val3 * $val4<span class="nt">&lt;/vlen&gt;</span>
   <span class="nt">&lt;/source&gt;</span>
 <span class="nt">&lt;/block&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;block&gt;</span>
   <span class="nt">&lt;name&gt;</span>Convolutional Decoder<span class="nt">&lt;/name&gt;</span>
   <span class="nt">&lt;key&gt;</span>Tu_modulo_decodconv_vff<span class="nt">&lt;/key&gt;</span>
@@ -970,13 +969,13 @@ itpp::vec tempin(pz * polsize * sizeof(float));
     <span class="nt">&lt;key&gt;</span>val2<span class="nt">&lt;/key&gt;</span>
     <span class="nt">&lt;type&gt;</span>int<span class="nt">&lt;/type&gt;</span>
   <span class="nt">&lt;/param&gt;</span>
- 
+
   <span class="nt">&lt;param&gt;</span>
     <span class="nt">&lt;name&gt;</span>Packet Size<span class="nt">&lt;/name&gt;</span>
     <span class="nt">&lt;key&gt;</span>val3<span class="nt">&lt;/key&gt;</span>
     <span class="nt">&lt;type&gt;</span>int<span class="nt">&lt;/type&gt;</span>
   <span class="nt">&lt;/param&gt;</span>
-  
+
   <span class="nt">&lt;param&gt;</span>
     <span class="nt">&lt;name&gt;</span>Rate (1/N)<span class="nt">&lt;/name&gt;</span>
     <span class="nt">&lt;key&gt;</span>val4<span class="nt">&lt;/key&gt;</span>
@@ -1005,46 +1004,46 @@ itpp::vec tempin(pz * polsize * sizeof(float));
     <span class="nt">&lt;vlen&gt;</span>$val3<span class="nt">&lt;/vlen&gt;</span>
   <span class="nt">&lt;/source&gt;</span>
 <span class="nt">&lt;/block&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><em>Compilación de los bloques</em></p>
 
 <p>Una vez ya realizado todos los procesos referentes al código de programación de los bloques de procesamiento se procede a integrarlos en el proyecto de GNU Radio. Esto se realiza por medio de una serie de comandos desde una terminal de linux en la raíz del proyecto. En caso de no tener una carpeta de build, se crea por medio de comandos de linux</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ mkdir build
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir build
 $ cd build
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>Una vez dentro de la carpeta de build, se procede a compilar el proyecto</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ cmake ../
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cmake ../
 $ make
 $ sudo make install
 $ sudo ldconfig
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>De esa manera queda integrado el módulo out-of-tree dentro de GNU Radio.</p>
-
-<p>viktorivan@openmailbox.org</p>
 
 <p>@viktor_ivan</p>
 
-    <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-url="http://viktorivan.github.io/itpp/gnuradio/sdr/dsp/2014/03/19/librerias-externas-en-gnu-radio.html" data-text="Librerías externas en GNU Radio -" data-dnt="true">Twitter</a>
-    <div class="g-plusone" data-href="http://viktorivan.github.io/itpp/gnuradio/sdr/dsp/2014/03/19/librerias-externas-en-gnu-radio.html" data-annotation="none" data-width="" data-size="medium"></div>
-    <div class="g-plus" data-action="share" data-href="http://viktorivan.github.io/itpp/gnuradio/sdr/dsp/2014/03/19/librerias-externas-en-gnu-radio.html" data-annotation="none" data-width="" data-size="medium"></div>
-    <div class="fb-like" data-href="http://viktorivan.github.io/itpp/gnuradio/sdr/dsp/2014/03/19/librerias-externas-en-gnu-radio.html" data-layout="button" data-action="like" data-show-faces="false" data-colorscheme="light" data-kid-directed-site="false" data-share="false"></div>
-    <div class="fb-send" data-href="http://viktorivan.github.io/itpp/gnuradio/sdr/dsp/2014/03/19/librerias-externas-en-gnu-radio.html" data-colorscheme="light" data-kid-directed-site="false"></div>
-    <div id="disqus_thread"></div> <script type="text/javascript"> var disqus_shortname = 'viktorivanblog'; var disqus_url = 'http://viktorivan.github.io/itpp/gnuradio/sdr/dsp/2014/03/19/librerias-externas-en-gnu-radio.html'; var disqus_identifier = 'http://viktorivan.github.io/itpp/gnuradio/sdr/dsp/2014/03/19/librerias-externas-en-gnu-radio.html'; var disqus_title = 'Librerías externas en GNU Radio'; (function () { var s = document.createElement('script'); s.async = true; s.type = 'text/javascript'; s.src = '//viktorivanblog.disqus.com/embed.js'; (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s); }()); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-url="http://0.0.0.0:4000/itpp/gnuradio/sdr/dsp/2014/03/20/librerias-externas-en-gnu-radio.html" data-text="Librerías externas en GNU Radio -" data-dnt="true">Twitter</a>
+    <div class="g-plusone" data-href="http://0.0.0.0:4000/itpp/gnuradio/sdr/dsp/2014/03/20/librerias-externas-en-gnu-radio.html" data-annotation="none" data-width="" data-size="medium"></div>
+    <div class="g-plus" data-action="share" data-href="http://0.0.0.0:4000/itpp/gnuradio/sdr/dsp/2014/03/20/librerias-externas-en-gnu-radio.html" data-annotation="none" data-width="" data-size="medium"></div>
+    <div class="fb-like" data-href="http://0.0.0.0:4000/itpp/gnuradio/sdr/dsp/2014/03/20/librerias-externas-en-gnu-radio.html" data-layout="button" data-action="like" data-show-faces="false" data-colorscheme="light" data-kid-directed-site="false" data-share="false"></div>
+    <div class="fb-send" data-href="http://0.0.0.0:4000/itpp/gnuradio/sdr/dsp/2014/03/20/librerias-externas-en-gnu-radio.html" data-colorscheme="light" data-kid-directed-site="false"></div>
+    <div id="disqus_thread"></div> <script type="text/javascript"> var disqus_shortname = 'viktorivanblog'; var disqus_url = 'http://0.0.0.0:4000/itpp/gnuradio/sdr/dsp/2014/03/20/librerias-externas-en-gnu-radio.html'; var disqus_identifier = 'http://0.0.0.0:4000/itpp/gnuradio/sdr/dsp/2014/03/20/librerias-externas-en-gnu-radio.html'; var disqus_title = 'Librerías externas en GNU Radio'; (function () { var s = document.createElement('script'); s.async = true; s.type = 'text/javascript'; s.src = '//viktorivanblog.disqus.com/embed.js'; (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s); }()); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
   </div>
 
+  
+    
+
+  
 </article>
 
       </div>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      <div id="fb-root"></div> <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+      <script type="text/javascript"> (function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/platform.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })(); </script>
     </main>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <div id="fb-root"></div> <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
-    <script type="text/javascript"> (function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/platform.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })(); </script>
+
     <footer class="site-footer">
 
   <div class="wrapper">
@@ -1054,8 +1053,12 @@ $ sudo ldconfig
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
-          <li>Iván Rodríguez</li>
-          <li><a href="mailto:"></a></li>
+          <li>
+            
+              Iván Rodríguez
+            
+            </li>
+            
         </ul>
       </div>
 
@@ -1063,7 +1066,7 @@ $ sudo ldconfig
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/viktorivan"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+            <a href="https://github.com/viktorivan"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
 </span><span class="username">viktorivan</span></a>
 
           </li>
@@ -1071,7 +1074,7 @@ $ sudo ldconfig
 
           
           <li>
-            <a href="https://twitter.com/viktor_ivan"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+            <a href="https://twitter.com/viktor_ivan"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
 </span><span class="username">viktor_ivan</span></a>
 
           </li>
@@ -1080,8 +1083,7 @@ $ sudo ldconfig
       </div>
 
       <div class="footer-col footer-col-3">
-        <p>Un blog sobre radio definido por software.
-</p>
+        <p>Un blog sobre radio definido por software.</p>
       </div>
     </div>
 
