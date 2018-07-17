@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="http://viktorivan.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="http://viktorivan.github.io/" rel="alternate" type="text/html" /><updated>2018-04-11T01:09:01+00:00</updated><id>http://viktorivan.github.io/</id><title type="html">Iván Rodríguez</title><subtitle>Un blog sobre radio definido por software.</subtitle><entry><title type="html">Instalación De ADI Linux Embedded De Analog Devices</title><link href="http://viktorivan.github.io/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices.html" rel="alternate" type="text/html" title="Instalación De ADI Linux Embedded De Analog Devices" /><published>2016-11-01T22:06:17+00:00</published><updated>2016-11-01T22:06:17+00:00</updated><id>http://viktorivan.github.io/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices</id><content type="html" xml:base="http://viktorivan.github.io/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices.html">&lt;p&gt;El desarrollo de sistemas operativos embebidos personalizados permite a los fabricantes de hardware tener un ecosistema de programación con las herramientas y drivers necesarios para la implementación rápida de sistemas de comunicación en sus plataformas de evaluación.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="http://viktorivan.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="http://viktorivan.github.io/" rel="alternate" type="text/html" /><updated>2018-07-17T16:00:18+00:00</updated><id>http://viktorivan.github.io/</id><title type="html">Iván Rodríguez</title><subtitle>Un blog sobre radio definido por software.</subtitle><entry><title type="html">Instalación De ADI Linux Embedded De Analog Devices</title><link href="http://viktorivan.github.io/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices.html" rel="alternate" type="text/html" title="Instalación De ADI Linux Embedded De Analog Devices" /><published>2016-11-01T22:06:17+00:00</published><updated>2016-11-01T22:06:17+00:00</updated><id>http://viktorivan.github.io/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices</id><content type="html" xml:base="http://viktorivan.github.io/adi/linux-embedded/analog-devices/picozed/zedboard/2016/11/01/instalacin-de-adi-linux-embedded-de-analog-devices.html">&lt;p&gt;El desarrollo de sistemas operativos embebidos personalizados permite a los fabricantes de hardware tener un ecosistema de programación con las herramientas y drivers necesarios para la implementación rápida de sistemas de comunicación en sus plataformas de evaluación.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://www.analog.com&quot;&gt;Analog Devices&lt;/a&gt; ha desarrollado un sistema operativo (ADI) que contiene un entorno de programación para aplicaciones basadas en SDR capaz de conectarse a una red para acceso y control remoto.&lt;/p&gt;
 
@@ -410,13 +410,13 @@ sudo ldconfig
 
 &lt;p&gt;Aunque el ejemplo mostrado es sencillo, es una base para implementarlo en sistemas mas complejos, como el cifrado de voz o mensajes de chat para su eventual transmisión con alguna tarjeta USRP.&lt;/p&gt;
 
-&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">Una forma sencilla de describir lo que es cifrado es: Aquello que está escrito con letras, símbolos o números que solo pueden comprenderse si se dispone de la clave necesaria para descifrarlos.</summary></entry><entry><title type="html">Instalación GNU Radio con PyBombs versión 2</title><link href="http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/30/instalacion-gnu-radio-con-pybombs-version-2.html" rel="alternate" type="text/html" title="Instalación GNU Radio con PyBombs versión 2" /><published>2016-03-30T02:24:26+00:00</published><updated>2016-03-30T02:24:26+00:00</updated><id>http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/30/instalacion-gnu-radio-con-pybombs-version-2</id><content type="html" xml:base="http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/30/instalacion-gnu-radio-con-pybombs-version-2.html">&lt;p&gt;&lt;a href=&quot;http://gnuradio.org&quot;&gt;GNU Radio&lt;/a&gt; es un proyecto de software libre orientado a radio definido por software, basado en Python; existen diversos medios para instalar el conjunto de herramientas que comprenden a GNU Radio, desde los repositorios utilizando &lt;code class=&quot;highlighter-rouge&quot;&gt;apt-get&lt;/code&gt; hasta la instalación desde el código fuente del proyecto en la terminal, con ayuda de un script o con un gestor de paquetes. La ventaja de instalar GNU Radio desde el código fuente con respecto a los repositorios es la versión de instalación, ya que los repositorios pueden tardar en actualizarse con respecto a los avances del proyecto.&lt;/p&gt;
+&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">Una forma sencilla de describir lo que es cifrado es: Aquello que está escrito con letras, símbolos o números que solo pueden comprenderse si se dispone de la clave necesaria para descifrarlos.</summary></entry><entry><title type="html">Instalación GNU Radio con PyBombs versión 2</title><link href="http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/30/instalacion-gnu-radio-con-pybombs-version-2.html" rel="alternate" type="text/html" title="Instalación GNU Radio con PyBombs versión 2" /><published>2016-03-30T02:24:26+00:00</published><updated>2016-03-30T02:24:26+00:00</updated><id>http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/30/instalacion-gnu-radio-con-pybombs-version-2</id><content type="html" xml:base="http://viktorivan.github.io/gnuradio/pybombs/instalacion/2016/03/30/instalacion-gnu-radio-con-pybombs-version-2.html">&lt;p&gt;&lt;a href=&quot;http://gnuradio.org&quot;&gt;GNU Radio&lt;/a&gt; es un proyecto de software libre orientado a radio definido por software, basado en Python; existen diversos medios para instalar el conjunto de herramientas que comprenden a GNU Radio, desde los repositorios utilizando &lt;code class=&quot;highlighter-rouge&quot;&gt;apt&lt;/code&gt; hasta la instalación desde el código fuente del proyecto en la terminal, con ayuda de un script o con un gestor de paquetes. La ventaja de instalar GNU Radio desde el código fuente con respecto a los repositorios es la versión de instalación, ya que los repositorios pueden tardar en actualizarse con respecto a los avances del proyecto.&lt;/p&gt;
 
 &lt;p&gt;Anteriormente, GNU Radio desarrolló una primera versión de &lt;a href=&quot;https://github.com/gnuradio/pybombs/&quot;&gt;PyBombs&lt;/a&gt; que permitía la instalación del proyecto de una manera sencilla e inclusive intuitiva. Debido a la popularidad de PyBombs para la instalación de proyectos OOT de GNU Radio, se realizó una actualización que permite la fácil distribución e instalación de proyectos pero ahora es incluido desde el gestor &lt;a href=&quot;https://pip.pypa.io&quot;&gt;pip&lt;/a&gt; de Python.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Instalación.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Primeramente es necesario instalar el gestor pip de Python, desde una terminal.&lt;/p&gt;
+&lt;p&gt;Primero se debe de instalar el gestor &lt;code class=&quot;highlighter-rouge&quot;&gt;pip&lt;/code&gt; de Python, desde una terminal.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install python-pip python-dev build-essential git
 $ sudo pip install --upgrade pip
@@ -426,15 +426,14 @@ $ sudo pip install setuptools
 
 &lt;p&gt;Una vez instalado el gestor de aplicaciones de Python, se procede a la instalación de PyBombs.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pip install -Iv PyBOMBS==2.1.0
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pip install pybombs
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Teniendo una vez instalado el proyecto de PyBombs, se descargan las recetas donde están indicadas las ubicaciones de los proyectos para su descarga.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
-$ pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pybombs auto-config
+$ sudo pybombs recipes add-defaults
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
 &lt;p&gt;Para que GNU Radio pueda ser ejecutado desde cualquier ubicación se tiene que indicar donde se instalará el proyecto.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pybombs prefix init /usr/local -a myprefix
@@ -442,9 +441,8 @@ $ pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.gi
 
 &lt;p&gt;Una vez inicializado el prefijo, se procede a la instalación de GNU Radio desde PyBombs.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pybombs -p myprefix install gnuradio gr-osmosdr
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pybombs -p myprefix install gnuradio
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
 &lt;p&gt;Para ejecutar la interfaz gráfica de GNU Radio, sólo se ejecuta el comando.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gnuradio-companion
@@ -458,6 +456,57 @@ $ pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.gi
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;De este modo, de manera automática se agregarán los íconos a los diferentes menús de la distribución de Linux.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Error en instalación de paquetes&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Durante la instalación de GNU Radio, PyBombs descargará todos los programas necesarios para el correcto funcionamiento de GNU Radio, por ello, se requiere de una conexión a Internet para la descarga. En caso de que exista un error en la instalación de algún prerequisito se debe de ejecutar nuevamente el comando de PyBombs o en su defecto instalar a través de &lt;code class=&quot;highlighter-rouge&quot;&gt;pip&lt;/code&gt; o &lt;code class=&quot;highlighter-rouge&quot;&gt;apt&lt;/code&gt; el paquete que genere algún problema durante la instalación de GNU Radio, por ejemplo, si el programa &lt;code class=&quot;highlighter-rouge&quot;&gt;PyCairo&lt;/code&gt; no se instala correctamente se puede utilizar el siguiente comando:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pip install pycairo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Error en instalación de apache-thrift para Ubuntu 18.04 LTS&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;En Ubuntu 18.04 se puede presentar un error en la instalación de &lt;code class=&quot;highlighter-rouge&quot;&gt;apache-thrift&lt;/code&gt;, para ello se debe de instalar el paquete directamente desde el código fuente.&lt;/p&gt;
+
+&lt;p&gt;Primero se descarga desde github&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone https://github.com/apache/thrift.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Una vez descargado se ingresa al folder donde se descargó y se ejecutan los siguientes comandos&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ./bootstrap.sh
+
+$ ./configure
+
+$ ./configure --with-boost=/usr/local
+
+$ ./configure  --enable-coverage
+
+$ make
+
+$ sudo make install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;En caso de presentarse algún error al momento de ejecutar &lt;code class=&quot;highlighter-rouge&quot;&gt;make&lt;/code&gt; se debe de correr de nuevo los comandos de &lt;code class=&quot;highlighter-rouge&quot;&gt;configure&lt;/code&gt;, de este modo al ejecutar nuevamente &lt;code class=&quot;highlighter-rouge&quot;&gt;make&lt;/code&gt; ya no se presentarán nuevamente los errores.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Descarga de paquetes de PyBombs&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Si se desea instalar otros paquetes de GNU Radio se puede hacer desde PyBOMBS&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pybombs -p myprefix install gr-iio
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;Instalación de una versión específica de PyBombs&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;En caso de que se desee instalar una versión en específico se puede utilizar el siguiente comando&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pip install -Iv PyBOMBS==2.1.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;Descarga de recetas desde github&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;En versiones anteriores de PyBombs las recetas se descargan directamente desde la página de github con el comando:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
+$ pybombs recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Imágenes del firmware de USRP&lt;/em&gt;&lt;/p&gt;
 
@@ -505,7 +554,7 @@ pybombs: error: argument &amp;lt;command&amp;gt;: invalid choice: 'upgrade' (cho
 
 &lt;p&gt;La segunda de ellas se ubica en &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local&lt;/code&gt;, se llama &lt;code class=&quot;highlighter-rouge&quot;&gt;.pybombs&lt;/code&gt;, y en ella se encuentra el archivo que indica el prefijo de instalación de GNU Radio.&lt;/p&gt;
 
-&lt;p&gt;Finalmente se eliminan las carpetas relacionadas a las descargas del código fuente del entorno de GNU Radio, ubicado en ´/usr/local/src´.&lt;/p&gt;
+&lt;p&gt;Finalmente se eliminan las carpetas relacionadas a las descargas del código fuente del entorno de GNU Radio, ubicado en &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/src&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Una vez eliminado todos estos archivos, se procede a descargar los archivos &lt;code class=&quot;highlighter-rouge&quot;&gt;recipes&lt;/code&gt; e indicar el prefijo. De este modo, PyBombs instalará el entorno de GNU Radio sin tomar en consideración las versiones previas descargadas.&lt;/p&gt;
 
@@ -543,7 +592,7 @@ $ sudo udevadm control --reload-rules
 
 &lt;p&gt;El proyecto de PyBombs de GNU Radio ha mostrado un cambio que puede interpretarse como positivo, ya que permite agregar proyectos OOT de una manera sencilla e incluso modificar las recetas para proyectos personales y facilitar su distribución e instalación.&lt;/p&gt;
 
-&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">GNU Radio es un proyecto de software libre orientado a radio definido por software, basado en Python; existen diversos medios para instalar el conjunto de herramientas que comprenden a GNU Radio, desde los repositorios utilizando apt-get hasta la instalación desde el código fuente del proyecto en la terminal, con ayuda de un script o con un gestor de paquetes. La ventaja de instalar GNU Radio desde el código fuente con respecto a los repositorios es la versión de instalación, ya que los repositorios pueden tardar en actualizarse con respecto a los avances del proyecto.</summary></entry><entry><title type="html">Instalación de GNU Radio embedded en tarjetas ZedBoard</title><link href="http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" rel="alternate" type="text/html" title="Instalación de GNU Radio embedded en tarjetas ZedBoard" /><published>2015-11-28T19:21:27+00:00</published><updated>2015-11-28T19:21:27+00:00</updated><id>http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard</id><content type="html" xml:base="http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html">&lt;p&gt;El uso de sistemas embebidos se ha popularizado y beneficiado por las nuevas tecnologías, ya que ahora permiten implementar sistemas que no solo controlen de un modo básico y simple un dispositivo, sino que pueden formar parte de un ecosistema que incluya conectividad a Internet y por lo tanto monitoreo y control remoto. Adicionalmente, tendencias como el radio definido por software (SDR) han integrado a sus desarrollos la implementación en sistemas embebidos lo que permite el desarrollo de un sistema de comunicación completo en un ambiente embebido, disminuyendo costos y proporcionando portatibilidad.&lt;/p&gt;
+&lt;p&gt;@viktor_ivan&lt;/p&gt;</content><author><name></name></author><summary type="html">GNU Radio es un proyecto de software libre orientado a radio definido por software, basado en Python; existen diversos medios para instalar el conjunto de herramientas que comprenden a GNU Radio, desde los repositorios utilizando apt hasta la instalación desde el código fuente del proyecto en la terminal, con ayuda de un script o con un gestor de paquetes. La ventaja de instalar GNU Radio desde el código fuente con respecto a los repositorios es la versión de instalación, ya que los repositorios pueden tardar en actualizarse con respecto a los avances del proyecto.</summary></entry><entry><title type="html">Instalación de GNU Radio embedded en tarjetas ZedBoard</title><link href="http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html" rel="alternate" type="text/html" title="Instalación de GNU Radio embedded en tarjetas ZedBoard" /><published>2015-11-28T19:21:27+00:00</published><updated>2015-11-28T19:21:27+00:00</updated><id>http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard</id><content type="html" xml:base="http://viktorivan.github.io/gnuradio/embedded/zedboard/2015/11/28/instalacion-de-gnu-radio-embedded-en-tarjetas-zedboard.html">&lt;p&gt;El uso de sistemas embebidos se ha popularizado y beneficiado por las nuevas tecnologías, ya que ahora permiten implementar sistemas que no solo controlen de un modo básico y simple un dispositivo, sino que pueden formar parte de un ecosistema que incluya conectividad a Internet y por lo tanto monitoreo y control remoto. Adicionalmente, tendencias como el radio definido por software (SDR) han integrado a sus desarrollos la implementación en sistemas embebidos lo que permite el desarrollo de un sistema de comunicación completo en un ambiente embebido, disminuyendo costos y proporcionando portatibilidad.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Instalación.&lt;/em&gt;&lt;/p&gt;
 
